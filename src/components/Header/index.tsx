@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -7,7 +8,9 @@ const Header = () => {
         <p className="text-3xl">Link Shortener</p>
         <div className="flex">
           <Image src="./sun.svg" width={16} height={16} alt="theme" priority />
-          <div className="mx-3">GitHub</div>
+          <Link href="https://github.com/AndreyProvozen" className="mx-3">
+            GitHub
+          </Link>
           <div>language</div>
         </div>
       </header>
