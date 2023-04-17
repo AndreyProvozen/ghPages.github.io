@@ -5,11 +5,7 @@ export default function Document() {
     <Html lang="en">
       <Head />
 
-      <body
-        style={{
-          backgroundColor: "#020205",
-        }}
-      >
+      <body className="bg-blackMain mx-5">
         <Main />
         <NextScript />
       </body>

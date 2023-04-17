@@ -13,6 +13,12 @@ export default async function handleRedirect(
   await connectMongodb();
   const { shortPath } = req.query;
   const data = await Urls.findOne({ code: shortPath });
-
-  return data ? res.redirect(301, data.url) : res.status(404).send("Not Found");
+  if (data) {
+    data.clicked += 1;
+    data.markModified("clicked");
+    await data.save();
+    res.setHeader("Cache-Control", "no-cache, max-age=0");
+    res.redirect(301, data.url);
+  }
+  return res.status(404).send("Not Found");
 }

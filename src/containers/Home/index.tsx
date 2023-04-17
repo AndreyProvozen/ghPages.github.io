@@ -1,38 +1,40 @@
+import type { linkData } from "@/interface";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<linkData[]>([]);
+
   useEffect(() => {
     fetch("api/link")
       .then((res) => res.json())
       .then((res) => setData(res));
   }, []);
-  const handleOnSubmit = async (e) => {
-    e.preventDefault();
-    const newUrl = longLink;
-    setLongLink("");
 
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const response = await fetch("api/link", {
       method: "POST",
       headers: { "content-type": "application/json" },
-      body: JSON.stringify({ url: newUrl }),
+      body: JSON.stringify({ url: longLink }),
     });
+    setLongLink("");
     const content = await response.json();
+
     if (content) {
       setData([content, ...data]);
     }
   };
+
   return (
-    <div className="container text-center mx-auto text-lg max-w-screen-md">
+    <div className="container text-center mx-auto text-lg max-w-screen-md bg-home-bg-image">
       <div className="mt-12 text-5xl">Link Shortener</div>
       <div className="max-w-lg mx-auto my-5">
         Free URL Shortener for transforming long, ugly links into nice,
         memorable and trackable short URLs
       </div>
       <form
-        action=""
         onSubmit={handleOnSubmit}
         className="relative mb-4 flex w-full flex-wrap items-stretch"
       >
@@ -61,15 +63,26 @@ const Home = () => {
                 {item.url}
               </div>
               <Link
+                rel="noopener noreferrer"
                 target="_blank"
                 href={`/api/${item.code}`}
-                className="text-pinkMain"
+                className="text-darkPinkMain"
               >
                 {item.code}
               </Link>
               <div key={i} className="text-blackMain">
                 {item.clicked}
               </div>
+              <button
+                className="text-darkPinkMain"
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `http://localhost:3000/api/${item.code}`
+                  )
+                }
+              >
+                Copy
+              </button>
             </div>
           ))}
       </div>
