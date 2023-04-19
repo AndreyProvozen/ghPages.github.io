@@ -2,12 +2,16 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Header = () => (
-  <div className="text-whiteMain mt-5">
+  <div className="text-whiteMain pt-5">
     <header className="container mx-auto flex justify-between items-center text-xl">
-      <p className="text-3xl">Link Shortener</p>
+      <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
         <Image src="./sun.svg" width={16} height={16} alt="theme" priority />
-        <Link href="https://github.com/AndreyProvozen" className="mx-3">
+        <Link
+          href="https://github.com/AndreyProvozen"
+          target="_blank"
+          className="mx-3"
+        >
           GitHub
         </Link>
       </div>
