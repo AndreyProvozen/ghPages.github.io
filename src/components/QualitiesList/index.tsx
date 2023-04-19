@@ -24,7 +24,7 @@ const QualitiesList = () => {
   ];
 
   return (
-    <div className="my-8">
+    <>
       <h3 className="text-4xl font-bold mb-5">Our qualities</h3>
       <div className="flex justify-center">
         {qualitiesList.map((quality, i) => {
@@ -37,7 +37,7 @@ const QualitiesList = () => {
           );
         })}
       </div>
-    </div>
+    </>
   );
 };
 

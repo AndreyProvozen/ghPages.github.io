@@ -6,7 +6,6 @@ const Header = () => (
     <header className="container mx-auto flex justify-between items-center text-xl">
       <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
-        <Image src="./sun.svg" width={16} height={16} alt="theme" priority />
         <Link
           href="https://github.com/AndreyProvozen"
           target="_blank"
