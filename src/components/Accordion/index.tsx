@@ -29,12 +29,11 @@ const Accordion: FC<AccordionProps> = ({ data }) => {
         />
       </div>
       <div
-        className={`text-start transition-max-height ease-in-out duration-300 overflow-hidden ${
+        className={`transition-max-height ease-in-out duration-300 overflow-hidden ${
           isOpen ? "max-h-[1000px]" : "max-h-0"
         }`}
-      >
-        <p>{data.description}</p>
-      </div>
+        dangerouslySetInnerHTML={{ __html: data.description }}
+      />
     </div>
   );
 };

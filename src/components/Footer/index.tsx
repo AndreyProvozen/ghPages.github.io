@@ -8,7 +8,7 @@ const Footer = () => {
     { src: "./steam.svg", href: "", alt: "" },
   ];
   return (
-    <div className="bg-blackMain">
+    <div className="bg-blackMain text-whiteMain">
       <div className="container flex justify-between px-5 items-center py-5 mx-auto">
         <p className="text-3xl font-extrabold">Link Shortener</p>
         <div className="flex">

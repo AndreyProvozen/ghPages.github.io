@@ -14,9 +14,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = ({ data }) => {
           className="flex justify-between p-5 mb-5 bg-whiteMain rounded-md"
           key={i}
         >
-          <div className="text-blackMain line-clamp-1 break-all max-w-xs">
-            {item.url}
-          </div>
+          <div className="line-clamp-1 break-all max-w-xs">{item.url}</div>
           <Link
             rel="noopener noreferrer"
             target="_blank"
@@ -25,9 +23,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = ({ data }) => {
           >
             {item.code}
           </Link>
-          <div key={i} className="text-blackMain">
-            {item.clicked}
-          </div>
+          <p>{item.clicked}</p>
           <button
             className="text-darkPinkMain"
             onClick={() =>

@@ -12,7 +12,7 @@ const QualitiesList = () => {
       src: "./heart.svg",
       title: "Easy",
       subTitle:
-        "ShortURL is easy and fast, enter the long link to get your shortened link",
+        "Link Shortener is easy and fast, enter the long link to get your shortened link",
       alt: "",
     },
     {
