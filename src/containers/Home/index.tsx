@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useCallback, useEffect, useState } from "react";
 import type { linkData } from "@/interface";
 import Image from "next/image";
 import Header from "@/components/Header";
@@ -7,10 +7,13 @@ import QualitiesList from "@/components/QualitiesList";
 import Accordion from "@/components/Accordion";
 import Footer from "@/components/Footer";
 import InfoBlock from "@/components/InfoBlock";
+import LinksList from "@/components/Skeletons/LinksList";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
   const [data, setData] = useState<linkData[]>([]);
+  const [showMouseSvg, setShowMouseSvg] = useState(true);
+
   const questions = [
     {
       title: "What is a URL shortener?",
@@ -34,11 +37,17 @@ const Home = () => {
     },
   ];
 
+  const handleScroll = useCallback(() => {
+    Boolean(window.scrollY) ? setShowMouseSvg(false) : setShowMouseSvg(true);
+  }, []);
+
   useEffect(() => {
     fetch("api/link")
       .then((res) => res.json())
       .then((res) => setData(res));
-  }, []);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -85,11 +94,13 @@ const Home = () => {
               generate link
             </button>
           </form>
-          {Boolean(data.length) && <LinkDataBlock data={data} />}
-          <div className="absolute bottom-0 left-1/2 animate-bounce">
-            <Image src="./mouse.svg" width={30} height={30} alt="" />
-            <Image src="./arrow.svg" width={30} height={30} alt="" />
-          </div>
+          {Boolean(data.length) ? <LinkDataBlock data={data} /> : <LinksList />}
+          {showMouseSvg && (
+            <div className="absolute bottom-0 left-1/2 animate-bounce">
+              <Image src="./mouse.svg" width={30} height={30} alt="" />
+              <Image src="./arrow.svg" width={30} height={30} alt="" />
+            </div>
+          )}
         </div>
       </div>
       <div className="container max-w-screen-lg mx-auto text-center px-5 my-8">
