@@ -3,7 +3,7 @@ import React from "react";
 
 const InfoBlock = () => {
   return (
-    <div className="bg-blackMain text-center py-20 px-3 text-whiteMain">
+    <div className="bg-darkGrayMain text-center py-20 px-3 text-whiteMain">
       <div className="text-3xl font-bold mb-10">
         Already there are abbreviated links
       </div>

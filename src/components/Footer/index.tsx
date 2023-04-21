@@ -8,7 +8,7 @@ const Footer = () => {
     { src: "./steam.svg", href: "", alt: "" },
   ];
   return (
-    <div className="bg-blackMain text-whiteMain">
+    <div className="bg-darkGrayMain text-whiteMain">
       <div className="container flex justify-between px-5 items-center py-5 mx-auto">
         <p className="text-3xl font-extrabold">Link Shortener</p>
         <div className="flex">
@@ -19,11 +19,20 @@ const Footer = () => {
           ))}
         </div>
       </div>
-      <>
-        <Link href="https://www.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_6038271.htm">
+      <div className="container py-5 mx-auto">
+        <Link
+          className="block"
+          href="https://www.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_6038271.htm"
+        >
           Image by kjpargeter on Freepik
         </Link>
-      </>
+        <Link
+          className="block"
+          href="https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&from_view=search&track=robertav1_2_sidr"
+        >
+          Image by rawpixel.com on Freepik
+        </Link>
+      </div>
     </div>
   );
 };

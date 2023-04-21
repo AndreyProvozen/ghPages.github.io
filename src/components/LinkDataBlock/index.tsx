@@ -11,21 +11,23 @@ const LinkDataBlock: FC<LinkDataBlockProps> = ({ data }) => {
     <div>
       {data.map((item, i) => (
         <div
-          className="flex justify-between p-5 mb-5 bg-whiteMain rounded-md"
+          className="flex justify-between p-4 mb-5 bg-whiteMain rounded-md "
           key={i}
         >
-          <div className="line-clamp-1 break-all max-w-xs">{item.url}</div>
+          <div className="line-clamp-1 break-all max-w-xs max-md:max-w-[15rem]">
+            {item.url}
+          </div>
           <Link
             rel="noopener noreferrer"
             target="_blank"
             href={`/api/${item.code}`}
-            className="text-darkPinkMain"
+            className="text-darkPinkMain hover:text-pinkMain"
           >
             {item.code}
           </Link>
           <p>{item.clicked}</p>
           <button
-            className="text-darkPinkMain"
+            className="text-darkPinkMain hover:text-pinkMain"
             onClick={() =>
               navigator.clipboard.writeText(
                 `http://localhost:3000/api/${item.code}`

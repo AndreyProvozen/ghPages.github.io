@@ -8,6 +8,7 @@ import Accordion from "@/components/Accordion";
 import Footer from "@/components/Footer";
 import InfoBlock from "@/components/InfoBlock";
 import LinksList from "@/components/Skeletons/LinksList";
+import SearchBlock from "@/components/SearchBlock";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
@@ -76,24 +77,11 @@ const Home = () => {
             Free URL Shortener for transforming long, ugly links into nice,
             memorable and trackable short URLs
           </p>
-          <form
+          <SearchBlock
             onSubmit={handleOnSubmit}
-            className="relative mb-4 flex w-full flex-wrap items-stretch"
-          >
-            <input
-              type="search"
-              value={longLink}
-              onChange={(e) => setLongLink(e.target.value)}
-              placeholder="Paste the URL to be shortened"
-              className="relative m-0 flex-auto rounded-l px-3 py-[0.25rem]"
-            />
-            <button
-              type="submit"
-              className="relative flex items-center rounded-r text-whiteMain hover:bg-lightPinkMain bg-pinkMain px-6 py-2.5 active:bg-darkPinkMain"
-            >
-              generate link
-            </button>
-          </form>
+            value={longLink}
+            setValue={setLongLink}
+          />
           {Boolean(data.length) ? <LinkDataBlock data={data} /> : <LinksList />}
           {showMouseSvg && (
             <div className="absolute bottom-0 left-1/2 animate-bounce">
