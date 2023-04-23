@@ -1,5 +1,5 @@
 import Image from "next/image";
-
+import devicesIcon from "../../../public/devices.png";
 const QualitiesList = () => {
   const qualitiesList = [
     {
@@ -16,7 +16,7 @@ const QualitiesList = () => {
       alt: "",
     },
     {
-      src: "./devices.svg",
+      src: devicesIcon.src,
       title: "Devices",
       subTitle: "Compatible with smartphones, tablets and desktop",
       alt: "",
