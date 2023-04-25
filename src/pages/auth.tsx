@@ -1,66 +1,15 @@
-import React from "react";
-import { signIn, getSession } from "next-auth/react";
-import Image from "next/image";
-import Header from "@/components/Header";
+import Auth from "@/containers/AuthPage";
+import Head from "next/head";
 
-const Auth = ({ session }) => {
-  console.log(session);
-
-  const authWith = [
-    {
-      src: "./google.svg",
-      text: "Continue with Google",
-      alt: "",
-      provider: "google",
-    },
-    {
-      src: "./gitHub.svg",
-      text: "Continue with GitHub",
-      alt: "",
-      provider: "github",
-    },
-    {
-      src: "./email.svg",
-      text: "Continue with Email",
-      alt: "",
-      provider: "email",
-    },
-  ];
+const HomePage = () => {
   return (
-    <div className="text-center ">
-      <Header textBlack={true} />
-      <h1 className="text-5xl my-8">Sign in or register</h1>
-      {authWith.map((item, i) => (
-        <button
-          key={i}
-          className="hover:bg-grayMain flex mx-auto border mb-5 p-4 border-grayMain rounded-xl w-full max-w-[350px]"
-          onClick={() => signIn(item.provider)}
-        >
-          <Image
-            className="mr-2"
-            src={item.src}
-            width={24}
-            height={24}
-            alt={item.alt}
-          />
-          <p className="mx-auto text-darkPinkMain">{item.text}</p>
-        </button>
-      ))}
-    </div>
+    <>
+      <Head>
+        <title>Auth Page</title>
+      </Head>
+      <Auth />
+    </>
   );
 };
 
-export const getServerSideProps = async (context: any) => {
-  const session = await getSession(context);
-  if (session) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-  return { props: { session } };
-};
-
-export default Auth;
+export default HomePage;

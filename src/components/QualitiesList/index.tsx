@@ -1,22 +1,25 @@
 import Image from "next/image";
 import devicesIcon from "../../../public/devices.png";
+import barChartIcon from "../../../public/barChart.svg";
+import heartIcon from "../../../public/heart.svg";
+
 const QualitiesList = () => {
   const qualitiesList = [
     {
-      src: "./barChart.svg",
+      src: barChartIcon,
       title: "Statistics",
       subTitle: "Check the amount of clicks that your shortened URL received",
       alt: "",
     },
     {
-      src: "./heart.svg",
+      src: heartIcon,
       title: "Easy",
       subTitle:
         "Link Shortener is easy and fast, enter the long link to get your shortened link",
       alt: "",
     },
     {
-      src: devicesIcon.src,
+      src: devicesIcon,
       title: "Devices",
       subTitle: "Compatible with smartphones, tablets and desktop",
       alt: "",
@@ -30,7 +33,12 @@ const QualitiesList = () => {
         {qualitiesList.map((quality, i) => {
           return (
             <div className="flex flex-col items-center max-w-xs mx-3" key={i}>
-              <Image src={quality.src} width={100} height={100} alt="" />
+              <Image
+                src={quality.src}
+                width={100}
+                height={100}
+                alt={quality.alt}
+              />
               <p className="text-2xl font-bold">{quality.title}</p>
               <p>{quality.subTitle}</p>
             </div>

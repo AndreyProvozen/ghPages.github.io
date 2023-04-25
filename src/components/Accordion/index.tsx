@@ -1,6 +1,7 @@
-import Image from "next/image";
-import { FC, useState } from "react";
+import { FC, memo, useState } from "react";
+import dynamic from "next/dynamic";
 
+const Image = dynamic(() => import("next/image"));
 interface AccordionProps {
   data: {
     title: string;
@@ -8,13 +9,13 @@ interface AccordionProps {
   };
 }
 
-const Accordion: FC<AccordionProps> = ({ data }) => {
+const Accordion: FC<AccordionProps> = memo(({ data }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div>
-      <div
-        className="p-2 cursor-pointer flex justify-between border-b-2 hover:bg-lightPinkMain"
+      <button
+        className="p-2 cursor-pointer flex justify-between border-b-2 w-full hover:bg-lightPinkMain"
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3 className="font-bold text-lg">{data.title}</h3>
@@ -27,7 +28,7 @@ const Accordion: FC<AccordionProps> = ({ data }) => {
           height={30}
           alt=""
         />
-      </div>
+      </button>
       <div
         className={`transition-max-height ease-in-out duration-300 overflow-hidden ${
           isOpen ? "max-h-[1000px]" : "max-h-0"
@@ -36,6 +37,8 @@ const Accordion: FC<AccordionProps> = ({ data }) => {
       />
     </div>
   );
-};
+});
+
+Accordion.displayName = "Accordion";
 
 export default Accordion;

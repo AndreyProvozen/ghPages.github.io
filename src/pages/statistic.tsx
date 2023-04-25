@@ -5,7 +5,7 @@ const StatisticPage = () => {
   return (
     <>
       <Head>
-        <title>Link Shortener home</title>
+        <title>Statistic Page</title>
       </Head>
       <Statistic />
     </>

@@ -5,37 +5,39 @@ import Dropdown from "../Dropdown";
 
 const Header = ({ textBlack }: { textBlack?: boolean }) => {
   const { data: session } = useSession();
-  const dropdownData = session && [
-    {
-      field: (
-        <div className="flex items-center">
-          <Image
-            className="rounded-full mr-2"
-            src={session.user?.image || ""}
-            width={48}
-            height={48}
-            alt=""
-          />
-          <div className="overflow-hidden">
-            <p className="text-ellipsis overflow-hidden">
-              {session.user?.name}
-            </p>
-            <p className="text-ellipsis overflow-hidden">
-              {session.user?.email}
-            </p>
-          </div>
-        </div>
-      ),
-    },
-    { field: <div className="flex items-center">daddasadssd</div> },
-    {
-      field: (
-        <button className="flex items-center" onClick={() => signOut()}>
-          Sign out
-        </button>
-      ),
-    },
-  ];
+  const dropdownData = session
+    ? [
+        {
+          field: (
+            <div className="flex items-center">
+              <Image
+                className="flex-shrink-0 rounded-full overflow-hidden mr-2"
+                src={session.user?.image || ""}
+                width={48}
+                height={48}
+                alt=""
+              />
+              <div className="overflow-hidden">
+                <p className="text-ellipsis overflow-hidden">
+                  {session.user?.name}
+                </p>
+                <p className="text-ellipsis overflow-hidden">
+                  {session.user?.email}
+                </p>
+              </div>
+            </div>
+          ),
+        },
+        { field: <div className="flex items-center">daddasadssd</div> },
+        {
+          field: (
+            <button className="flex items-center" onClick={() => signOut()}>
+              Sign out
+            </button>
+          ),
+        },
+      ]
+    : [];
 
   return (
     <div
@@ -45,7 +47,7 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
           : "text-whiteMain"
       } py-5`}
     >
-      <header className="container mx-auto flex justify-between items-center text-xl">
+      <header className="container max-w-screen-xl mx-auto flex justify-between items-center text-xl">
         <p className="text-3xl font-extrabold">Link Shortener</p>
         <div className="flex">
           <Link href="/" className="mx-3">
