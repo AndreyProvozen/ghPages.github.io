@@ -72,7 +72,7 @@ const Home = () => {
       >
         <Header />
         <div className="container max-w-screen-lg text-center mx-auto text-lg h-full">
-          <h1 className="mt-12 text-5xl text-whiteMain">Link Shortener</h1>
+          <h1 className="mt-7 text-5xl text-whiteMain">Link Shortener</h1>
           <p className="max-w-lg mx-auto my-5 text-whiteMain">
             Free URL Shortener for transforming long, ugly links into nice,
             memorable and trackable short URLs
