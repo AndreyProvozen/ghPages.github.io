@@ -1,26 +1,26 @@
-import React from "react";
 import { signIn, getSession } from "next-auth/react";
 import Image from "next/image";
 import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Google from "@/icons/svg/Google";
+import GitHub from "@/icons/svg/GitHub";
+import Email from "@/icons/svg/Email";
 
 const Auth = () => {
   const authWith = [
     {
-      src: "./google.svg",
+      image: <Google />,
       text: "Continue with Google",
-      alt: "",
       provider: "google",
     },
     {
-      src: "./gitHub.svg",
+      image: <GitHub />,
       text: "Continue with GitHub",
-      alt: "",
       provider: "github",
     },
     {
-      src: "./email.svg",
+      image: <Email />,
       text: "Continue with Email",
-      alt: "",
       provider: "email",
     },
   ];
@@ -28,22 +28,17 @@ const Auth = () => {
     <div className="text-center ">
       <Header textBlack={true} />
       <h1 className="text-5xl my-8">Sign in or register</h1>
-      {authWith.map((item, i) => (
+      {authWith.map(({ image, provider, text }, i) => (
         <button
           key={i}
           className="hover:bg-grayMain flex mx-auto border mb-5 p-4 border-grayMain rounded-xl w-full max-w-[350px]"
-          onClick={() => signIn(item.provider)}
+          onClick={() => signIn(provider)}
         >
-          <Image
-            className="mr-2"
-            src={item.src}
-            width={24}
-            height={24}
-            alt={item.alt}
-          />
-          <p className="mx-auto text-darkPinkMain">{item.text}</p>
+          <div className="w-6 h-6">{image}</div>
+          <p className="mx-auto text-darkPinkMain">{text}</p>
         </button>
       ))}
+      <Footer containerClasses="fixed bottom-0 w-full" />
     </div>
   );
 };

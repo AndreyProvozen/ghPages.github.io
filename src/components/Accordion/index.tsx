@@ -1,7 +1,6 @@
 import { FC, memo, useState } from "react";
-import dynamic from "next/dynamic";
+import Chevron from "@/icons/svg/Chevron";
 
-const Image = dynamic(() => import("next/image"));
 interface AccordionProps {
   data: {
     title: string;
@@ -19,14 +18,12 @@ const Accordion: FC<AccordionProps> = memo(({ data }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3 className="font-bold text-lg">{data.title}</h3>
-        <Image
-          src="./chevron.svg"
+        <Chevron
+          width="30px"
+          height="30px"
           className={`transform transition ease-out duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
-          width={30}
-          height={30}
-          alt=""
         />
       </button>
       <div

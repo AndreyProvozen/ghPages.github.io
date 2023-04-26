@@ -1,14 +1,15 @@
-import Image from "next/image";
+import GitHub from "@/icons/svg/GitHub";
+import Instagram from "@/icons/svg/Instagram";
+import Steam from "@/icons/svg/Steam";
 import Link from "next/link";
 
 const linksData = [
   {
-    src: "/github.svg",
+    icon: <GitHub fill="white" />,
     href: "https://github.com/AndreyProvozen",
-    alt: "GitHub",
   },
-  { src: "/instagram.svg", href: "", alt: "Instagram" },
-  { src: "/steam.svg", href: "", alt: "Steam" },
+  { icon: <Instagram />, href: "" },
+  { icon: <Steam />, href: "" },
 ];
 
 const credits = [
@@ -26,14 +27,14 @@ const credits = [
   },
 ];
 
-const Footer = () => (
-  <div className="bg-darkGrayMain text-whiteMain">
+const Footer = ({ containerClasses = "" }) => (
+  <div className={`bg-darkGrayMain text-whiteMain ${containerClasses}`}>
     <div className="container max-w-screen-xl flex justify-between px-5 items-center py-5 mx-auto">
       <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
-        {linksData.map(({ src, href, alt }) => (
-          <Link target="_blank" href={href} className="mr-3" key={src}>
-            <Image src={src} width={30} height={30} alt={alt} />
+        {linksData.map(({ icon, href }) => (
+          <Link target="_blank" href={href} className="mr-3" key={href}>
+            {icon}
           </Link>
         ))}
       </div>

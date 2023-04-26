@@ -1,6 +1,5 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
 import type { linkData } from "@/interface";
-import Image from "next/image";
 import Header from "@/components/Header";
 import LinkDataBlock from "@/components/LinkDataBlock";
 import QualitiesList from "@/components/QualitiesList";
@@ -9,6 +8,10 @@ import Footer from "@/components/Footer";
 import InfoBlock from "@/components/InfoBlock";
 import LinksList from "@/components/Skeletons/LinksList";
 import SearchBlock from "@/components/SearchBlock";
+import Arrow from "@/icons/svg/Arrow";
+import Mouse from "@/icons/svg/Mouse";
+
+import Image from "next/image";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
@@ -66,10 +69,14 @@ const Home = () => {
 
   return (
     <>
-      <div
-        className="h-screen px-5 bg-cover bg-center"
-        style={{ backgroundImage: 'url("/homeBg.avif")' }}
-      >
+      <div className="relative h-screen px-5">
+        <Image
+          src="/homeBg.avif"
+          alt="Home background"
+          priority
+          fill
+          className="object-cover object-center z-[-1]"
+        />
         <Header />
         <div className="container max-w-screen-lg text-center mx-auto text-lg h-full">
           <h1 className="mt-7 text-5xl text-whiteMain">Link Shortener</h1>
@@ -85,8 +92,8 @@ const Home = () => {
           {Boolean(data.length) ? <LinkDataBlock data={data} /> : <LinksList />}
           {showMouseSvg && (
             <div className="absolute bottom-0 left-1/2 animate-bounce">
-              <Image src="./mouse.svg" width={30} height={30} alt="" />
-              <Image src="./arrow.svg" width={30} height={30} alt="" />
+              <Mouse width="30px" height="30px" />
+              <Arrow width="30px" height="30px" />
             </div>
           )}
         </div>

@@ -28,7 +28,7 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
             </div>
           ),
         },
-        { field: <div className="flex items-center">daddasadssd</div> },
+        { field: <div className="flex items-center">2 field</div> },
         {
           field: (
             <button className="flex items-center" onClick={() => signOut()}>
@@ -48,7 +48,9 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
       } py-5`}
     >
       <header className="container max-w-screen-xl mx-auto flex justify-between items-center text-xl">
-        <p className="text-3xl font-extrabold">Link Shortener</p>
+        <Link href="/" className="text-3xl font-extrabold">
+          Link Shortener
+        </Link>
         <div className="flex">
           <Link href="/" className="mx-3">
             Home
