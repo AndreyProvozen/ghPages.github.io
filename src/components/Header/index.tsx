@@ -28,13 +28,9 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
             </div>
           ),
         },
-        { field: <div className="flex items-center">2 field</div> },
+        { field: <div>2 field</div> },
         {
-          field: (
-            <button className="flex items-center" onClick={() => signOut()}>
-              Sign out
-            </button>
-          ),
+          field: <button onClick={() => signOut()}>Sign out</button>,
         },
       ]
     : [];

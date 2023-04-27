@@ -7,6 +7,14 @@ const LinkSkeleton = () => (
   </div>
 );
 
-const LinksList = () => <>{Array(5).fill(<LinkSkeleton />)}</>;
+const LinksList = () => (
+  <>
+    {Array(5)
+      .fill(1)
+      .map((_, i) => (
+        <LinkSkeleton key={i} />
+      ))}
+  </>
+);
 
 export default LinksList;

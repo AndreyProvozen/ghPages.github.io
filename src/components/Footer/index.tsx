@@ -8,7 +8,7 @@ const linksData = [
     icon: <GitHub fill="white" />,
     href: "https://github.com/AndreyProvozen",
   },
-  { icon: <Instagram />, href: "" },
+  { icon: <Instagram />, href: "/" },
   { icon: <Steam />, href: "" },
 ];
 

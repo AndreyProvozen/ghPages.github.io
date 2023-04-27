@@ -16,6 +16,7 @@ import Image from "next/image";
 const Home = () => {
   const [longLink, setLongLink] = useState("");
   const [data, setData] = useState<linkData[]>([]);
+  const [count, setCount] = useState();
   const [showMouseSvg, setShowMouseSvg] = useState(true);
 
   const questions = [
@@ -48,7 +49,10 @@ const Home = () => {
   useEffect(() => {
     fetch("api/link")
       .then((res) => res.json())
-      .then((res) => setData(res));
+      .then((res) => {
+        setCount(res.count);
+        setData(res.urlsList);
+      });
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
@@ -89,7 +93,11 @@ const Home = () => {
             value={longLink}
             setValue={setLongLink}
           />
-          {Boolean(data.length) ? <LinkDataBlock data={data} /> : <LinksList />}
+          {data.length ? (
+            <LinkDataBlock data={data} />
+          ) : (
+            count !== 0 && <LinksList />
+          )}
           {showMouseSvg && (
             <div className="absolute bottom-0 left-1/2 animate-bounce">
               <Mouse width="30px" height="30px" />
