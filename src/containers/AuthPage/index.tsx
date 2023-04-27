@@ -1,5 +1,4 @@
 import { signIn, getSession } from "next-auth/react";
-import Image from "next/image";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Google from "@/icons/svg/Google";
