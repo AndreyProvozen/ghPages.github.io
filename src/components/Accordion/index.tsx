@@ -14,7 +14,7 @@ const Accordion: FC<AccordionProps> = memo(({ data }) => {
   return (
     <div>
       <button
-        className="p-2 cursor-pointer flex justify-between border-b-2 w-full hover:bg-lightPinkMain"
+        className="p-2 cursor-pointer flex justify-between border-b-2 w-full hover:bg-lightPink"
         onClick={() => setIsOpen(!isOpen)}
       >
         <h3 className="font-bold text-lg">{data.title}</h3>

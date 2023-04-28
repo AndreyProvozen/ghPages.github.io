@@ -30,11 +30,11 @@ const Auth = () => {
       {authWith.map(({ image, provider, text }, i) => (
         <button
           key={i}
-          className="hover:bg-grayMain flex mx-auto border mb-5 p-4 border-grayMain rounded-xl w-full max-w-[350px]"
+          className="hover:bg-gray flex mx-auto border mb-5 p-4 border-gray rounded-xl w-full max-w-[350px]"
           onClick={() => signIn(provider)}
         >
           <div className="w-6 h-6">{image}</div>
-          <p className="mx-auto text-darkPinkMain">{text}</p>
+          <p className="mx-auto text-darkPink">{text}</p>
         </button>
       ))}
       <Footer containerClasses="fixed bottom-0 w-full" />

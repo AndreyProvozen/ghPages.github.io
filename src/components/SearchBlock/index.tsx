@@ -17,11 +17,11 @@ const SearchBlock: FC<SearchBlockProps> = ({ onSubmit, value, setValue }) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Paste the URL to be shortened"
-        className="bg-whiteMain placeholder:text-blackMain relative m-0 flex-auto rounded-l px-3 py-[0.6rem] max-sm:w-full max-sm:rounded-r focus:outline-none"
+        className="bg-white placeholder:text-black relative m-0 flex-auto rounded-l px-3 py-[0.6rem] max-sm:w-full max-sm:rounded-r focus:outline-none"
       />
       <button
         type="submit"
-        className="text-whiteMain bg-pinkMain rounded-r text-center px-6 py-2.5 max-sm:w-full max-sm:mt-4 hover:bg-lightPinkMain active:bg-darkPinkMain"
+        className="text-white bg-pink rounded-r text-center px-6 py-2.5 max-sm:w-full max-sm:mt-4 hover:bg-lightPink active:bg-darkPink"
       >
         generate link
       </button>

@@ -55,9 +55,7 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
   return (
     <div
       className={`${
-        textBlack
-          ? "text-blackMain border-b-2 border-grayMain"
-          : "text-whiteMain"
+        textBlack ? "text-black border-b-2 border-gray" : "text-white"
       } py-5`}
     >
       <header className="container max-w-screen-xl mx-auto flex justify-between items-center text-xl">

@@ -12,6 +12,7 @@ import Arrow from "@/icons/svg/Arrow";
 import Mouse from "@/icons/svg/Mouse";
 
 import Image from "next/image";
+import Snackbar from "@/components/Snackbar";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
@@ -57,7 +58,7 @@ const Home = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     fetch("api/link", {
       method: "POST",
@@ -83,8 +84,8 @@ const Home = () => {
         />
         <Header />
         <div className="container max-w-screen-lg text-center mx-auto text-lg h-full">
-          <h1 className="mt-7 text-5xl text-whiteMain">Link Shortener</h1>
-          <p className="max-w-lg mx-auto my-5 text-whiteMain">
+          <h1 className="mt-7 text-5xl text-white">Link Shortener</h1>
+          <p className="max-w-lg mx-auto my-5 text-white">
             Free URL Shortener for transforming long, ugly links into nice,
             memorable and trackable short URLs
           </p>
@@ -94,7 +95,7 @@ const Home = () => {
             setValue={setLongLink}
           />
           {data.length ? (
-            <LinkDataBlock data={data} />
+            <LinkDataBlock data={data} setLinks={setData} />
           ) : (
             count !== 0 && <LinksList />
           )}
@@ -118,6 +119,7 @@ const Home = () => {
           <Accordion data={question} key={question.title} />
         ))}
       </div>
+      <Snackbar />
       <Footer />
     </>
   );

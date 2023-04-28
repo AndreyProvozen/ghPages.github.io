@@ -1,64 +1,21 @@
-import ThreeDots from "@/icons/svg/ThreeDots";
-import { linkData } from "@/interface";
+import { ScreenSize, linkData } from "@/interface";
 import Link from "next/link";
-import { FC, memo } from "react";
-import Dropdown from "../Dropdown";
-import { useRouter } from "next/router";
-import ClipBoard from "@/icons/svg/ClipBoard";
-import Trash from "@/icons/svg/Trash";
-import BarChart from "@/icons/svg/BarChart";
+import { Dispatch, FC, SetStateAction, memo } from "react";
+import SettingsDropDown from "./SettingsDropDown";
+import { useMediaQuery } from "@/utils/useMediaQuery";
 
 interface LinkDataBlockProps {
   data: linkData[];
+  setLinks: Dispatch<SetStateAction<linkData[]>>;
 }
 
-const SettingsDropDown = ({ data }: { data: linkData }) => {
-  const router = useRouter();
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/api/${data.code}`);
-  };
-  const handleDeleteLink = () => {
-    const a = 1;
-  };
-  const handleRedirect = () => {
-    router.push("/statistic");
-  };
-
-  const settingsFields = [
-    {
-      fieldTitle: "Copy",
-      fieldFunction: handleCopyLink,
-      fieldImage: <ClipBoard />,
-    },
-    {
-      fieldTitle: " Delete",
-      fieldFunction: handleDeleteLink,
-      fieldImage: <Trash />,
-    },
-    {
-      fieldTitle: "Statistic",
-      fieldFunction: handleRedirect,
-      fieldImage: <BarChart width="25px" height="25px" fill="white" />,
-    },
-  ];
-
-  return (
-    <Dropdown
-      placeholder={
-        <ThreeDots className="fill-darkPinkMain hover:fill-pinkMain" />
-      }
-      dropdownData={settingsFields}
-      popoverClass="w-60"
-    />
-  );
-};
-
-const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data }) => {
+const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
+  const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
   return (
     <div>
       {data.map((data) => (
         <div
-          className="flex justify-between p-4 mb-5 bg-whiteMain rounded-md "
+          className="flex justify-between p-4 mb-5 bg-white rounded-md "
           key={data.code}
         >
           <div className="line-clamp-1 break-all max-w-xs max-md:max-w-[15rem]">
@@ -68,12 +25,12 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data }) => {
             rel="noopener noreferrer"
             target="_blank"
             href={`/api/${data.code}`}
-            className="text-darkPinkMain hover:text-pinkMain"
+            className="text-darkPink mx-5 hover:text-pink"
           >
             {data.code}
           </Link>
-          <p className="max-sm:hidden"> {data.clicked}</p>
-          <SettingsDropDown data={data} />
+          {!isMobile && <p> {data.clicked}</p>}
+          <SettingsDropDown data={data} setLinks={setLinks} />
         </div>
       ))}
     </div>

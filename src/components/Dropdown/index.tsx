@@ -42,7 +42,7 @@ const Dropdown: FC<DropdownProps> = ({
   };
 
   return (
-    <div className="relative text-whiteMain" ref={dropdownRef}>
+    <div className="relative text-white" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="cursor-pointer flex"
@@ -51,7 +51,7 @@ const Dropdown: FC<DropdownProps> = ({
       </button>
       {isOpen && (
         <div
-          className={`${popoverClass} absolute rounded-lg bg-darkGrayMain px-4 pt-4 mt-4 right-0 z-10`}
+          className={`${popoverClass} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 right-0 z-10`}
         >
           {dropdownData.map(
             ({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
@@ -60,18 +60,18 @@ const Dropdown: FC<DropdownProps> = ({
                   customField
                 ) : (
                   <button
-                    className={`group flex items-center border-b-2 border-pinkMain py-4 w-full text-start ${
+                    className={`group flex items-center border-b-2 border-pink py-4 w-full text-start ${
                       i === 0 ? "first:pt-0" : ""
                     } ${i === dropdownData.length - 1 ? "last:border-0" : ""}`}
                     key={i}
                     onClick={() => handleFunction(fieldFunction)}
                   >
                     {Boolean(fieldImage) && (
-                      <div className="mr-3 group-hover:[&>svg]:fill-lightPinkMain [&>svg]:w-6 [&>svg]:h-6">
+                      <div className="mr-3 group-hover:[&>svg]:fill-lightPink [&>svg]:w-6 [&>svg]:h-6">
                         {fieldImage}
                       </div>
                     )}
-                    <div className="text-xl group-hover:text-lightPinkMain">
+                    <div className="text-xl group-hover:text-lightPink">
                       {fieldTitle}
                     </div>
                   </button>
