@@ -9,7 +9,7 @@ const LinkSkeleton = () => (
 
 const LinksList = () => (
   <>
-    {Array(5)
+    {Array(3)
       .fill(1)
       .map((_, i) => (
         <LinkSkeleton key={i} />

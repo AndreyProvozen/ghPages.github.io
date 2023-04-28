@@ -2,13 +2,19 @@ import { signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 import Dropdown from "../Dropdown";
+import LogOut from "@/icons/svg/LogOut";
+import Heart from "@/icons/svg/Heart";
 
 const Header = ({ textBlack }: { textBlack?: boolean }) => {
   const { data: session } = useSession();
+  const favoriteLinks = () => {
+    // eslint-disable-next-line no-console
+    console.log("favoriteLinks");
+  };
   const dropdownData = session
     ? [
         {
-          field: (
+          customField: (
             <div className="flex items-center">
               <Image
                 className="flex-shrink-0 rounded-full overflow-hidden mr-2"
@@ -28,9 +34,15 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
             </div>
           ),
         },
-        { field: <div>2 field</div> },
         {
-          field: <button onClick={() => signOut()}>Sign out</button>,
+          fieldTitle: "Favorite links",
+          fieldFunction: favoriteLinks,
+          fieldImage: <Heart fill="white" />,
+        },
+        {
+          fieldTitle: "Sign out",
+          fieldFunction: signOut,
+          fieldImage: <LogOut />,
         },
       ]
     : [];

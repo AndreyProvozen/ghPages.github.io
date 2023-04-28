@@ -3,50 +3,54 @@ import { linkData } from "@/interface";
 import Link from "next/link";
 import { FC, memo } from "react";
 import Dropdown from "../Dropdown";
+import { useRouter } from "next/router";
+import ClipBoard from "@/icons/svg/ClipBoard";
+import Trash from "@/icons/svg/Trash";
+import BarChart from "@/icons/svg/BarChart";
 
 interface LinkDataBlockProps {
   data: linkData[];
 }
 
 const SettingsDropDown = ({ data }: { data: linkData }) => {
+  const router = useRouter();
+  const handleCopyLink = () => {
+    navigator.clipboard.writeText(`http://localhost:3000/api/${data.code}`);
+  };
+  const handleDeleteLink = () => {
+    const a = 1;
+  };
+  const handleRedirect = () => {
+    router.push("/statistic");
+  };
+
   const settingsFields = [
     {
-      field: (
-        <button
-          className="text-whiteMain"
-          onClick={() =>
-            navigator.clipboard.writeText(
-              `http://localhost:3000/api/${data.code}`
-            )
-          }
-        >
-          Copy
-        </button>
-      ),
+      fieldTitle: "Copy",
+      fieldFunction: handleCopyLink,
+      fieldImage: <ClipBoard />,
     },
     {
-      field: (
-        <button
-          className=""
-          onClick={() =>
-            navigator.clipboard.writeText(
-              `http://localhost:3000/api/${data.code}`
-            )
-          }
-        >
-          Delete
-        </button>
-      ),
+      fieldTitle: " Delete",
+      fieldFunction: handleDeleteLink,
+      fieldImage: <Trash />,
     },
     {
-      field: (
-        <Link href={`/statistic`} className="block">
-          Statistic
-        </Link>
-      ),
+      fieldTitle: "Statistic",
+      fieldFunction: handleRedirect,
+      fieldImage: <BarChart width="25px" height="25px" fill="white" />,
     },
   ];
-  return <Dropdown placeholder={<ThreeDots />} dropdownData={settingsFields} />;
+
+  return (
+    <Dropdown
+      placeholder={
+        <ThreeDots className="fill-darkPinkMain hover:fill-pinkMain" />
+      }
+      dropdownData={settingsFields}
+      popoverClass="w-60"
+    />
+  );
 };
 
 const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data }) => {
@@ -68,7 +72,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data }) => {
           >
             {data.code}
           </Link>
-          <p>{data.clicked}</p>
+          <p className="max-sm:hidden"> {data.clicked}</p>
           <SettingsDropDown data={data} />
         </div>
       ))}
