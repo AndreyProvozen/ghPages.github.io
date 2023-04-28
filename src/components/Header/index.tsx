@@ -4,9 +4,14 @@ import Link from "next/link";
 import Dropdown from "../Dropdown";
 import LogOut from "@/icons/svg/LogOut";
 import Heart from "@/icons/svg/Heart";
+import { useMediaQuery } from "@/utils/useMediaQuery";
+import { ScreenSize } from "@/interface";
+import Menu from "@/icons/svg/Menu";
 
 const Header = ({ textBlack }: { textBlack?: boolean }) => {
   const { data: session } = useSession();
+  const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
+
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
     console.log("favoriteLinks");
@@ -59,36 +64,41 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
         <Link href="/" className="text-3xl font-extrabold">
           Link Shortener
         </Link>
-        <div className="flex">
-          <Link href="/" className="mx-3">
-            Home
-          </Link>
-
-          <Link href="/statistic" className="mx-3">
-            Statistic
-          </Link>
-          {session ? (
-            <Dropdown
-              dropdownData={dropdownData}
-              placeholder={
-                <div className="flex mx-3">
-                  <Image
-                    className="rounded-full mr-2"
-                    src={session.user?.image || ""}
-                    width={30}
-                    height={30}
-                    alt=""
-                  />
-                  <p>My profile</p>
-                </div>
-              }
-            />
-          ) : (
-            <Link href="/auth" className="mx-3">
-              Sign in
+        {}
+        {!isMobile ? (
+          <div className="flex">
+            <Link href="/" className="mx-3">
+              Home
             </Link>
-          )}
-        </div>
+
+            <Link href="/statistic" className="mx-3">
+              Statistic
+            </Link>
+            {session ? (
+              <Dropdown
+                dropdownData={dropdownData}
+                placeholder={
+                  <div className="flex mx-3">
+                    <Image
+                      className="rounded-full mr-2"
+                      src={session.user?.image || ""}
+                      width={30}
+                      height={30}
+                      alt=""
+                    />
+                    <p>My profile</p>
+                  </div>
+                }
+              />
+            ) : (
+              <Link href="/auth" className="mx-3">
+                Sign in
+              </Link>
+            )}
+          </div>
+        ) : (
+          <Menu />
+        )}
       </header>
     </div>
   );
