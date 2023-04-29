@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useEffect, useState } from "react";
-import type { linkData } from "@/interface";
+import { flashMessageType, linkData } from "@/interface";
 import Header from "@/components/Header";
 import LinkDataBlock from "@/components/LinkDataBlock";
 import QualitiesList from "@/components/QualitiesList";
@@ -12,11 +12,12 @@ import Arrow from "@/icons/svg/Arrow";
 import Mouse from "@/icons/svg/Mouse";
 
 import Image from "next/image";
-import Snackbar from "@/components/Snackbar";
+import { useFlashMessage } from "@/utils/FlashMessage";
 
 const Home = () => {
   const [longLink, setLongLink] = useState("");
   const [data, setData] = useState<linkData[]>([]);
+  const flashMessage = useFlashMessage();
   const [count, setCount] = useState();
   const [showMouseSvg, setShowMouseSvg] = useState(true);
 
@@ -69,7 +70,15 @@ const Home = () => {
         setLongLink("");
         return res.ok && res.json();
       })
-      .then((content) => content && setData([content, ...data]));
+      .then((content) => {
+        if (content) {
+          setData([content, ...data]);
+          flashMessage.addFlashMessage(
+            "Shortened link successfully added",
+            flashMessageType.SUCCESSFUL
+          );
+        }
+      });
   };
 
   return (
@@ -119,7 +128,6 @@ const Home = () => {
           <Accordion data={question} key={question.title} />
         ))}
       </div>
-      <Snackbar />
       <Footer />
     </>
   );

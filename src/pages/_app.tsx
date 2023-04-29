@@ -1,6 +1,7 @@
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
 import { SessionProvider } from "next-auth/react";
+import FlashMessageProvider from "@/utils/FlashMessage";
 
 interface AppData extends AppProps {
   session: any;
@@ -9,7 +10,9 @@ interface AppData extends AppProps {
 export default function App({ Component, pageProps, session }: AppData) {
   return (
     <SessionProvider session={session}>
-      <Component {...pageProps} />
+      <FlashMessageProvider>
+        <Component {...pageProps} />
+      </FlashMessageProvider>
     </SessionProvider>
   );
 }

@@ -3,7 +3,8 @@ import BarChart from "@/icons/svg/BarChart";
 import ClipBoard from "@/icons/svg/ClipBoard";
 import ThreeDots from "@/icons/svg/ThreeDots";
 import Trash from "@/icons/svg/Trash";
-import { linkData } from "@/interface";
+import { flashMessageType, linkData } from "@/interface";
+import { useFlashMessage } from "@/utils/FlashMessage";
 import { useRouter } from "next/router";
 import { Dispatch, FC, SetStateAction } from "react";
 
@@ -14,9 +15,14 @@ interface SettingsDropDownProps {
 
 const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setLinks }) => {
   const router = useRouter();
+  const flashMessage = useFlashMessage();
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(`http://localhost:3000/api/${data.code}`);
+    flashMessage.addFlashMessage(
+      "Link copied successfully",
+      flashMessageType.SUCCESSFUL
+    );
   };
 
   const handleDeleteLink = () => {
