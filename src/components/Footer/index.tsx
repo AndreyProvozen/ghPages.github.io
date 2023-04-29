@@ -7,9 +7,10 @@ const linksData = [
   {
     icon: <GitHub fill="white" />,
     href: "https://github.com/AndreyProvozen",
+    ariaLabel: "Link to GitHub",
   },
-  { icon: <Instagram />, href: "/" },
-  { icon: <Steam />, href: "" },
+  { icon: <Instagram />, href: "/", ariaLabel: "Link to Instagram" },
+  { icon: <Steam />, href: "", ariaLabel: "Link to Steam" },
 ];
 
 const credits = [
@@ -32,8 +33,14 @@ const Footer = ({ containerClasses = "" }) => (
     <div className="container max-w-screen-xl flex justify-between px-5 items-center py-5 mx-auto">
       <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
-        {linksData.map(({ icon, href }) => (
-          <Link target="_blank" href={href} className="mr-3" key={href}>
+        {linksData.map(({ icon, href, ariaLabel }) => (
+          <Link
+            target="_blank"
+            href={href}
+            className="mr-3"
+            key={href}
+            aria-label={ariaLabel}
+          >
             {icon}
           </Link>
         ))}

@@ -21,7 +21,7 @@ const SearchBlock: FC<SearchBlockProps> = ({ onSubmit, value, setValue }) => {
       />
       <button
         type="submit"
-        className="text-white bg-pink rounded-r text-center px-6 py-2.5 max-sm:w-full max-sm:mt-4 hover:bg-lightPink active:bg-darkPink"
+        className="text-white text-2xl bg-pink rounded-r text-center px-6 py-2.5 max-sm:w-full max-sm:mt-4 hover:bg-lightPink active:bg-darkPink"
       >
         generate link
       </button>

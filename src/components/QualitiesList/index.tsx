@@ -29,7 +29,7 @@ const QualitiesList = () => {
 
   return (
     <>
-      <h3 className="text-4xl font-bold mb-5">Our qualities</h3>
+      <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
       <div className="flex justify-center max-sm:flex-col max-sm:items-center">
         {qualitiesList.map(({ image, title, subTitle }, i) => {
           return (

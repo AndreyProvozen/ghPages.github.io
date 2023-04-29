@@ -62,7 +62,12 @@ const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setLinks }) => {
 
   return (
     <Dropdown
-      placeholder={<ThreeDots className="fill-darkPink hover:fill-pink" />}
+      placeholder={
+        <ThreeDots
+          className="fill-darkPink hover:fill-pink"
+          aria-label="Open link settings"
+        />
+      }
       dropdownData={settingsFields}
       popoverClass="w-60"
     />

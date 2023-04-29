@@ -27,6 +27,7 @@
     "typescript": "5.0.4"
   },
   "devDependencies": {
-    "@types/shortid": "^0.0.29"
+    "@types/shortid": "^0.0.29",
+    "cssnano": "^6.0.0"
   }
 }
