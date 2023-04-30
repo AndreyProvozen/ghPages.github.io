@@ -15,7 +15,8 @@ export enum ScreenSize {
   MOBILE_SMALL_BELOW = "(max-width: 400px)",
 }
 export enum flashMessageType {
-  ERROR = "bg-darkRed",
-  WARNING = "bg-lightOrange",
-  SUCCESSFUL = "bg-darkGreen",
+  //fix me
+  ERROR = "#c1002a",
+  WARNING = "#F0AD4E",
+  SUCCESSFUL = "#05c148",
 }

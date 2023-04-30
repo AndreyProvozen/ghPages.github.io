@@ -50,7 +50,8 @@ const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
         {flashMessages.map((flashMessage, index) => (
           <div
             key={index}
-            className={`flex justify-between p-4 rounded-lg ${flashMessage.type}`}
+            className={`flex justify-between p-4 rounded-lg`}
+            style={{ backgroundColor: flashMessage.type }}
           >
             <p>{flashMessage.message}</p>
             <button onClick={() => removeFlashMessage(index)}>

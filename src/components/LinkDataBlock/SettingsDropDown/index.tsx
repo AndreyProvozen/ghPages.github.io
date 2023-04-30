@@ -10,15 +10,20 @@ import { Dispatch, FC, SetStateAction } from "react";
 
 interface SettingsDropDownProps {
   data: linkData;
-  setLinks: Dispatch<SetStateAction<linkData[]>>;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  setDeletedLink: Dispatch<SetStateAction<undefined | linkData>>;
 }
 
-const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setLinks }) => {
+const SettingsDropDown: FC<SettingsDropDownProps> = ({
+  data,
+  setIsModalOpen,
+  setDeletedLink,
+}) => {
   const router = useRouter();
   const flashMessage = useFlashMessage();
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/api/${data.code}`);
+    navigator.clipboard.writeText(`${window.location.host}/api/${data.code}`);
     flashMessage.addFlashMessage(
       "Link copied successfully",
       flashMessageType.SUCCESSFUL
@@ -26,16 +31,8 @@ const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setLinks }) => {
   };
 
   const handleDeleteLink = () => {
-    fetch(`api/link?id=${data._id}`, {
-      method: "DELETE",
-      headers: { "content-type": "application/json" },
-    })
-      .then((res) => {
-        return res.ok && res.json();
-      })
-      .then((res) =>
-        setLinks((prev) => prev.filter(({ _id }) => _id !== res._id))
-      );
+    setDeletedLink(data);
+    setIsModalOpen(true);
   };
 
   const handleRedirect = () => {

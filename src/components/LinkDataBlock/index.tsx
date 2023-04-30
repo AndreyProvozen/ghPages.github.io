@@ -1,8 +1,9 @@
 import { ScreenSize, linkData } from "@/interface";
 import Link from "next/link";
-import { Dispatch, FC, SetStateAction, memo } from "react";
+import { Dispatch, FC, SetStateAction, memo, useState } from "react";
 import SettingsDropDown from "./SettingsDropDown";
 import { useMediaQuery } from "@/utils/useMediaQuery";
+import DeleteLinkModal from "../Modal";
 
 interface LinkDataBlockProps {
   data: linkData[];
@@ -11,6 +12,11 @@ interface LinkDataBlockProps {
 
 const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletedLink, setDeletedLink] = useState<linkData | undefined>(
+    undefined
+  );
+
   return (
     <div>
       {data.map((data) => (
@@ -30,9 +36,20 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
             {data.code}
           </Link>
           {!isMobile && <p> {data.clicked}</p>}
-          <SettingsDropDown data={data} setLinks={setLinks} />
+          <SettingsDropDown
+            data={data}
+            setIsModalOpen={setIsModalOpen}
+            setDeletedLink={setDeletedLink}
+          />
         </div>
       ))}
+      {isModalOpen && (
+        <DeleteLinkModal
+          setIsModalOpen={setIsModalOpen}
+          deletedLink={deletedLink}
+          setLinksList={setLinks}
+        />
+      )}
     </div>
   );
 });
