@@ -43,7 +43,7 @@ const DeleteLinkModal: FC<ModalProps> = ({
     >
       <div className="bg-white rounded-lg">
         <div className="border-b-2 border-b-gray py-2 flex justify-between">
-          <b className="text-xl mx-auto">delete link</b>
+          <b className="text-xl mx-auto">Delete link</b>
           <button onClick={() => setIsModalOpen(false)}>
             <Close fill="black" width="20px" height="20px" className="mr-2" />
           </button>

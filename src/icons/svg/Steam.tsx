@@ -1,6 +1,6 @@
 import { SVGProps } from "react";
 
-const Mouse = (props?: SVGProps<SVGSVGElement>) => (
+const Steam = (props?: SVGProps<SVGSVGElement>) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="30px"
@@ -15,4 +15,4 @@ const Mouse = (props?: SVGProps<SVGSVGElement>) => (
   </svg>
 );
 
-export default Mouse;
+export default Steam;

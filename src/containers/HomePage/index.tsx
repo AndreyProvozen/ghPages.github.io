@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useEffect, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { flashMessageType, linkData } from "@/interface";
 import Header from "@/components/Header";
 import LinkDataBlock from "@/components/LinkDataBlock";
@@ -8,9 +8,6 @@ import Footer from "@/components/Footer";
 import InfoBlock from "@/components/InfoBlock";
 import LinksList from "@/components/Skeletons/LinksList";
 import SearchBlock from "@/components/SearchBlock";
-import Arrow from "@/icons/svg/Arrow";
-import Mouse from "@/icons/svg/Mouse";
-
 import Image from "next/image";
 import { useFlashMessage } from "@/utils/FlashMessage";
 
@@ -19,7 +16,6 @@ const Home = () => {
   const [data, setData] = useState<linkData[]>([]);
   const flashMessage = useFlashMessage();
   const [count, setCount] = useState();
-  const [showMouseSvg, setShowMouseSvg] = useState(true);
 
   const questions = [
     {
@@ -44,10 +40,6 @@ const Home = () => {
     },
   ];
 
-  const handleScroll = useCallback(() => {
-    Boolean(window.scrollY) ? setShowMouseSvg(false) : setShowMouseSvg(true);
-  }, []);
-
   useEffect(() => {
     fetch("api/link")
       .then((res) => res.json())
@@ -55,9 +47,7 @@ const Home = () => {
         setCount(res.count);
         setData(res.urlsList);
       });
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+  }, []);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -83,7 +73,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="relative h-screen px-5">
+      <div className="relative pb-5 min-h-screen px-5">
         <Image
           src="/homeBg.avif"
           alt="Home background"
@@ -107,12 +97,6 @@ const Home = () => {
             <LinkDataBlock data={data} setLinks={setData} />
           ) : (
             count !== 0 && <LinksList />
-          )}
-          {showMouseSvg && (
-            <div className="absolute bottom-0 left-1/2 animate-bounce">
-              <Mouse width="30px" height="30px" />
-              <Arrow width="30px" height="30px" />
-            </div>
           )}
         </div>
       </div>

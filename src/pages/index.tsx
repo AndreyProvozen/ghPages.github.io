@@ -6,6 +6,10 @@ const HomePage = () => {
     <>
       <Head>
         <title>Link Shortener home</title>
+        <meta
+          name="description"
+          content=" Create short, custom links with ease using our Link Shortener. Boost your online presence and track link clicks with our advanced analytics. Try it now for free!"
+        />
       </Head>
       <Home />
     </>

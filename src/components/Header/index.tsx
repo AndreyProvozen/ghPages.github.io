@@ -7,15 +7,23 @@ import Heart from "@/icons/svg/Heart";
 import { useMediaQuery } from "@/utils/useMediaQuery";
 import { ScreenSize } from "@/interface";
 import Menu from "@/icons/svg/Menu";
+import Drover from "../Drover";
+import { useState } from "react";
 
 const Header = ({ textBlack }: { textBlack?: boolean }) => {
   const { data: session } = useSession();
-  const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
+  const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
+  const [isOpenDrover, setIsOpenDrover] = useState(false);
+
+  const handleToggle = () => {
+    setIsOpenDrover(!isOpenDrover);
+  };
 
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
     console.log("favoriteLinks");
   };
+
   const dropdownData = session
     ? [
         {
@@ -62,7 +70,6 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
         <Link href="/" className="text-3xl font-extrabold">
           Link Shortener
         </Link>
-        {}
         {!isMobile ? (
           <div className="flex">
             <Link href="/" className="mx-3">
@@ -95,7 +102,18 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
             )}
           </div>
         ) : (
-          <Menu />
+          <div>
+            <Menu
+              onClick={handleToggle}
+              cursor="pointer"
+              className={`${textBlack ? "fill-black" : "fill-white"}`}
+            />
+            <Drover
+              isOpen={isOpenDrover}
+              handleToggle={handleToggle}
+              session={session}
+            />
+          </div>
         )}
       </header>
     </div>

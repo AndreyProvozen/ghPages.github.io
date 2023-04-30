@@ -31,7 +31,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
             rel="noopener noreferrer"
             target="_blank"
             href={`/api/${data.code}`}
-            className="text-darkPink mx-5 hover:text-pink"
+            className="text-darkPink mx-5 whitespace-nowrap hover:text-pink "
           >
             {data.code}
           </Link>
