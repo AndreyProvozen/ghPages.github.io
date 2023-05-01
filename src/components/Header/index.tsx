@@ -64,7 +64,7 @@ const Header = ({ textBlack }: { textBlack?: boolean }) => {
     <div
       className={`${
         textBlack ? "text-black border-b-2 border-gray" : "text-white"
-      } py-5`}
+      } p-5`}
     >
       <header className="container max-w-screen-xl mx-auto flex justify-between items-center text-xl">
         <Link href="/" className="text-3xl font-extrabold">

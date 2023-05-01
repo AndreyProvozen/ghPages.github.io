@@ -1,30 +1,74 @@
+import Chevron from "@/icons/svg/Chevron";
 import Close from "@/icons/svg/Close";
 import Link from "next/link";
-import { FC } from "react";
+import { FC, useState } from "react";
 
 interface DroverProps {
   isOpen: boolean;
   handleToggle: () => void;
   session: any;
 }
+interface MenuProps {
+  name: string;
+  link?: string;
+  children?: MenuProps[];
+}
 
 const Drover: FC<DroverProps> = ({ isOpen, handleToggle, session }) => {
-  const navLinks = [
-    { title: "Home", link: "/" },
-    { title: "Statistic", link: "/" },
+  const menu: MenuProps[] = [
+    { name: "Home", link: "/" },
+    {
+      name: "Statistic",
+      link: "/statistic",
+    },
     session
-      ? { title: "My profile", link: "/" }
-      : { title: "Sign in", link: "/auth" },
+      ? {
+          name: "My profile",
+          children: [
+            { name: "2 level name", link: "/" },
+            {
+              name: "2 level name with children",
+              children: [
+                { name: "3 level name", link: "/" },
+                { name: "3 level name", link: "/" },
+              ],
+            },
+          ],
+        }
+      : { name: "Sign in", link: "/auth" },
   ];
+
+  const [level, setLevel] = useState(1);
+  const [currentMenu, setCurrentMenu] = useState([menu]);
+
+  const selectLevel = (nextLevel: number, menu: any) => {
+    setLevel(nextLevel);
+    setCurrentMenu((l) => {
+      l[level] = menu;
+      return l;
+    });
+  };
+
+  const backToPrevLevel = () => {
+    setLevel(level - 1);
+    setCurrentMenu((prevLevel) => prevLevel.slice(0, level - 1));
+  };
+
   return (
     <div className="relative text-white">
       <div
         className={`${
           isOpen ? "right-0" : "right-full"
-        } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all  duration-500`}
+        } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all duration-500`}
       >
         <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="font-bold text-2xl">Menu</h2>
+          {level > 1 ? (
+            <button onClick={backToPrevLevel} className="font-bold text-2xl">
+              back
+            </button>
+          ) : (
+            <h2 className="font-bold text-2xl">Menu</h2>
+          )}
           <button
             className="text-gray-500 focus:outline-none"
             onClick={handleToggle}
@@ -33,11 +77,40 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, session }) => {
             <Close />
           </button>
         </div>
-        <div className="px-4 py-8 flex flex-col">
-          {navLinks.map(({ title, link }) => (
-            <Link href={link} key={title} onClick={handleToggle}>
-              {title}
-            </Link>
+        <div
+          className="px-4 py-8 flex ease-in-out transition-all duration-500"
+          style={{
+            transform: `translateX(calc(-100% * ${level - 1} + 16px * ${
+              level - 1
+            }))`,
+          }}
+        >
+          {currentMenu.map((item, i) => (
+            <div key={i} style={{ minWidth: "calc(100% + 16px)" }}>
+              {item.map((m, item) => (
+                <div key={m.name + item}>
+                  {m.children && (
+                    <button
+                      className="flex font-bold text-xl"
+                      onClick={() => selectLevel(level + 1, m.children)}
+                    >
+                      {m.name}
+                      <Chevron
+                        fill="white"
+                        className="rotate-[270deg]"
+                        width="30px"
+                        height="30px"
+                      />
+                    </button>
+                  )}
+                  {m.link && (
+                    <Link className="font-bold text-xl" href={m.link}>
+                      {m.name}
+                    </Link>
+                  )}
+                </div>
+              ))}
+            </div>
           ))}
         </div>
       </div>
