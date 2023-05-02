@@ -19,25 +19,25 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
 
   return (
     <div>
-      {data.map((data) => (
+      {data.map((linkData) => (
         <div
           className="flex justify-between p-4 mb-5 bg-white rounded-md "
-          key={data.code}
+          key={linkData.code}
         >
           <div className="line-clamp-1 break-all max-w-xs max-md:max-w-[15rem]">
-            {data.url}
+            {linkData.url}
           </div>
           <Link
             rel="noopener noreferrer"
             target="_blank"
-            href={`/api/${data.code}`}
+            href={`/api/${linkData.code}`}
             className="text-darkPink mx-5 whitespace-nowrap hover:text-pink "
           >
-            {data.code}
+            {linkData.code}
           </Link>
-          {!isMobile && <p> {data.clicked}</p>}
+          {!isMobile && <p> {linkData.clicked}</p>}
           <SettingsDropDown
-            data={data}
+            data={linkData}
             setIsModalOpen={setIsModalOpen}
             setDeletedLink={setDeletedLink}
           />
@@ -45,6 +45,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
       ))}
       {isModalOpen && (
         <DeleteLinkModal
+          key={deletedLink?.code}
           setIsModalOpen={setIsModalOpen}
           deletedLink={deletedLink}
           setLinksList={setLinks}

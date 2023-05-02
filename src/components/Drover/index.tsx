@@ -2,42 +2,15 @@ import Chevron from "@/icons/svg/Chevron";
 import Close from "@/icons/svg/Close";
 import Link from "next/link";
 import { FC, useState } from "react";
+import { MenuProps } from "../Header/MobileHeader";
 
 interface DroverProps {
   isOpen: boolean;
   handleToggle: () => void;
-  session: any;
-}
-interface MenuProps {
-  name: string;
-  link?: string;
-  children?: MenuProps[];
+  menu: MenuProps[];
 }
 
-const Drover: FC<DroverProps> = ({ isOpen, handleToggle, session }) => {
-  const menu: MenuProps[] = [
-    { name: "Home", link: "/" },
-    {
-      name: "Statistic",
-      link: "/statistic",
-    },
-    session
-      ? {
-          name: "My profile",
-          children: [
-            { name: "2 level name", link: "/" },
-            {
-              name: "2 level name with children",
-              children: [
-                { name: "3 level name", link: "/" },
-                { name: "3 level name", link: "/" },
-              ],
-            },
-          ],
-        }
-      : { name: "Sign in", link: "/auth" },
-  ];
-
+const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
   const [level, setLevel] = useState(1);
   const [currentMenu, setCurrentMenu] = useState([menu]);
 
@@ -107,6 +80,14 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, session }) => {
                     <Link className="font-bold text-xl" href={m.link}>
                       {m.name}
                     </Link>
+                  )}
+                  {m.handleFunction && (
+                    <button
+                      className="font-bold text-xl"
+                      onClick={m.handleFunction}
+                    >
+                      {m.name}
+                    </button>
                   )}
                 </div>
               ))}
