@@ -1,0 +1,22 @@
+{
+  "root": true,
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["@typescript-eslint"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "tsconfigRootDir": "."
+  },
+  "rules": {
+    "no-console": "error",
+    "no-debugger": "error",
+    "prefer-const": "error",
+    "no-self-assign": "error",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "@next/next/no-title-in-document-head": "off",
+    "array-callback-return": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/return-await": "off",
+    "@typescript-eslint/no-unused-expressions": "off"
+  }
+}

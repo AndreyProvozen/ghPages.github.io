@@ -62,7 +62,12 @@ const Home = () => {
       })
       .then((content) => {
         if (content) {
-          setData([content, ...data]);
+          const newArray =
+            data.length > 4
+              ? [content, ...data].slice(0, -1)
+              : [content, ...data];
+
+          setData(newArray);
           flashMessage.addFlashMessage(
             "Shortened link successfully added",
             flashMessageType.SUCCESSFUL
