@@ -8,8 +8,6 @@ import DesktopHeader from "./DesktopHeader";
 const Header = ({ textBlack = false }) => {
   const { data: session } = useSession();
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
-  // eslint-disable-next-line no-console
-  console.log(session);
 
   return (
     <div

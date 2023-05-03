@@ -8,7 +8,7 @@ import { signOut } from "next-auth/react";
 const DesktopHeader = ({ session }: any) => {
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
-    console.log("session");
+    console.log("favoriteLinks");
   };
 
   const dropdownData = session

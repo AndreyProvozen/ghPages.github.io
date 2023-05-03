@@ -58,7 +58,10 @@ const Home = () => {
     })
       .then((res) => {
         setLongLink("");
-        return res.ok && res.json();
+        if (res.status === 409) {
+          throw new Error("URL already exists");
+        }
+        return res.json();
       })
       .then((content) => {
         if (content) {
@@ -73,7 +76,10 @@ const Home = () => {
             flashMessageType.SUCCESSFUL
           );
         }
-      });
+      })
+      .catch((error) =>
+        flashMessage.addFlashMessage(error.message, flashMessageType.ERROR)
+      );
   };
 
   return (

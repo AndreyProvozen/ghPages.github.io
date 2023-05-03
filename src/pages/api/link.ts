@@ -24,6 +24,11 @@ export default async function handlePostGetNewLink(
         return res.status(400).json("Please provide a valid url");
       }
 
+      const existingUrl = await Urls.findOne({ url });
+      if (existingUrl) {
+        return res.status(409).json("Please provide a valid url");
+      }
+
       const newUrl = await Urls.create({ url });
       return res.status(200).json(newUrl);
     }
