@@ -1,7 +1,8 @@
 import { Schema, model, models } from "mongoose";
-import shortid from "shortid";
+import { nanoid } from "nanoid";
+
 const UrlSchema = new Schema({
-  code: { type: String, unique: true, default: shortid.generate },
+  code: { type: String, unique: true, default: () => nanoid(7) },
   url: { type: String, require: true },
   clicked: { type: Number, default: 0 },
 });
