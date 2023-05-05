@@ -23,6 +23,14 @@ const credits = [
     text: "Image by rawpixel.com on Freepik",
   },
   {
+    href: "https://www.freepik.com/free-vector/statistical-analysis-man-cartoon-character-with-magnifying-glass-analyzing-data-circular-diagram-with-colorful-segments-statistics-audit-research-concept-illustration_11668491.htm#&position=4&from_view=collections",
+    text: "Image by vectorjuice on Freepik",
+  },
+  {
+    href: "https://www.freepik.com/free-vector/site-stats-concept-illustration_7140739.htm#&position=2&from_view=collections",
+    text: "Image by storyset on Freepik",
+  },
+  {
     href: "https://icons8.com/icon/12923/multiple-devices",
     text: "Multiple Devices icon by Icons8",
   },

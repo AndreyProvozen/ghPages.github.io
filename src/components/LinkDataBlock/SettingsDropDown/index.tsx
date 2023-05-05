@@ -23,7 +23,7 @@ const SettingsDropDown: FC<SettingsDropDownProps> = ({
   const flashMessage = useFlashMessage();
 
   const handleCopyLink = () => {
-    navigator.clipboard.writeText(`${window.location.host}/api/${data.code}`);
+    navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
     flashMessage.addFlashMessage(
       "Link copied successfully",
       flashMessageType.SUCCESSFUL

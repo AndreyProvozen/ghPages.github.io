@@ -103,6 +103,9 @@ const Home = () => {
             onSubmit={handleOnSubmit}
             value={longLink}
             setValue={setLongLink}
+            btnText="generate link"
+            containerClasses="mb-14"
+            placeholder="Paste the URL to be shortened"
           />
           {data.length ? (
             <LinkDataBlock data={data} setLinks={setData} />
@@ -114,7 +117,10 @@ const Home = () => {
       <div className="container max-w-screen-lg mx-auto text-center px-5 my-8">
         <QualitiesList />
       </div>
-      <InfoBlock />
+      <InfoBlock
+        btnData={{ text: "Get link statistics", href: "/statistic" }}
+        title="Already there are abbreviated links"
+      />
       <div className="container max-w-screen-lg mx-auto px-5 my-10">
         <p className="text-4xl font-bold mb-5 text-center">
           Frequently Asked Questions

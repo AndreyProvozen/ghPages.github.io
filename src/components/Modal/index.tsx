@@ -14,7 +14,7 @@ const DeleteLinkModal: FC<ModalProps> = ({
   deletedLink,
   setLinksList,
 }) => {
-  const shortLink = `http://${window.location.host}/api/${deletedLink?.code}`;
+  const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
 
   const handleDeleteLink = () => {
     fetch(`api/link?id=${deletedLink?._id}`, {
