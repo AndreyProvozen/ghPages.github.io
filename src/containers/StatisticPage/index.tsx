@@ -43,7 +43,7 @@ const Statistic = () => {
           <SearchBlock
             onSubmit={handleOnSubmit}
             value={link}
-            containerClasses="mb-5"
+            containerClasses="mb-5 text-black"
             setValue={setLink}
             btnText="get statistic"
             placeholder="Enter here your shortened URL"
@@ -66,7 +66,7 @@ const Statistic = () => {
           src: contentImage2.src,
           alt: "",
         }}
-        containerClasses="my-5"
+        containerClasses="mb-10"
         title="Link Performance"
         listData={[
           "View click-through rates and link performance metrics",
@@ -90,7 +90,7 @@ const Statistic = () => {
         }}
         imageFirst={true}
         title="User Engagement"
-        containerClasses="my-5"
+        containerClasses="my-10"
         listData={[
           "Analyze the number of clicks, unique visitors, and conversion rates to understand user engagement",
           "View top referrers, sources, and campaigns that drive traffic to your links",

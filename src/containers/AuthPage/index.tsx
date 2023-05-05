@@ -25,7 +25,7 @@ const Auth = () => {
   ];
   return (
     <div className="min-h-screen flex flex-col justify-between">
-      <Header textBlack={true} />
+      <Header textBlack={true} containerClasses="px-5" />
       <div className="text-center px-5 pb-20">
         <h1 className="text-5xl my-8 ">Sign in or register</h1>
         {authWith.map(({ image, provider, text }, i) => (

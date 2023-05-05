@@ -4,8 +4,14 @@ import { useMediaQuery } from "@/utils/useMediaQuery";
 import { ScreenSize } from "@/interface";
 import MobileHeader from "./MobileHeader";
 import DesktopHeader from "./DesktopHeader";
+import { FC } from "react";
 
-const Header = ({ textBlack = false }) => {
+interface HeaderProps {
+  textBlack?: boolean;
+  containerClasses?: string;
+}
+
+const Header: FC<HeaderProps> = ({ textBlack, containerClasses = "" }) => {
   const { data: session } = useSession();
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
 
@@ -13,10 +19,13 @@ const Header = ({ textBlack = false }) => {
     <div
       className={`${
         textBlack ? "text-black border-b-2 border-gray" : "text-white"
-      } p-5`}
+      } ${containerClasses} py-5`}
     >
       <header className="container max-w-screen-desktop mx-auto flex justify-between items-center text-xl">
-        <Link href="/" className="text-3xl font-extrabold">
+        <Link
+          href="/"
+          className="text-3xl font-extrabold max-mobile-small:text-2xl"
+        >
           Link Shortener
         </Link>
         {isMobile ? (

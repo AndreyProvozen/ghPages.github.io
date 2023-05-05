@@ -11,7 +11,7 @@ export interface MenuProps {
 }
 
 interface MobileHeaderProps {
-  textBlack: boolean;
+  textBlack?: boolean;
   session: any;
 }
 

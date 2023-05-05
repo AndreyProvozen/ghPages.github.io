@@ -5,16 +5,17 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/utils/**/*.{js,ts,jsx,tsx}",
     "./src/containers/**/*.{js,ts,jsx,tsx}",
-    "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
     screens: {
+      //min-width
       desktop: "1200px",
       "desktop-small": "1023px",
       tablet: "767px",
       "tablet-small": "640px",
       mobile: "500px",
       "mobile-small": "400px",
+      //max-width
       "max-desktop": { max: "1200px" },
       "max-desktop-small": { max: "1023px" },
       "max-tablet": { max: "767px" },
@@ -35,5 +36,4 @@ module.exports = {
       darkRed: "#c1002a",
     },
   },
-  plugins: [],
 };
