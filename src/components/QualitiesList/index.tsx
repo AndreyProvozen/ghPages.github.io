@@ -30,7 +30,7 @@ const QualitiesList = () => {
   return (
     <>
       <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
-      <div className="flex justify-center max-sm:flex-col max-sm:items-center">
+      <div className="flex justify-center max-tablet-small:flex-col max-tablet-small:items-center">
         {qualitiesList.map(({ image, title, subTitle }, i) => {
           return (
             <div className="flex flex-col items-center max-w-xs mx-3 " key={i}>

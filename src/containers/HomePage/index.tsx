@@ -93,7 +93,7 @@ const Home = () => {
           className="object-cover object-center z-[-1]"
         />
         <Header />
-        <div className="container max-w-screen-lg text-center mx-auto text-lg h-full">
+        <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
           <h1 className="mt-7 text-5xl text-white">Link Shortener</h1>
           <p className="max-w-lg mx-auto my-5 text-white">
             Free URL Shortener for transforming long, ugly links into nice,
@@ -114,14 +114,14 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className="container max-w-screen-lg mx-auto text-center px-5 my-8">
+      <div className="container max-w-screen-desktop-small mx-auto text-center px-5 my-8">
         <QualitiesList />
       </div>
       <InfoBlock
         btnData={{ text: "Get link statistics", href: "/statistic" }}
         title="Already there are abbreviated links"
       />
-      <div className="container max-w-screen-lg mx-auto px-5 my-10">
+      <div className="container max-w-screen-desktop-small mx-auto px-5 my-10">
         <p className="text-4xl font-bold mb-5 text-center">
           Frequently Asked Questions
         </p>

@@ -31,7 +31,7 @@ const Statistic = () => {
           fill
           className="object-cover object-center z-[-1]"
         />
-        <div className="container max-w-screen-lg text-center mx-auto">
+        <div className="container max-w-screen-desktop-small text-center mx-auto">
           <h1 className=" text-5xl py-5">Statistic Page</h1>
           <p className="text-center text-xl pb-5">
             View detailed statistics for your shortened links with our Link

@@ -15,7 +15,7 @@ const Header = ({ textBlack = false }) => {
         textBlack ? "text-black border-b-2 border-gray" : "text-white"
       } p-5`}
     >
-      <header className="container max-w-screen-xl mx-auto flex justify-between items-center text-xl">
+      <header className="container max-w-screen-desktop mx-auto flex justify-between items-center text-xl">
         <Link href="/" className="text-3xl font-extrabold">
           Link Shortener
         </Link>

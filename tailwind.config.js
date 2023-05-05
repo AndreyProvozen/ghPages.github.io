@@ -8,6 +8,14 @@ module.exports = {
     "./src/app/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
+    screens: {
+      desktop: "1200px",
+      "desktop-small": "1023px",
+      tablet: "767px",
+      "tablet-small": "640px",
+      mobile: "500px",
+      "mobile-small": "400px",
+    },
     colors: {
       white: "#ffff",
       gray: "#dde1e7",

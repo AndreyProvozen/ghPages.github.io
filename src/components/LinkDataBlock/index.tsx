@@ -24,7 +24,7 @@ const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
           className="flex justify-between p-4 mb-5 bg-white rounded-md items-center"
           key={linkData.code}
         >
-          <div className="line-clamp-1 flex-1 break-all max-w-xs max-md:max-w-[15rem] text-start">
+          <div className="line-clamp-1 flex-1 break-all max-w-xs text-start">
             {linkData.url}
           </div>
           <Link
