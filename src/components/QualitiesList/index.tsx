@@ -1,29 +1,28 @@
-import devicesIcon from "@/icons/devices.png";
-import BarChart from "@/icons/svg/BarChart";
-import Heart from "@/icons/svg/Heart";
+import devicesIcon from '@/icons/devices.png';
+import BarChart from '@/icons/svg/BarChart';
+import Heart from '@/icons/svg/Heart';
 
-import Image from "next/image";
+import Image from 'next/image';
 
 const QualitiesList = () => {
   const qualitiesList = [
     {
       image: <BarChart />,
-      title: "Statistics",
-      subTitle: "Check the amount of clicks that your shortened URL received",
-      alt: "",
+      title: 'Statistics',
+      subTitle: 'Check the amount of clicks that your shortened URL received',
+      alt: '',
     },
     {
       image: <Heart />,
-      title: "Easy",
-      subTitle:
-        "Link Shortener is easy and fast, enter the long link to get your shortened link",
-      alt: "",
+      title: 'Easy',
+      subTitle: 'Link Shortener is easy and fast, enter the long link to get your shortened link',
+      alt: '',
     },
     {
       image: <Image src={devicesIcon} width={100} height={100} alt="" />,
-      title: "Devices",
-      subTitle: "Compatible with smartphones, tablets and desktop",
-      alt: "",
+      title: 'Devices',
+      subTitle: 'Compatible with smartphones, tablets and desktop',
+      alt: '',
     },
   ];
 

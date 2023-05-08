@@ -1,13 +1,6 @@
-import Close from "@/icons/svg/Close";
-import type { flashMessageType } from "@/interface";
-import {
-  ReactNode,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import Close from '@/icons/svg/Close';
+import type { flashMessageType } from '@/interface';
+import { ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
 
 interface FlashMessage {
   message: string;
@@ -19,7 +12,7 @@ interface FlashMessageContextProps {
 }
 
 const FlashMessageContext = createContext<FlashMessageContextProps>({
-  addFlashMessage: () => {},
+  addFlashMessage: () => null,
 });
 
 const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
@@ -29,7 +22,7 @@ const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     if (flashMessages.length > 0) {
       timerRef.current = setTimeout(() => {
-        setFlashMessages((prevMessages) => prevMessages.slice(1));
+        setFlashMessages(prevMessages => prevMessages.slice(1));
       }, 2000);
     }
 
@@ -37,11 +30,11 @@ const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
   }, [flashMessages]);
 
   const addFlashMessage = (message: string, type: flashMessageType) => {
-    setFlashMessages((prev) => [...prev, { message, type }].slice(-5));
+    setFlashMessages(prev => [...prev, { message, type }].slice(-5));
   };
 
   const removeFlashMessage = (index: number) => {
-    setFlashMessages((prev) => prev.filter((_, i) => i !== index));
+    setFlashMessages(prev => prev.filter((_, i) => i !== index));
   };
 
   const renderFlashMessages = () => (

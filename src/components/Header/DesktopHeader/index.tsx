@@ -1,14 +1,14 @@
-import Dropdown from "@/components/Dropdown";
-import Heart from "@/icons/svg/Heart";
-import LogOut from "@/icons/svg/LogOut";
-import Image from "next/image";
-import Link from "next/link";
-import { signOut } from "next-auth/react";
+import Dropdown from '@/components/Dropdown';
+import Heart from '@/icons/svg/Heart';
+import LogOut from '@/icons/svg/LogOut';
+import Image from 'next/image';
+import Link from 'next/link';
+import { signOut } from 'next-auth/react';
 
 const DesktopHeader = ({ session }: any) => {
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
-    console.log("favoriteLinks");
+    console.log('favoriteLinks');
   };
 
   const dropdownData = session
@@ -18,29 +18,25 @@ const DesktopHeader = ({ session }: any) => {
             <div className="flex items-center">
               <Image
                 className="flex-shrink-0 rounded-full overflow-hidden mr-2"
-                src={session.user?.image || ""}
+                src={session.user?.image || ''}
                 width={48}
                 height={48}
                 alt=""
               />
               <div className="overflow-hidden">
-                <p className="text-ellipsis overflow-hidden">
-                  {session.user?.name}
-                </p>
-                <p className="text-ellipsis overflow-hidden">
-                  {session.user?.email}
-                </p>
+                <p className="text-ellipsis overflow-hidden">{session.user?.name}</p>
+                <p className="text-ellipsis overflow-hidden">{session.user?.email}</p>
               </div>
             </div>
           ),
         },
         {
-          fieldTitle: "Favorite links",
+          fieldTitle: 'Favorite links',
           fieldFunction: favoriteLinks,
           fieldImage: <Heart fill="white" />,
         },
         {
-          fieldTitle: "Sign out",
+          fieldTitle: 'Sign out',
           fieldFunction: signOut,
           fieldImage: <LogOut />,
         },
@@ -48,8 +44,8 @@ const DesktopHeader = ({ session }: any) => {
     : [];
 
   const menuDesktop = [
-    { name: "Home", link: "/" },
-    { name: "Statistic", link: "/statistic" },
+    { name: 'Home', link: '/' },
+    { name: 'Statistic', link: '/statistic' },
     session
       ? {
           component: (
@@ -57,20 +53,14 @@ const DesktopHeader = ({ session }: any) => {
               dropdownData={dropdownData}
               placeholder={
                 <div className="flex mx-3">
-                  <Image
-                    className="rounded-full mr-2"
-                    src={session.user?.image || ""}
-                    width={30}
-                    height={30}
-                    alt=""
-                  />
+                  <Image className="rounded-full mr-2" src={session.user?.image || ''} width={30} height={30} alt="" />
                   <p className="text-2xl">My profile</p>
                 </div>
               }
             />
           ),
         }
-      : { name: " Sign in", link: "/auth" },
+      : { name: ' Sign in', link: '/auth' },
   ];
   return (
     <nav className="flex">

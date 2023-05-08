@@ -1,5 +1,5 @@
-import Home from "@/containers/HomePage";
-import Head from "next/head";
+import Home from '@/containers/HomePage';
+import Head from 'next/head';
 
 const HomePage = () => {
   return (

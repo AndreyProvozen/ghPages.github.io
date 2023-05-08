@@ -1,5 +1,5 @@
-import { FC, memo, useState } from "react";
-import Chevron from "@/icons/svg/Chevron";
+import { FC, memo, useState } from 'react';
+import Chevron from '@/icons/svg/Chevron';
 
 interface AccordionProps {
   data: {
@@ -21,14 +21,12 @@ const Accordion: FC<AccordionProps> = memo(({ data }) => {
         <Chevron
           width="30px"
           height="30px"
-          className={`transform transition ease-out duration-300 ${
-            isOpen ? "rotate-180" : ""
-          }`}
+          className={`transform transition ease-out duration-300 ${isOpen ? 'rotate-180' : ''}`}
         />
       </button>
       <div
         className={`transition-max-height ease-in-out duration-300 overflow-hidden ${
-          isOpen ? "max-h-[1000px]" : "max-h-0"
+          isOpen ? 'max-h-[1000px]' : 'max-h-0'
         }`}
         dangerouslySetInnerHTML={{ __html: data.description }}
       />
@@ -36,6 +34,6 @@ const Accordion: FC<AccordionProps> = memo(({ data }) => {
   );
 });
 
-Accordion.displayName = "Accordion";
+Accordion.displayName = 'Accordion';
 
 export default Accordion;

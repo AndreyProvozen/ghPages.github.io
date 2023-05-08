@@ -1,26 +1,26 @@
-import { signIn, getSession } from "next-auth/react";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
-import Google from "@/icons/svg/Google";
-import GitHub from "@/icons/svg/GitHub";
-import Email from "@/icons/svg/Email";
+import { signIn, getSession } from 'next-auth/react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import Google from '@/icons/svg/Google';
+import GitHub from '@/icons/svg/GitHub';
+import Email from '@/icons/svg/Email';
 
 const Auth = () => {
   const authWith = [
     {
       image: <Google />,
-      text: "Continue with Google",
-      provider: "google",
+      text: 'Continue with Google',
+      provider: 'google',
     },
     {
       image: <GitHub />,
-      text: "Continue with GitHub",
-      provider: "github",
+      text: 'Continue with GitHub',
+      provider: 'github',
     },
     {
       image: <Email />,
-      text: "Continue with Email",
-      provider: "email",
+      text: 'Continue with Email',
+      provider: 'email',
     },
   ];
   return (
@@ -49,7 +49,7 @@ export const getServerSideProps = async (context: any) => {
   if (session) {
     return {
       redirect: {
-        destination: "/",
+        destination: '/',
         permanent: false,
       },
     };

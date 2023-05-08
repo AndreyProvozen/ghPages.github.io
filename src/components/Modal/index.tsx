@@ -1,7 +1,7 @@
-import Close from "@/icons/svg/Close";
-import { linkData } from "@/interface";
-import Link from "next/link";
-import { Dispatch, FC, SetStateAction, MouseEvent } from "react";
+import Close from '@/icons/svg/Close';
+import { linkData } from '@/interface';
+import Link from 'next/link';
+import { Dispatch, FC, SetStateAction, MouseEvent } from 'react';
 
 interface ModalProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -9,24 +9,18 @@ interface ModalProps {
   deletedLink?: linkData;
 }
 
-const DeleteLinkModal: FC<ModalProps> = ({
-  setIsModalOpen,
-  deletedLink,
-  setLinksList,
-}) => {
+const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinksList }) => {
   const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
 
   const handleDeleteLink = () => {
     fetch(`api/link?id=${deletedLink?._id}`, {
-      method: "DELETE",
-      headers: { "content-type": "application/json" },
+      method: 'DELETE',
+      headers: { 'content-type': 'application/json' },
     })
-      .then((res) => {
+      .then(res => {
         return res.ok && res.json();
       })
-      .then((res) =>
-        setLinksList((prev) => prev.filter(({ _id }) => _id !== res._id))
-      );
+      .then(res => setLinksList(prev => prev.filter(({ _id }) => _id !== res._id)));
     setIsModalOpen(false);
   };
 
@@ -51,11 +45,7 @@ const DeleteLinkModal: FC<ModalProps> = ({
 
         <div className="py-4 px-8">
           <p>You really want to delete this link?</p>
-          <Link
-            target="_blank"
-            href={shortLink}
-            className="text-darkPink hover:text-pink"
-          >
+          <Link target="_blank" href={shortLink} className="text-darkPink hover:text-pink">
             {shortLink}
           </Link>
         </div>
@@ -67,10 +57,7 @@ const DeleteLinkModal: FC<ModalProps> = ({
           >
             No
           </button>
-          <button
-            className="hover:bg-darkGreen px-4 py-2 w-1/2 rounded-br-lg"
-            onClick={handleDeleteLink}
-          >
+          <button className="hover:bg-darkGreen px-4 py-2 w-1/2 rounded-br-lg" onClick={handleDeleteLink}>
             Yes
           </button>
         </div>

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC } from 'react';
 
 interface SearchBlockProps {
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
@@ -14,8 +14,8 @@ const SearchBlock: FC<SearchBlockProps> = ({
   value,
   setValue,
   btnText,
-  placeholder = "",
-  containerClasses = "",
+  placeholder = '',
+  containerClasses = '',
 }) => {
   return (
     <form
@@ -25,7 +25,7 @@ const SearchBlock: FC<SearchBlockProps> = ({
       <input
         type="search"
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={e => setValue(e.target.value)}
         placeholder={placeholder}
         className="bg-white border-[1px] border-gray flex-auto placeholder:text-black relative m-0 rounded-l px-3 py-2.5 max-tablet-small:w-full max-tablet-small:rounded-r focus:outline-none focus:border-pink"
       />

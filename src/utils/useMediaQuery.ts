@@ -1,5 +1,5 @@
-import { ScreenSize } from "@/interface";
-import { useState, useEffect } from "react";
+import { ScreenSize } from '@/interface';
+import { useState, useEffect } from 'react';
 
 export const useMediaQuery = (query: ScreenSize) => {
   const [matches, setMatches] = useState(false);
@@ -11,10 +11,10 @@ export const useMediaQuery = (query: ScreenSize) => {
       setMatches(event.matches);
     };
 
-    mediaQuery.addEventListener("change", handleChange);
+    mediaQuery.addEventListener('change', handleChange);
     setMatches(mediaQuery.matches);
 
-    return () => mediaQuery.removeEventListener("change", handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
   }, [query]);
 
   return matches;

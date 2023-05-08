@@ -1,7 +1,7 @@
-import Drover from "@/components/Drover";
-import Menu from "@/icons/svg/Menu";
-import React, { FC, useState } from "react";
-import { signOut } from "next-auth/react";
+import Drover from '@/components/Drover';
+import Menu from '@/icons/svg/Menu';
+import React, { FC, useState } from 'react';
+import { signOut } from 'next-auth/react';
 
 export interface MenuProps {
   name: string;
@@ -22,36 +22,28 @@ const MobileHeader: FC<MobileHeaderProps> = ({ textBlack, session }) => {
   };
 
   const menuMobile: MenuProps[] = [
-    { name: "Home", link: "/" },
+    { name: 'Home', link: '/' },
     {
-      name: "Statistic",
-      link: "/statistic",
+      name: 'Statistic',
+      link: '/statistic',
     },
     session
       ? {
-          name: "My profile",
+          name: 'My profile',
           children: [
-            { name: "Favorite links", link: "/" },
+            { name: 'Favorite links', link: '/' },
             {
-              name: "Sign out",
+              name: 'Sign out',
               handleFunction: signOut,
             },
           ],
         }
-      : { name: "Sign in", link: "/auth" },
+      : { name: 'Sign in', link: '/auth' },
   ];
   return (
     <div>
-      <Menu
-        onClick={handleToggle}
-        cursor="pointer"
-        className={`${textBlack ? "fill-black" : "fill-white"}`}
-      />
-      <Drover
-        isOpen={isOpenDrover}
-        handleToggle={handleToggle}
-        menu={menuMobile}
-      />
+      <Menu onClick={handleToggle} cursor="pointer" className={`${textBlack ? 'fill-black' : 'fill-white'}`} />
+      <Drover isOpen={isOpenDrover} handleToggle={handleToggle} menu={menuMobile} />
     </div>
   );
 };

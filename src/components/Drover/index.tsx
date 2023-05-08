@@ -1,8 +1,8 @@
-import Chevron from "@/icons/svg/Chevron";
-import Close from "@/icons/svg/Close";
-import Link from "next/link";
-import { FC, useState } from "react";
-import { MenuProps } from "../Header/MobileHeader";
+import Chevron from '@/icons/svg/Chevron';
+import Close from '@/icons/svg/Close';
+import Link from 'next/link';
+import { FC, useState } from 'react';
+import { MenuProps } from '../Header/MobileHeader';
 
 interface DroverProps {
   isOpen: boolean;
@@ -16,7 +16,7 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
 
   const selectLevel = (nextLevel: number, menu: any) => {
     setLevel(nextLevel);
-    setCurrentMenu((l) => {
+    setCurrentMenu(l => {
       l[level] = menu;
       return l;
     });
@@ -24,14 +24,14 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
 
   const backToPrevLevel = () => {
     setLevel(level - 1);
-    setCurrentMenu((prevLevel) => prevLevel.slice(0, level - 1));
+    setCurrentMenu(prevLevel => prevLevel.slice(0, level - 1));
   };
 
   return (
     <div className="relative text-white">
       <div
         className={`${
-          isOpen ? "right-0" : "right-full"
+          isOpen ? 'right-0' : 'right-full'
         } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all duration-500`}
       >
         <div className="flex justify-between items-center p-4 border-b">
@@ -42,38 +42,24 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
           ) : (
             <h2 className="font-bold text-2xl">Menu</h2>
           )}
-          <button
-            className="text-gray-500 focus:outline-none"
-            onClick={handleToggle}
-            aria-label="Close button"
-          >
+          <button className="text-gray-500 focus:outline-none" onClick={handleToggle} aria-label="Close button">
             <Close />
           </button>
         </div>
         <div
           className="px-4 py-8 flex ease-in-out transition-all duration-500"
           style={{
-            transform: `translateX(calc(-100% * ${level - 1} + 16px * ${
-              level - 1
-            }))`,
+            transform: `translateX(calc(-100% * ${level - 1} + 16px * ${level - 1}))`,
           }}
         >
           {currentMenu.map((item, i) => (
-            <div key={i} style={{ minWidth: "calc(100% + 16px)" }}>
+            <div key={i} style={{ minWidth: 'calc(100% + 16px)' }}>
               {item.map((m, item) => (
                 <div key={m.name + item}>
                   {m.children && (
-                    <button
-                      className="flex font-bold text-xl"
-                      onClick={() => selectLevel(level + 1, m.children)}
-                    >
+                    <button className="flex font-bold text-xl" onClick={() => selectLevel(level + 1, m.children)}>
                       {m.name}
-                      <Chevron
-                        fill="white"
-                        className="rotate-[270deg]"
-                        width="30px"
-                        height="30px"
-                      />
+                      <Chevron fill="white" className="rotate-[270deg]" width="30px" height="30px" />
                     </button>
                   )}
                   {m.link && (
@@ -82,10 +68,7 @@ const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
                     </Link>
                   )}
                   {m.handleFunction && (
-                    <button
-                      className="font-bold text-xl"
-                      onClick={m.handleFunction}
-                    >
+                    <button className="font-bold text-xl" onClick={m.handleFunction}>
                       {m.name}
                     </button>
                   )}
