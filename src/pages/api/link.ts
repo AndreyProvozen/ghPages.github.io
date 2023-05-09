@@ -1,10 +1,10 @@
-import Urls, { IUrl } from '@/models/urls';
+import Urls from '@/models/urls';
 import connectMongodb from '@/utils/connectMongodb';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
-export default async function handlePostGetNewLink(req: NextApiRequest, res: NextApiResponse) {
+const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const { id, limit } = req.query;
     await connectMongodb();
@@ -21,7 +21,7 @@ export default async function handlePostGetNewLink(req: NextApiRequest, res: Nex
         return res.status(400).json('Please provide a valid url');
       }
 
-      const existingUrl: IUrl | null = await Urls.findOne({ url });
+      const existingUrl = await Urls.findOne({ url });
       if (existingUrl) {
         return res.status(409).json('Please provide a valid url');
       }
@@ -47,4 +47,15 @@ export default async function handlePostGetNewLink(req: NextApiRequest, res: Nex
   } catch (error: any) {
     return res.status(500).send(error.message);
   }
-}
+};
+
+export const GetLinkFullData = async (code: string) => {
+  await connectMongodb();
+  const existingUrl = await Urls.findOne({ code });
+  if (code) {
+    return JSON.stringify(existingUrl);
+  }
+  return null;
+};
+
+export default BaseLink;

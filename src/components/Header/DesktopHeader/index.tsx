@@ -17,7 +17,7 @@ const DesktopHeader = ({ session }: any) => {
           customField: (
             <div className="flex items-center">
               <Image
-                className="flex-shrink-0 rounded-full overflow-hidden mr-2"
+                className="flex-shrink-0 rounded-full overflow-hidden mr-2 w-auto"
                 src={session.user?.image || ''}
                 width={48}
                 height={48}
@@ -53,7 +53,13 @@ const DesktopHeader = ({ session }: any) => {
               dropdownData={dropdownData}
               placeholder={
                 <div className="flex mx-3">
-                  <Image className="rounded-full mr-2" src={session.user?.image || ''} width={30} height={30} alt="" />
+                  <Image
+                    className="rounded-full mr-2 w-auto"
+                    src={session.user?.image || ''}
+                    width={30}
+                    height={30}
+                    alt=""
+                  />
                   <p className="text-2xl">My profile</p>
                 </div>
               }
