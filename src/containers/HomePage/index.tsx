@@ -1,4 +1,5 @@
 import { FormEvent, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { flashMessageType, linkData } from '@/interface';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
@@ -8,7 +9,6 @@ import Footer from '@/components/Footer';
 import InfoBlock from '@/components/InfoBlock';
 import LinksList from '@/components/Skeletons/LinksList';
 import SearchBlock from '@/components/SearchBlock';
-import Image from 'next/image';
 import { useFlashMessage } from '@/utils/FlashMessage';
 
 const Home = () => {

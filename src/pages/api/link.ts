@@ -1,6 +1,6 @@
+import type { NextApiRequest, NextApiResponse } from 'next';
 import Urls from '@/models/urls';
 import connectMongodb from '@/utils/connectMongodb';
-import type { NextApiRequest, NextApiResponse } from 'next';
 
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 

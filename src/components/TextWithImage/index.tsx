@@ -1,6 +1,6 @@
-import Star from '@/icons/svg/Star';
 import Image from 'next/image';
 import React, { FC } from 'react';
+import Star from '@/icons/svg/Star';
 
 interface TextWithImageProps {
   linkData: { src: string; alt: string };

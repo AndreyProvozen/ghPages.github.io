@@ -1,5 +1,5 @@
-import Statistic from '@/containers/StatisticPage';
 import Head from 'next/head';
+import Statistic from '@/containers/StatisticPage';
 
 const StatisticPage = () => {
   return (

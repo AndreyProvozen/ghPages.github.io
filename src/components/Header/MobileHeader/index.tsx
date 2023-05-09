@@ -1,7 +1,7 @@
-import Drover from '@/components/Drover';
-import Menu from '@/icons/svg/Menu';
 import React, { FC, useState } from 'react';
 import { signOut } from 'next-auth/react';
+import Drover from '@/components/Drover';
+import Menu from '@/icons/svg/Menu';
 
 export interface MenuProps {
   name: string;

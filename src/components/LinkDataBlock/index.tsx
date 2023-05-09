@@ -1,8 +1,8 @@
-import { ScreenSize, linkData } from '@/interface';
 import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, memo, useState } from 'react';
-import SettingsDropDown from './SettingsDropDown';
+import { ScreenSize, linkData } from '@/interface';
 import { useMediaQuery } from '@/utils/useMediaQuery';
+import SettingsDropDown from './SettingsDropDown';
 import DeleteLinkModal from '../Modal';
 
 interface LinkDataBlockProps {

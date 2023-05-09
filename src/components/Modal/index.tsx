@@ -1,7 +1,7 @@
-import Close from '@/icons/svg/Close';
-import { linkData } from '@/interface';
 import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, MouseEvent } from 'react';
+import Close from '@/icons/svg/Close';
+import { linkData } from '@/interface';
 
 interface ModalProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

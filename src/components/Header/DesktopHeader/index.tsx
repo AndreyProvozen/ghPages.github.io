@@ -1,9 +1,9 @@
-import Dropdown from '@/components/Dropdown';
-import Heart from '@/icons/svg/Heart';
-import LogOut from '@/icons/svg/LogOut';
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import Dropdown from '@/components/Dropdown';
+import Heart from '@/icons/svg/Heart';
+import LogOut from '@/icons/svg/LogOut';
 
 const DesktopHeader = ({ session }: any) => {
   const favoriteLinks = () => {

@@ -1,6 +1,6 @@
+import { ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
 import Close from '@/icons/svg/Close';
 import type { flashMessageType } from '@/interface';
-import { ReactNode, createContext, useContext, useEffect, useRef, useState } from 'react';
 
 interface FlashMessage {
   message: string;

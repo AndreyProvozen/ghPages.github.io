@@ -1,10 +1,10 @@
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { FC } from 'react';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 import { ScreenSize } from '@/interface';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
-import { FC } from 'react';
 
 interface HeaderProps {
   textBlack?: boolean;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { GetLinkFullData } from '../api/link';
 import { NextPageContext } from 'next';
+import { GetLinkFullData } from '../api/link';
 
 const LinkStatistic = ({ data }) => {
   const [link, setLink] = useState(undefined);

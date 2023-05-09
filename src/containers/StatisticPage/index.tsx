@@ -1,11 +1,11 @@
+import Image from 'next/image';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import SearchBlock from '@/components/SearchBlock';
 import TextWithImage from '@/components/TextWithImage';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useEffect, useState } from 'react';
 import contentImage1 from '@/icons/contentImage1.avif';
 import contentImage2 from '@/icons/contentImage2.avif';
 

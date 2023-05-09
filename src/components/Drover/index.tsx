@@ -1,7 +1,7 @@
-import Chevron from '@/icons/svg/Chevron';
-import Close from '@/icons/svg/Close';
 import Link from 'next/link';
 import { FC, useState } from 'react';
+import Chevron from '@/icons/svg/Chevron';
+import Close from '@/icons/svg/Close';
 import { MenuProps } from '../Header/MobileHeader';
 
 interface DroverProps {

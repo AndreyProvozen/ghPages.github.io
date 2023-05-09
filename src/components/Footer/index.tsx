@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import GitHub from '@/icons/svg/GitHub';
 import Instagram from '@/icons/svg/Instagram';
 import Steam from '@/icons/svg/Steam';
-import Link from 'next/link';
 
 const linksData = [
   {

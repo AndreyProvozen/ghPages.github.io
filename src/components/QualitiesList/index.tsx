@@ -1,8 +1,7 @@
+import Image from 'next/image';
 import devicesIcon from '@/icons/devices.png';
 import BarChart from '@/icons/svg/BarChart';
 import Heart from '@/icons/svg/Heart';
-
-import Image from 'next/image';
 
 const QualitiesList = () => {
   const qualitiesList = [
