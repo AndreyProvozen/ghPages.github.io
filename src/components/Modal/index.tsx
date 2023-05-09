@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, MouseEvent } from 'react';
 import Close from '@/icons/svg/Close';
 import { linkData } from '@/interface';
+import customFetch from '@/utils/customFetch';
 
 interface ModalProps {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -13,14 +14,10 @@ const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinks
   const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
 
   const handleDeleteLink = () => {
-    fetch(`api/link?id=${deletedLink?._id}`, {
+    customFetch(`api/link?id=${deletedLink?._id}`, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-    })
-      .then(res => {
-        return res.ok && res.json();
-      })
-      .then(res => setLinksList(prev => prev.filter(({ _id }) => _id !== res._id)));
+    }).then(res => setLinksList(prev => prev.filter(({ _id }) => _id !== res._id)));
     setIsModalOpen(false);
   };
 

@@ -10,6 +10,7 @@ import InfoBlock from '@/components/InfoBlock';
 import LinksList from '@/components/Skeletons/LinksList';
 import SearchBlock from '@/components/SearchBlock';
 import { useFlashMessage } from '@/utils/FlashMessage';
+import customFetch from '@/utils/customFetch';
 
 const Home = () => {
   const [longLink, setLongLink] = useState('');
@@ -41,27 +42,25 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    fetch('api/link')
-      .then(res => res.json())
-      .then(res => {
-        setCount(res.count);
-        setData(res.urlsList);
-      });
+    customFetch('api/link').then(res => {
+      setCount(res.count);
+      setData(res.urlsList);
+    });
   }, []);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    fetch('api/link', {
+    customFetch('api/link', {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ url: longLink }),
     })
       .then(res => {
         setLongLink('');
-        if (res.status === 409) {
-          throw new Error('URL already exists');
+        if (typeof res === 'string') {
+          throw new Error(res);
         }
-        return res.json();
+        return res;
       })
       .then(content => {
         if (content) {
@@ -71,7 +70,9 @@ const Home = () => {
           flashMessage.addFlashMessage('Shortened link successfully added', flashMessageType.SUCCESSFUL);
         }
       })
-      .catch(error => flashMessage.addFlashMessage(error.message, flashMessageType.ERROR));
+      .catch(error => {
+        flashMessage.addFlashMessage(error.message, flashMessageType.ERROR);
+      });
   };
 
   return (

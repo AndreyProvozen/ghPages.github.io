@@ -20,12 +20,12 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'POST') {
       const { url } = req.body;
       if (!urlRegex.test(url)) {
-        return res.status(400).json('Please provide a valid url');
+        return res.status(400).json({ error: 'Please provide a valid url' });
       }
 
       const existingUrl = await Urls.findOne({ url });
       if (existingUrl) {
-        return res.status(409).json('Please provide a valid url');
+        return res.status(409).json({ error: 'URL already exists' });
       }
 
       const newUrl = await Urls.create({ url });
@@ -33,13 +33,9 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     if (req.method === 'DELETE') {
-      if (!id) {
-        return res.status(400).json('Please provide an id parameter');
-      }
-
       const deletedUrl = await Urls.findOneAndDelete({ _id: id });
       if (!deletedUrl) {
-        return res.status(404).json('URL not found');
+        return res.status(404).json({ error: 'URL has already been deleted' });
       }
 
       return res.status(200).json(deletedUrl);
