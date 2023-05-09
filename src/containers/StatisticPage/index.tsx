@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
@@ -10,6 +11,7 @@ import contentImage1 from '@/icons/contentImage1.avif';
 import contentImage2 from '@/icons/contentImage2.avif';
 
 const Statistic = () => {
+  const router = useRouter();
   const [link, setLink] = useState('');
   const [exampleLink, setExampleLink] = useState('');
 
@@ -17,9 +19,10 @@ const Statistic = () => {
     setExampleLink(`${window.location.origin}/api/wXk_Mot`);
   }, []);
 
-  const handleOnSubmit = () => {
-    // eslint-disable-next-line no-console
-    console.log(link);
+  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const getLinkCode = link.split('/');
+    router.push(`${router.asPath}/${getLinkCode[getLinkCode.length - 1]}`);
   };
 
   return (

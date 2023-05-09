@@ -18,34 +18,28 @@ const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setIsModalOpen, set
   const router = useRouter();
   const flashMessage = useFlashMessage();
 
-  const handleCopyLink = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
-    flashMessage.addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
-  };
-
-  const handleDeleteLink = () => {
-    setDeletedLink(data);
-    setIsModalOpen(true);
-  };
-
-  const handleRedirect = () => {
-    router.push('/statistic');
-  };
-
   const settingsFields = [
     {
       fieldTitle: 'Copy',
-      fieldFunction: handleCopyLink,
+      fieldFunction: () => {
+        navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
+        flashMessage.addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
+      },
       fieldImage: <ClipBoard />,
     },
     {
       fieldTitle: ' Delete',
-      fieldFunction: handleDeleteLink,
+      fieldFunction: () => {
+        setDeletedLink(data);
+        setIsModalOpen(true);
+      },
       fieldImage: <Trash />,
     },
     {
       fieldTitle: 'Statistic',
-      fieldFunction: handleRedirect,
+      fieldFunction: () => {
+        router.push(`/statistic/${data.code}`);
+      },
       fieldImage: <BarChart width="25px" height="25px" fill="white" />,
     },
   ];

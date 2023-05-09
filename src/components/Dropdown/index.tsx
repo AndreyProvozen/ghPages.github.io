@@ -42,7 +42,7 @@ const Dropdown: FC<DropdownProps> = ({ dropdownData = [], placeholder, popoverCl
       {isOpen && (
         <div className={`${popoverClass} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 right-0 z-10`}>
           {dropdownData.map(({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
-            <>
+            <div key={i}>
               {customField ? (
                 customField
               ) : (
@@ -50,7 +50,6 @@ const Dropdown: FC<DropdownProps> = ({ dropdownData = [], placeholder, popoverCl
                   className={`group flex items-center border-b-2 border-pink py-4 w-full text-start ${
                     i === 0 ? 'first:pt-0' : ''
                   } ${i === dropdownData.length - 1 ? 'last:border-0' : ''}`}
-                  key={i}
                   onClick={() => handleFunction(fieldFunction)}
                 >
                   {Boolean(fieldImage) && (
@@ -59,7 +58,7 @@ const Dropdown: FC<DropdownProps> = ({ dropdownData = [], placeholder, popoverCl
                   <div className="text-xl group-hover:text-lightPink">{fieldTitle}</div>
                 </button>
               )}
-            </>
+            </div>
           ))}
         </div>
       )}

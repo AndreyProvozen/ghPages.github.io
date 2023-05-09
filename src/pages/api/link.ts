@@ -11,7 +11,9 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (req.method === 'GET') {
       const count = await Urls.countDocuments();
-      const urlsList = await Urls.find().limit(Number(limit) || 5);
+      const urlsList = await Urls.find()
+        .select('url clicked code')
+        .limit(Number(limit) || 5);
       return res.status(200).json({ count, urlsList });
     }
 
