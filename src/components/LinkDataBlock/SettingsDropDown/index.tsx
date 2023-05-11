@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { Dispatch, FC, SetStateAction } from 'react';
-import Dropdown from '@/components/Dropdown';
+import Dropdown from '@/atoms/Dropdown';
 import BarChart from '@/icons/svg/BarChart';
 import ClipBoard from '@/icons/svg/ClipBoard';
 import ThreeDots from '@/icons/svg/ThreeDots';

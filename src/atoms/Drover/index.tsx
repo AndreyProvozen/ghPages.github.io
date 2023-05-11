@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import Chevron from '@/icons/svg/Chevron';
 import Close from '@/icons/svg/Close';
-import { MenuProps } from '../Header/MobileHeader';
+import { MenuProps } from '../../components/Header/MobileHeader';
 
 interface DroverProps {
   isOpen: boolean;

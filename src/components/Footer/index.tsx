@@ -42,7 +42,13 @@ const Footer = ({ containerClasses = '' }) => (
       <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
         {linksData.map(({ icon, href, ariaLabel }) => (
-          <Link target="_blank" href={href} className="mr-3" key={href} aria-label={ariaLabel}>
+          <Link
+            target="_blank"
+            href={href}
+            className="mr-3 hover:[&>svg]:fill-lightPink"
+            key={href}
+            aria-label={ariaLabel}
+          >
             {icon}
           </Link>
         ))}
