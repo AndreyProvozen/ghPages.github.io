@@ -21,11 +21,7 @@ const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinks
     setIsModalOpen(false);
   };
 
-  const handleModalClick = (event: MouseEvent) => {
-    if (event.target === event.currentTarget) {
-      setIsModalOpen(false);
-    }
-  };
+  const handleModalClick = (e: MouseEvent) => e.target === e.currentTarget && setIsModalOpen(false);
 
   return (
     <div

@@ -1,6 +1,6 @@
 import React, { FC, useState } from 'react';
 import { signOut } from 'next-auth/react';
-import Drover from '@/atoms/Drover';
+import dynamic from 'next/dynamic';
 import Menu from '@/icons/svg/Menu';
 
 export interface MenuProps {
@@ -14,6 +14,8 @@ interface MobileHeaderProps {
   textBlack?: boolean;
   session: any;
 }
+
+const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
 
 const MobileHeader: FC<MobileHeaderProps> = ({ textBlack, session }) => {
   const [isOpenDrover, setIsOpenDrover] = useState(false);

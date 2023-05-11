@@ -1,39 +1,30 @@
-import { FC, memo, useState } from 'react';
-import Chevron from '@/icons/svg/Chevron';
+import { FC, useState } from 'react';
+import AccordionItem from './AccordionItem';
 
 interface AccordionProps {
-  data: {
+  questions: {
     title: string;
     description: string;
-  };
+  }[];
 }
 
-const Accordion: FC<AccordionProps> = memo(({ data }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Accordion: FC<AccordionProps> = ({ questions }) => {
+  const [activeQuestions, setActiveQuestions] = useState<string | null>(null);
+  const toggleActiveQuestions = questionId => setActiveQuestions(activeQuestions !== questionId ? questionId : null);
 
   return (
-    <div>
-      <button
-        className="p-2 cursor-pointer flex justify-between border-b-2 w-full hover:bg-lightPink"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        <h3 className="font-bold text-lg">{data.title}</h3>
-        <Chevron
-          width="30px"
-          height="30px"
-          className={`transform transition ease-out duration-300 ${isOpen ? 'rotate-180' : ''}`}
+    <>
+      {questions.map(({ title, description }) => (
+        <AccordionItem
+          title={title}
+          description={description}
+          key={title}
+          isOpened={activeQuestions === title}
+          onClick={() => toggleActiveQuestions(title)}
         />
-      </button>
-      <div
-        className={`transition-max-height ease-in-out duration-300 overflow-hidden ${
-          isOpen ? 'max-h-[1000px]' : 'max-h-0'
-        }`}
-        dangerouslySetInnerHTML={{ __html: data.description }}
-      />
-    </div>
+      ))}
+    </>
   );
-});
-
-Accordion.displayName = 'Accordion';
+};
 
 export default Accordion;

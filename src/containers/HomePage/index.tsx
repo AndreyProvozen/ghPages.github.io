@@ -1,16 +1,18 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
 import { flashMessageType, linkData } from '@/interface';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualitiesList from '@/components/QualitiesList';
-import Accordion from '@/atoms/Accordion';
 import Footer from '@/components/Footer';
 import InfoBlock from '@/components/InfoBlock';
 import LinksList from '@/atoms/Skeleton/LinksList';
 import SearchBlock from '@/components/SearchBlock';
 import { useFlashMessage } from '@/utils/FlashMessage';
 import customFetch from '@/utils/customFetch';
+
+const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
 
 const Home = () => {
   const [longLink, setLongLink] = useState('');
@@ -105,9 +107,7 @@ const Home = () => {
       />
       <div className="container max-w-screen-desktop-small mx-auto px-5 my-10">
         <p className="text-4xl font-bold mb-5 text-center">Frequently Asked Questions</p>
-        {questions.map(question => (
-          <Accordion data={question} key={question.title} />
-        ))}
+        <Accordion questions={questions} />
       </div>
       <Footer />
     </>

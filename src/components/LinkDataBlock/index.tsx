@@ -1,14 +1,16 @@
 import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, memo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { ScreenSize, linkData } from '@/interface';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 import SettingsDropDown from './SettingsDropDown';
-import DeleteLinkModal from '../Modal';
 
 interface LinkDataBlockProps {
   data: linkData[];
   setLinks: Dispatch<SetStateAction<linkData[]>>;
 }
+
+const DeleteLinkModal = dynamic(() => import('../Modal'), { ssr: false });
 
 const LinkDataBlock: FC<LinkDataBlockProps> = memo(({ data, setLinks }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
