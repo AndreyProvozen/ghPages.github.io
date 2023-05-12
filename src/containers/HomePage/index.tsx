@@ -1,6 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
 import { flashMessageType, linkData } from '@/interface';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
@@ -15,6 +16,7 @@ import customFetch from '@/utils/customFetch';
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
 
 const Home = () => {
+  const { data: session } = useSession();
   const [longLink, setLongLink] = useState('');
   const [data, setData] = useState<linkData[]>([]);
   const flashMessage = useFlashMessage();
@@ -44,7 +46,7 @@ const Home = () => {
   ];
 
   useEffect(() => {
-    customFetch('api/link').then(res => {
+    customFetch(`api/link?session=${Boolean(session?.user?.email)}`).then(res => {
       setCount(res.count);
       setData(res.urlsList);
     });
@@ -52,7 +54,7 @@ const Home = () => {
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    customFetch('api/link', {
+    customFetch(`api/link?session=${Boolean(session?.user?.email)}`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({ url: longLink }),
@@ -95,7 +97,7 @@ const Home = () => {
             containerClasses="mb-14"
             placeholder="Paste the URL to be shortened"
           />
-          {data.length ? <LinkDataBlock data={data} setLinks={setData} /> : count !== 0 && <LinksList />}
+          {data?.length ? <LinkDataBlock data={data} setLinks={setData} /> : count !== 0 && <LinksList />}
         </div>
       </div>
       <div className="container max-w-screen-desktop-small mx-auto text-center px-5 my-8">

@@ -14,10 +14,10 @@ const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinks
   const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
 
   const handleDeleteLink = () => {
-    customFetch(`api/link?id=${deletedLink?._id}`, {
+    customFetch(`api/link?code=${deletedLink?.code}`, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-    }).then(res => setLinksList(prev => prev.filter(({ _id }) => _id !== res._id)));
+    }).then(deletedLinkCode => setLinksList(prev => prev.filter(item => item.code !== deletedLinkCode)));
     setIsModalOpen(false);
   };
 

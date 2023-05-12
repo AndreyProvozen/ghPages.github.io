@@ -30,6 +30,11 @@
   dependencies:
     regenerator-runtime "^0.13.11"
 
+"@choutkamartin/mongoose-adapter@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@choutkamartin/mongoose-adapter/-/mongoose-adapter-0.1.0.tgz#89f787ea0dfc709263512996a834d1555a001e3d"
+  integrity sha512-pA4y6v+F2nzV4t/pN1GuCSN7TcRqaPUtDUQ82FW9zNA9XYCeiUm7lmpq2h9OdmTrptWd6EIdkrK0bp/o6+AZ7A==
+
 "@eslint-community/eslint-utils@^4.2.0":
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/@eslint-community/eslint-utils/-/eslint-utils-4.4.0.tgz#a23514e8fb9af1269d5f7788aa556798d61c6b59"
@@ -230,6 +235,11 @@
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
   integrity sha512-L7z9BgrNEcYyUYtF+HaEfiS5ebkh9jXqbszz7pC0hRBPaatV0XjSD3+eHrpqFemQfgwiFF0QPIarnIihIDn7OA==
 
+"@types/cookie@^0.4.1":
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/@types/cookie/-/cookie-0.4.1.tgz#bfd02c1f2224567676c1545199f87c3a861d878d"
+  integrity sha512-XW/Aa8APYr6jSVVA1y/DEIZX0/GMKLEVekNG727R8cs56ahETkRAy/3DR7+fJyh7oUgGwNQaRfXCun0+KbWY7Q==
+
 "@types/json-schema@^7.0.9":
   version "7.0.11"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.11.tgz#d421b6c527a3037f7c84433fd2c4229e016863d3"
@@ -241,14 +251,19 @@
   integrity sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
 
 "@types/node@*":
-  version "20.1.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.1.1.tgz#afc492e8dbe7f672dd3a13674823522b467a45ad"
-  integrity sha512-uKBEevTNb+l6/aCQaKVnUModfEMjAl98lw2Si9P5y4hLu9tm6AlX2ZIoXZX6Wh9lJueYPrGPKk5WMCNHg/u6/A==
+  version "20.1.3"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.1.3.tgz#bc8e7cd8065a5fc355a3a191a68db8019c58bc00"
+  integrity sha512-NP2yfZpgmf2eDRPmgGq+fjGjSwFgYbihA8/gK+ey23qT9RkxsgNTZvGOEpXgzIGqesTYkElELLgtKoMQTys5vA==
 
 "@types/node@18.15.11":
   version "18.15.11"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.15.11.tgz#b3b790f09cb1696cffcec605de025b088fa4225f"
   integrity sha512-E5Kwq2n4SbMzQOn6wnmBjuK9ouqlURrcZDVfbo9ftDDTFt3nk7ZKK4GMOzoYgnpQJKcxwQw+lGaBvvlMo0qN/Q==
+
+"@types/node@^16.10.2":
+  version "16.18.29"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.18.29.tgz#4b5e19b078513fa5e828b98aede649525e5d1750"
+  integrity sha512-cal+XTYF4JBwG82kw3m9ktTOyUj7GXcO9i2o+t49y/OF+3asYfpHqTROF1UbV91e71g/UB5wNeL5hfqPthzp8Q==
 
 "@types/prop-types@*":
   version "15.7.5"
@@ -622,9 +637,9 @@ browserslist@^4.0.0, browserslist@^4.21.4, browserslist@^4.21.5:
     update-browserslist-db "^1.0.10"
 
 bson@^5.2.0:
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-5.2.0.tgz#c81d35dd30e2798203e5422a639780ea98dd25ba"
-  integrity sha512-HevkSpDbpUfsrHWmWiAsNavANKYIErV2ePXllp1bwq5CDreAaFVj6RVlZpJnxK4WWDCJ/5jMUpaY6G526q3Hjg==
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-5.3.0.tgz#37b006df4cd91ed125cb686467c1dd6d4606b514"
+  integrity sha512-ukmCZMneMlaC5ebPHXIkP8YJzNl5DC41N5MAIvKDqLggdao342t4McltoJBQfQya/nHBWAcSsYRqlXPoQkTJag==
 
 buffer@^5.5.0:
   version "5.7.1"
@@ -783,10 +798,24 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
+cookie@^0.4.0:
+  version "0.4.2"
+  resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.2.tgz#0e41f24de5ecf317947c82fc789e06a884824432"
+  integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
+
 cookie@^0.5.0:
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.5.0.tgz#d1f5d71adec6558c58f389987c366aa47e994f8b"
   integrity sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
+
+cookies-next@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/cookies-next/-/cookies-next-2.1.1.tgz#8d82f1b78fccfb19d9d7c26766fa5707a3ec4695"
+  integrity sha512-AZGZPdL1hU3jCjN2UMJTGhLOYzNUN9Gm+v8BdptYIHUdwz397Et1p+sZRfvAl8pKnnmMdX2Pk9xDRKCGBum6GA==
+  dependencies:
+    "@types/cookie" "^0.4.1"
+    "@types/node" "^16.10.2"
+    cookie "^0.4.0"
 
 cosmiconfig@^8.1.3:
   version "8.1.3"
@@ -1067,9 +1096,9 @@ domutils@^3.0.1:
     domhandler "^5.0.3"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.385"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.385.tgz#1afd8d6280d510145148777b899ff481c65531ff"
-  integrity sha512-L9zlje9bIw0h+CwPQumiuVlfMcV4boxRjFIWDcLfFqTZNbkwOExBzfmswytHawObQX4OUhtNv8gIiB21kOurIg==
+  version "1.4.392"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.392.tgz#57ec91fa02393ab32e46df6925ef309642a44680"
+  integrity sha512-TXQOMW9tnhIms3jGy/lJctLjICOgyueZFJ1KUtm6DTQ+QpxX3p7ZBwB6syuZ9KBuT5S4XX7bgY1ECPgfxKUdOg==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
@@ -1084,9 +1113,9 @@ end-of-stream@^1.1.0, end-of-stream@^1.4.1:
     once "^1.4.0"
 
 enhanced-resolve@^5.12.0:
-  version "5.13.0"
-  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.13.0.tgz#26d1ecc448c02de997133217b5c1053f34a0a275"
-  integrity sha512-eyV8f0y1+bzyfh8xAwW/WTSZpLbjhqc4ne9eGSH4Zo2ejdyiNG9pU6mf9DG8a7+Auk6MFTlNOT4Y2y/9k8GKVg==
+  version "5.14.0"
+  resolved "https://registry.yarnpkg.com/enhanced-resolve/-/enhanced-resolve-5.14.0.tgz#0b6c676c8a3266c99fa281e4433a706f5c0c61c4"
+  integrity sha512-+DCows0XNwLDcUhbFJPdlQEVnT2zXlCv7hPxemTz86/O+B/hCQ+mb7ydkPKiflpVraqLPCAfu7lDy+hBXueojw==
   dependencies:
     graceful-fs "^4.2.4"
     tapable "^2.2.0"
@@ -2265,9 +2294,9 @@ mongodb@5.3.0:
     saslprep "^1.0.3"
 
 mongoose@^7.0.3:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-7.1.0.tgz#ad7f23184a0c19eb8efbbad4f1ff2113ede1515d"
-  integrity sha512-shoo9z/7o96Ojx69wpJn65+EC+Mt3q1SWTducW+F2Y4ieCXo0lZwpCZedgC841MIvJ7V8o6gmzoN1NfcnOTOuw==
+  version "7.1.1"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-7.1.1.tgz#a0e17be54754dd8801cb3696585b949399550aa9"
+  integrity sha512-AIxaWwGY+td7QOMk4NgK6fbRuGovFyDzv65nU1uj1DsUh3lpjfP3iFYHSR+sUKrs7nbp19ksLlRXkmInBteSCA==
   dependencies:
     bson "^5.2.0"
     kareem "2.5.1"

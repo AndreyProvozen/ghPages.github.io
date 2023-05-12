@@ -14,9 +14,11 @@
     "format": "prettier --write \"./src/**/*.{ts,tsx}\""
   },
   "dependencies": {
+    "@choutkamartin/mongoose-adapter": "^0.1.0",
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "cookies-next": "^2.1.1",
     "mongoose": "^7.0.3",
     "nanoid": "^4.0.2",
     "next": "13.3.0",

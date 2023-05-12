@@ -2,7 +2,10 @@ import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
+import { MongooseAdapter } from '@choutkamartin/mongoose-adapter';
+
 export default NextAuth({
+  adapter: MongooseAdapter(process.env.MONGODB_URI),
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',
