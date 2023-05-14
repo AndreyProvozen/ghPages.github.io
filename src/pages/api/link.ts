@@ -3,13 +3,14 @@ import { nanoid } from 'nanoid';
 import { setCookie, getCookie } from 'cookies-next';
 import Urls from '@/models/Urls';
 import connectMongodb from '@/utils/connectMongodb';
+import User from '@/models/User';
 
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 const getLinksData = async (req, res) => {
   const { limit, session } = req.query;
 
-  if (session === 'true') {
+  if (session !== 'undefined') {
     const count = await Urls.countDocuments();
     const urlsList = await Urls.find()
       .select('url clicked code')
@@ -47,14 +48,13 @@ const deleteLinksData = async (req, res) => {
 };
 
 const postLinksData = async (req, res) => {
-  const { url } = req.body;
-  const { session } = req.query;
+  const { url, userEmail } = req.body;
 
   if (!urlRegex.test(url)) {
     return res.status(400).json({ error: 'Please provide a valid url' });
   }
 
-  if (session === 'true') {
+  if (userEmail !== 'undefined') {
     const existingUrl = await Urls.findOne({ url });
 
     if (existingUrl) {
@@ -62,6 +62,12 @@ const postLinksData = async (req, res) => {
     }
 
     const newUrl = await Urls.create({ url });
+    const userData = await User.findOne({ email: userEmail });
+
+    userData.userLinks = [newUrl.code];
+
+    await userData.save();
+
     return res.status(200).json(newUrl);
   }
 
