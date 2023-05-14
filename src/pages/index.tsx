@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
 import Home from '@/containers/HomePage';
-import customFetch from '@/utils/customFetch';
 
-const HomePage = ({ session, urlsListData }) => {
+const HomePage = ({ session }) => {
   const questions = [
     {
       title: 'What is a URL shortener?',
@@ -26,7 +25,7 @@ const HomePage = ({ session, urlsListData }) => {
         '<p>Because of its versatility, a QR Code can be programmed to do a multitude of things. It can be split into two formats: Dynamic and Static. A Dynamic QR Code is useful for businesses or nonprofits in their marketing strategy because of its advantages. Though it needs a subscription to work, it is a small price to pay compared to the benefits it offers. Dynamic QR Code solutions are editable, which means if you made a mistake and only noticed it after the QR Codes are printed, you can easily log in to the dashboard and fix them without changing the appearance of the already printed Codes.</p>',
     },
   ];
-  
+
   return (
     <>
       <Head>
@@ -36,17 +35,15 @@ const HomePage = ({ session, urlsListData }) => {
           content=" Create short, custom links with ease using our Link Shortener. Boost your online presence and track link clicks with our advanced analytics. Try it now for free!"
         />
       </Head>
-      <Home session={session} questions={questions} urlsListData={urlsListData} />
+      <Home session={session} questions={questions} />
     </>
   );
 };
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  const baseUrl = `http://${context.req.headers['x-forwarded-host']}`;
-  const urlsListData = await customFetch(`${baseUrl}/api/link?session=${Boolean(session?.user?.email)}`);
 
-  return { props: { session, urlsListData } };
+  return { props: { session } };
 }
 
 export default HomePage;

@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import UAParser from 'ua-parser-js';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import connectMongodb from '@/utils/connectMongodb';
 import Urls, { IUrl } from '@/models/Urls';
 
@@ -39,9 +39,13 @@ export default async function handleRedirect(req: NextApiRequest, res: NextApiRe
     const parsedLinksList = JSON.parse(cookieLinksList);
     const currentLink = parsedLinksList.find(item => item.code === shortPath);
 
-    res.setHeader('Cache-Control', 'no-cache, max-age=0');
-    res.redirect(301, currentLink.url);
-  }
+    if (currentLink) {
+      currentLink.clicked++;
+      setCookie('link-data', JSON.stringify(parsedLinksList), { req, res });
 
+      res.setHeader('Cache-Control', 'no-cache, max-age=0');
+      res.redirect(301, currentLink.url);
+    }
+  }
   return res.status(404).send('Not Found');
 }

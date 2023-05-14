@@ -8,20 +8,20 @@ import User from '@/models/User';
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 const getLinksData = async (req, res) => {
-  const { limit, session } = req.query;
+  const { limit, userEmail } = req.query;
 
-  if (session !== 'undefined') {
-    const count = await Urls.countDocuments();
-    const urlsList = await Urls.find()
+  if (userEmail !== 'undefined') {
+    const userData = await User.findOne({ email: userEmail });
+    const urlsList = await Urls.find({ code: userData.userLinks })
       .select('url clicked code')
       .limit(Number(limit) || 5);
+
+    const count = urlsList.length;
     return res.status(200).json({ urlsList, count });
   }
+  const cookieLinksList = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
 
-  const cookieLinksList = (getCookie('link-data', { req, res }) as string) || '[]';
-  const parsedLinksList = JSON.parse(cookieLinksList);
-
-  return res.status(200).json({ urlsList: parsedLinksList, count: parsedLinksList.length });
+  return res.status(200).json({ urlsList: cookieLinksList, count: cookieLinksList.length });
 };
 
 const deleteLinksData = async (req, res) => {
@@ -35,14 +35,11 @@ const deleteLinksData = async (req, res) => {
 
     return res.status(200).json(code);
   }
-  const cookieLinksList = (getCookie('link-data', { req, res }) as string) || '[]';
-  const parsedLinksList = JSON.parse(cookieLinksList);
+  const cookieLinksList = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
 
-  setCookie(
-    'link-data',
-    parsedLinksList.filter(item => item.code !== code),
-    { req, res }
-  );
+  const newList = cookieLinksList.filter(item => item.code !== code);
+
+  setCookie('link-data', newList, { req, res });
 
   return res.status(200).json(code);
 };
@@ -54,7 +51,7 @@ const postLinksData = async (req, res) => {
     return res.status(400).json({ error: 'Please provide a valid url' });
   }
 
-  if (userEmail !== 'undefined') {
+  if (userEmail !== undefined) {
     const existingUrl = await Urls.findOne({ url });
 
     if (existingUrl) {
@@ -64,7 +61,7 @@ const postLinksData = async (req, res) => {
     const newUrl = await Urls.create({ url });
     const userData = await User.findOne({ email: userEmail });
 
-    userData.userLinks = [newUrl.code];
+    userData.userLinks = [...userData.userLinks, newUrl.code];
 
     await userData.save();
 

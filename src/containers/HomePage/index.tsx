@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import dynamic from 'next/dynamic';
 import { flashMessageType, linkData } from '@/interface';
@@ -14,11 +14,19 @@ import customFetch from '@/utils/customFetch';
 
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
 
-const Home = ({ session, questions, urlsListData }) => {
+const Home = ({ session, questions }) => {
   const [longLink, setLongLink] = useState('');
-  const [data, setData] = useState<linkData[]>(urlsListData.urlsList);
+  const [data, setData] = useState<linkData[]>([]);
   const flashMessage = useFlashMessage();
-  const [count] = useState(urlsListData.count);
+  const [count, setCount] = useState();
+
+  useEffect(() => {
+    // Fix me
+    customFetch(`api/link?userEmail=${encodeURIComponent(session?.user?.email)}`).then(res => {
+      setData(res.urlsList);
+      setCount(res.count);
+    });
+  }, []);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
