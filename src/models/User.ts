@@ -1,6 +1,6 @@
 import { Schema, model, models, Document, Model, Types } from 'mongoose';
 
-interface IUser extends Document {
+export interface IUser extends Document {
   _id: Types.ObjectId;
   __v: string;
   id: string;
@@ -8,6 +8,7 @@ interface IUser extends Document {
   email: string | null;
   emailVerified: Date | null;
   image: string | null;
+  userLinks: string[];
 }
 
 const UserSchema = new Schema({
@@ -15,7 +16,7 @@ const UserSchema = new Schema({
   email: { type: String, unique: true },
   emailVerified: { type: Date },
   image: { type: String },
-  links: [{ type: Schema.Types.ObjectId, ref: 'urls' }],
+  userLinks: [{ type: String }],
 });
 
 const User = (models.User as Model<IUser>) || model<IUser>('User', UserSchema);
