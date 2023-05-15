@@ -30,7 +30,7 @@ export default async function handleRedirect(req: NextApiRequest, res: NextApiRe
     await data.save();
 
     res.setHeader('Cache-Control', 'no-cache, max-age=0');
-    res.redirect(301, data.url);
+    return res.redirect(301, data.url);
   }
 
   const cookieLinksList = getCookie('link-data', { req, res }) as string;
@@ -44,7 +44,7 @@ export default async function handleRedirect(req: NextApiRequest, res: NextApiRe
       setCookie('link-data', JSON.stringify(parsedLinksList), { req, res });
 
       res.setHeader('Cache-Control', 'no-cache, max-age=0');
-      res.redirect(301, currentLink.url);
+      return res.redirect(301, currentLink.url);
     }
   }
   return res.status(404).send('Not Found');

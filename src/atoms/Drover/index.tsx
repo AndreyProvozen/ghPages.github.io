@@ -2,19 +2,19 @@ import Link from 'next/link';
 import { FC, useState } from 'react';
 import Chevron from '@/icons/svg/Chevron';
 import Close from '@/icons/svg/Close';
-import { MenuProps } from '../../components/Header/MobileHeader';
+import type { MenuProps } from '../../components/Header/MobileHeader';
 
-interface DroverProps {
+interface Props {
   isOpen: boolean;
   handleToggle: () => void;
   menu: MenuProps[];
 }
 
-const Drover: FC<DroverProps> = ({ isOpen, handleToggle, menu }) => {
+const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
   const [level, setLevel] = useState(1);
   const [currentMenu, setCurrentMenu] = useState([menu]);
 
-  const selectLevel = (nextLevel: number, menu: any) => {
+  const selectLevel = (nextLevel: number, menu: MenuProps[]) => {
     setLevel(nextLevel);
     setCurrentMenu(l => {
       l[level] = menu;

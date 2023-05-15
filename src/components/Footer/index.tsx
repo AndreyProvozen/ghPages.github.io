@@ -2,6 +2,7 @@ import Link from 'next/link';
 import GitHub from '@/icons/svg/GitHub';
 import Instagram from '@/icons/svg/Instagram';
 import Steam from '@/icons/svg/Steam';
+import { credits } from 'mock';
 
 const linksData = [
   {
@@ -11,29 +12,6 @@ const linksData = [
   },
   { icon: <Instagram />, href: '/', ariaLabel: 'Link to Instagram' },
   { icon: <Steam />, href: '', ariaLabel: 'Link to Steam' },
-];
-
-const credits = [
-  {
-    href: 'https://www.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_6038271.htm',
-    text: 'Image by kjpargeter on Freepik',
-  },
-  {
-    href: 'https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&from_view=search&track=robertav1_2_sidr',
-    text: 'Image by rawpixel.com on Freepik',
-  },
-  {
-    href: 'https://www.freepik.com/free-vector/statistical-analysis-man-cartoon-character-with-magnifying-glass-analyzing-data-circular-diagram-with-colorful-segments-statistics-audit-research-concept-illustration_11668491.htm#&position=4&from_view=collections',
-    text: 'Image by vectorjuice on Freepik',
-  },
-  {
-    href: 'https://www.freepik.com/free-vector/site-stats-concept-illustration_7140739.htm#&position=2&from_view=collections',
-    text: 'Image by storyset on Freepik',
-  },
-  {
-    href: 'https://icons8.com/icon/12923/multiple-devices',
-    text: 'Multiple Devices icon by Icons8',
-  },
 ];
 
 const Footer = ({ containerClasses = '' }) => (

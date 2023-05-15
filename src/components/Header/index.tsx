@@ -6,12 +6,12 @@ import { ScreenSize } from '@/interface';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 
-interface HeaderProps {
+interface Props {
   textBlack?: boolean;
   containerClasses?: string;
 }
 
-const Header: FC<HeaderProps> = ({ textBlack, containerClasses = '' }) => {
+const Header: FC<Props> = ({ textBlack, containerClasses = '' }) => {
   const { data: session } = useSession();
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
 

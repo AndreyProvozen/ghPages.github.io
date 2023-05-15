@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Auth from '@/containers/AuthPage';
 
-const HomePage = () => {
+const AuthPage = () => {
   return (
     <>
       <Head>
@@ -16,4 +16,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default AuthPage;

@@ -1,8 +1,8 @@
 import Image from 'next/image';
-import React, { FC } from 'react';
+import { FC } from 'react';
 import Star from '@/icons/svg/Star';
 
-interface TextWithImageProps {
+interface Props {
   linkData: { src: string; alt: string };
   text: string;
   title: string;
@@ -11,14 +11,7 @@ interface TextWithImageProps {
   listData?: string[];
 }
 
-const TextWithImage: FC<TextWithImageProps> = ({
-  linkData,
-  text,
-  imageFirst,
-  title,
-  listData,
-  containerClasses = '',
-}) => {
+const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, listData, containerClasses = '' }) => {
   return (
     <div
       className={`flex justify-between max-w-screen-desktop px-5 mx-auto max-desktop-small:block ${

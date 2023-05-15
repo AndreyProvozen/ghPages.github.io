@@ -5,7 +5,7 @@ import Dropdown from '@/atoms/Dropdown';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 
-const DesktopHeader = ({ session }: any) => {
+const DesktopHeader = ({ session }) => {
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
     console.log('favoriteLinks');
@@ -43,7 +43,7 @@ const DesktopHeader = ({ session }: any) => {
       ]
     : [];
 
-  const menuDesktop = [
+  const navFields = [
     { name: 'Home', link: '/' },
     { name: 'Statistic', link: '/statistic' },
     session
@@ -70,7 +70,7 @@ const DesktopHeader = ({ session }: any) => {
   ];
   return (
     <nav className="flex">
-      {menuDesktop.map((item, i) => (
+      {navFields.map((item, i) => (
         <div key={i}>
           {item.link && (
             <Link href={item.link} className="mx-3 text-2xl">

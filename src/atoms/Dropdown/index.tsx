@@ -1,6 +1,6 @@
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 
-interface DropdownProps {
+interface Props {
   dropdownData: {
     fieldTitle?: string;
     fieldFunction?: () => void;
@@ -11,7 +11,7 @@ interface DropdownProps {
   popoverClass?: string;
 }
 
-const Dropdown: FC<DropdownProps> = ({ dropdownData = [], placeholder, popoverClass = 'w-72' }) => {
+const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, popoverClass = 'w-72' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
