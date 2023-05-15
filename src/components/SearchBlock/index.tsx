@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import { FC, FormEvent } from 'react';
 
-interface SearchBlockProps {
-  onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+interface Props {
+  onSubmit: (e: FormEvent<HTMLFormElement>) => void;
   value: string;
   setValue: (value: string) => void;
   btnText: string;
@@ -9,14 +9,7 @@ interface SearchBlockProps {
   containerClasses?: string;
 }
 
-const SearchBlock: FC<SearchBlockProps> = ({
-  onSubmit,
-  value,
-  setValue,
-  btnText,
-  placeholder = '',
-  containerClasses = '',
-}) => {
+const SearchBlock: FC<Props> = ({ onSubmit, value, setValue, btnText, placeholder = '', containerClasses = '' }) => {
   return (
     <form
       onSubmit={onSubmit}

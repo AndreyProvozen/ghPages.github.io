@@ -1,19 +1,27 @@
 import Link from 'next/link';
-import { Dispatch, FC, SetStateAction, MouseEvent } from 'react';
+import { Dispatch, FC, SetStateAction, MouseEvent, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Close from '@/icons/svg/Close';
 import { linkData } from '@/interface';
 import customFetch from '@/utils/customFetch';
 
-interface ModalProps {
+interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setLinksList: Dispatch<SetStateAction<linkData[]>>;
   deletedLink?: linkData;
 }
 
-const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinksList }) => {
+const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList }) => {
   const { data: session } = useSession();
   const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
+
+  useEffect(() => {
+    document.body.classList.add('overflow-hidden');
+
+    return () => {
+      document.body.classList.remove('overflow-hidden');
+    };
+  }, [setIsModalOpen]);
 
   const handleDeleteLink = () => {
     customFetch(`api/link?code=${deletedLink?.code}&session=${Boolean(session?.user?.email)}`, {
@@ -30,7 +38,7 @@ const DeleteLinkModal: FC<ModalProps> = ({ setIsModalOpen, deletedLink, setLinks
       onClick={handleModalClick}
       className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black z-50 bg-opacity-75"
     >
-      <div className="bg-white rounded-lg">
+      <div className="overflow-y-auto bg-white rounded-lg">
         <div className="border-b-2 border-b-gray py-2 flex justify-between">
           <b className="text-xl mx-auto">Delete link</b>
           <button onClick={() => setIsModalOpen(false)}>

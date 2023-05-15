@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
-import dynamic from 'next/dynamic';
+import { useSession } from 'next-auth/react';
 import { flashMessageType, linkData } from '@/interface';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
@@ -11,13 +11,14 @@ import LinksList from '@/atoms/Skeleton/LinksList';
 import SearchBlock from '@/components/SearchBlock';
 import { useFlashMessage } from '@/utils/FlashMessage';
 import customFetch from '@/utils/customFetch';
+import Accordion from '@/atoms/Accordion';
+import { questions } from 'mock';
 
-const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
-
-const Home = ({ session, questions }) => {
+const Home = () => {
+  const { data: session } = useSession();
+  const flashMessage = useFlashMessage();
   const [longLink, setLongLink] = useState('');
   const [data, setData] = useState<linkData[]>([]);
-  const flashMessage = useFlashMessage();
   const [count, setCount] = useState();
 
   useEffect(() => {

@@ -1,4 +1,4 @@
-import { signIn, getSession } from 'next-auth/react';
+import { signIn, getSession, GetSessionParams } from 'next-auth/react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import Google from '@/icons/svg/Google';
@@ -44,7 +44,7 @@ const Auth = () => {
   );
 };
 
-export const getServerSideProps = async (context: any) => {
+export const getServerSideProps = async context => {
   const session = await getSession(context);
   if (session) {
     return {

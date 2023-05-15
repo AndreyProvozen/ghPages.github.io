@@ -7,9 +7,9 @@
     "npm": ">=8.19.4"
   },
   "scripts": {
-    "dev": "next dev -p 3000",
+    "dev": "next dev",
     "build": "next build",
-    "start": "next start -p 5002",
+    "start": "next start",
     "lint": "next lint",
     "format": "prettier --write \"./src/**/*.{ts,tsx}\""
   },
@@ -29,7 +29,6 @@
     "ua-parser-js": "^1.0.35"
   },
   "devDependencies": {
-    "@types/shortid": "^0.0.29",
     "@types/ua-parser-js": "^0.7.36",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
     "autoprefixer": "10.4.14",

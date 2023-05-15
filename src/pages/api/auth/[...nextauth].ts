@@ -1,10 +1,12 @@
+import { randomBytes, randomUUID } from 'crypto';
+import { MongooseAdapter } from '@choutkamartin/mongoose-adapter';
+import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
-import { MongooseAdapter } from '@choutkamartin/mongoose-adapter';
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
   adapter: MongooseAdapter(process.env.MONGODB_URI),
   providers: [
     GoogleProvider({
@@ -20,8 +22,18 @@ export default NextAuth({
       clientSecret: process.env.GITHUB_SECRET ?? '',
     }),
   ],
+  session: {
+    strategy: 'database',
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+    generateSessionToken: () => {
+      return randomUUID?.() ?? randomBytes(32).toString('hex');
+    },
+  },
   pages: {
     signIn: '/auth',
   },
+
   secret: process.env.JWT_SECRET,
-});
+};
+
+export default NextAuth(authOptions);

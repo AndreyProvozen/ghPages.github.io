@@ -3,13 +3,9 @@ import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
 import FlashMessageProvider from '@/utils/FlashMessage';
 
-interface AppData extends AppProps {
-  session: any;
-}
-
-export default function App({ Component, pageProps, session }: AppData) {
+export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={session}>
+    <SessionProvider session={pageProps.session}>
       <FlashMessageProvider>
         <Component {...pageProps} />
       </FlashMessageProvider>

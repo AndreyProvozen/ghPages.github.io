@@ -8,13 +8,13 @@ import Trash from '@/icons/svg/Trash';
 import { flashMessageType, linkData } from '@/interface';
 import { useFlashMessage } from '@/utils/FlashMessage';
 
-interface SettingsDropDownProps {
+interface Props {
   data: linkData;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setDeletedLink: Dispatch<SetStateAction<undefined | linkData>>;
 }
 
-const SettingsDropDown: FC<SettingsDropDownProps> = ({ data, setIsModalOpen, setDeletedLink }) => {
+const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setDeletedLink }) => {
   const router = useRouter();
   const flashMessage = useFlashMessage();
 
