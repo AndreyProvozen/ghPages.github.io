@@ -2,13 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import dynamic from 'next/dynamic';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import SearchBlock from '@/components/SearchBlock';
-import TextWithImage from '@/components/TextWithImage';
-import contentImage1 from '@/icons/contentImage1.avif';
-import contentImage2 from '@/icons/contentImage2.avif';
+
+const Table = dynamic(() => import('@/atoms/Table'), { ssr: false });
 
 const Statistic = () => {
   const router = useRouter();
@@ -59,43 +59,13 @@ const Statistic = () => {
           </div>
         </div>
       </div>
-      <TextWithImage
-        linkData={{
-          src: contentImage2.src,
-          alt: '',
-        }}
-        containerClasses="mb-10"
-        title="Link Performance"
-        listData={[
-          'View click-through rates and link performance metrics',
-          'Monitor link performance over time',
-          'View statistics on user demographics and devices used to access your links',
-          'Identify your top-performing links and focus your marketing efforts accordingly',
-        ]}
-        text="<p>Track how well your links are performing! View detailed statistics on how many times your links have been clicked, where your clicks are coming from, and what devices are being used. With this information, you can gain valuable insights into your audience and optimize your marketing efforts.</p>"
-      />
+      <Table />
       <InfoBlock
         btnData={{
           text: 'Shortened link',
           href: '/',
         }}
         title="There was no shortened link created here"
-      />
-      <TextWithImage
-        linkData={{
-          src: contentImage1.src,
-          alt: '',
-        }}
-        imageFirst={true}
-        title="User Engagement"
-        containerClasses="my-10"
-        listData={[
-          'Analyze the number of clicks, unique visitors, and conversion rates to understand user engagement',
-          'View top referrers, sources, and campaigns that drive traffic to your links',
-          'Identify channels that need improvement and make data-driven decisions to improve link engagement',
-          'Analyze the geographic location of your link clicks to better understand your audience and tailor your marketing efforts to specific regions',
-        ]}
-        text="<p>You can analyze the number of clicks, unique visitors, and conversion rates to understand how well your links are performing in terms of user engagement. This information helps you to identify which channels are working well and which need improvement, allowing you to make data-driven decisions to improve your link engagement.</p>"
       />
       <Footer />
     </>

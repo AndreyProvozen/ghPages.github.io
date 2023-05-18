@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from 'react';
 import { NextPageContext } from 'next';
+import Head from 'next/head';
+import LinkStatistic from '@/containers/LinkStatisticPage';
 import { GetLinkFullData } from '../api/link';
 
-const LinkStatistic = ({ data }) => {
-  const [link, setLink] = useState(undefined);
-  useEffect(() => {
-    setLink(JSON.parse(data));
-  }, []);
-
+const LinkStatisticPage = ({ data }) => {
   return (
     <>
-      <div>LinkPage </div>
-      {link && <div>{link.url}</div>}
+      <Head>
+        <title>Link Shortener home</title>
+        <meta
+          name="description"
+          content=" Create short, custom links with ease using our Link Shortener. Boost your online presence and track link clicks with our advanced analytics. Try it now for free!"
+        />
+      </Head>
+      <LinkStatistic data={data} />
     </>
   );
 };
@@ -23,4 +25,4 @@ export const getServerSideProps = async (context: NextPageContext) => {
   return { props: { data } };
 };
 
-export default LinkStatistic;
+export default LinkStatisticPage;

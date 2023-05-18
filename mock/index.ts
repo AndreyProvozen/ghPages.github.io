@@ -39,6 +39,14 @@ export const credits = [
     text: 'Image by storyset on Freepik',
   },
   {
+    href: 'https://www.freepik.com/free-vector/environment-data-analytics-abstract-concept_12085726.htm#&position=2&from_view=collections',
+    text: 'Image by vectorjuice on Freepik',
+  },
+  {
+    href: 'https://www.freepik.com/free-vector/setup-analytics-concept-illustration_7140754.htm#&position=0&from_view=collections',
+    text: 'Image by storyset on Freepik',
+  },
+  {
     href: 'https://icons8.com/icon/12923/multiple-devices',
     text: 'Multiple Devices icon by Icons8',
   },

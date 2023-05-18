@@ -18,14 +18,18 @@
     "@types/node": "18.15.11",
     "@types/react": "18.0.35",
     "@types/react-dom": "18.0.11",
+    "chart.js": "^4.3.0",
     "cookies-next": "^2.1.1",
     "mongoose": "^7.0.3",
     "nanoid": "^4.0.2",
     "next": "13.3.0",
     "next-auth": "^4.22.1",
     "react": "18.2.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-data-table-component": "^7.5.3",
     "react-dom": "18.2.0",
     "sharp": "^0.32.0",
+    "styled-components": "^6.0.0-rc.1",
     "ua-parser-js": "^1.0.35"
   },
   "devDependencies": {
