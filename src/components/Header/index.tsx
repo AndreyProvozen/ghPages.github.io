@@ -2,7 +2,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { FC } from 'react';
 import { useMediaQuery } from '@/utils/useMediaQuery';
-import { ScreenSize } from '@/interface';
+import { ScreenSize } from '@/constants';
 import MobileHeader from './MobileHeader';
 import DesktopHeader from './DesktopHeader';
 

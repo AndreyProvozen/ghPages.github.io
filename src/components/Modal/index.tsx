@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, MouseEvent, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import Close from '@/icons/svg/Close';
-import { linkData } from '@/interface';
+import { linkData } from '@/constants';
 import customFetch from '@/utils/customFetch';
 
 interface Props {
@@ -24,7 +24,7 @@ const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList 
   }, [setIsModalOpen]);
 
   const handleDeleteLink = () => {
-    customFetch(`api/link?code=${deletedLink?.code}&session=${Boolean(session?.user?.email)}`, {
+    customFetch(`api/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(session?.user?.email)}`, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
     }).then(deletedLinkCode => setLinksList(prev => prev.filter(item => item.code !== deletedLinkCode)));

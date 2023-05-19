@@ -5,7 +5,7 @@ import BarChart from '@/icons/svg/BarChart';
 import ClipBoard from '@/icons/svg/ClipBoard';
 import ThreeDots from '@/icons/svg/ThreeDots';
 import Trash from '@/icons/svg/Trash';
-import { flashMessageType, linkData } from '@/interface';
+import { flashMessageType, linkData } from '@/constants';
 import { useFlashMessage } from '@/utils/FlashMessage';
 
 interface Props {
@@ -48,7 +48,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setDeletedLink }) =
     <Dropdown
       placeholder={<ThreeDots className="fill-darkPink hover:fill-pink" aria-label="Open link settings" />}
       dropdownData={settingsFields}
-      popoverClass="w-60"
+      popoverWidth="w-60"
     />
   );
 };

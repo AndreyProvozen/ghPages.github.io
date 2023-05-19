@@ -3,7 +3,7 @@ import contentImage2 from '@/icons/contentImage2.avif';
 import contentImage3 from '@/icons/contentImage3.avif';
 import contentImage4 from '@/icons/contentImage4.avif';
 
-export const questions = [  
+export const questions = [
   {
     title: 'What is a URL shortener?',
     description:
@@ -55,9 +55,11 @@ export const credits = [
     href: 'https://icons8.com/icon/12923/multiple-devices',
     text: 'Multiple Devices icon by Icons8',
   },
+  {
+    href: 'https://www.freepik.com/free-photo/old-black-background-grunge-texture-blackboard-chalkboard-concrete_14055416.htm#query=background&position=31&from_view=search&track=sph',
+    text: 'Image by benzoix on Freepik',
+  },
 ];
-
-
 
 export const TextWithImageData = [
   {

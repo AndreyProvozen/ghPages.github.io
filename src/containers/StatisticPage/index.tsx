@@ -1,29 +1,27 @@
 import Image from 'next/image';
-import Link from 'next/link';
-import { FormEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import dynamic from 'next/dynamic';
+import { useEffect, useState } from 'react';
+import { useSession } from 'next-auth/react';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import InfoBlock from '@/components/InfoBlock';
-import SearchBlock from '@/components/SearchBlock';
-
-const Table = dynamic(() => import('@/atoms/Table'), { ssr: false });
+import customFetch from '@/utils/customFetch';
+import { linkData } from '@/constants';
+import Table from '@/atoms/Table';
+import TableLinksSkeleton from '@/atoms/Skeleton/TableLinksList';
 
 const Statistic = () => {
-  const router = useRouter();
-  const [link, setLink] = useState('');
-  const [exampleLink, setExampleLink] = useState('');
+  const { data: session } = useSession();
+
+  const [linksList, setLinksList] = useState<linkData[]>([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [count, setCount] = useState(0);
+  const [perPage] = useState(5);
 
   useEffect(() => {
-    setExampleLink(`${window.location.origin}/api/wXk_Mot`);
-  }, []);
-
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const getLinkCode = link.split('/');
-    router.push(`${router.asPath}/${getLinkCode[getLinkCode.length - 1]}`);
-  };
+    customFetch(`api/link?userEmail=${encodeURIComponent(session?.user?.email)}&page=${currentPage}`).then(res => {
+      setLinksList(res.urlsList);
+      setCount(res.count);
+    });
+  }, [currentPage]);
 
   return (
     <>
@@ -36,37 +34,19 @@ const Statistic = () => {
           fill
           className="object-cover object-center z-[-1]"
         />
-        <div className="container max-w-screen-desktop-small text-center mx-auto">
+        <div className="container max-w-screen-desktop-small text-center mx-auto pb-20  ">
           <h1 className=" text-5xl py-5">Statistic Page</h1>
-          <p className="text-center text-xl pb-5">
+          <p className="text-center text-xl">
             View detailed statistics for your shortened links with our Link Shortener&apos;s statistics page. Track
             clicks, locations, and referral sources to gain insights on your link&apos;s performance.
           </p>
-          <SearchBlock
-            onSubmit={handleOnSubmit}
-            value={link}
-            containerClasses="mb-5 text-black"
-            setValue={setLink}
-            btnText="get statistic"
-            placeholder="Enter here your shortened URL"
-          />
-          <div className="pb-14">
-            Example link:{' '}
-            <Link href={exampleLink} target="_blank" className="text-lightPink hover:text-pink">
-              {exampleLink}
-            </Link>
-            <p>(copy and paste the link to see his statistics)</p>
-          </div>
         </div>
       </div>
-      <Table />
-      <InfoBlock
-        btnData={{
-          text: 'Shortened link',
-          href: '/',
-        }}
-        title="There was no shortened link created here"
-      />
+      <div className="max-w-screen-desktop mx-auto w-full px-5">
+        <h2 className="text-4xl font-bold my-5 text-center">All user Links</h2>
+        <Table linksList={linksList} paginationData={{ perPage, currentPage, setCurrentPage, count }} />
+      </div>
+
       <Footer />
     </>
   );

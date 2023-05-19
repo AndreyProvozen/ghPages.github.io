@@ -11,7 +11,7 @@ const QualitiesList = () => {
       subTitle: 'Check the amount of clicks that your shortened URL received',
     },
     {
-      image: <Heart />,
+      image: <Heart width={100} height={100} fill="none" strokeWidth="2" stroke="red"  />,
       title: 'Easy',
       subTitle: 'Link Shortener is easy and fast, enter the long link to get your shortened link',
     },

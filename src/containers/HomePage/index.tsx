@@ -1,7 +1,7 @@
 import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { flashMessageType, linkData } from '@/interface';
+import { flashMessageType, linkData } from '@/constants';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualitiesList from '@/components/QualitiesList';
@@ -72,7 +72,7 @@ const Home = () => {
             value={longLink}
             setValue={setLongLink}
             btnText="generate link"
-            containerClasses="mb-14"
+            containerClasses="mb-14 w-full"
             placeholder="Paste the URL to be shortened"
           />
           {linksList?.length ? (

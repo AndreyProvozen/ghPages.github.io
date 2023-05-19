@@ -20,3 +20,4 @@ export enum flashMessageType {
   WARNING = '#F0AD4E',
   SUCCESSFUL = '#05c148',
 }
+export const PAGINATION_PER_PAGE = [5, 10, 15, 20];

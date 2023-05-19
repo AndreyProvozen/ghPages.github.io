@@ -1,17 +1,25 @@
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 
-interface Props {
-  dropdownData: {
-    fieldTitle?: string;
-    fieldFunction?: () => void;
-    fieldImage?: ReactElement;
-    customField?: ReactElement;
-  }[];
-  placeholder: ReactElement;
-  popoverClass?: string;
+interface dropdownDataProps {
+  fieldTitle?: string;
+  fieldFunction?: () => void;
+  fieldImage?: ReactElement;
+  customField?: ReactElement;
 }
 
-const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, popoverClass = 'w-72' }) => {
+interface Props {
+  dropdownData: dropdownDataProps[];
+  placeholder: ReactElement;
+  popoverPosition?: string;
+  popoverWidth?: string;
+}
+
+const Dropdown: FC<Props> = ({
+  dropdownData = [],
+  placeholder,
+  popoverPosition = 'right-0',
+  popoverWidth = 'w-72',
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +48,7 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, popoverClass = 'w
         {placeholder}
       </button>
       {isOpen && (
-        <div className={`${popoverClass} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 right-0 z-10`}>
+        <div className={`${popoverPosition} ${popoverWidth} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 z-10`}>
           {dropdownData.map(({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
             <div key={i}>
               {customField ? (

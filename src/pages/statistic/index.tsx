@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { getSession } from 'next-auth/react';
 import Statistic from '@/containers/StatisticPage';
 
 const StatisticPage = () => {
@@ -15,5 +16,13 @@ const StatisticPage = () => {
     </>
   );
 };
+
+export async function getServerSideProps(context) {
+  return {
+    props: {
+      session: await getSession(context),
+    },
+  };
+}
 
 export default StatisticPage;

@@ -33,7 +33,7 @@ const DesktopHeader = ({ session }) => {
         {
           fieldTitle: 'Favorite links',
           fieldFunction: favoriteLinks,
-          fieldImage: <Heart fill="white" />,
+          fieldImage: <Heart  fill='white' strokeWidth="2" stroke="white" />,
         },
         {
           fieldTitle: 'Sign out',

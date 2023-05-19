@@ -8,15 +8,18 @@ import User from '@/models/User';
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 const getLinksData = async (req, res) => {
-  const { limit, userEmail } = req.query;
+  const { limit = 5, userEmail, page } = req.query;
+
+  const getLinksByPage = parseInt(page, 10) ? page * limit - 1 : 0;
 
   if (userEmail !== 'undefined') {
     const userData = await User.findOne({ email: userEmail });
     const urlsList = await Urls.find({ code: userData.userLinks })
       .select('url clicked code')
-      .limit(Number(limit) || 5);
+      .skip(getLinksByPage)
+      .limit(limit);
 
-    const count = urlsList.length;
+    const count = await Urls.find({ code: userData.userLinks }).countDocuments();
     return res.status(200).json({ urlsList, count });
   }
   const cookieLinksList = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
@@ -25,8 +28,9 @@ const getLinksData = async (req, res) => {
 };
 
 const deleteLinksData = async (req, res) => {
-  const { code, session } = req.query;
-  if (session === 'true') {
+  const { code, userEmail } = req.query;
+  if (userEmail !== 'undefined') {
+    await User.findOneAndUpdate({ email: userEmail }, { $pull: { userLinks: code } }, { new: true });
     const deletedUrl = await Urls.findOneAndDelete({ code });
 
     if (!deletedUrl) {

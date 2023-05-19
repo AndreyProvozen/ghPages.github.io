@@ -1,4 +1,4 @@
-import { ScreenSize } from '@/interface';
+import { ScreenSize } from '@/constants';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 const LinkSkeleton = () => {
