@@ -1,9 +1,10 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
-import { nanoid } from 'nanoid';
 import { setCookie, getCookie } from 'cookies-next';
+import { nanoid } from 'nanoid';
+import type { NextApiRequest, NextApiResponse } from 'next';
+
 import Urls from '@/models/Urls';
-import connectMongodb from '@/utils/connectMongodb';
 import User from '@/models/User';
+import connectMongodb from '@/utils/connectMongodb';
 
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 

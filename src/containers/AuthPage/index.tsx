@@ -1,9 +1,10 @@
-import { signIn, getSession, GetSessionParams } from 'next-auth/react';
-import Header from '@/components/Header';
+import { signIn, getSession } from 'next-auth/react';
+
 import Footer from '@/components/Footer';
-import Google from '@/icons/svg/Google';
-import GitHub from '@/icons/svg/GitHub';
+import Header from '@/components/Header';
 import Email from '@/icons/svg/Email';
+import GitHub from '@/icons/svg/GitHub';
+import Google from '@/icons/svg/Google';
 
 const Auth = () => {
   const authWith = [

@@ -1,10 +1,11 @@
 import { randomBytes, randomUUID } from 'crypto';
+
 import { MongooseAdapter } from '@choutkamartin/mongoose-adapter';
 import { NextAuthOptions } from 'next-auth';
 import NextAuth from 'next-auth/next';
-import GoogleProvider from 'next-auth/providers/google';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
+import GoogleProvider from 'next-auth/providers/google';
 
 export const authOptions: NextAuthOptions = {
   adapter: MongooseAdapter(process.env.MONGODB_URI),

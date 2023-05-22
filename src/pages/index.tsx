@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import { getSession } from 'next-auth/react';
+
 import Home from '@/containers/HomePage';
 
 const HomePage = () => {

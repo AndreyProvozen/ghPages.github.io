@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+
 import { ScreenSize } from '@/constants';
 
 export const useMediaQuery = (query: ScreenSize) => {

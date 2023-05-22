@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+
 import AccordionItem from './AccordionItem';
 
 interface Props {

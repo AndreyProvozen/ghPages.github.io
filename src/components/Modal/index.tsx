@@ -1,8 +1,9 @@
 import Link from 'next/link';
-import { Dispatch, FC, SetStateAction, MouseEvent, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
-import Close from '@/icons/svg/Close';
+import { Dispatch, FC, SetStateAction, MouseEvent, useEffect } from 'react';
+
 import { linkData } from '@/constants';
+import Close from '@/icons/svg/Close';
 import customFetch from '@/utils/customFetch';
 
 interface Props {
@@ -31,11 +32,18 @@ const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList 
     setIsModalOpen(false);
   };
 
-  const handleModalClick = (e: MouseEvent) => e.target === e.currentTarget && setIsModalOpen(false);
+  const handleModalClick = e => e.target === e.currentTarget && setIsModalOpen(false);
 
   return (
     <div
+      role="button"
+      tabIndex={0}
       onClick={handleModalClick}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          handleModalClick(e);
+        }
+      }}
       className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black z-50 bg-opacity-75"
     >
       <div className="overflow-y-auto bg-white rounded-lg">

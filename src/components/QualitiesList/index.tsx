@@ -1,4 +1,5 @@
 import Image from 'next/image';
+
 import devicesIcon from '@/icons/devices.png';
 import BarChart from '@/icons/svg/BarChart';
 import Heart from '@/icons/svg/Heart';
@@ -11,7 +12,7 @@ const QualitiesList = () => {
       subTitle: 'Check the amount of clicks that your shortened URL received',
     },
     {
-      image: <Heart width={100} height={100} fill="none" strokeWidth="2" stroke="red"  />,
+      image: <Heart width={100} height={100} fill="none" strokeWidth="2" stroke="red" />,
       title: 'Easy',
       subTitle: 'Link Shortener is easy and fast, enter the long link to get your shortened link',
     },

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
 const LinkStatistic = ({ data }) => {
-  const [link, setLink] = useState(undefined);
+  const [setLink] = useState(undefined);
 
   useEffect(() => {
     setLink(JSON.parse(data));

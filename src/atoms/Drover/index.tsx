@@ -1,7 +1,9 @@
 import Link from 'next/link';
 import { FC, useState } from 'react';
+
 import Chevron from '@/icons/svg/Chevron';
 import Close from '@/icons/svg/Close';
+
 import type { MenuProps } from '../../components/Header/MobileHeader';
 
 interface Props {

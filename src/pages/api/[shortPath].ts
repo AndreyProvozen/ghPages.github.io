@@ -1,8 +1,9 @@
+import { getCookie, setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import UAParser from 'ua-parser-js';
-import { getCookie, setCookie } from 'cookies-next';
-import connectMongodb from '@/utils/connectMongodb';
+
 import Urls, { IUrl } from '@/models/Urls';
+import connectMongodb from '@/utils/connectMongodb';
 
 export default async function handleRedirect(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {

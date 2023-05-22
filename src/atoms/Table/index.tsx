@@ -1,10 +1,12 @@
-import { useState } from 'react';
 import Link from 'next/link';
-import ThreeDots from '@/icons/svg/ThreeDots';
+import { useState } from 'react';
+
 import SearchBlock from '@/components/SearchBlock';
-import Heart from '@/icons/svg/Heart';
-import { useMediaQuery } from '@/utils/useMediaQuery';
 import { ScreenSize } from '@/constants';
+import Heart from '@/icons/svg/Heart';
+import ThreeDots from '@/icons/svg/ThreeDots';
+import { useMediaQuery } from '@/utils/useMediaQuery';
+
 import Pagination from '../Pagination';
 import TableLinksSkeleton from '../Skeleton/TableLinksList';
 

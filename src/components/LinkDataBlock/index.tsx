@@ -1,8 +1,10 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, memo, useState } from 'react';
-import dynamic from 'next/dynamic';
+
 import { ScreenSize, linkData } from '@/constants';
 import { useMediaQuery } from '@/utils/useMediaQuery';
+
 import SettingsDropDown from './SettingsDropDown';
 
 const DeleteLinkModal = dynamic(() => import('../Modal'), { ssr: false });

@@ -1,12 +1,12 @@
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useEffect, useState } from 'react';
+
+import Table from '@/atoms/Table';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import customFetch from '@/utils/customFetch';
 import { linkData } from '@/constants';
-import Table from '@/atoms/Table';
-import TableLinksSkeleton from '@/atoms/Skeleton/TableLinksList';
+import customFetch from '@/utils/customFetch';
 
 const Statistic = () => {
   const { data: session } = useSession();

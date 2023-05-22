@@ -1,6 +1,8 @@
 import { NextPageContext } from 'next';
 import Head from 'next/head';
+
 import LinkStatistic from '@/containers/LinkStatisticPage';
+
 import { GetLinkFullData } from '../api/link';
 
 const LinkStatisticPage = ({ data }) => {

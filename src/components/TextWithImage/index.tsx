@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { FC } from 'react';
+
 import Star from '@/icons/svg/Star';
 
 interface Props {

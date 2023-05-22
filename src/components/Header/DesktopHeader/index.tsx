@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+
 import Dropdown from '@/atoms/Dropdown';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
@@ -33,7 +34,7 @@ const DesktopHeader = ({ session }) => {
         {
           fieldTitle: 'Favorite links',
           fieldFunction: favoriteLinks,
-          fieldImage: <Heart  fill='white' strokeWidth="2" stroke="white" />,
+          fieldImage: <Heart fill="white" strokeWidth="2" stroke="white" />,
         },
         {
           fieldTitle: 'Sign out',

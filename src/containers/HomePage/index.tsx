@@ -1,19 +1,20 @@
-import { FormEvent, useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import { flashMessageType, linkData } from '@/constants';
+import { FormEvent, useEffect, useState } from 'react';
+
+import Accordion from '@/atoms/Accordion';
+import LinksList from '@/atoms/Skeleton/LinksList';
+import Footer from '@/components/Footer';
 import Header from '@/components/Header';
+import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualitiesList from '@/components/QualitiesList';
-import Footer from '@/components/Footer';
-import InfoBlock from '@/components/InfoBlock';
-import LinksList from '@/atoms/Skeleton/LinksList';
 import SearchBlock from '@/components/SearchBlock';
-import { useFlashMessage } from '@/utils/FlashMessage';
-import customFetch from '@/utils/customFetch';
-import Accordion from '@/atoms/Accordion';
-import { TextWithImageData, questions } from 'mock';
 import TextWithImage from '@/components/TextWithImage';
+import { flashMessageType, linkData } from '@/constants';
+import customFetch from '@/utils/customFetch';
+import { useFlashMessage } from '@/utils/FlashMessage';
+import { TextWithImageData, questions } from 'mock';
 
 const Home = () => {
   const { data: session } = useSession();

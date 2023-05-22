@@ -1,4 +1,5 @@
 import Head from 'next/head';
+
 import Auth from '@/containers/AuthPage';
 
 const AuthPage = () => {
