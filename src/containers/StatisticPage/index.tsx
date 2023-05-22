@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
@@ -10,18 +11,20 @@ import customFetch from '@/utils/customFetch';
 
 const Statistic = () => {
   const { data: session } = useSession();
+  const router = useRouter();
 
   const [linksList, setLinksList] = useState<linkData[]>([]);
-  const [currentPage, setCurrentPage] = useState(0);
   const [count, setCount] = useState(0);
   const [perPage] = useState(5);
 
   useEffect(() => {
-    customFetch(`api/link?userEmail=${encodeURIComponent(session?.user?.email)}&page=${currentPage}`).then(res => {
-      setLinksList(res.urlsList);
-      setCount(res.count);
-    });
-  }, [currentPage]);
+    customFetch(`api/link?userEmail=${encodeURIComponent(session?.user?.email)}&page=${router.query.page || 0}`).then(
+      res => {
+        setLinksList(res.urlsList);
+        setCount(res.count);
+      }
+    );
+  }, [router.query?.page]);
 
   return (
     <>
@@ -44,7 +47,7 @@ const Statistic = () => {
       </div>
       <div className="max-w-screen-desktop mx-auto w-full px-5">
         <h2 className="text-4xl font-bold my-5 text-center">All user Links</h2>
-        <Table linksList={linksList} paginationData={{ perPage, currentPage, setCurrentPage, count }} />
+        <Table linksList={linksList} paginationData={{ perPage,  count }} />
       </div>
 
       <Footer />

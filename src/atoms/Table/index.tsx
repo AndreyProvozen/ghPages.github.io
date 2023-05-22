@@ -11,9 +11,6 @@ import Pagination from '../Pagination';
 import TableLinksSkeleton from '../Skeleton/TableLinksList';
 
 const Table = ({ linksList, paginationData }) => {
-  const { perPage, currentPage, setCurrentPage, count } = paginationData;
-  const totalPage = Math.ceil(count / perPage);
-
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
 
   const [link, setLink] = useState('');
@@ -67,7 +64,7 @@ const Table = ({ linksList, paginationData }) => {
               );
             })}
           </>
-          <Pagination totalPage={totalPage} currentPage={currentPage} setCurrentPage={setCurrentPage} />{' '}
+          <Pagination paginationData={paginationData} />
         </div>
       ) : (
         <TableLinksSkeleton />

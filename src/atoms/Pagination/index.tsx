@@ -1,18 +1,31 @@
+import { useRouter } from 'next/router';
+
 import Chevron from '@/icons/svg/Chevron';
 
-const Pagination = ({ setCurrentPage, currentPage, totalPage }) => {
+const Pagination = ({ paginationData }) => {
+  const router = useRouter();
+
+  const { count, perPage } = paginationData;
+
+  const currentPage = parseInt(router.query?.page as string, 10) || 0;
+  const totalPage = Math.ceil(count / perPage);
+
   const disabledForPrev = currentPage === 0;
   const disabledForNext = currentPage === totalPage - 1;
 
+  const updatePage = page => {
+    router.push({ query: { ...router.query, page } }, undefined, { shallow: true });
+  };
+
   const nextPage = () => {
     if (currentPage < totalPage - 1) {
-      setCurrentPage(prevPage => prevPage + 1);
+      updatePage(currentPage + 1);
     }
   };
 
   const prevPage = () => {
     if (currentPage > 0) {
-      setCurrentPage(prevPage => prevPage - 1);
+      updatePage(currentPage - 1);
     }
   };
 
