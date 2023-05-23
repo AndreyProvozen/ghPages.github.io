@@ -59,6 +59,10 @@ export const credits = [
     href: 'https://www.freepik.com/free-photo/old-black-background-grunge-texture-blackboard-chalkboard-concrete_14055416.htm#query=background&position=31&from_view=search&track=sph',
     text: 'Image by benzoix on Freepik',
   },
+  {
+    href: 'https://www.flaticon.com/free-icons/laptop-screen',
+    text: 'Laptop screen icons created by DinosoftLabs - Flaticon',
+  },
 ];
 
 export const TextWithImageData = [

@@ -1,12 +1,16 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-import Table from '@/atoms/Table';
-import Footer from '@/components/Footer';
+import FilterBlockSkeleton from '@/atoms/Skeleton/FilterBlock';
+import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
+import PaginationSkeleton from '@/atoms/Skeleton/Pagination';
 import Header from '@/components/Header';
+import LinkDataBlock from '@/components/LinkDataBlock';
 import { linkData } from '@/constants';
+import laptop from '@/icons/laptop.png';
 import customFetch from '@/utils/customFetch';
 
 const Statistic = () => {
@@ -14,16 +18,16 @@ const Statistic = () => {
   const router = useRouter();
 
   const [linksList, setLinksList] = useState<linkData[]>([]);
-  const [count, setCount] = useState(0);
-  const [perPage] = useState(5);
+  const [count, setCount] = useState();
+  const [perPage] = useState(10);
 
   useEffect(() => {
-    customFetch(`api/link?userEmail=${encodeURIComponent(session?.user?.email)}&page=${router.query.page || 0}`).then(
-      res => {
-        setLinksList(res.urlsList);
-        setCount(res.count);
-      }
-    );
+    customFetch(
+      `api/link?limit=${perPage}&&userEmail=${encodeURIComponent(session?.user?.email)}&page=${router.query.page || 0}`
+    ).then(res => {
+      setLinksList(res.urlsList);
+      setCount(res.count);
+    });
   }, [router.query?.page]);
 
   return (
@@ -46,11 +50,30 @@ const Statistic = () => {
         </div>
       </div>
       <div className="max-w-screen-desktop mx-auto w-full px-5">
-        <h2 className="text-4xl font-bold my-5 text-center">All user Links</h2>
-        <Table linksList={linksList} paginationData={{ perPage,  count }} />
-      </div>
+        {linksList?.length ? (
+          <LinkDataBlock linksList={linksList} count={count} perPage={perPage} setLinksList={setLinksList} />
+        ) : count === 0 ? (
+          <div className="text-center">
+            <Image src={laptop.src} alt="" width={200} height={200} className="mx-auto" />
 
-      <Footer />
+            <h2 className="text-2xl font-bold my-6 mx-auto max-w-xl">
+              You currently do not have any links in your collection.
+            </h2>
+            <Link
+              href="/"
+              className="text-2xl text-white rounded-md hover:bg-lightPink bg-pink px-6 py-2.5 active:bg-darkPink"
+            >
+              Create new link
+            </Link>
+          </div>
+        ) : (
+          <>
+            <FilterBlockSkeleton />
+            <LinksListSkeleton quantity={5} />
+            <PaginationSkeleton />
+          </>
+        )}
+      </div>
     </>
   );
 };

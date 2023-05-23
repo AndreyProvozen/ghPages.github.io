@@ -26,9 +26,7 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'database',
     maxAge: 30 * 24 * 60 * 60, // 30 days
-    generateSessionToken: () => {
-      return randomUUID?.() ?? randomBytes(32).toString('hex');
-    },
+    generateSessionToken: () => randomUUID?.() ?? randomBytes(32).toString('hex'),
   },
   pages: {
     signIn: '/auth',

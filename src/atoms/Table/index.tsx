@@ -1,20 +1,33 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { Dispatch, FC, SetStateAction, useState } from 'react';
 
+import SettingsDropDown from '@/components/LinkDataBlock/SettingsDropDown';
+import DeleteLinkModal from '@/components/Modal';
 import SearchBlock from '@/components/SearchBlock';
-import { ScreenSize } from '@/constants';
+import { ScreenSize, linkData } from '@/constants';
+import laptop from '@/icons/laptop.png';
 import Heart from '@/icons/svg/Heart';
-import ThreeDots from '@/icons/svg/ThreeDots';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import Pagination from '../Pagination';
-import TableLinksSkeleton from '../Skeleton/TableLinksList';
+import TableLinksSkeleton from '../Skeleton/LinksList';
 
-const Table = ({ linksList, paginationData }) => {
+interface Props {
+  linksList: linkData[];
+  setLinksList: Dispatch<SetStateAction<linkData[]>>;
+  count?: number;
+  perPage?: number;
+  isHomePageList: boolean;
+}
+
+const Table: FC<Props> = ({ linksList, count, perPage, setLinksList, isHomePageList }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
 
   const [link, setLink] = useState('');
   const [isFavoriteLinks, setIsFavoriteLinks] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [deletedLink, setDeletedLink] = useState<linkData | undefined>(undefined);
 
   return (
     <div className="my-10">
@@ -40,34 +53,51 @@ const Table = ({ linksList, paginationData }) => {
       {linksList.length ? (
         <div>
           <>
-            {linksList.map(({ url, code, clicked }, i) => {
-              const shortLink = `${window.location.origin}/api/${code}`;
+            {linksList.map((linkData, i) => {
+              const shortLink = `${window.location.origin}/api/${linkData.code}`;
               return (
                 <div key={i} className="flex justify-between items-center  border-b border-gray p-5">
                   <div className="flex flex-col w-full max-w-md">
                     <Link
-                      href={`/statistic/${code}`}
+                      href={`/statistic/${linkData.code}`}
                       className="text-darkPink hover:text-pink cursor-pointer line-clamp-1 break-all"
                     >
                       {shortLink}
                     </Link>
-                    <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{url}</p>
+                    <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{linkData.url}</p>
                   </div>
-                  {!isMobile && <div className="ml-10">{clicked}</div>}
-                  <ThreeDots
-                    className="fill-darkPink hover:fill-pink rotate-90 cursor-pointer ml-10"
-                    width={35}
-                    height={35}
-                    aria-label="Open link settings"
-                  />
+                  {!isMobile && <div className="pl-5">{linkData.clicked}</div>}
+                  <SettingsDropDown data={linkData} setIsModalOpen={setIsModalOpen} setDeletedLink={setDeletedLink} />
                 </div>
               );
             })}
           </>
-          <Pagination paginationData={paginationData} />
+          {!isHomePageList && <Pagination count={count} perPage={perPage} />}
         </div>
-      ) : (
+      ) : count !== 0 ? (
         <TableLinksSkeleton />
+      ) : (
+        <div className="text-center">
+          <Image src={laptop.src} alt="" width={200} height={200} className="mx-auto" />
+
+          <h2 className="text-2xl font-bold my-6 mx-auto max-w-xl">
+            You currently do not have any links in your collection.
+          </h2>
+          <Link
+            href="/"
+            className="text-2xl text-white rounded-md hover:bg-lightPink bg-pink px-6 py-2.5 active:bg-darkPink"
+          >
+            Create new link
+          </Link>
+        </div>
+      )}
+      {isModalOpen && (
+        <DeleteLinkModal
+          key={deletedLink?.code}
+          setIsModalOpen={setIsModalOpen}
+          deletedLink={deletedLink}
+          setLinksList={setLinksList}
+        />
       )}
     </div>
   );

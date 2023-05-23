@@ -5,6 +5,7 @@ import { signOut } from 'next-auth/react';
 import Dropdown from '@/atoms/Dropdown';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
+import Settings from '@/icons/svg/Settings';
 
 const DesktopHeader = ({ session }) => {
   const favoriteLinks = () => {
@@ -35,6 +36,11 @@ const DesktopHeader = ({ session }) => {
           fieldTitle: 'Favorite links',
           fieldFunction: favoriteLinks,
           fieldImage: <Heart fill="white" strokeWidth="2" stroke="white" />,
+        },
+        {
+          fieldTitle: 'Settings',
+          fieldFunction: favoriteLinks,
+          fieldImage: <Settings />,
         },
         {
           fieldTitle: 'Sign out',

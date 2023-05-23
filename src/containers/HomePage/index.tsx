@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { FormEvent, useEffect, useState } from 'react';
 
 import Accordion from '@/atoms/Accordion';
-import LinksList from '@/atoms/Skeleton/LinksList';
+import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
@@ -77,9 +77,9 @@ const Home = () => {
             placeholder="Paste the URL to be shortened"
           />
           {linksList?.length ? (
-            <LinkDataBlock data={linksList} setLinks={setLinksList} />
+            <LinkDataBlock linksList={linksList} setLinksList={setLinksList} isHomePageList={true} />
           ) : (
-            count !== 0 && <LinksList />
+            count !== 0 && <LinksListSkeleton isHomePageList={true} />
           )}
         </div>
       </div>

@@ -1,11 +1,15 @@
 import { useRouter } from 'next/router';
+import { FC } from 'react';
 
 import Chevron from '@/icons/svg/Chevron';
 
-const Pagination = ({ paginationData }) => {
-  const router = useRouter();
+interface Props {
+  perPage: number;
+  count: number;
+}
 
-  const { count, perPage } = paginationData;
+const Pagination: FC<Props> = ({ perPage, count }) => {
+  const router = useRouter();
 
   const currentPage = parseInt(router.query?.page as string, 10) || 0;
   const totalPage = Math.ceil(count / perPage);
