@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import Pagination from '@/atoms/Pagination';
-import DeleteLinkModal from '@/components/Modal';
+import DeleteLinkModal from '@/components/Modal/DeleteLink';
 import { ScreenSize, linkData } from '@/constants';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
@@ -20,7 +20,7 @@ interface Props {
 const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isHomePageList }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deletedLink, setDeletedLink] = useState<linkData | undefined>(undefined);
 
   const linkContainerClasses = isHomePageList ? 'bg-white rounded-md mb-5' : 'border-b border-gray ';
@@ -43,15 +43,19 @@ const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isH
               <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{linkData.url}</p>
             </div>
             {!isMobile && <div className="pl-5">{linkData.clicked}</div>}
-            <SettingsDropDown data={linkData} setIsModalOpen={setIsModalOpen} setDeletedLink={setDeletedLink} />
+            <SettingsDropDown
+              data={linkData}
+              setIsModalOpen={setIsDeleteModalOpen}
+              setIsDeleteModalOpen={setDeletedLink}
+            />
           </div>
         ))}
         {!isHomePageList && <Pagination count={count} perPage={perPage} />}
       </div>
-      {isModalOpen && (
+      {isDeleteModalOpen && (
         <DeleteLinkModal
           key={deletedLink?.code}
-          setIsModalOpen={setIsModalOpen}
+          setIsModalOpen={setIsDeleteModalOpen}
           deletedLink={deletedLink}
           setLinksList={setLinksList}
         />

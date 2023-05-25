@@ -12,10 +12,10 @@ import { useFlashMessage } from '@/utils/FlashMessage';
 interface Props {
   data: linkData;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setDeletedLink: Dispatch<SetStateAction<undefined | linkData>>;
+  setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | linkData>>;
 }
 
-const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setDeletedLink }) => {
+const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpen }) => {
   const router = useRouter();
   const flashMessage = useFlashMessage();
 
@@ -31,7 +31,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setDeletedLink }) =
     {
       fieldTitle: ' Delete',
       fieldFunction: () => {
-        setDeletedLink(data);
+        setIsDeleteModalOpen(data);
         setIsModalOpen(true);
       },
       fieldImage: <Trash />,

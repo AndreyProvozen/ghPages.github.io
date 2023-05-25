@@ -1,13 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut } from 'next-auth/react';
+import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
+import ConfirmSignOut from '@/components/Modal/ConfirmSignOut';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 import Settings from '@/icons/svg/Settings';
 
 const DesktopHeader = ({ session }) => {
+  const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
+
   const favoriteLinks = () => {
     // eslint-disable-next-line no-console
     console.log('favoriteLinks');
@@ -44,7 +48,7 @@ const DesktopHeader = ({ session }) => {
         },
         {
           fieldTitle: 'Sign out',
-          fieldFunction: signOut,
+          fieldFunction: () => setIsSignOutModalOpen(true),
           fieldImage: <LogOut />,
         },
       ]
@@ -87,6 +91,7 @@ const DesktopHeader = ({ session }) => {
           {item?.component}
         </div>
       ))}
+      {isSignOutModalOpen && <ConfirmSignOut setIsSignOutModalOpen={setIsSignOutModalOpen} />}
     </nav>
   );
 };
