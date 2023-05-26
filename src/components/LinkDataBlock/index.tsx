@@ -3,15 +3,15 @@ import { Dispatch, FC, SetStateAction, useState } from 'react';
 
 import Pagination from '@/atoms/Pagination';
 import DeleteLinkModal from '@/components/Modal/DeleteLink';
-import { ScreenSize, linkData } from '@/constants';
+import { ScreenSize, linkDataProps } from '@/constants';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import FiltersBlock from './FiltersBlock';
 import SettingsDropDown from './SettingsDropDown';
 
 interface Props {
-  linksList: linkData[];
-  setLinksList: Dispatch<SetStateAction<linkData[]>>;
+  linksList: linkDataProps[];
+  setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
   count?: number;
   perPage?: number;
   isHomePageList?: boolean;
@@ -21,7 +21,7 @@ const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isH
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const [deletedLink, setDeletedLink] = useState<linkData | undefined>(undefined);
+  const [deletedLink, setDeletedLink] = useState<linkDataProps | undefined>(undefined);
 
   const linkContainerClasses = isHomePageList ? 'bg-white rounded-md mb-5' : 'border-b border-gray ';
 
@@ -33,8 +33,9 @@ const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isH
           <div key={i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
             <div className="flex flex-col w-full max-w-md">
               <Link
+                target={isHomePageList ? '_blank' : '_self'}
                 href={`${
-                  isHomePageList ? `${window.location.origin}/api/${linkData.code}` : `/statistic/${linkData.code}`
+                  isHomePageList ? `${window.location.origin}/api/${linkData.code}` : `/links/${linkData.code}`
                 }`}
                 className="text-darkPink hover:text-pink cursor-pointer line-clamp-1 break-all"
               >

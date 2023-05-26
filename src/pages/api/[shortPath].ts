@@ -1,9 +1,9 @@
 import { getCookie, setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
-import UAParser from 'ua-parser-js';
 
 import Urls, { IUrl } from '@/models/Urls';
 import connectMongodb from '@/utils/connectMongodb';
+import setMetricsData from '@/utils/updateMetricsData';
 
 export default async function handleRedirect(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'GET') {
@@ -16,16 +16,8 @@ export default async function handleRedirect(req: NextApiRequest, res: NextApiRe
   const data: IUrl | null = await Urls.findOne({ code: shortPath }).exec();
 
   if (data) {
-    const parser = new UAParser(req.headers['user-agent']);
-    const { name: browserName } = parser.getBrowser();
-    const { name: OSName } = parser.getOS();
-    const { type: deviceType } = parser.getDevice();
-    const { architecture: CPUArchitecture } = parser.getCPU();
+    await setMetricsData(data.metrics, req);
 
-    data.browserName = browserName;
-    data.OSName = OSName;
-    data.CPUArchitecture = CPUArchitecture;
-    data.deviceType = deviceType === undefined ? 'personal computer' : deviceType;
     data.clicked++;
 
     await data.save();

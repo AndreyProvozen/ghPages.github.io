@@ -56,7 +56,7 @@ const DesktopHeader = ({ session }) => {
 
   const navFields = [
     { name: 'Home', link: '/' },
-    { name: 'Statistic', link: '/statistic' },
+    { name: 'Links', link: '/links' },
     session
       ? {
           component: (

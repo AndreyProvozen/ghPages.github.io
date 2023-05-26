@@ -11,7 +11,7 @@ import LinkDataBlock from '@/components/LinkDataBlock';
 import QualitiesList from '@/components/QualitiesList';
 import SearchBlock from '@/components/SearchBlock';
 import TextWithImage from '@/components/TextWithImage';
-import { flashMessageType, linkData } from '@/constants';
+import { flashMessageType, linkDataProps } from '@/constants';
 import customFetch from '@/utils/customFetch';
 import { useFlashMessage } from '@/utils/FlashMessage';
 import { TextWithImageData, questions } from 'mock';
@@ -20,7 +20,7 @@ const Home = () => {
   const { data: session } = useSession();
   const flashMessage = useFlashMessage();
   const [longLink, setLongLink] = useState('');
-  const [linksList, setLinksList] = useState<linkData[]>([]);
+  const [linksList, setLinksList] = useState<linkDataProps[]>([]);
   const [count, setCount] = useState();
 
   useEffect(() => {
@@ -93,7 +93,7 @@ const Home = () => {
         <QualitiesList />
       </div>
       <InfoBlock
-        btnData={{ text: 'Get link statistics', href: '/statistic' }}
+        btnData={{ text: 'Get link statistics', href: '/links' }}
         title="Already there are abbreviated links"
       />
 

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { Dispatch, FC, SetStateAction } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
-import { flashMessageType, linkData } from '@/constants';
+import { flashMessageType, linkDataProps } from '@/constants';
 import BarChart from '@/icons/svg/BarChart';
 import ClipBoard from '@/icons/svg/ClipBoard';
 import ThreeDots from '@/icons/svg/ThreeDots';
@@ -10,9 +10,9 @@ import Trash from '@/icons/svg/Trash';
 import { useFlashMessage } from '@/utils/FlashMessage';
 
 interface Props {
-  data: linkData;
+  data: linkDataProps;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | linkData>>;
+  setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | linkDataProps>>;
 }
 
 const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpen }) => {
@@ -39,7 +39,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
     {
       fieldTitle: 'Statistic',
       fieldFunction: () => {
-        router.push(`/statistic/${data.code}`);
+        router.push(`/links/${data.code}`);
       },
       fieldImage: <BarChart width="25px" height="25px" fill="white" />,
     },

@@ -1,27 +1,28 @@
 import { Schema, model, models, Document, Model } from 'mongoose';
 import { nanoid } from 'nanoid';
 
+import { metricsProps } from '@/constants';
+
 export interface IUrl extends Document {
   code: string;
   url: string;
   clicked: number;
   createdAt: Date;
   updatedAt: Date;
-  browserName: string;
-  deviceType: string;
-  CPUArchitecture: string;
-  OSName: string;
+  metrics: metricsProps[];
 }
 
 const UrlSchema = new Schema(
   {
     code: { type: String, unique: true, default: () => nanoid(7) },
-    url: { type: String, require: true },
+    url: { type: String, required: true },
     clicked: { type: Number, default: 0 },
-    browserName: { type: String, default: 'Unknown' },
-    deviceType: { type: String, default: 'Unknown' },
-    OSName: { type: String, default: 'Unknown' },
-    CPUArchitecture: { type: String, default: 'Unknown' },
+    metrics: [
+      {
+        title: { type: String, required: true },
+        data: { type: Schema.Types.Mixed, default: {} },
+      },
+    ],
   },
   { timestamps: true }
 );

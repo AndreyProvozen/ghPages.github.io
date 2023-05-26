@@ -1,9 +1,20 @@
-export interface linkData {
-  clicked: number;
+export interface linkDataProps {
   code: string;
   url: string;
+  clicked: number;
+  createdAt: Date;
+  updatedAt: Date;
   _id: string;
   __v: number;
+}
+
+export interface metricsProps {
+  title: string;
+  data: any;
+}
+
+export interface FullLinkDataProps extends linkDataProps {
+  metrics: metricsProps;
 }
 
 export enum ScreenSize {

@@ -28,8 +28,8 @@ const MobileHeader: FC<Props> = ({ textBlack, session }) => {
   const menuMobile: MenuProps[] = [
     { name: 'Home', link: '/' },
     {
-      name: 'Statistic',
-      link: '/statistic',
+      name: 'Links',
+      link: '/links',
     },
     session
       ? {

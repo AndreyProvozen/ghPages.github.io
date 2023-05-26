@@ -2,15 +2,15 @@ import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction } from 'react';
 
-import { linkData } from '@/constants';
+import { linkDataProps } from '@/constants';
 import customFetch from '@/utils/customFetch';
 
 import ModalWrapper from '../ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setLinksList: Dispatch<SetStateAction<linkData[]>>;
-  deletedLink?: linkData;
+  setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
+  deletedLink?: linkDataProps;
 }
 
 const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList }) => {

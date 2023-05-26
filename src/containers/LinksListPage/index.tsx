@@ -7,16 +7,16 @@ import { useEffect, useState } from 'react';
 import FilterBlockSkeleton from '@/atoms/Skeleton/FilterBlock';
 import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
 import PaginationSkeleton from '@/atoms/Skeleton/Pagination';
-import Header from '@/components/Header';
+import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
-import { linkData } from '@/constants';
+import { linkDataProps } from '@/constants';
 import customFetch from '@/utils/customFetch';
 
-const Statistic = () => {
+const LinksList = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [linksList, setLinksList] = useState<linkData[]>([]);
+  const [linksList, setLinksList] = useState<linkDataProps[]>([]);
   const [count, setCount] = useState();
   const [perPage] = useState(10);
 
@@ -31,29 +31,19 @@ const Statistic = () => {
 
   return (
     <>
-      <div className="relative px-5 bg-cover bg-center max-h-max text-white ">
-        <Header />
-        <Image
-          src="/images/statisticHeroImage.avif"
-          alt="Home background"
-          priority
-          fill
-          className="object-cover object-center z-[-1]"
-        />
-        <div className="container max-w-screen-desktop-small text-center mx-auto pb-20  ">
-          <h1 className=" text-5xl py-5">Statistic Page</h1>
-          <p className="text-center text-xl">
-            View detailed statistics for your shortened links with our Link Shortener&apos;s statistics page. Track
-            clicks, locations, and referral sources to gain insights on your link&apos;s performance.
-          </p>
-        </div>
-      </div>
+      <HeroBlock
+        backgroundImage={{ src: '/images/statisticHeroImage.avif', alt: 'Links list page background' }}
+        title="Links List Page"
+        subTitle="Explore a comprehensive list of your links and effortlessly manage them all on the Links List Page. With
+        this powerful tool, you can stay organized, keep track of your important URLs, and optimize your online
+        presence."
+      />
       <div className="max-w-screen-desktop mx-auto w-full px-5">
         {linksList?.length ? (
           <LinkDataBlock linksList={linksList} count={count} perPage={perPage} setLinksList={setLinksList} />
         ) : count === 0 ? (
           <div className="text-center">
-            <Image src={'/images/laptop.png'} alt="" width={200} height={200} className="mx-auto" />
+            <Image src="/images/laptop.png" alt="" width={200} height={200} className="mx-auto" />
 
             <h2 className="text-2xl font-bold my-6 mx-auto max-w-xl">
               You currently do not have any links in your collection.
@@ -77,4 +67,4 @@ const Statistic = () => {
   );
 };
 
-export default Statistic;
+export default LinksList;
