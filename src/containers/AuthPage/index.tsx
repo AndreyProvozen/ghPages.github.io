@@ -1,29 +1,11 @@
-import { signIn, getSession } from 'next-auth/react';
+import Image from 'next/image';
+import { signIn } from 'next-auth/react';
 
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import Email from '@/icons/svg/Email';
-import GitHub from '@/icons/svg/GitHub';
-import Google from '@/icons/svg/Google';
+import { authWith } from 'mock';
 
 const Auth = () => {
-  const authWith = [
-    {
-      image: <Google />,
-      text: 'Continue with Google',
-      provider: 'google',
-    },
-    {
-      image: <GitHub />,
-      text: 'Continue with GitHub',
-      provider: 'github',
-    },
-    {
-      image: <Email />,
-      text: 'Continue with Email',
-      provider: 'email',
-    },
-  ];
   return (
     <div className="min-h-screen flex flex-col justify-between">
       <Header textBlack={true} containerClasses="px-5" />
@@ -35,7 +17,7 @@ const Auth = () => {
             className="hover:bg-gray flex mx-auto border mb-5 p-4 border-gray rounded-xl w-full max-w-[350px]"
             onClick={() => signIn(provider)}
           >
-            <div className="w-6 h-6">{image}</div>
+            <Image width={24} height={24} src={image} alt="" />
             <p className="mx-auto text-darkPink">{text}</p>
           </button>
         ))}
@@ -43,19 +25,6 @@ const Auth = () => {
       <Footer containerClasses="w-full" />
     </div>
   );
-};
-
-export const getServerSideProps = async context => {
-  const session = await getSession(context);
-  if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
-  return { props: {} };
 };
 
 export default Auth;

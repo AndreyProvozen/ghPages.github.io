@@ -61,7 +61,13 @@ const Home = () => {
   return (
     <>
       <div className="relative pb-5 min-h-screen px-5">
-        <Image src="/homeBg.avif" alt="Home background" priority fill className="object-cover object-center z-[-1]" />
+        <Image
+          src="/images/homeBg.avif"
+          alt="Home background"
+          priority
+          fill
+          className="object-cover object-center z-[-1]"
+        />
         <Header />
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
           <h1 className="mt-7 text-5xl text-white">Link Shortener</h1>

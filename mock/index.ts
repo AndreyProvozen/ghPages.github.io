@@ -1,8 +1,3 @@
-import contentImage1 from '@/icons/contentImage1.avif';
-import contentImage2 from '@/icons/contentImage2.avif';
-import contentImage3 from '@/icons/contentImage3.avif';
-import contentImage4 from '@/icons/contentImage4.avif';
-
 export const questions = [
   {
     title: 'What is a URL shortener?',
@@ -74,7 +69,7 @@ export const TextWithImageData = [
       'View statistics on user demographics and devices used to access your links',
       'Identify your top-performing links and focus your marketing efforts accordingly',
     ],
-    linkData: { src: contentImage2.src, alt: '' },
+    linkData: { src: '/images/contentImage2.avif', alt: '' },
     text: '<p>Track the performance of your links and gain valuable insights into your audience. View detailed statistics on click-through rates, link performance metrics, and user demographics. Monitor how your links are performing over time and identify your top-performing links. With this information, you can optimize your marketing efforts and make data-driven decisions for better results.</p>',
   },
   {
@@ -86,7 +81,7 @@ export const TextWithImageData = [
       'Analyze geographic location of link clicks to tailor your marketing efforts',
     ],
     linkData: {
-      src: contentImage1.src,
+      src: '/images/contentImage1.avif',
       alt: '',
     },
     text: '<p>Understand the engagement of your users with your links. Analyze the number of clicks, unique visitors, and conversion rates to gain insights into user engagement. Explore top referrers, sources, and campaigns that drive traffic to your links. Identify areas for improvement and make data-driven decisions to enhance link engagement. Analyze the geographic location of link clicks to better understand your audience and tailor your marketing efforts to specific regions.</p>',
@@ -100,7 +95,7 @@ export const TextWithImageData = [
       'Create custom slugs for easy sharing and memorability',
     ],
     linkData: {
-      src: contentImage3.src,
+      src: '/images/contentImage3.avif',
       alt: '',
     },
     text: '<p>Elevate your brand presence with customized links. Add branding elements such as logos, colors, and fonts to customize the appearance of your links. Create branded short links by adding custom domains, giving them a professional and recognizable touch. Enhance the visual appeal of your links by choosing link thumbnails and preview images that resonate with your audience. Create custom slugs, which are unique and memorable link URLs, making it easier for users to remember and share your links.</p>',
@@ -114,9 +109,27 @@ export const TextWithImageData = [
       'Make informed decisions based on campaign performance',
     ],
     linkData: {
-      src: contentImage4.src,
+      src: '/images/contentImage4.avif',
       alt: '',
     },
     text: '<p>Efficiently track the success of your marketing campaigns with campaign tracking. Assign unique tags or labels to categorize and organize your links based on different campaigns. Analyze campaign-specific metrics such as click-through rates, conversion rates, and revenue. Make informed decisions about your marketing strategies based on the performance of your campaigns. Optimize your campaigns for better results and achieve your marketing goals.</p>',
+  },
+];
+
+export const authWith = [
+  {
+    image: '/svg/google.svg',
+    text: 'Continue with Google',
+    provider: 'google',
+  },
+  {
+    image: '/svg/gitHub.svg',
+    text: 'Continue with GitHub',
+    provider: 'github',
+  },
+  {
+    image: '/svg/email.svg',
+    text: 'Continue with Email',
+    provider: 'email',
   },
 ];

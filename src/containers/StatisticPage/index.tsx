@@ -10,7 +10,6 @@ import PaginationSkeleton from '@/atoms/Skeleton/Pagination';
 import Header from '@/components/Header';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import { linkData } from '@/constants';
-import laptop from '@/icons/laptop.png';
 import customFetch from '@/utils/customFetch';
 
 const Statistic = () => {
@@ -35,7 +34,7 @@ const Statistic = () => {
       <div className="relative px-5 bg-cover bg-center max-h-max text-white ">
         <Header />
         <Image
-          src="/statisticHeroImage.avif"
+          src="/images/statisticHeroImage.avif"
           alt="Home background"
           priority
           fill
@@ -54,7 +53,7 @@ const Statistic = () => {
           <LinkDataBlock linksList={linksList} count={count} perPage={perPage} setLinksList={setLinksList} />
         ) : count === 0 ? (
           <div className="text-center">
-            <Image src={laptop.src} alt="" width={200} height={200} className="mx-auto" />
+            <Image src={'/images/laptop.png'} alt="" width={200} height={200} className="mx-auto" />
 
             <h2 className="text-2xl font-bold my-6 mx-auto max-w-xl">
               You currently do not have any links in your collection.

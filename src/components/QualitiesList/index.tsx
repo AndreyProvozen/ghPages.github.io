@@ -1,6 +1,5 @@
 import Image from 'next/image';
 
-import devicesIcon from '@/icons/devices.png';
 import BarChart from '@/icons/svg/BarChart';
 import Heart from '@/icons/svg/Heart';
 
@@ -17,7 +16,7 @@ const QualitiesList = () => {
       subTitle: 'Link Shortener is easy and fast, enter the long link to get your shortened link',
     },
     {
-      image: <Image src={devicesIcon} width={100} height={100} alt="" />,
+      image: <Image src={'/images/devices.png'} width={100} height={100} alt="" />,
       title: 'Devices',
       subTitle: 'Compatible with smartphones, tablets and desktop',
     },
