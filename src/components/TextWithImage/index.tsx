@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 
 import Star from '@/icons/svg/Star';
+import ClassNames from '@/utils/ClassNames';
 
 interface Props {
   linkData: { src: string; alt: string };
@@ -14,9 +15,11 @@ interface Props {
 
 const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, listData, containerClasses = '' }) => (
   <div
-    className={`flex justify-between max-w-screen-desktop px-5 mx-auto max-desktop-small:block ${
-      imageFirst ? '' : 'flex-row-reverse'
-    } ${containerClasses}`}
+    className={ClassNames(
+      { 'flex-row-reverse': imageFirst },
+      'flex justify-between max-w-screen-desktop px-5 mx-auto max-desktop-small:block',
+      containerClasses
+    )}
   >
     <Image src={linkData.src} alt={linkData.alt} height={400} width={500} className="px-5 max-desktop-small:mx-auto" />
     <div className="pt-5 max-w-[700px] max-desktop-small:mx-auto">

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import Chevron from '@/icons/svg/Chevron';
+import ClassNames from '@/utils/ClassNames';
 
 interface Props {
   perPage: number;
@@ -36,13 +37,13 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
   return (
     <div className="flex justify-center my-4">
       <button onClick={prevPage} className="flex" disabled={disabledForPrev}>
-        <Chevron className={`rotate-90 ${disabledForPrev ? 'fill-gray' : ''}`} width={30} height={30} />
-        <b className={`text-xl ${disabledForPrev ? 'text-gray' : ''}`}>Prev</b>
+        <Chevron className={ClassNames('rotate-90', { 'fill-gray': disabledForPrev })} width={30} height={30} />
+        <b className={ClassNames('text-xl', { 'text-gray': disabledForPrev })}>Prev</b>
       </button>
       <b className="text-xl mx-5"> {`Page ${currentPage + 1} of ${totalPage}`}</b>
       <button className="flex" onClick={nextPage} disabled={disabledForNext}>
-        <b className={`text-xl ${disabledForNext ? 'text-gray' : ''}`}>Next</b>
-        <Chevron className={`-rotate-90 ${disabledForNext ? 'fill-gray' : ''}`} width={30} height={30} />
+        <b className={ClassNames('text-xl', { 'text-gray': disabledForNext })}>Next</b>
+        <Chevron className={ClassNames('-rotate-90', { 'fill-gray': disabledForNext })} width={30} height={30} />
       </button>
     </div>
   );

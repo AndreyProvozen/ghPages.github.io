@@ -2,7 +2,7 @@ import { UAParser } from 'ua-parser-js';
 
 import { metricsProps } from '@/constants';
 
-const updateMetrics = (metrics: Array<Record<string, number>>, field: string) => {
+const updateMetrics = (metrics: Record<string, number>, field: string) => {
   if (field in metrics) {
     return { ...metrics, [field]: metrics[field] + 1 };
   }
@@ -21,9 +21,9 @@ const setMetricsData = async (metrics: metricsProps[], req) => {
   const { name: OSName } = parser.getOS();
   const { type: deviceType } = parser.getDevice();
 
-  const ipDataResponse = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,continent,country`);
+  const ipDataResponse = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,country`);
 
-  const { country, continent } = await ipDataResponse.json();
+  const { country } = await ipDataResponse.json();
 
   const metricFields = [
     { title: 'Browsers clicks', data: browserName },
@@ -31,7 +31,6 @@ const setMetricsData = async (metrics: metricsProps[], req) => {
     { title: 'Languages clicks', data: languageCode },
     { title: 'Devices clicks', data: deviceType === undefined ? 'Desktop' : deviceType },
     { title: 'Country clicks', data: country },
-    { title: 'continent', data: continent },
   ];
 
   metricFields.forEach(({ title, data }) => {

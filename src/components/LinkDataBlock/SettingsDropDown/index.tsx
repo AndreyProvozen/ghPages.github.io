@@ -29,19 +29,19 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
       fieldImage: <ClipBoard />,
     },
     {
+      fieldTitle: 'Statistic',
+      fieldFunction: () => {
+        router.push(`/links/${data.code}`);
+      },
+      fieldImage: <BarChart width="25px" height="25px" fill="white" />,
+    },
+    {
       fieldTitle: ' Delete',
       fieldFunction: () => {
         setIsDeleteModalOpen(data);
         setIsModalOpen(true);
       },
       fieldImage: <Trash />,
-    },
-    {
-      fieldTitle: 'Statistic',
-      fieldFunction: () => {
-        router.push(`/links/${data.code}`);
-      },
-      fieldImage: <BarChart width="25px" height="25px" fill="white" />,
     },
   ];
 

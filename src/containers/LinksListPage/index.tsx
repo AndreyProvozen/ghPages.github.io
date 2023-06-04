@@ -15,19 +15,28 @@ import customFetch from '@/utils/customFetch';
 const LinksList = () => {
   const { data: session } = useSession();
   const router = useRouter();
-
+  const [showFavoriteList, setShowFavoriteList] = useState(router?.query?.search === 'favorite');
   const [linksList, setLinksList] = useState<linkDataProps[]>([]);
   const [count, setCount] = useState();
   const [perPage] = useState(10);
 
   useEffect(() => {
-    customFetch(
-      `api/link?limit=${perPage}&&userEmail=${encodeURIComponent(session?.user?.email)}&page=${router.query.page || 0}`
-    ).then(res => {
-      setLinksList(res.urlsList);
-      setCount(res.count);
-    });
-  }, [router.query?.page]);
+    if (showFavoriteList) {
+      customFetch(`api/favorite?userEmail=${encodeURIComponent(session?.user?.email)}`).then(res => {
+        setLinksList(res.urlsList);
+        setCount(res.count);
+      });
+    } else {
+      customFetch(
+        `api/link?limit=${perPage}&&userEmail=${encodeURIComponent(session?.user?.email)}&page=${
+          router.query.page || 0
+        }`
+      ).then(res => {
+        setLinksList(res.urlsList);
+        setCount(res.count);
+      });
+    }
+  }, [router.query, showFavoriteList]);
 
   return (
     <>
@@ -38,9 +47,18 @@ const LinksList = () => {
         this powerful tool, you can stay organized, keep track of your important URLs, and optimize your online
         presence."
       />
-      <div className="max-w-screen-desktop mx-auto w-full px-5">
+      <div className="max-w-screen-desktop mx-auto w-full px-5 my-10">
         {linksList?.length ? (
-          <LinkDataBlock linksList={linksList} count={count} perPage={perPage} setLinksList={setLinksList} />
+          <LinkDataBlock
+            linksList={linksList}
+            count={count}
+            perPage={perPage}
+            setLinksList={setLinksList}
+            setShowFavoriteList={setShowFavoriteList}
+            showFavoriteList={showFavoriteList}
+            linkContainerClasses="border-b border-gray"
+            showFiltersAndPagination={true}
+          />
         ) : count === 0 ? (
           <div className="text-center">
             <Image src="/images/laptop.png" alt="" width={200} height={200} className="mx-auto" />

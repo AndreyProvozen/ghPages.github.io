@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { signOut } from 'next-auth/react';
 import { FC, useState } from 'react';
 
+import { Session } from '@/constants';
 import Menu from '@/icons/svg/Menu';
 
 export interface MenuProps {
@@ -13,7 +14,7 @@ export interface MenuProps {
 
 interface Props {
   textBlack?: boolean;
-  session: any;
+  session: Session | null;
 }
 
 const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });

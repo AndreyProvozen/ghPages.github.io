@@ -1,5 +1,7 @@
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 
+import ClassNames from '@/utils/ClassNames';
+
 interface dropdownDataProps {
   fieldTitle?: string;
   fieldFunction?: () => void;
@@ -55,9 +57,10 @@ const Dropdown: FC<Props> = ({
                 customField
               ) : (
                 <button
-                  className={`group flex items-center border-b-2 border-pink py-4 w-full text-start ${
-                    i === 0 ? 'first:pt-0' : ''
-                  } ${i === dropdownData.length - 1 ? 'last:border-0' : ''}`}
+                  className={ClassNames('group flex items-center border-b-2 border-pink py-4 w-full text-start', {
+                    'first:pt-0': i === 0,
+                    'last:border-0': i === dropdownData.length - 1,
+                  })}
                   onClick={() => handleFunction(fieldFunction)}
                 >
                   {Boolean(fieldImage) && (

@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { signOut } from 'next-auth/react';
 import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
@@ -12,10 +11,7 @@ import Settings from '@/icons/svg/Settings';
 const DesktopHeader = ({ session }) => {
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
 
-  const favoriteLinks = () => {
-    // eslint-disable-next-line no-console
-    console.log('favoriteLinks');
-  };
+  const favoriteLinks = () => null;
 
   const dropdownData = session
     ? [

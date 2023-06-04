@@ -10,7 +10,16 @@ export interface linkDataProps {
 
 export interface metricsProps {
   title: string;
-  data: any;
+  data: Record<string, number>;
+}
+export interface Session {
+  expires: string;
+  user: { email: string; image: string; name: string };
+}
+
+export enum storageTypes {
+  LOCAL_STORAGE = 'localStorage',
+  SESSION_STORAGE = 'sessionStorage',
 }
 
 export interface FullLinkDataProps extends linkDataProps {

@@ -26,7 +26,7 @@ const getPieChartData = list => {
   return pieData;
 };
 
-const getBarChartData = list => {
+const getBarChartData = (list: Record<string, number>) => {
   const { colorWithOpacity } = getRandomColor(0.4);
 
   const barData = {

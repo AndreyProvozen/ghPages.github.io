@@ -1,8 +1,14 @@
-import { useEffect } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect } from 'react';
 
 import Close from '@/icons/svg/Close';
 
-const ModalWrapper = ({ setIsModalOpen, title, children }) => {
+interface Props {
+  title: string;
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+  children: React.ReactNode;
+}
+
+const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children }) => {
   useEffect(() => {
     document.body.classList.add('overflow-hidden');
 

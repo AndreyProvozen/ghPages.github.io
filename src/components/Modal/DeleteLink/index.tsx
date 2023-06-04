@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction } from 'react';
 
@@ -11,18 +12,33 @@ interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
   deletedLink?: linkDataProps;
+  isStatisticPage?: boolean;
 }
 
-const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList }) => {
+const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList, isStatisticPage }) => {
   const { data: session } = useSession();
   const shortLink = `${window.location.origin}/api/${deletedLink?.code}`;
+  const router = useRouter();
+
+  const updateLinksList = (deletedLinkCode: string) => {
+    if (isStatisticPage) {
+      return router.push('/links');
+    }
+    setLinksList(prev => prev.filter(item => item.code !== deletedLinkCode));
+    setIsModalOpen(false);
+  };
 
   const handleDeleteLink = () => {
-    customFetch(`api/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(session?.user?.email)}`, {
+    const url = `${window.location.origin}/api/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(
+      session?.user?.email
+    )}`;
+
+    customFetch(url, {
       method: 'DELETE',
       headers: { 'content-type': 'application/json' },
-    }).then(deletedLinkCode => setLinksList(prev => prev.filter(item => item.code !== deletedLinkCode)));
-    setIsModalOpen(false);
+    }).then(deletedLinkCode => {
+      return updateLinksList(deletedLinkCode);
+    });
   };
 
   return (

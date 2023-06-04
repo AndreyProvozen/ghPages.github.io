@@ -83,7 +83,11 @@ const Home = () => {
             placeholder="Paste the URL to be shortened"
           />
           {linksList?.length ? (
-            <LinkDataBlock linksList={linksList} setLinksList={setLinksList} isHomePageList={true} />
+            <LinkDataBlock
+              linksList={linksList}
+              setLinksList={setLinksList}
+              linkContainerClasses="bg-white rounded-md mb-5"
+            />
           ) : (
             count !== 0 && <LinksListSkeleton isHomePageList={true} />
           )}

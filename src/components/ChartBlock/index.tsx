@@ -24,8 +24,8 @@ const barOptions = {
 
 const ChartBlock = ({ metrics }) => {
   return (
-    <div className="grid grid-cols-2 grid-rows-3 gap-5 container max-w-screen-desktop-small mx-auto px-5 mt-5">
-      <div className="col-span-2 bg-lightPink/10 w-full border border-pink p-5 mb-5">
+    <div className="grid grid-cols-2 grid-rows-3 gap-8">
+      <div className="col-span-2 bg-gray/20 w-full rounded-lg border border-gray p-5 mb-5 hover:border-pink hover:shadow-lg">
         <p className="text-2xl font-bold mb-5 text-center">{metrics[4].title}</p>
         <Bar options={barOptions} data={getBarChartData(metrics[4].data)} />
       </div>
@@ -34,7 +34,7 @@ const ChartBlock = ({ metrics }) => {
           <div
             className={`row-start-${
               i > 1 ? 3 : 2
-            } flex flex-col bg-lightPink/10 w-full border border-pink p-5 rounded-lg drop-shadow-2xl	`}
+            } flex flex-col bg-gray/20 w-full border border-gray p-5 rounded-lg hover:border-pink hover:shadow-lg`}
             key={title}
           >
             <p className="text-2xl font-bold mb-5 text-center">{title}</p>

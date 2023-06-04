@@ -1,57 +1,106 @@
+import { getCookie, setCookie } from 'cookies-next';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Dispatch, FC, SetStateAction, useState } from 'react';
+import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
 
 import Pagination from '@/atoms/Pagination';
-import DeleteLinkModal from '@/components/Modal/DeleteLink';
-import { ScreenSize, linkDataProps } from '@/constants';
+import { ScreenSize, flashMessageType, linkDataProps } from '@/constants';
+import Heart from '@/icons/svg/Heart';
+import { useFlashMessage } from '@/utils/FlashMessage';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import FiltersBlock from './FiltersBlock';
 import SettingsDropDown from './SettingsDropDown';
 
+const DeleteLinkModal = dynamic(() => import('@/components/Modal/DeleteLink'), { ssr: false });
+
 interface Props {
   linksList: linkDataProps[];
   setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
+  showFavoriteList?: boolean;
+  setShowFavoriteList?: Dispatch<SetStateAction<boolean>>;
   count?: number;
   perPage?: number;
-  isHomePageList?: boolean;
+  linkContainerClasses?: string;
+  showFiltersAndPagination?: boolean;
 }
 
-const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isHomePageList }) => {
+const LinkDataBlock: FC<Props> = ({
+  linksList,
+  count,
+  perPage,
+  setLinksList,
+  linkContainerClasses,
+  showFiltersAndPagination,
+  showFavoriteList,
+  setShowFavoriteList,
+}) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
+  const flashMessage = useFlashMessage();
 
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
   const [deletedLink, setDeletedLink] = useState<linkDataProps | undefined>(undefined);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
-  const linkContainerClasses = isHomePageList ? 'bg-white rounded-md mb-5' : 'border-b border-gray ';
+  useEffect(() => {
+    setCookie('favorite', favoriteList);
+  }, [favoriteList]);
+
+  const toggleFavorite = (isFavoriteLink: boolean, code: string) => {
+    if (isFavoriteLink) {
+      setFavoriteList(favoriteList.filter(item => item !== code));
+      flashMessage.addFlashMessage('The link has been removed from the favorites list', flashMessageType.SUCCESSFUL);
+      return null;
+    }
+    setFavoriteList([...favoriteList, code]);
+    flashMessage.addFlashMessage('Link has been added to the favorites list', flashMessageType.SUCCESSFUL);
+  };
 
   return (
-    <div className="my-10">
-      {!isHomePageList && <FiltersBlock />}
+    <>
+      {showFiltersAndPagination && (
+        <FiltersBlock showFavoriteList={showFavoriteList} setShowFavoriteList={setShowFavoriteList} />
+      )}
       <div className="text-start">
-        {linksList.map((linkData, i) => (
-          <div key={i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
-            <div className="flex flex-col w-full max-w-md">
-              <Link
-                target={isHomePageList ? '_blank' : '_self'}
-                href={`${
-                  isHomePageList ? `${window.location.origin}/api/${linkData.code}` : `/links/${linkData.code}`
-                }`}
-                className="text-darkPink hover:text-pink cursor-pointer line-clamp-1 break-all"
-              >
-                {window.location.origin}/api/{linkData.code}
-              </Link>
-              <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{linkData.url}</p>
+        {linksList.map((linkData, i) => {
+          const isFavoriteLink = favoriteList.includes(linkData.code);
+          return (
+            <div key={i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
+              <div className="flex flex-col w-full max-w-md">
+                <Link
+                  target={!showFiltersAndPagination ? '_blank' : '_self'}
+                  href={`${
+                    !showFiltersAndPagination
+                      ? `${window.location.origin}/api/${linkData.code}`
+                      : `/links/${linkData.code}`
+                  }`}
+                  className="text-darkPink hover:text-pink cursor-pointer line-clamp-1 break-all"
+                >
+                  {window.location.origin}/api/{linkData.code}
+                </Link>
+                <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{linkData.url}</p>
+              </div>
+              {!isMobile && (
+                <>
+                  <div className="pr-10 pl-5">{linkData.clicked}</div>{' '}
+                  <Heart
+                    width={24}
+                    onClick={() => toggleFavorite(isFavoriteLink, linkData.code)}
+                    className={`${
+                      !isFavoriteLink ? 'fill-none' : 'fill-darkRed'
+                    } ml-auto cursor-pointer stroke-2 stroke-darkRed`}
+                  />
+                </>
+              )}
+              <SettingsDropDown
+                data={linkData}
+                setIsModalOpen={setIsDeleteModalOpen}
+                setIsDeleteModalOpen={setDeletedLink}
+              />
             </div>
-            {!isMobile && <div className="pl-5">{linkData.clicked}</div>}
-            <SettingsDropDown
-              data={linkData}
-              setIsModalOpen={setIsDeleteModalOpen}
-              setIsDeleteModalOpen={setDeletedLink}
-            />
-          </div>
-        ))}
-        {!isHomePageList && <Pagination count={count} perPage={perPage} />}
+          );
+        })}
+        {showFiltersAndPagination && count > perPage && <Pagination count={count} perPage={perPage} />}
       </div>
       {isDeleteModalOpen && (
         <DeleteLinkModal
@@ -61,7 +110,7 @@ const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, setLinksList, isH
           setLinksList={setLinksList}
         />
       )}
-    </div>
+    </>
   );
 };
 

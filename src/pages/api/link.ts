@@ -11,7 +11,7 @@ const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 const getLinksData = async (req, res) => {
   const { limit = 5, userEmail, page } = req.query;
 
-  const getLinksByPage = parseInt(page, 10) ? page * limit - 1 : 0;
+  const getLinksByPage = parseInt(page, 10) ? page * limit : 0;
 
   if (userEmail !== 'undefined') {
     const userData = await User.findOne({ email: userEmail });
@@ -30,6 +30,7 @@ const getLinksData = async (req, res) => {
 
 const deleteLinksData = async (req, res) => {
   const { code, userEmail } = req.query;
+
   if (userEmail !== 'undefined') {
     await User.findOneAndUpdate({ email: userEmail }, { $pull: { userLinks: code } }, { new: true });
     const deletedUrl = await Urls.findOneAndDelete({ code });
