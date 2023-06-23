@@ -1,6 +1,6 @@
 import chroma from 'chroma-js';
 
-const getRandomColor = opacity => {
+const getRandomColor = (opacity: number) => {
   const color = chroma.random().saturate(2).hex();
 
   if (opacity) {

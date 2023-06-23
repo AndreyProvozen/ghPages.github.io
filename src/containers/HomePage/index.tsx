@@ -70,8 +70,8 @@ const Home = () => {
         />
         <Header />
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
-          <h1 className="mt-7 text-5xl text-white">Link Shortener</h1>
-          <p className="max-w-lg mx-auto my-5 text-white">
+          <h1 className="mt-7 text-5xl text-white animate__animated animate__fadeInDown">Link Shortener</h1>
+          <p className="max-w-lg mx-auto my-5 text-white animate__animated animate__fadeInDown">
             Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
           </p>
           <SearchBlock

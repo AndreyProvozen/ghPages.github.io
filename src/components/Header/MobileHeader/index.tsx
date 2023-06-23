@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
+import { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { FC, useState } from 'react';
 
-import { Session } from '@/constants';
 import Menu from '@/icons/svg/Menu';
 
 export interface MenuProps {
