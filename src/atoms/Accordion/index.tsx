@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useCallback, useState } from 'react';
 
 import AccordionItem from './AccordionItem';
 
@@ -12,8 +12,10 @@ interface Props {
 const Accordion: FC<Props> = ({ questions }) => {
   const [activeQuestions, setActiveQuestions] = useState<string | null>(null);
 
-  const toggleActiveQuestions = (questionId: string) =>
-    setActiveQuestions(activeQuestions !== questionId ? questionId : null);
+  const toggleActiveQuestions = useCallback(
+    (questionId: string) => setActiveQuestions(activeQuestions !== questionId ? questionId : null),
+    [activeQuestions]
+  );
 
   return (
     <>

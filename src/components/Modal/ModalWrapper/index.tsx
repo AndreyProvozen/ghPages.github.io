@@ -31,7 +31,7 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children }) => {
       }}
       className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black z-50 bg-opacity-75"
     >
-      <div className="overflow-y-auto bg-white rounded-lg">
+      <div className="animate__animated animate__fadeInDown overflow-y-auto bg-white rounded-lg">
         <div className="border-b-2 border-b-gray py-2 flex justify-between">
           <b className="text-xl mx-auto text-black">{title}</b>
           <button onClick={() => setIsModalOpen(false)}>

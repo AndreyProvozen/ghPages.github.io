@@ -39,7 +39,7 @@ const Dropdown: FC<Props> = ({
     };
   }, [dropdownRef]);
 
-  const handleFunction = (fieldFunction = () => null) => {
+  const handleFunction = (fieldFunction: () => void) => {
     fieldFunction();
     setIsOpen(false);
   };
@@ -52,7 +52,7 @@ const Dropdown: FC<Props> = ({
       {isOpen && (
         <div className={`${popoverPosition} ${popoverWidth} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 z-10`}>
           {dropdownData.map(({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
-            <div key={i}>
+            <div key={fieldTitle}>
               {customField ? (
                 customField
               ) : (

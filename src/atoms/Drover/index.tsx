@@ -54,10 +54,10 @@ const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
             transform: `translateX(calc(-100% * ${level - 1} + 16px * ${level - 1}))`,
           }}
         >
-          {currentMenu.map((item, i) => (
-            <div key={i} style={{ minWidth: 'calc(100% + 16px)' }}>
-              {item.map((m, item) => (
-                <div key={m.name + item}>
+          {currentMenu.map((item, index) => (
+            <div key={index} style={{ minWidth: 'calc(100% + 16px)' }}>
+              {item.map((m, i) => (
+                <div key={m.name + i}>
                   {m.children && (
                     <button className="flex font-bold text-xl" onClick={() => selectLevel(level + 1, m.children)}>
                       {m.name}

@@ -19,12 +19,24 @@ const FlashMessageContext = createContext<FlashMessageContextProps>({
 const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
   const [flashMessages, setFlashMessages] = useState<FlashMessage[]>([]);
   const timerRef = useRef<NodeJS.Timeout>();
+  const animationRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
     if (flashMessages.length > 0) {
       timerRef.current = setTimeout(() => {
-        setFlashMessages(prevMessages => prevMessages.slice(1));
-      }, 2000);
+        animationRefs.current.forEach((ref, index) => {
+          if (!ref) return;
+
+          if (index === 0) {
+            return ref.classList.add('animate__zoomOut');
+          }
+          ref.style.display = 'none';
+        });
+
+        setTimeout(() => {
+          setFlashMessages(prevMessages => prevMessages.slice(1));
+        }, 300);
+      }, 3000);
     }
 
     return () => clearTimeout(timerRef.current);
@@ -44,7 +56,8 @@ const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
         {flashMessages.map((flashMessage, index) => (
           <div
             key={index}
-            className={`flex justify-between p-4 rounded-lg`}
+            ref={el => (animationRefs.current[index] = el)}
+            className={`flex justify-between p-4 rounded-lg animate__animated animate__zoomIn`}
             style={{ backgroundColor: flashMessage.type }}
           >
             <p>{flashMessage.message}</p>

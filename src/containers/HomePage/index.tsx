@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { FormEvent, useEffect, useState } from 'react';
+import { InView } from 'react-intersection-observer';
 
 import Accordion from '@/atoms/Accordion';
 import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
@@ -12,6 +13,7 @@ import QualitiesList from '@/components/QualitiesList';
 import SearchBlock from '@/components/SearchBlock';
 import TextWithImage from '@/components/TextWithImage';
 import { flashMessageType, linkDataProps } from '@/constants';
+import ClassNames from '@/utils/ClassNames';
 import customFetch from '@/utils/customFetch';
 import { useFlashMessage } from '@/utils/FlashMessage';
 import { TextWithImageData, questions } from 'mock';
@@ -70,10 +72,23 @@ const Home = () => {
         />
         <Header />
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
-          <h1 className="mt-7 text-5xl text-white animate__animated animate__fadeInDown">Link Shortener</h1>
-          <p className="max-w-lg mx-auto my-5 text-white animate__animated animate__fadeInDown">
-            Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
-          </p>
+          <InView threshold={0.3} triggerOnce initialInView={true}>
+            {({ inView, ref }) => (
+              <div
+                ref={ref}
+                className={ClassNames(
+                  { invisible: !inView },
+                  { animate__fadeInDown: inView },
+                  'mt-7 my-5 text-white animate__animated'
+                )}
+              >
+                <h1 className="text-5xl">Link Shortener</h1>
+                <p className="max-w-lg mx-auto">
+                  Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
+                </p>
+              </div>
+            )}
+          </InView>
           <SearchBlock
             onSubmit={handleOnSubmit}
             value={longLink}
@@ -93,7 +108,7 @@ const Home = () => {
           )}
         </div>
       </div>
-      <div className="container max-w-screen-desktop-small mx-auto text-center px-5 my-8">
+      <div className="container max-w-screen-desktop mx-auto text-center px-5 my-8">
         <QualitiesList />
       </div>
       <InfoBlock

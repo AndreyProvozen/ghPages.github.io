@@ -65,7 +65,11 @@ const LinkDataBlock: FC<Props> = ({
         {linksList.map((linkData, i) => {
           const isFavoriteLink = favoriteList.includes(linkData.code);
           return (
-            <div key={i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
+            <div
+              //  animate__fadeInDown
+              key={i}
+              className={`flex items-center justify-between p-5 ${linkContainerClasses}`}
+            >
               <div className="flex flex-col w-full max-w-md">
                 <Link
                   target={!showFiltersAndPagination ? '_blank' : '_self'}
