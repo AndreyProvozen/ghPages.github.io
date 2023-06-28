@@ -1,6 +1,5 @@
 import { getCookie, setCookie } from 'cookies-next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { flashMessageType } from '@/constants';
@@ -9,7 +8,7 @@ import Heart from '@/icons/svg/Heart';
 import Trash from '@/icons/svg/Trash';
 import { useFlashMessage } from '@/utils/FlashMessage';
 
-import DeleteLinkModal from '../Modal/DeleteLink';
+import DeleteLinkModal from './Modals/DeleteLink';
 
 const LinkSettingsBar = ({ link, setLink }) => {
   const flashMessage = useFlashMessage();

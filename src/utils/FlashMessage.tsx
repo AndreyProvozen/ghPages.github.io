@@ -53,14 +53,14 @@ const FlashMessageProvider = ({ children }: { children: ReactNode }) => {
   const renderFlashMessages = () => (
     <div className="fixed w-full bottom-8 z-50 text-white">
       <div className="mx-auto grid gap-3 w-full max-w-md">
-        {flashMessages.map((flashMessage, index) => (
+        {flashMessages.map(({ type, message }, index) => (
           <div
             key={index}
             ref={el => (animationRefs.current[index] = el)}
-            className={`flex justify-between p-4 rounded-lg animate__animated animate__zoomIn`}
-            style={{ backgroundColor: flashMessage.type }}
+            className="flex justify-between p-4 rounded-lg animate__animated animate__zoomIn animate__faster"
+            style={{ backgroundColor: type }}
           >
-            <p>{flashMessage.message}</p>
+            <p>{message}</p>
             <button onClick={() => removeFlashMessage(index)}>
               <Close />
             </button>

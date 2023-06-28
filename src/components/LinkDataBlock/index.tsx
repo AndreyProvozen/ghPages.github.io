@@ -12,7 +12,7 @@ import { useMediaQuery } from '@/utils/useMediaQuery';
 import FiltersBlock from './FiltersBlock';
 import SettingsDropDown from './SettingsDropDown';
 
-const DeleteLinkModal = dynamic(() => import('@/components/Modal/DeleteLink'), { ssr: false });
+const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });
 
 interface Props {
   linksList: linkDataProps[];

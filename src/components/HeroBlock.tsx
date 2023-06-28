@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React, { FC } from 'react';
 
-import Header from '../Header';
+import Header from './Header';
 
 interface Props {
   backgroundImage: {

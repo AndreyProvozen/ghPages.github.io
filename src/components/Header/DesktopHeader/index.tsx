@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
-import ConfirmSignOut from '@/components/Modal/ConfirmSignOut';
+import ConfirmSignOut from '@/components/Modals/ConfirmSignOut';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 import Settings from '@/icons/svg/Settings';
