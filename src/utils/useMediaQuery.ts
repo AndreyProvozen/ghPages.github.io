@@ -16,7 +16,7 @@ export const useMediaQuery = (query: ScreenSize) => {
     setMatches(mediaQuery.matches);
 
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, [query]);
+  }, []);
 
   return matches;
 };

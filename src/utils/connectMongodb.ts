@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const { MONGODB_URI } = process.env;
+const opts = {
+  bufferCommands: false,
+};
+
 let cachedConnection = null;
 
 const connectMongodb = async () => {
@@ -11,10 +15,6 @@ const connectMongodb = async () => {
   if (cachedConnection) {
     return cachedConnection;
   }
-
-  const opts = {
-    bufferCommands: false,
-  };
 
   cachedConnection = await mongoose.connect(MONGODB_URI, opts);
   return cachedConnection;

@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
@@ -9,6 +7,8 @@ import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
 import PaginationSkeleton from '@/atoms/Skeleton/Pagination';
 import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
+import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';
+import NotFoundSection from '@/components/NotFoundSection';
 import { linkDataProps } from '@/constants';
 import customFetch from '@/utils/customFetch';
 
@@ -48,31 +48,23 @@ const LinksList = () => {
         presence."
       />
       <div className="max-w-screen-desktop mx-auto w-full px-5 my-10">
+        <FiltersBlock showFavoriteList={showFavoriteList} setShowFavoriteList={setShowFavoriteList} />
         {linksList?.length ? (
           <LinkDataBlock
             linksList={linksList}
             count={count}
             perPage={perPage}
             setLinksList={setLinksList}
-            setShowFavoriteList={setShowFavoriteList}
-            showFavoriteList={showFavoriteList}
             linkContainerClasses="border-b border-gray"
             showFiltersAndPagination={true}
           />
         ) : count === 0 ? (
-          <div className="text-center">
-            <Image src="/images/laptop.png" alt="" width={200} height={200} className="mx-auto" />
-
-            <h2 className="text-2xl font-bold my-6 mx-auto max-w-xl">
-              You currently do not have any links in your collection.
-            </h2>
-            <Link
-              href="/"
-              className="text-2xl text-white rounded-md hover:bg-lightPink bg-pink px-6 py-2.5 active:bg-darkPink"
-            >
-              Create new link
-            </Link>
-          </div>
+          <NotFoundSection
+            title="You currently do not have any links in your collection."
+            href="/"
+            linkClassName="text-2xl text-white rounded-md hover:bg-lightPink bg-pink px-6 py-2.5 active:bg-darkPink"
+            linkText="Create new link"
+          />
         ) : (
           <>
             <FilterBlockSkeleton />

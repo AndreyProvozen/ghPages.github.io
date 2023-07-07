@@ -20,7 +20,8 @@ import { TextWithImageData, questions } from 'mock';
 
 const Home = () => {
   const { data: session } = useSession();
-  const flashMessage = useFlashMessage();
+  const { addFlashMessage } = useFlashMessage();
+
   const [longLink, setLongLink] = useState('');
   const [linksList, setLinksList] = useState<linkDataProps[]>([]);
   const [count, setCount] = useState();
@@ -52,11 +53,11 @@ const Home = () => {
           const newArray = linksList.length > 4 ? [content, ...linksList].slice(0, -1) : [content, ...linksList];
 
           setLinksList(newArray);
-          flashMessage.addFlashMessage('Shortened link successfully added', flashMessageType.SUCCESSFUL);
+          addFlashMessage('Shortened link successfully added', flashMessageType.SUCCESSFUL);
         }
       })
       .catch(error => {
-        flashMessage.addFlashMessage(error.message, flashMessageType.ERROR);
+        addFlashMessage(error.message, flashMessageType.ERROR);
       });
   };
 
@@ -78,8 +79,8 @@ const Home = () => {
                 ref={ref}
                 className={ClassNames(
                   { invisible: !inView },
-                  { animate__fadeInDown: inView },
-                  'mt-7 my-5 text-white animate__animated'
+                  { 'animate__fadeInDown animate__animated': inView },
+                  'mt-7 my-5 text-white'
                 )}
               >
                 <h1 className="text-5xl">Link Shortener</h1>

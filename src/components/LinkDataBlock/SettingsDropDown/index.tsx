@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { Dispatch, FC, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
 import { flashMessageType, linkDataProps } from '@/constants';
@@ -16,34 +16,35 @@ interface Props {
 }
 
 const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpen }) => {
-  const router = useRouter();
-  const flashMessage = useFlashMessage();
+  const { push } = useRouter();
+  const { addFlashMessage } = useFlashMessage();
 
-  const settingsFields = [
-    {
-      fieldTitle: 'Copy',
-      fieldFunction: () => {
-        navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
-        flashMessage.addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
+  const settingsFields = useMemo(
+    () => [
+      {
+        fieldTitle: 'Copy',
+        fieldFunction: () => {
+          navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
+          addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
+        },
+        fieldImage: <ClipBoard />,
       },
-      fieldImage: <ClipBoard />,
-    },
-    {
-      fieldTitle: 'Statistic',
-      fieldFunction: () => {
-        router.push(`/links/${data.code}`);
+      {
+        fieldTitle: 'Statistic',
+        fieldFunction: () => push(`/links/${data.code}`),
+        fieldImage: <BarChart width="25px" height="25px" fill="white" />,
       },
-      fieldImage: <BarChart width="25px" height="25px" fill="white" />,
-    },
-    {
-      fieldTitle: ' Delete',
-      fieldFunction: () => {
-        setIsDeleteModalOpen(data);
-        setIsModalOpen(true);
+      {
+        fieldTitle: ' Delete',
+        fieldFunction: () => {
+          setIsDeleteModalOpen(data);
+          setIsModalOpen(true);
+        },
+        fieldImage: <Trash />,
       },
-      fieldImage: <Trash />,
-    },
-  ];
+    ],
+    [data]
+  );
 
   return (
     <Dropdown

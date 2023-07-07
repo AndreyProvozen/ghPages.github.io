@@ -23,7 +23,7 @@ export enum storageTypes {
 }
 
 export interface FullLinkDataProps extends linkDataProps {
-  metrics: metricsProps;
+  metrics: metricsProps[];
 }
 
 export enum ScreenSize {

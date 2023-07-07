@@ -9,7 +9,6 @@ import Heart from '@/icons/svg/Heart';
 import { useFlashMessage } from '@/utils/FlashMessage';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
-import FiltersBlock from './FiltersBlock';
 import SettingsDropDown from './SettingsDropDown';
 
 const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });
@@ -17,8 +16,6 @@ const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), 
 interface Props {
   linksList: linkDataProps[];
   setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
-  showFavoriteList?: boolean;
-  setShowFavoriteList?: Dispatch<SetStateAction<boolean>>;
   count?: number;
   perPage?: number;
   linkContainerClasses?: string;
@@ -32,11 +29,9 @@ const LinkDataBlock: FC<Props> = ({
   setLinksList,
   linkContainerClasses,
   showFiltersAndPagination,
-  showFavoriteList,
-  setShowFavoriteList,
 }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
-  const flashMessage = useFlashMessage();
+  const { addFlashMessage } = useFlashMessage();
 
   const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
   const [deletedLink, setDeletedLink] = useState<linkDataProps | undefined>(undefined);
@@ -49,18 +44,15 @@ const LinkDataBlock: FC<Props> = ({
   const toggleFavorite = (isFavoriteLink: boolean, code: string) => {
     if (isFavoriteLink) {
       setFavoriteList(favoriteList.filter(item => item !== code));
-      flashMessage.addFlashMessage('The link has been removed from the favorites list', flashMessageType.SUCCESSFUL);
+      addFlashMessage('The link has been removed from the favorites list', flashMessageType.SUCCESSFUL);
       return null;
     }
     setFavoriteList([...favoriteList, code]);
-    flashMessage.addFlashMessage('Link has been added to the favorites list', flashMessageType.SUCCESSFUL);
+    addFlashMessage('Link has been added to the favorites list', flashMessageType.SUCCESSFUL);
   };
 
   return (
     <>
-      {showFiltersAndPagination && (
-        <FiltersBlock showFavoriteList={showFavoriteList} setShowFavoriteList={setShowFavoriteList} />
-      )}
       <div className="text-start">
         {linksList.map((linkData, i) => {
           const isFavoriteLink = favoriteList.includes(linkData.code);

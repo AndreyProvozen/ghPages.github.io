@@ -1,13 +1,6 @@
-const customFetch = async (
-  url: string,
-  options?: { method?: string; headers?: HeadersInit; body?: BodyInit | null }
-) => {
+const customFetch = async (url: string, { method = 'GET', headers = {}, body = null } = {}) => {
   try {
-    const response = await fetch(url, {
-      method: options?.method ?? 'GET',
-      headers: options?.headers ?? {},
-      body: options?.body ?? null,
-    });
+    const response = await fetch(url, { method, headers, body });
 
     if (!response.ok) {
       const { error }: { error: string } = await response.json();
@@ -16,7 +9,7 @@ const customFetch = async (
 
     return await response.json();
   } catch (error) {
-    const message = error.message || 'Something went wrong';
+    const message = error.message || 'Fetch error';
     return message;
   }
 };

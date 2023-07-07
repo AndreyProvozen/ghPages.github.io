@@ -8,7 +8,7 @@ const getRandomColor = (opacity: number) => {
     return { color, colorWithOpacity };
   }
 
-  return chroma.random().saturate(2).hex();
+  return color;
 };
 
 export default getRandomColor;
