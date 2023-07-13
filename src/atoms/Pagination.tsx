@@ -18,7 +18,9 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
   const disabledForPrev = useMemo(() => currentPage === 0, [currentPage]);
   const disabledForNext = useMemo(() => currentPage === totalPage - 1, [currentPage, totalPage]);
 
-  const updatePage = page => {
+  const pageCounter = useMemo(() => `Page ${currentPage + 1} of ${totalPage}`, [currentPage, totalPage]);
+
+  const updatePage = (page: number) => {
     push({ query: { ...query, page } }, undefined, { shallow: true });
   };
 
@@ -40,7 +42,7 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
         <Chevron className={ClassNames('rotate-90', { 'fill-gray': disabledForPrev })} width={30} height={30} />
         <b className={ClassNames('text-xl', { 'text-gray': disabledForPrev })}>Prev</b>
       </button>
-      <b className="text-xl mx-5"> {`Page ${currentPage + 1} of ${totalPage}`}</b>
+      <b className="text-xl mx-5"> {pageCounter}</b>
       <button className="flex" onClick={nextPage} disabled={disabledForNext}>
         <b className={ClassNames('text-xl', { 'text-gray': disabledForNext })}>Next</b>
         <Chevron className={ClassNames('-rotate-90', { 'fill-gray': disabledForNext })} width={30} height={30} />

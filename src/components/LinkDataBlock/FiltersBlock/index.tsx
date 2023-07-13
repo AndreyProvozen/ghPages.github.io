@@ -1,20 +1,31 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import SearchBlock from '@/components/SearchBlock';
 import Heart from '@/icons/svg/Heart';
 
-const FiltersBlock = ({ showFavoriteList, setShowFavoriteList }) => {
+const FiltersBlock = () => {
   const router = useRouter();
 
-  const [link, setLink] = useState('');
+  const [link, setLink] = useState(router.query?.searchString || '');
+
+  const showFavoriteList = useMemo(() => router.query?.search === 'favorite', [router.query?.search]);
+
+  useEffect(() => {
+    if (link) {
+      const timeoutId = setTimeout(() => {
+        router.push(`?searchString=${link}`);
+      }, 1000);
+
+      return () => clearTimeout(timeoutId);
+    }
+    router.push(router.pathname);
+  }, [link]);
 
   const updateQuery = () => {
     if (showFavoriteList) {
-      setShowFavoriteList(false);
       router.push(router.pathname);
     } else {
-      setShowFavoriteList(true);
       router.push('?search=favorite');
     }
   };
@@ -32,10 +43,10 @@ const FiltersBlock = ({ showFavoriteList, setShowFavoriteList }) => {
       </button>
       <SearchBlock
         onSubmit={() => null}
-        value={link}
+        value={String(link)}
         containerClasses="mb-5 text-black w-1/2"
         setValue={setLink}
-        placeholder="Search"
+        placeholder="Enter symbols after the last slash in the URL"
       />
     </div>
   );

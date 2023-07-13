@@ -5,6 +5,7 @@ import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
 import { linkDataProps } from '@/constants';
 import customFetch from '@/utils/customFetch';
+import getConfigVariable from '@/utils/getConfigVariable';
 
 import ModalWrapper from './ModalWrapper';
 
@@ -15,16 +16,16 @@ interface Props {
   isStatisticPage?: boolean;
 }
 
+const API_HOST = getConfigVariable('API_HOST');
+
 const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList, isStatisticPage }) => {
   const { data: session } = useSession();
   const { push } = useRouter();
 
-  const shortLink = useMemo(() => `${window.location.origin}/api/${deletedLink?.code}`, [deletedLink?.code]);
+  const shortLink = useMemo(() => `${API_HOST}/${deletedLink?.code}`, [deletedLink?.code]);
+
   const endpointUrl = useMemo(
-    () =>
-      `${window.location.origin}/api/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(
-        session?.user?.email
-      )}`,
+    () => `${API_HOST}/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(session?.user?.email)}`,
     [deletedLink?.code, session?.user]
   );
 

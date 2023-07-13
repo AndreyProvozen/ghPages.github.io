@@ -7,6 +7,7 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   swcMinify: true,
+  publicRuntimeConfig: { API_HOST: process.env.API_HOST },
   images: {
     deviceSizes: [320, 420, 640, 768, 1024, 1280, 1536],
     formats: ['image/avif', 'image/webp'],

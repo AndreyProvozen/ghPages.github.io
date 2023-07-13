@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { InView } from 'react-intersection-observer';
 
 import Star from '@/icons/svg/Star';
@@ -11,12 +11,13 @@ interface Props {
   title: string;
   imageFirst?: boolean;
   containerClasses?: string;
-  listData?: string[];
+  featuresListData?: string[];
 }
 
-const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, listData, containerClasses = '' }) => {
-  const imageTransition = `${imageFirst ? 'animate__fadeInRight' : 'animate__fadeInLeft'}`;
-  const textTransition = `${imageFirst ? 'animate__fadeInLeft' : 'animate__fadeInRight'}`;
+const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresListData, containerClasses = '' }) => {
+  const imageTransition = useMemo(() => (imageFirst ? 'animate__fadeInRight' : 'animate__fadeInLeft'), [imageFirst]);
+  const textTransition = useMemo(() => (imageFirst ? 'animate__fadeInLeft' : 'animate__fadeInRight'), [imageFirst]);
+
   return (
     <InView threshold={0.3} triggerOnce initialInView={true}>
       {({ inView, ref }) => (
@@ -44,14 +45,12 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, listData,
           >
             <h2 className="text-2xl font-bold mx-auto text-center mb-2">{title}</h2>
             <div dangerouslySetInnerHTML={{ __html: text }} />
-            <div>
-              {Boolean(listData) &&
-                listData?.map((title, i) => (
-                  <div className="flex mt-5" key={i}>
-                    <Star className="shrink-0 mr-2 fill-lightOrange" /> {title}
-                  </div>
-                ))}
-            </div>
+            {Boolean(featuresListData) &&
+              featuresListData?.map(feature => (
+                <div className="flex mt-5" key={feature}>
+                  <Star className="shrink-0 mr-2 fill-lightOrange" /> {feature}
+                </div>
+              ))}
           </div>
         </div>
       )}

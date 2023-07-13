@@ -8,12 +8,14 @@ import ClipBoard from '@/icons/svg/ClipBoard';
 import ThreeDots from '@/icons/svg/ThreeDots';
 import Trash from '@/icons/svg/Trash';
 import { useFlashMessage } from '@/utils/FlashMessage';
+import getConfigVariable from '@/utils/getConfigVariable';
 
 interface Props {
   data: linkDataProps;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | linkDataProps>>;
 }
+const API_HOST = getConfigVariable('API_HOST');
 
 const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpen }) => {
   const { push } = useRouter();
@@ -24,7 +26,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
       {
         fieldTitle: 'Copy',
         fieldFunction: () => {
-          navigator.clipboard.writeText(`${window.location.origin}/api/${data.code}`);
+          navigator.clipboard.writeText(`${API_HOST}/${data.code}`);
           addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
         },
         fieldImage: <ClipBoard />,

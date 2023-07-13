@@ -7,9 +7,12 @@ import ClipBoard from '@/icons/svg/ClipBoard';
 import Heart from '@/icons/svg/Heart';
 import Trash from '@/icons/svg/Trash';
 import { useFlashMessage } from '@/utils/FlashMessage';
+import getConfigVariable from '@/utils/getConfigVariable';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import DeleteLinkModal from './Modals/DeleteLink';
+
+const API_HOST = getConfigVariable('API_HOST');
 
 const LinkSettingsBar = ({ link, setLink }) => {
   const { addFlashMessage } = useFlashMessage();
@@ -29,7 +32,7 @@ const LinkSettingsBar = ({ link, setLink }) => {
       {
         fieldTitle: !isSmallMobile && 'Copy',
         fieldFunction: () => {
-          navigator.clipboard.writeText(`${window.location.origin}/api/${link.code}`);
+          navigator.clipboard.writeText(`${API_HOST}/${link.code}`);
           addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
         },
         fieldImage: <ClipBoard fill="black" />,
@@ -64,7 +67,7 @@ const LinkSettingsBar = ({ link, setLink }) => {
         ),
       },
     ],
-    [isSmallMobile, link]
+    [isSmallMobile, link, favoriteList]
   );
   return (
     <>

@@ -7,6 +7,7 @@ import Pagination from '@/atoms/Pagination';
 import { ScreenSize, flashMessageType, linkDataProps } from '@/constants';
 import Heart from '@/icons/svg/Heart';
 import { useFlashMessage } from '@/utils/FlashMessage';
+import getConfigVariable from '@/utils/getConfigVariable';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import SettingsDropDown from './SettingsDropDown';
@@ -21,6 +22,8 @@ interface Props {
   linkContainerClasses?: string;
   showFiltersAndPagination?: boolean;
 }
+
+const API_HOST = getConfigVariable('API_HOST');
 
 const LinkDataBlock: FC<Props> = ({
   linksList,
@@ -65,14 +68,10 @@ const LinkDataBlock: FC<Props> = ({
               <div className="flex flex-col w-full max-w-md">
                 <Link
                   target={!showFiltersAndPagination ? '_blank' : '_self'}
-                  href={`${
-                    !showFiltersAndPagination
-                      ? `${window.location.origin}/api/${linkData.code}`
-                      : `/links/${linkData.code}`
-                  }`}
+                  href={`${!showFiltersAndPagination ? `${API_HOST}/${linkData.code}` : `/links/${linkData.code}`}`}
                   className="text-darkPink hover:text-pink cursor-pointer line-clamp-1 break-all"
                 >
-                  {window.location.origin}/api/{linkData.code}
+                  {API_HOST}/{linkData.code}
                 </Link>
                 <p className="max-w-sm text-black/60 line-clamp-1 break-all text-sm">{linkData.url}</p>
               </div>

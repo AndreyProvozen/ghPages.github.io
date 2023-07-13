@@ -23,7 +23,7 @@ const SearchBlock: FC<Props> = ({ onSubmit, value, setValue, btnText, placeholde
       placeholder={placeholder}
       className={ClassNames(
         { 'rounded-r': Boolean(btnText) },
-        'bg-white border-[1px] border-gray flex-auto placeholder:text-black relative m-0 rounded-l px-3 py-2.5 max-tablet-small:w-full max-tablet-small:rounded-r focus:outline-none focus:border-pink'
+        'bg-white border-[1px] border-gray flex-auto relative m-0 rounded-l px-3 py-2.5 max-tablet-small:w-full max-tablet-small:rounded-r focus:outline-none focus:border-pink'
       )}
     />
     {Boolean(btnText) && (

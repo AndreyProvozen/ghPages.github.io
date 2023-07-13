@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-import FilterBlockSkeleton from '@/atoms/Skeleton/FilterBlock';
-import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
-import PaginationSkeleton from '@/atoms/Skeleton/Pagination';
+import FilterBlockSkeleton from '@/atoms/Skeleton/FilterBlockSkeleton';
+import LinksListSkeleton from '@/atoms/Skeleton/LinksListSkeleton';
+import PaginationSkeleton from '@/atoms/Skeleton/PaginationSkeleton';
 import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';
@@ -15,15 +15,20 @@ import customFetch from '@/utils/customFetch';
 const LinksList = () => {
   const { data: session } = useSession();
   const router = useRouter();
-  const [showFavoriteList, setShowFavoriteList] = useState(router?.query?.search === 'favorite');
+
   const [linksList, setLinksList] = useState<linkDataProps[]>([]);
   const [count, setCount] = useState();
   const [perPage] = useState(10);
 
   useEffect(() => {
-    if (showFavoriteList) {
+    if (router?.query?.search === 'favorite') {
       customFetch(`api/favorite?userEmail=${encodeURIComponent(session?.user?.email)}`).then(res => {
         setLinksList(res.urlsList);
+        setCount(res.count);
+      });
+    } else if (router?.query?.searchString) {
+      customFetch(`api/search?search=${router.query.searchString}`).then(res => {
+        setLinksList(res.searchedList);
         setCount(res.count);
       });
     } else {
@@ -36,19 +41,20 @@ const LinksList = () => {
         setCount(res.count);
       });
     }
-  }, [router.query, showFavoriteList]);
+  }, [router.query]);
 
   return (
     <>
       <HeroBlock
-        backgroundImage={{ src: '/images/statisticHeroImage.avif', alt: 'Links list page background' }}
+        bgSrc="/images/statisticHeroImage.avif"
+        bgAlt="Links list page background"
         title="Links List Page"
         subTitle="Explore a comprehensive list of your links and effortlessly manage them all on the Links List Page. With
         this powerful tool, you can stay organized, keep track of your important URLs, and optimize your online
         presence."
       />
       <div className="max-w-screen-desktop mx-auto w-full px-5 my-10">
-        <FiltersBlock showFavoriteList={showFavoriteList} setShowFavoriteList={setShowFavoriteList} />
+        <FiltersBlock />
         {linksList?.length ? (
           <LinkDataBlock
             linksList={linksList}

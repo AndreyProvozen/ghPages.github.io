@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
 import Accordion from '@/atoms/Accordion';
-import LinksListSkeleton from '@/atoms/Skeleton/LinksList';
+import LinksListSkeleton from '@/atoms/Skeleton/LinksListSkeleton';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
@@ -124,7 +124,7 @@ const Home = () => {
           imageFirst={i % 2 !== 0}
           title={title}
           containerClasses="my-10"
-          listData={listData}
+          featuresListData={listData}
           text={text}
         />
       ))}

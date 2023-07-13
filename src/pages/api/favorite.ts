@@ -1,4 +1,4 @@
-import { setCookie, getCookie } from 'cookies-next';
+import { getCookie } from 'cookies-next';
 import { NextApiRequest, NextApiResponse } from 'next';
 
 import Urls from '@/models/Urls';
