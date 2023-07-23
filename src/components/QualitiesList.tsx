@@ -45,10 +45,10 @@ const qualitiesList = [
   },
 ];
 
-const QualitiesList = () => {
+const QualitiesList = ({ containerClasses = '' }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
   return (
-    <>
+    <div className={containerClasses}>
       <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
       <div className="grid grid-cols-6 justify-items-center max-tablet:grid-cols-2 max-mobile:grid-cols-1 gap-4">
         {qualitiesList.map(({ image, title, subTitle, gridClasses }) => (
@@ -62,7 +62,7 @@ const QualitiesList = () => {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

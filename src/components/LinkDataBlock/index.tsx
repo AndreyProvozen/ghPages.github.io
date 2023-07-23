@@ -1,22 +1,22 @@
 import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { Dispatch, FC, SetStateAction, useEffect, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 
-import Pagination from '@/atoms/Pagination';
 import { ScreenSize, flashMessageType, linkDataProps } from '@/constants';
 import Heart from '@/icons/svg/Heart';
-import { useFlashMessage } from '@/utils/FlashMessage';
+import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
+import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 import SettingsDropDown from './SettingsDropDown';
 
 const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });
+const Pagination = dynamic(() => import('@/atoms/Pagination'), { ssr: false });
 
 interface Props {
   linksList: linkDataProps[];
-  setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
   count?: number;
   perPage?: number;
   linkContainerClasses?: string;
@@ -25,16 +25,9 @@ interface Props {
 
 const API_HOST = getConfigVariable('API_HOST');
 
-const LinkDataBlock: FC<Props> = ({
-  linksList,
-  count,
-  perPage,
-  setLinksList,
-  linkContainerClasses,
-  showFiltersAndPagination,
-}) => {
+const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, linkContainerClasses, showFiltersAndPagination }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
-  const { addFlashMessage } = useFlashMessage();
+  const dispatch = useAppDispatch();
 
   const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
   const [deletedLink, setDeletedLink] = useState<linkDataProps | undefined>(undefined);
@@ -47,11 +40,18 @@ const LinkDataBlock: FC<Props> = ({
   const toggleFavorite = (isFavoriteLink: boolean, code: string) => {
     if (isFavoriteLink) {
       setFavoriteList(favoriteList.filter(item => item !== code));
-      addFlashMessage('The link has been removed from the favorites list', flashMessageType.SUCCESSFUL);
+      dispatch(
+        addNewFlashMessage({
+          message: 'The link has been removed from the favorites list',
+          type: flashMessageType.SUCCESSFUL,
+        })
+      );
       return null;
     }
     setFavoriteList([...favoriteList, code]);
-    addFlashMessage('Link has been added to the favorites list', flashMessageType.SUCCESSFUL);
+    dispatch(
+      addNewFlashMessage({ message: 'Link has been added to the favorites list', type: flashMessageType.SUCCESSFUL })
+    );
   };
 
   return (
@@ -59,12 +59,9 @@ const LinkDataBlock: FC<Props> = ({
       <div className="text-start">
         {linksList.map((linkData, i) => {
           const isFavoriteLink = favoriteList.includes(linkData.code);
+
           return (
-            <div
-              //  animate__fadeInDown
-              key={i}
-              className={`flex items-center justify-between p-5 ${linkContainerClasses}`}
-            >
+            <div key={linkData.code + i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
               <div className="flex flex-col w-full max-w-md">
                 <Link
                   target={!showFiltersAndPagination ? '_blank' : '_self'}
@@ -98,12 +95,7 @@ const LinkDataBlock: FC<Props> = ({
         {showFiltersAndPagination && count > perPage && <Pagination count={count} perPage={perPage} />}
       </div>
       {isDeleteModalOpen && (
-        <DeleteLinkModal
-          key={deletedLink?.code}
-          setIsModalOpen={setIsDeleteModalOpen}
-          deletedLink={deletedLink}
-          setLinksList={setLinksList}
-        />
+        <DeleteLinkModal key={deletedLink?.code} setIsModalOpen={setIsDeleteModalOpen} deletedLink={deletedLink} />
       )}
     </>
   );

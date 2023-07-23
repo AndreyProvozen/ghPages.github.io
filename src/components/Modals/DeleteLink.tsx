@@ -4,22 +4,23 @@ import { useSession } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
 import { linkDataProps } from '@/constants';
-import customFetch from '@/utils/customFetch';
+import { deleteLink } from '@/store/slices/links.slice';
+import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 
 import ModalWrapper from './ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setLinksList: Dispatch<SetStateAction<linkDataProps[]>>;
   deletedLink?: linkDataProps;
   isStatisticPage?: boolean;
 }
 
 const API_HOST = getConfigVariable('API_HOST');
 
-const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList, isStatisticPage }) => {
+const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, isStatisticPage }) => {
   const { data: session } = useSession();
+  const dispatch = useAppDispatch();
   const { push } = useRouter();
 
   const shortLink = useMemo(() => `${API_HOST}/${deletedLink?.code}`, [deletedLink?.code]);
@@ -29,21 +30,12 @@ const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, setLinksList,
     [deletedLink?.code, session?.user]
   );
 
-  const updateLinksList = (deletedLinkCode: string) => {
-    if (isStatisticPage) {
-      return push('/links');
-    }
-    setLinksList(prev => prev.filter(item => item.code !== deletedLinkCode));
-    setIsModalOpen(false);
-  };
+  const handleDeleteLink = async () => {
+    await dispatch(deleteLink(endpointUrl));
 
-  const handleDeleteLink = () => {
-    customFetch(endpointUrl, {
-      method: 'DELETE',
-      headers: { 'content-type': 'application/json' },
-    }).then(deletedLinkCode => {
-      return updateLinksList(deletedLinkCode);
-    });
+    if (isStatisticPage) return push('/links');
+
+    setIsModalOpen(false);
   };
 
   return (

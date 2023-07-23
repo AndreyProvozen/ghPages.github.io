@@ -8,6 +8,11 @@ export interface linkDataProps {
   __v: number;
 }
 
+export interface linkDataListProps {
+  urlsList: linkDataProps[];
+  count: number;
+}
+
 export interface metricsProps {
   title: string;
   data: Record<string, number>;

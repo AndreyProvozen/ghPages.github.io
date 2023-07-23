@@ -18,7 +18,7 @@ const SearchLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
 
       const count = searchedList.length;
 
-      return res.status(200).json({ searchedList, count });
+      return res.status(200).json({ urlsList: searchedList, count });
     }
 
     return res.status(500).send('error');

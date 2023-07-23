@@ -14,7 +14,7 @@ const API_HOST = getConfigVariable('API_HOST');
 const LinkStatistic = ({ data }) => {
   const [link, setLink] = useState<FullLinkDataProps | undefined>(undefined);
 
-  const shortLink = useMemo(() => `${API_HOST}/${link.code}`, [link]);
+  const shortLink = useMemo(() => `${API_HOST}/${link?.code}`, [link]);
 
   useEffect(() => {
     setLink(JSON.parse(data));
@@ -39,7 +39,7 @@ const LinkStatistic = ({ data }) => {
             >
               {shortLink}
             </Link>
-            <LinkSettingsBar link={link} setLink={setLink} />
+            <LinkSettingsBar link={link} />
           </div>
           {link.metrics.length ? (
             <ChartBlock metrics={link.metrics} />

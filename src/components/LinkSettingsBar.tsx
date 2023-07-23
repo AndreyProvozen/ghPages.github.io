@@ -6,7 +6,8 @@ import { ScreenSize, flashMessageType } from '@/constants';
 import ClipBoard from '@/icons/svg/ClipBoard';
 import Heart from '@/icons/svg/Heart';
 import Trash from '@/icons/svg/Trash';
-import { useFlashMessage } from '@/utils/FlashMessage';
+import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
+import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
@@ -14,8 +15,8 @@ import DeleteLinkModal from './Modals/DeleteLink';
 
 const API_HOST = getConfigVariable('API_HOST');
 
-const LinkSettingsBar = ({ link, setLink }) => {
-  const { addFlashMessage } = useFlashMessage();
+const LinkSettingsBar = ({ link }) => {
+  const dispatch = useAppDispatch();
   const isSmallMobile = useMediaQuery(ScreenSize.MOBILE_BELOW);
 
   const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
@@ -33,7 +34,7 @@ const LinkSettingsBar = ({ link, setLink }) => {
         fieldTitle: !isSmallMobile && 'Copy',
         fieldFunction: () => {
           navigator.clipboard.writeText(`${API_HOST}/${link.code}`);
-          addFlashMessage('Link copied successfully', flashMessageType.SUCCESSFUL);
+          dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: flashMessageType.SUCCESSFUL }));
         },
         fieldImage: <ClipBoard fill="black" />,
       },
@@ -51,11 +52,21 @@ const LinkSettingsBar = ({ link, setLink }) => {
         fieldFunction: () => {
           if (isFavoriteLink) {
             setFavoriteList(favoriteList.filter(item => item !== link.code));
-            addFlashMessage('The link has been removed from the favorites list', flashMessageType.SUCCESSFUL);
+            dispatch(
+              addNewFlashMessage({
+                message: 'The link has been removed from the favorites list',
+                type: flashMessageType.SUCCESSFUL,
+              })
+            );
             return null;
           }
           setFavoriteList([...favoriteList, link.code]);
-          addFlashMessage('Link has been added to the favorites list', flashMessageType.SUCCESSFUL);
+          dispatch(
+            addNewFlashMessage({
+              message: 'Link has been added to the favorites list',
+              type: flashMessageType.SUCCESSFUL,
+            })
+          );
         },
         fieldImage: (
           <Heart
@@ -97,12 +108,7 @@ const LinkSettingsBar = ({ link, setLink }) => {
         </div>
       </div>
       {isDeleteModalOpen && (
-        <DeleteLinkModal
-          setIsModalOpen={setIsDeleteModalOpen}
-          deletedLink={link}
-          setLinksList={setLink}
-          isStatisticPage={true}
-        />
+        <DeleteLinkModal setIsModalOpen={setIsDeleteModalOpen} deletedLink={link} isStatisticPage={true} />
       )}
     </>
   );

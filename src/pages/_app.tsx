@@ -1,15 +1,18 @@
 import '@/styles/globals.css';
 import type { AppProps } from 'next/app';
 import { SessionProvider } from 'next-auth/react';
+import { Provider } from 'react-redux';
 
-import FlashMessageProvider from '@/utils/FlashMessage';
+import store from '@/store';
+import FlashMessage from '@/utils/FlashMessage';
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <SessionProvider session={pageProps.session}>
-      <FlashMessageProvider>
+    <Provider store={store}>
+      <SessionProvider session={pageProps.session}>
         <Component {...pageProps} />
-      </FlashMessageProvider>
-    </SessionProvider>
+        <FlashMessage />
+      </SessionProvider>
+    </Provider>
   );
 }

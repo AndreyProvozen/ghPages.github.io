@@ -9,37 +9,25 @@ import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';
 import NotFoundSection from '@/components/NotFoundSection';
-import { linkDataProps } from '@/constants';
-import customFetch from '@/utils/customFetch';
+import { fetchFavoriteLinks, fetchLinksBySearchString, fetchLinksList } from '@/store/slices/links.slice';
+import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
 
 const LinksList = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const [linksList, setLinksList] = useState<linkDataProps[]>([]);
-  const [count, setCount] = useState();
+  const dispatch = useAppDispatch();
+  const { count, linksList } = useAppSelector(state => state.links);
+
   const [perPage] = useState(10);
 
   useEffect(() => {
     if (router?.query?.search === 'favorite') {
-      customFetch(`api/favorite?userEmail=${encodeURIComponent(session?.user?.email)}`).then(res => {
-        setLinksList(res.urlsList);
-        setCount(res.count);
-      });
+      dispatch(fetchFavoriteLinks({ userEmail: session?.user?.email }));
     } else if (router?.query?.searchString) {
-      customFetch(`api/search?search=${router.query.searchString}`).then(res => {
-        setLinksList(res.searchedList);
-        setCount(res.count);
-      });
+      dispatch(fetchLinksBySearchString({ searchString: router.query.searchString as string }));
     } else {
-      customFetch(
-        `api/link?limit=${perPage}&&userEmail=${encodeURIComponent(session?.user?.email)}&page=${
-          router.query.page || 0
-        }`
-      ).then(res => {
-        setLinksList(res.urlsList);
-        setCount(res.count);
-      });
+      dispatch(fetchLinksList({ userEmail: session?.user?.email, page: router.query.page as string, perPage }));
     }
   }, [router.query]);
 
@@ -60,7 +48,6 @@ const LinksList = () => {
             linksList={linksList}
             count={count}
             perPage={perPage}
-            setLinksList={setLinksList}
             linkContainerClasses="border-b border-gray"
             showFiltersAndPagination={true}
           />
