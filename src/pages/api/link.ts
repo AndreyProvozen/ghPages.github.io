@@ -104,8 +104,8 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
       default:
         res.status(405).send('Method Not Allowed');
     }
-  } catch (error: any) {
-    return res.status(500).send(error.message);
+  } catch ({ message }) {
+    return res.status(500).send(message);
   }
 };
 

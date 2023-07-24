@@ -17,9 +17,9 @@ const FavoriteLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(200).json({ urlsList, count });
     }
 
-    return res.status(500).send('error');
-  } catch (error: any) {
-    return res.status(500).send(error.message);
+    throw new Error('error');
+  } catch ({ message }) {
+    return res.status(500).send(message);
   }
 };
 
