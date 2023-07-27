@@ -22,9 +22,7 @@ const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
 const MobileHeader: FC<Props> = ({ textBlack, session }) => {
   const [isOpenDrover, setIsOpenDrover] = useState(false);
 
-  const handleToggle = () => {
-    setIsOpenDrover(!isOpenDrover);
-  };
+  const handleToggle = () => setIsOpenDrover(!isOpenDrover);
 
   const menuMobile: MenuProps[] = [
     { name: 'Home', link: '/' },
@@ -45,6 +43,7 @@ const MobileHeader: FC<Props> = ({ textBlack, session }) => {
         }
       : { name: 'Sign in', link: '/auth' },
   ];
+
   return (
     <div>
       <Menu onClick={handleToggle} cursor="pointer" className={`${textBlack ? 'fill-black' : 'fill-white'}`} />

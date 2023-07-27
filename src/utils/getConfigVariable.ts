@@ -1,9 +1,7 @@
 import getConfig from 'next/config';
 
-const getConfigVariable = (key: string) => {
-  const { publicRuntimeConfig } = getConfig();
+const { publicRuntimeConfig } = getConfig();
 
-  return publicRuntimeConfig[key] || '';
-};
+const getConfigVariable = (key: string) => publicRuntimeConfig[key] || '';
 
 export default getConfigVariable;

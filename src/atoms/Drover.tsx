@@ -29,6 +29,21 @@ const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
     setCurrentMenu(prevLevel => prevLevel.slice(0, level - 1));
   };
 
+  const renderDroverHeader = () => (
+    <div className="flex justify-between items-center p-4 border-b">
+      {level > 1 ? (
+        <button onClick={backToPrevLevel} className="font-bold text-2xl">
+          back
+        </button>
+      ) : (
+        <h2 className="font-bold text-2xl">Menu</h2>
+      )}
+      <button className="text-gray-500 focus:outline-none" onClick={handleToggle} aria-label="Close button">
+        <Close />
+      </button>
+    </div>
+  );
+
   return (
     <div className="relative text-white">
       <div
@@ -36,18 +51,7 @@ const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
           isOpen ? 'right-0' : 'right-full'
         } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all duration-500`}
       >
-        <div className="flex justify-between items-center p-4 border-b">
-          {level > 1 ? (
-            <button onClick={backToPrevLevel} className="font-bold text-2xl">
-              back
-            </button>
-          ) : (
-            <h2 className="font-bold text-2xl">Menu</h2>
-          )}
-          <button className="text-gray-500 focus:outline-none" onClick={handleToggle} aria-label="Close button">
-            <Close />
-          </button>
-        </div>
+        {renderDroverHeader()}
         <div
           className="px-4 py-8 flex ease-in-out transition-all duration-500"
           style={{

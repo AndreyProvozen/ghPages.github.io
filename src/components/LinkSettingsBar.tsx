@@ -1,6 +1,7 @@
 import { getCookie, setCookie } from 'cookies-next';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { ScreenSize, flashMessageType } from '@/constants';
 import ClipBoard from '@/icons/svg/ClipBoard';
@@ -11,7 +12,7 @@ import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
-import DeleteLinkModal from './Modals/DeleteLink';
+const DeleteLinkModal = dynamic(() => import('./Modals/DeleteLink'), { ssr: false });
 
 const API_HOST = getConfigVariable('API_HOST');
 
@@ -80,6 +81,7 @@ const LinkSettingsBar = ({ link }) => {
     ],
     [isSmallMobile, link, favoriteList]
   );
+
   return (
     <>
       <div className="flex justify-between mt-5 gap-2 items-center max-tablet:flex-col-reverse">
@@ -93,18 +95,16 @@ const LinkSettingsBar = ({ link }) => {
           </p>
         </div>
         <div className="flex justify-end gap-3  items-center">
-          {barData.map(({ fieldTitle, fieldFunction, fieldImage }, i) => {
-            return (
-              <button
-                key={fieldTitle + i}
-                onClick={fieldFunction}
-                className="flex border rounded-lg p-2 hover:border-lightPink border-gray  hover:bg-pink/10"
-              >
-                {fieldImage}
-                {fieldTitle && <span className="ml-1">{fieldTitle}</span>}
-              </button>
-            );
-          })}
+          {barData.map(({ fieldTitle, fieldFunction, fieldImage }, i) => (
+            <button
+              key={fieldTitle + i}
+              onClick={fieldFunction}
+              className="flex border rounded-lg p-2 hover:border-lightPink border-gray hover:bg-pink/10"
+            >
+              {fieldImage}
+              {fieldTitle && <span className="ml-1">{fieldTitle}</span>}
+            </button>
+          ))}
         </div>
       </div>
       {isDeleteModalOpen && (

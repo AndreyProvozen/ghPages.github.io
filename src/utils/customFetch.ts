@@ -9,8 +9,7 @@ const customFetch = async (url: string, { method = 'GET', headers = {}, body = n
 
     return await response.json();
   } catch (error) {
-    const message = error.message || 'Fetch error';
-    return message;
+    return error.message || 'Fetch error';
   }
 };
 

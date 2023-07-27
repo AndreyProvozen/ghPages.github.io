@@ -1,12 +1,14 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
-import ConfirmSignOut from '@/components/Modals/ConfirmSignOut';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 import Settings from '@/icons/svg/Settings';
+
+const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
 
 const DesktopHeader = ({ session }) => {
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
@@ -77,17 +79,18 @@ const DesktopHeader = ({ session }) => {
   ];
   return (
     <nav className="flex">
-      {navFields.map((item, i) => (
-        <div key={i}>
-          {item.link && (
-            <Link href={item.link} className="mx-3 text-2xl">
-              {item.name}
+      {navFields.map(({ link, component, name }, i) => (
+        <div key={name ?? i}>
+          {link ? (
+            <Link href={link} className="mx-3 text-2xl">
+              {name}
             </Link>
+          ) : (
+            component
           )}
-          {item?.component}
         </div>
       ))}
-      {isSignOutModalOpen && <ConfirmSignOut setIsSignOutModalOpen={setIsSignOutModalOpen} />}
+      {isSignOutModalOpen && <ConfirmSignOut setIsModalOpen={setIsSignOutModalOpen} />}
     </nav>
   );
 };

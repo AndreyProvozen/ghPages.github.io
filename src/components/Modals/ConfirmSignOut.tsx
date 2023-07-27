@@ -1,10 +1,14 @@
 import { signOut } from 'next-auth/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, FC, SetStateAction } from 'react';
 
 import ModalWrapper from './ModalWrapper';
 
-const ConfirmSignOut = ({ setIsSignOutModalOpen }: { setIsSignOutModalOpen: Dispatch<SetStateAction<boolean>> }) => (
-  <ModalWrapper setIsModalOpen={setIsSignOutModalOpen} title="Sign out" onConfirm={() => signOut()}>
+interface Props {
+  setIsModalOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const ConfirmSignOut: FC<Props> = ({ setIsModalOpen }) => (
+  <ModalWrapper setIsModalOpen={setIsModalOpen} title="Sign out" onConfirm={() => signOut()}>
     <div className="py-4 px-8 text-black">
       <p className="text-black">You really want to sign out?</p>
     </div>

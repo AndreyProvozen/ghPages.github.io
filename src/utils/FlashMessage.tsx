@@ -44,8 +44,8 @@ const FlashMessage = () => {
       <div className="mx-auto grid gap-3 w-full max-w-md">
         {flashMessages.map(({ type, message }, index) => (
           <div
-            key={index}
-            ref={el => (animationRefs.current[index] = el)}
+            key={`${message}-${index}`}
+            ref={element => (animationRefs.current[index] = element)}
             className="flex justify-between p-4 rounded-lg animate__animated animate__zoomIn animate__faster"
             style={{ backgroundColor: type }}
           >
