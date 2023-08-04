@@ -2,6 +2,8 @@ import { UAParser } from 'ua-parser-js';
 
 import { metricsProps } from '@/constants';
 
+import customFetch from './customFetch';
+
 const updateMetrics = (metrics: Record<string, number>, field: string) => {
   if (field in metrics) {
     return { ...metrics, [field]: metrics[field] + 1 };
@@ -21,9 +23,7 @@ const setMetricsData = async (metrics: metricsProps[], req) => {
   const { name: OSName } = parser.getOS();
   const { type: deviceType } = parser.getDevice();
 
-  const ipDataResponse = await fetch(`http://ip-api.com/json/${ip}?fields=status,message,country`);
-
-  const { country } = await ipDataResponse.json();
+  const { country } = await customFetch(`http://ip-api.com/json/${ip}?fields=message,country`);
 
   const metricFields = [
     { title: 'Browsers clicks', data: browserName },
