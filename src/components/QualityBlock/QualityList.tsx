@@ -45,25 +45,23 @@ const qualitiesList = [
   },
 ];
 
-const QualitiesList = ({ containerClasses = '' }) => {
+const QualityList = () => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
+
   return (
-    <div className={containerClasses}>
-      <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
-      <div className="grid grid-cols-6 justify-items-center max-tablet:grid-cols-2 max-mobile:grid-cols-1 gap-4">
-        {qualitiesList.map(({ image, title, subTitle, gridClasses }) => (
-          <div
-            className={ClassNames('flex flex-col items-center max-w-xs mx-3', { [gridClasses]: !isMobile })}
-            key={title + subTitle}
-          >
-            {image}
-            <p className="text-2xl font-bold">{title}</p>
-            <p className="max-w-xs">{subTitle}</p>
-          </div>
-        ))}
-      </div>
+    <div className="grid grid-cols-6 justify-items-center max-tablet:grid-cols-2 max-mobile:grid-cols-1 gap-4">
+      {qualitiesList.map(({ image, title, subTitle, gridClasses }) => (
+        <div
+          className={ClassNames('flex flex-col items-center max-w-xs mx-3', { [gridClasses]: !isMobile })}
+          key={title + subTitle}
+        >
+          {image}
+          <p className="text-2xl font-bold">{title}</p>
+          <p className="max-w-xs">{subTitle}</p>
+        </div>
+      ))}
     </div>
   );
 };
 
-export default QualitiesList;
+export default QualityList;

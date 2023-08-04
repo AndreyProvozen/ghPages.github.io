@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
-import QualitiesList from '@/components/QualitiesList';
+import QualityBlock from '@/components/QualityBlock';
 import SearchBlock from '@/components/SearchBlock';
 import TextWithImage from '@/components/TextWithImage';
 import { addNewLink, fetchLinksList } from '@/store/slices/links.slice';
@@ -78,11 +78,8 @@ const Home = () => {
           )}
         </div>
       </div>
-      <QualitiesList containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
-      <InfoBlock
-        btnData={{ text: 'Get link statistics', href: '/links' }}
-        title="Already there are abbreviated links"
-      />
+      <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
+      <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
       {TextWithImageData.map(({ listData, linkData, text, title }, i) => (
         <TextWithImage
           key={i + title}
@@ -94,7 +91,7 @@ const Home = () => {
           text={text}
         />
       ))}
-      <InfoBlock btnData={{ text: 'Sign up', href: '/auth' }} title="Sign up to see full link statistic" />
+      <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
       <div className="container max-w-screen-desktop mx-auto px-5 my-10">
         <p className="text-4xl font-bold mb-5 text-center">Frequently Asked Questions</p>
         <Accordion questions={questions} />

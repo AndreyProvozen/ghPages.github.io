@@ -14,7 +14,7 @@ interface Props {
 const SearchBlock: FC<Props> = ({ onSubmit, value, setValue, btnText, placeholder = '', containerClasses = '' }) => (
   <form
     onSubmit={onSubmit}
-    className={`${containerClasses} relative flex  flex-wrap items-stretch max-tablet-small:block`}
+    className={`${containerClasses} relative flex flex-wrap items-stretch max-tablet-small:block`}
   >
     <input
       type="search"

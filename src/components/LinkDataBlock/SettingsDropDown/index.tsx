@@ -53,7 +53,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
     <Dropdown
       placeholder={<ThreeDots className="fill-darkPink hover:fill-pink ml-5" aria-label="Open link settings" />}
       dropdownData={settingsFields}
-      popoverWidth="w-60"
+      listContainerClasses="right-0 w-60"
     />
   );
 };
