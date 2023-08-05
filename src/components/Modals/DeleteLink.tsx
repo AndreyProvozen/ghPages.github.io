@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
-import { linkDataProps } from '@/constants';
+import type { linkDataProps } from '@/constants';
 import { deleteLink } from '@/store/slices/links.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';

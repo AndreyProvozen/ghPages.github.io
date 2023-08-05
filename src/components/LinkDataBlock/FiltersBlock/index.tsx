@@ -5,30 +5,27 @@ import SearchBlock from '@/components/SearchBlock';
 import Heart from '@/icons/svg/Heart';
 
 const FiltersBlock = () => {
-  const router = useRouter();
+  const { query, push, pathname } = useRouter();
 
-  const [link, setLink] = useState(router.query?.searchString || '');
+  const [link, setLink] = useState(query?.searchString || '');
 
-  const showFavoriteList = useMemo(() => router.query?.search === 'favorite', [router.query?.search]);
+  const showFavoriteList = useMemo(() => query?.search === 'favorite', [query?.search]);
 
   useEffect(() => {
+    if (query.search) return;
+
     if (link) {
       const timeoutId = setTimeout(() => {
-        router.push(`?searchString=${link}`);
+        push(`?searchString=${link}`);
       }, 1000);
 
       return () => clearTimeout(timeoutId);
     }
-    router.push(router.pathname);
+
+    push(pathname);
   }, [link]);
 
-  const updateQuery = () => {
-    if (showFavoriteList) {
-      router.push(router.pathname);
-    } else {
-      router.push('?search=favorite');
-    }
-  };
+  const updateQuery = () => (showFavoriteList ? push(pathname) : push('?search=favorite'));
 
   return (
     <div className="flex justify-between w-full items-start border-b border-gray">

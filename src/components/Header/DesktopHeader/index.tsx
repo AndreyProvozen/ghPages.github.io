@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
@@ -11,9 +12,8 @@ import Settings from '@/icons/svg/Settings';
 const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
 
 const DesktopHeader = ({ session }) => {
+  const { push } = useRouter();
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
-
-  const favoriteLinks = () => null;
 
   const dropdownData = session
     ? [
@@ -36,12 +36,12 @@ const DesktopHeader = ({ session }) => {
         },
         {
           fieldTitle: 'Favorite links',
-          fieldFunction: favoriteLinks,
+          fieldFunction: () => push(`${window.location.origin}/links?search=favorite`),
           fieldImage: <Heart fill="white" strokeWidth="2" stroke="white" />,
         },
         {
           fieldTitle: 'Settings',
-          fieldFunction: favoriteLinks,
+          fieldFunction: () => null,
           fieldImage: <Settings />,
         },
         {
@@ -77,6 +77,7 @@ const DesktopHeader = ({ session }) => {
         }
       : { name: ' Sign in', link: '/auth' },
   ];
+
   return (
     <nav className="flex">
       {navFields.map(({ link, component, name }, i) => (

@@ -1,11 +1,11 @@
-import { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from 'react';
 
 import Close from '@/icons/svg/Close';
 
 interface Props {
   title: string;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  children: React.ReactNode;
+  children: ReactNode;
   onConfirm: () => void;
 }
 

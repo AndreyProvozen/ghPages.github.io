@@ -1,5 +1,6 @@
 import dynamic from 'next/dynamic';
-import { Session } from 'next-auth';
+import { useRouter } from 'next/router';
+import type { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { FC, useState } from 'react';
 
@@ -20,6 +21,7 @@ interface Props {
 const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
 
 const MobileHeader: FC<Props> = ({ textBlack, session }) => {
+  const { push } = useRouter();
   const [isOpenDrover, setIsOpenDrover] = useState(false);
 
   const handleToggle = () => setIsOpenDrover(!isOpenDrover);
@@ -34,7 +36,10 @@ const MobileHeader: FC<Props> = ({ textBlack, session }) => {
       ? {
           name: 'My profile',
           children: [
-            { name: 'Favorite links', link: '/' },
+            {
+              name: 'Favorite links',
+              handleFunction: () => push(`${window.location.origin}/links?search=favorite`),
+            },
             {
               name: 'Sign out',
               handleFunction: signOut,
