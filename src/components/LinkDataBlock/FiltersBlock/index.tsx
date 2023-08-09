@@ -1,7 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import SearchBlock from '@/components/SearchBlock';
 import Heart from '@/icons/svg/Heart';
 
 const FiltersBlock = () => {
@@ -28,7 +27,7 @@ const FiltersBlock = () => {
   const updateQuery = () => (showFavoriteList ? push(pathname) : push('?search=favorite'));
 
   return (
-    <div className="flex justify-between w-full items-start border-b border-gray">
+    <div className="flex justify-between w-full items-start border-b border-gray mb-5 gap-5">
       <button
         className={`border ${
           showFavoriteList ? 'border-pink bg-lightPink/20' : 'border-gray'
@@ -38,12 +37,14 @@ const FiltersBlock = () => {
         <Heart width={20} height={20} className={`${showFavoriteList ? 'fill-pink' : 'fill-gray'}`} />
         <p className="ml-2">Favorite</p>
       </button>
-      <SearchBlock
-        onSubmit={() => null}
-        value={String(link)}
-        containerClasses="mb-5 text-black w-1/2"
-        setValue={setLink}
+      <input
+        type="search"
+        value={link}
+        onChange={e => setLink(e.target.value)}
         placeholder="Enter symbols after the last slash in the URL"
+        className={
+          'mb-5 px-3 py-2.5 relative max-w-sm w-full border-[1px] border-gray rounded focus:outline-none focus:border-pink'
+        }
       />
     </div>
   );

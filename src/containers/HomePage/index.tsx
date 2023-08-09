@@ -10,7 +10,6 @@ import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
-import SearchBlock from '@/components/SearchBlock';
 import TextWithImage from '@/components/TextWithImage';
 import { addNewLink, fetchLinksList } from '@/store/slices/links.slice';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
@@ -63,14 +62,25 @@ const Home = () => {
               </div>
             )}
           </InView>
-          <SearchBlock
+          <form
             onSubmit={handleOnSubmit}
-            value={longLink}
-            setValue={setLongLink}
-            btnText="generate link"
-            containerClasses="mb-14 w-full"
-            placeholder="Paste the URL to be shortened"
-          />
+            className={`mb-14 w-full relative flex flex-wrap items-stretch max-tablet-small:block`}
+          >
+            <input
+              type="search"
+              value={longLink}
+              onChange={e => setLongLink(e.target.value)}
+              placeholder="Paste the URL to be shortened"
+              className="rounded-r bg-white border-[1px] border-gray flex-auto relative m-0 rounded-l px-3 py-2.5 max-tablet-small:w-full max-tablet-small:rounded-r focus:outline-none focus:border-pink"
+            />
+            <button
+              type="submit"
+              className="text-white text-2xl bg-pink rounded-r text-center px-6 py-2.5 hover:bg-lightPink active:bg-darkPink max-tablet-small:w-full max-tablet-small:rounded-l max-tablet-small:mt-4"
+            >
+              generate link
+            </button>
+          </form>
+
           {linksList?.length ? (
             <LinkDataBlock linksList={linksList} linkContainerClasses="bg-white rounded-md mb-5" />
           ) : (
