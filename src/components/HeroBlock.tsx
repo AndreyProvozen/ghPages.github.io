@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FC } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 
 import Header from './Header';
 

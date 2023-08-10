@@ -1,6 +1,6 @@
 import { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 
 export interface DropdownDataProps {
   fieldTitle?: string;

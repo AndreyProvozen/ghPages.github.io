@@ -13,7 +13,7 @@ import QualityBlock from '@/components/QualityBlock';
 import TextWithImage from '@/components/TextWithImage';
 import { addNewLink, fetchLinksList } from '@/store/slices/links.slice';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 import { TextWithImageData, questions } from 'mock';
 
 const Home = () => {

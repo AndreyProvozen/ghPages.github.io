@@ -3,7 +3,7 @@ import Image from 'next/image';
 import { ScreenSize } from '@/constants';
 import BarChart from '@/icons/svg/BarChart';
 import Heart from '@/icons/svg/Heart';
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 import { useMediaQuery } from '@/utils/useMediaQuery';
 
 const qualitiesList = [

@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { FC, useCallback, useMemo } from 'react';
 
 import Chevron from '@/icons/svg/Chevron';
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 
 interface Props {
   perPage: number;

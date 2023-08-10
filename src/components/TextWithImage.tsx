@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import Star from '@/icons/svg/Star';
-import ClassNames from '@/utils/ClassNames';
+import ClassNames from '@/utils/classNames';
 
 interface Props {
   linkData: { src: string; alt: string };
