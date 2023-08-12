@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 
+import DroverContent from './DroverContent';
 import DroverHeader from './DroverHeader';
-import DroverItem from './DroverItem';
 import type { MenuProps } from '../../components/Header/MobileHeader';
 
 interface Props {
@@ -35,7 +35,7 @@ const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
         } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all duration-500`}
       >
         <DroverHeader level={level} handleToggle={handleToggle} backToPrevLevel={backToPrevLevel} />
-        <DroverItem selectLevel={selectLevel} currentMenu={currentMenu} level={level} />
+        <DroverContent selectLevel={selectLevel} currentMenu={currentMenu} level={level} />
       </div>
     </div>
   );

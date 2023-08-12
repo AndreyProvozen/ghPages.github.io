@@ -10,7 +10,7 @@ interface Props {
   selectLevel: (nextLevel: number, menu: MenuProps[]) => void;
 }
 
-const DroverItem: FC<Props> = ({ currentMenu, level, selectLevel }) => (
+const DroverContent: FC<Props> = ({ currentMenu, level, selectLevel }) => (
   <div
     className="px-4 py-8 flex ease-in-out transition-all duration-500"
     style={{
@@ -44,4 +44,4 @@ const DroverItem: FC<Props> = ({ currentMenu, level, selectLevel }) => (
   </div>
 );
 
-export default DroverItem;
+export default DroverContent;

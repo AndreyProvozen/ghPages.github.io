@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import Dropdown from '@/atoms/Dropdown';
+import { Dropdown } from '@/atoms';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 import Settings from '@/icons/svg/Settings';

@@ -1,6 +1,7 @@
 import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 
-import DropdownList, { DropdownDataProps } from './DropdownList';
+import DropdownPopUp, { DropdownDataProps } from './DropdownPopUp';
+import { DROPDOWN_TEST_IDS } from './testIds';
 
 interface Props {
   dropdownData: DropdownDataProps[];
@@ -28,11 +29,15 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClas
 
   return (
     <div className="relative text-white" ref={dropdownRef}>
-      <button onClick={() => setIsOpen(!isOpen)} className="cursor-pointer flex">
+      <button
+        data-testid={DROPDOWN_TEST_IDS.TOGGLE_BUTTON}
+        onClick={() => setIsOpen(!isOpen)}
+        className="cursor-pointer flex"
+      >
         {placeholder}
       </button>
       {isOpen && (
-        <DropdownList dropdownData={dropdownData} listContainerClasses={listContainerClasses} setIsOpen={setIsOpen} />
+        <DropdownPopUp dropdownData={dropdownData} listContainerClasses={listContainerClasses} setIsOpen={setIsOpen} />
       )}
     </div>
   );

@@ -2,6 +2,8 @@ import { Dispatch, FC, ReactElement, SetStateAction } from 'react';
 
 import ClassNames from '@/utils/classNames';
 
+import { DROPDOWN_TEST_IDS } from './testIds';
+
 export interface DropdownDataProps {
   fieldTitle?: string;
   fieldFunction?: () => void;
@@ -15,16 +17,19 @@ interface Props {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const DropdownList: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen }) => {
+const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen }) => {
   const handleFunction = (fieldFunction: () => void) => {
     fieldFunction();
     setIsOpen(false);
   };
 
   return (
-    <div className={`${listContainerClasses} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 z-10`}>
+    <div
+      data-testid={DROPDOWN_TEST_IDS.POPUP_ROOT}
+      className={`${listContainerClasses} absolute rounded-lg bg-lightBlack px-4 pt-4 mt-4 z-10`}
+    >
       {dropdownData.map(({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
-        <div key={`${fieldTitle}${i}`}>
+        <div data-testid={DROPDOWN_TEST_IDS.POPUP_ITEM} key={`${fieldTitle}${i}`}>
           {customField ? (
             customField
           ) : (
@@ -36,7 +41,12 @@ const DropdownList: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen
               onClick={() => handleFunction(fieldFunction)}
             >
               {Boolean(fieldImage) && (
-                <div className="mr-3 group-hover:[&>svg]:fill-lightPink [&>svg]:w-6 [&>svg]:h-6">{fieldImage}</div>
+                <div
+                  data-testid={DROPDOWN_TEST_IDS.POPUP_ITEM_IMAGE}
+                  className="mr-3 group-hover:[&>svg]:fill-lightPink [&>svg]:w-6 [&>svg]:h-6"
+                >
+                  {fieldImage}
+                </div>
               )}
               <div className="text-xl group-hover:text-lightPink">{fieldTitle}</div>
             </button>
@@ -47,4 +57,4 @@ const DropdownList: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen
   );
 };
 
-export default DropdownList;
+export default DropdownPopUp;

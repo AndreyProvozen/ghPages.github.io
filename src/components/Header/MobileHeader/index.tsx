@@ -18,7 +18,7 @@ interface Props {
   session: Session | null;
 }
 
-const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
+const Drover = dynamic(() => import('@/atoms/Drover/Drover'), { ssr: false });
 
 const MobileHeader: FC<Props> = ({ textBlack, session }) => {
   const { push } = useRouter();

@@ -3,8 +3,8 @@ import { useSession } from 'next-auth/react';
 import { FormEvent, useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
-import Accordion from '@/atoms/Accordion';
-import LinksListSkeleton from '@/atoms/Skeleton/LinksListSkeleton';
+import { Accordion } from '@/atoms';
+import { LinksListSkeleton } from '@/atoms/Skeleton';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
@@ -25,7 +25,7 @@ const Home = () => {
 
   useEffect(() => {
     dispatch(fetchLinksList({ userEmail: session?.user?.email, perPage: 5 }));
-  }, [dispatch]);
+  }, [dispatch, session]);
 
   const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
