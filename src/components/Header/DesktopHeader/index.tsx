@@ -7,7 +7,6 @@ import { useState } from 'react';
 import { Dropdown } from '@/atoms';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
-import Settings from '@/icons/svg/Settings';
 
 const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
 
@@ -38,11 +37,6 @@ const DesktopHeader = ({ session }) => {
           fieldTitle: 'Favorite links',
           fieldFunction: () => push(`${window.location.origin}/links?search=favorite`),
           fieldImage: <Heart fill="white" strokeWidth="2" stroke="white" />,
-        },
-        {
-          fieldTitle: 'Settings',
-          fieldFunction: () => null,
-          fieldImage: <Settings />,
         },
         {
           fieldTitle: 'Sign out',

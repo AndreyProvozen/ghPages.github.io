@@ -1,6 +1,5 @@
 import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ScreenSize, flashMessageType } from '@/constants';
@@ -38,11 +37,6 @@ const LinkSettingsBar = ({ link }) => {
           dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: flashMessageType.SUCCESSFUL }));
         },
         fieldImage: <ClipBoard fill="black" />,
-      },
-      {
-        fieldTitle: !isSmallMobile && 'Edit',
-        fieldFunction: () => null,
-        fieldImage: <Image src="/svg/edit.svg" width={24} height={24} alt="" />,
       },
       {
         fieldTitle: !isSmallMobile && 'Delete',

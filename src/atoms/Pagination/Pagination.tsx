@@ -4,6 +4,8 @@ import { FC, useCallback, useMemo } from 'react';
 import Chevron from '@/icons/svg/Chevron';
 import ClassNames from '@/utils/classNames';
 
+import { PAGINATION_TEST_IDS } from './testIds';
+
 interface Props {
   perPage: number;
   count: number;
@@ -38,12 +40,22 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
 
   return (
     <div className="flex justify-center my-4">
-      <button onClick={prevPage} className="flex" disabled={disabledForPrev}>
+      <button
+        onClick={prevPage}
+        data-testid={PAGINATION_TEST_IDS.PREV_BUTTON}
+        className="flex"
+        disabled={disabledForPrev}
+      >
         <Chevron className={ClassNames('rotate-90', { 'fill-gray': disabledForPrev })} width={30} height={30} />
         <b className={ClassNames('text-xl', { 'text-gray': disabledForPrev })}>Prev</b>
       </button>
       <b className="text-xl mx-5"> {pageCounter}</b>
-      <button className="flex" onClick={nextPage} disabled={disabledForNext}>
+      <button
+        className="flex"
+        onClick={nextPage}
+        data-testid={PAGINATION_TEST_IDS.NEXT_BUTTON}
+        disabled={disabledForNext}
+      >
         <b className={ClassNames('text-xl', { 'text-gray': disabledForNext })}>Next</b>
         <Chevron className={ClassNames('-rotate-90', { 'fill-gray': disabledForNext })} width={30} height={30} />
       </button>

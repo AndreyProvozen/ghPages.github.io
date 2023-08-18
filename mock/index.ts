@@ -127,9 +127,4 @@ export const authWith = [
     text: 'Continue with GitHub',
     provider: 'github',
   },
-  {
-    image: '/svg/email.svg',
-    text: 'Continue with Email',
-    provider: 'email',
-  },
 ];
