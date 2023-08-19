@@ -1,23 +1,22 @@
 import { UAParser } from 'ua-parser-js';
 
-import { metricsProps } from '@/constants';
+import { ipListForLocalhost, metricsProps } from '@/constants';
 
 import customFetch from './customFetch';
 
 const updateMetrics = (metrics: Record<string, number>, field: string) => {
-  if (field in metrics) {
-    return { ...metrics, [field]: metrics[field] + 1 };
-  }
+  if (field in metrics) return { ...metrics, [field]: metrics[field] + 1 };
 
   return { ...metrics, [field]: 1 };
 };
+const getIpForLocalhost = () => ipListForLocalhost[Math.floor(Math.random() * ipListForLocalhost.length)];
 
 const setMetricsData = async (metrics: metricsProps[], req) => {
   const parser = new UAParser(req.headers['user-agent']);
   const acceptLanguage = req.headers['accept-language'] || '';
 
   const languageCode = acceptLanguage.split(',')[0]?.split('-')[0].trim().toUpperCase() || 'Unknown';
-  const ip = req.socket.remoteAddress === '127.0.0.1' ? '161.184.29.248' : req.socket.remoteAddress;
+  const ip = req.socket.remoteAddress === '127.0.0.1' ? getIpForLocalhost() : req.socket.remoteAddress;
 
   const { name: browserName } = parser.getBrowser();
   const { name: OSName } = parser.getOS();
@@ -44,7 +43,3 @@ const setMetricsData = async (metrics: metricsProps[], req) => {
 };
 
 export default setMetricsData;
-
-//161.184.29.248--Edmonton
-//185.237.74.247--Kyiv
-//195.140.184.24--Munich

@@ -27,7 +27,7 @@ const mockDropdownProps = {
 
 const setup = () => render(<Dropdown {...mockDropdownProps} />);
 
-describe('<Accordion/>', () => {
+describe('<Dropdown/>', () => {
   it('should render correctly', () => {
     setup();
 

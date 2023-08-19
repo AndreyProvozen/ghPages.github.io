@@ -2,6 +2,8 @@ import { FC } from 'react';
 
 import Close from '@/icons/svg/Close';
 
+import { DROVER_TEST_IDS } from './testIds';
+
 interface Props {
   level: number;
   handleToggle: () => void;
@@ -17,7 +19,12 @@ const DroverHeader: FC<Props> = ({ level, handleToggle, backToPrevLevel }) => (
     ) : (
       <h2 className="font-bold text-2xl">Menu</h2>
     )}
-    <button className="text-gray-500 focus:outline-none" onClick={handleToggle} aria-label="Close button">
+    <button
+      data-testid={DROVER_TEST_IDS.CLOSE_BUTTON}
+      className="text-gray-500 focus:outline-none"
+      onClick={handleToggle}
+      aria-label="Close button"
+    >
       <Close />
     </button>
   </div>

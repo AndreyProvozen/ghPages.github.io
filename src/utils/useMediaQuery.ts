@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { ScreenSize } from '@/constants';
 
-export const useMediaQuery = (query: ScreenSize) => {
+const useMediaQuery = (query: ScreenSize) => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -20,3 +20,5 @@ export const useMediaQuery = (query: ScreenSize) => {
 
   return matches;
 };
+
+export default useMediaQuery;

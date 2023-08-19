@@ -1,1 +1,1 @@
-export { default as Drover } from './Drover';
+export { default } from './Drover';

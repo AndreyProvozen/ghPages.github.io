@@ -2,25 +2,24 @@ import { setCookie, getCookie } from 'cookies-next';
 import { nanoid } from 'nanoid';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import Urls from '@/models/Urls';
-import User from '@/models/User';
+import { UrlsModel, UserModel } from '@/models';
 import connectMongodb from '@/utils/connectMongodb';
 
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 const getLinksData = async (req, res) => {
   const { limit = 5, userEmail, page } = req.query;
-
+  UserModel;
   const getLinksByPage = parseInt(page, 10) ? page * limit : 0;
 
   if (userEmail !== 'undefined') {
-    const userData = await User.findOne({ email: userEmail });
-    const urlsList = await Urls.find({ code: userData.userLinks })
+    const userData = await UserModel.findOne({ email: userEmail });
+    const urlsList = await UrlsModel.find({ code: userData.userLinks })
       .select('url clicked code')
       .skip(getLinksByPage)
       .limit(limit);
 
-    const count = await Urls.find({ code: userData.userLinks }).countDocuments();
+    const count = await UrlsModel.find({ code: userData.userLinks }).countDocuments();
     return res.status(200).json({ urlsList, count });
   }
   const cookieLinksList = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
@@ -32,8 +31,8 @@ const deleteLinksData = async (req, res) => {
   const { code, userEmail } = req.query;
 
   if (userEmail !== 'undefined') {
-    await User.findOneAndUpdate({ email: userEmail }, { $pull: { userLinks: code } }, { new: true });
-    const deletedUrl = await Urls.findOneAndDelete({ code });
+    await UserModel.findOneAndUpdate({ email: userEmail }, { $pull: { userLinks: code } }, { new: true });
+    const deletedUrl = await UrlsModel.findOneAndDelete({ code });
 
     if (!deletedUrl) {
       return res.status(404).json({ error: 'URL has already been deleted' });
@@ -58,14 +57,14 @@ const postLinksData = async (req, res) => {
   }
 
   if (userEmail !== undefined) {
-    const existingUrl = await Urls.findOne({ url });
+    const existingUrl = await UrlsModel.findOne({ url });
 
     if (existingUrl) {
       return res.status(409).json({ error: 'URL already exists' });
     }
 
-    const newUrl = await Urls.create({ url });
-    const userData = await User.findOne({ email: userEmail });
+    const newUrl = await UrlsModel.create({ url });
+    const userData = await UserModel.findOne({ email: userEmail });
 
     userData.userLinks = [...userData.userLinks, newUrl.code];
 
@@ -111,7 +110,7 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
 
 export const GetLinkFullData = async (code: string) => {
   await connectMongodb();
-  const existingUrl = await Urls.findOne({ code });
+  const existingUrl = await UrlsModel.findOne({ code });
   if (code) {
     return JSON.stringify(existingUrl);
   }

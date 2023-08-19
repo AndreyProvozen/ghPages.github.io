@@ -5,19 +5,19 @@ import Urls from '@/models/Urls';
 import connectMongodb from '@/utils/connectMongodb';
 
 const FavoriteLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== 'GET') return res.status(405).send('Method Not Allowed');
+
   try {
     await connectMongodb();
 
-    if (req.method === 'GET') {
-      const cookieFavoriteList = JSON.parse((getCookie('favorite', { req, res }) as string) || '[]');
+    const cookieFavoriteList = JSON.parse((getCookie('favorite', { req, res }) as string) || '[]');
 
-      const urlsList = await Urls.find({ code: cookieFavoriteList }).select('url clicked code');
+    const [urlsList, count] = await Promise.all([
+      Urls.find({ code: cookieFavoriteList }).select('url clicked code'),
+      Urls.countDocuments({ code: cookieFavoriteList }),
+    ]);
 
-      const count = await Urls.find({ code: cookieFavoriteList }).countDocuments();
-      return res.status(200).json({ urlsList, count });
-    }
-
-    throw new Error('error');
+    return res.status(200).json({ urlsList, count });
   } catch ({ message }) {
     return res.status(500).send(message);
   }

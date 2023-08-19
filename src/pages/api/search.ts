@@ -1,27 +1,26 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import Urls from '@/models/Urls';
+import { UrlsModel } from '@/models';
 import connectMongodb from '@/utils/connectMongodb';
 
 const SearchLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== 'GET') return res.status(405).send('Method Not Allowed');
+
   try {
     await connectMongodb();
-    if (req.method === 'GET') {
-      const { search } = req.query;
-      const searchTerm = String(search).trim();
 
-      if (searchTerm.length === 0) {
-        return res.status(400).json({ error: 'Search term is empty' });
-      }
+    const { search } = req.query;
+    const searchTerm = String(search).trim();
 
-      const searchedList = await Urls.find({ code: { $regex: searchTerm, $options: 'i' } }).select('url clicked code');
+    if (searchTerm.length === 0) return res.status(400).json({ error: 'Search term is empty' });
 
-      const count = searchedList.length;
+    const searchedList = await UrlsModel.find({ code: { $regex: searchTerm, $options: 'i' } })
+      .select('url clicked code')
+      .lean();
 
-      return res.status(200).json({ urlsList: searchedList, count });
-    }
+    const count = searchedList.length;
 
-    return res.status(500).send('error');
+    return res.status(200).json({ urlsList: searchedList, count });
   } catch ({ message }) {
     return res.status(500).send(message);
   }

@@ -8,12 +8,12 @@ import Heart from '@/icons/svg/Heart';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
-import { useMediaQuery } from '@/utils/useMediaQuery';
+import useMediaQuery from '@/utils/useMediaQuery';
 
 import SettingsDropDown from './SettingsDropDown';
 
-const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });
-const Pagination = dynamic(() => import('@/atoms/Pagination/Pagination'), { ssr: false });
+const DeleteLinkModal = dynamic(() => import('@/atoms/Modals/DeleteLink'), { ssr: false });
+const Pagination = dynamic(() => import('@/atoms/Pagination'), { ssr: false });
 
 interface Props {
   linksList: linkDataProps[];

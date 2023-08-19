@@ -89,13 +89,18 @@ const linksSlice = createSlice({
         state.linksList = action.payload.urlsList;
       })
       .addCase(deleteLink.fulfilled, (state, action) => {
-        state.linksList = state.linksList.filter(item => item.code !== action.payload);
+        state.linksList = state.linksList.filter(({ code }) => code !== action.payload);
+        state.count--;
       })
       .addCase(addNewLink.fulfilled, (state, action) => {
-        state.linksList =
+        if (!action.payload) return;
+        const list =
           state.linksList.length > 4
             ? [action.payload, ...state.linksList].slice(0, -1)
             : [action.payload, ...state.linksList];
+
+        state.linksList = list;
+        state.count = list.length;
       });
   },
 });

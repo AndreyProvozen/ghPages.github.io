@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { FC } from 'react';
 
 import { ScreenSize } from '@/constants';
-import { useMediaQuery } from '@/utils/useMediaQuery';
+import useMediaQuery from '@/utils/useMediaQuery';
 
 import DesktopHeader from './DesktopHeader';
 import MobileHeader from './MobileHeader';

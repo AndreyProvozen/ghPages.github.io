@@ -1,5 +1,5 @@
 import { ScreenSize } from '@/constants';
-import { useMediaQuery } from '@/utils/useMediaQuery';
+import useMediaQuery from '@/utils/useMediaQuery';
 
 const TableLink = ({ isHomePageList }) => {
   const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);

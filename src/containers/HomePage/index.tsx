@@ -3,7 +3,7 @@ import { useSession } from 'next-auth/react';
 import { FormEvent, useEffect, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
-import { Accordion } from '@/atoms';
+import Accordion from '@/atoms/Accordion';
 import { LinksListSkeleton } from '@/atoms/Skeleton';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';

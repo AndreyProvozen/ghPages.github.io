@@ -4,11 +4,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 
-import { Dropdown } from '@/atoms';
+import Dropdown from '@/atoms/Dropdown';
 import Heart from '@/icons/svg/Heart';
 import LogOut from '@/icons/svg/LogOut';
 
-const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
+const ConfirmSignOut = dynamic(() => import('@/atoms/Modals/ConfirmSignOut'), { ssr: false });
 
 const DesktopHeader = ({ session }) => {
   const { push } = useRouter();

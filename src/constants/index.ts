@@ -22,14 +22,11 @@ export interface Session {
   user: { email: string; image: string; name: string };
 }
 
-export enum storageTypes {
-  LOCAL_STORAGE = 'localStorage',
-  SESSION_STORAGE = 'sessionStorage',
-}
-
 export interface FullLinkDataProps extends linkDataProps {
   metrics: metricsProps[];
 }
+
+export const ipListForLocalhost = ['161.184.29.248', '185.237.74.247', '195.140.184.24', '1.32.231.255'];
 
 export enum ScreenSize {
   DESKTOP_BELOW = '(max-width: 1200px)',
@@ -45,4 +42,3 @@ export enum flashMessageType {
   WARNING = '#F0AD4E',
   SUCCESSFUL = '#05c148',
 }
-export const PAGINATION_PER_PAGE = [5, 10, 15, 20];

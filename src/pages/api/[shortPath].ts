@@ -1,19 +1,17 @@
 import { getCookie, setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import Urls, { IUrl } from '@/models/Urls';
+import { UrlsModel } from '@/models';
 import connectMongodb from '@/utils/connectMongodb';
 import setMetricsData from '@/utils/updateMetricsData';
 
-export default async function handleRedirect(req: NextApiRequest, res: NextApiResponse) {
-  if (req.method !== 'GET') {
-    return res.status(400).send('Bad Request');
-  }
+const RedirectToFullLink = async (req: NextApiRequest, res: NextApiResponse) => {
+  if (req.method !== 'GET') return res.status(405).send('Method Not Allowed');
 
   await connectMongodb();
 
   const { shortPath } = req.query;
-  const data: IUrl | null = await Urls.findOne({ code: shortPath }).exec();
+  const data = await UrlsModel.findOne({ code: shortPath }).exec();
 
   if (data) {
     await setMetricsData(data.metrics, req);
@@ -27,18 +25,16 @@ export default async function handleRedirect(req: NextApiRequest, res: NextApiRe
   }
 
   const cookieLinksList = getCookie('link-data', { req, res }) as string;
+  const parsedLinksList = cookieLinksList ? JSON.parse(cookieLinksList) : [];
+  const currentLink = parsedLinksList.find(item => item.code === shortPath);
 
-  if (cookieLinksList) {
-    const parsedLinksList = JSON.parse(cookieLinksList);
-    const currentLink = parsedLinksList.find(item => item.code === shortPath);
+  if (!currentLink) return res.status(404).send('Not Found');
 
-    if (currentLink) {
-      currentLink.clicked++;
-      setCookie('link-data', JSON.stringify(parsedLinksList), { req, res });
+  currentLink.clicked++;
+  setCookie('link-data', JSON.stringify(parsedLinksList), { req, res });
+  res.setHeader('Cache-Control', 'no-cache, max-age=0');
 
-      res.setHeader('Cache-Control', 'no-cache, max-age=0');
-      return res.redirect(301, currentLink.url);
-    }
-  }
-  return res.status(404).send('Not Found');
-}
+  return res.redirect(301, currentLink.url);
+};
+
+export default RedirectToFullLink;

@@ -2,6 +2,7 @@ import { FC, useState } from 'react';
 
 import DroverContent from './DroverContent';
 import DroverHeader from './DroverHeader';
+import { DROVER_TEST_IDS } from './testIds';
 import type { MenuProps } from '../../components/Header/MobileHeader';
 
 interface Props {
@@ -30,6 +31,7 @@ const Drover: FC<Props> = ({ isOpen, handleToggle, menu }) => {
   return (
     <div className="relative text-white">
       <div
+        data-testid={DROVER_TEST_IDS.ROOT}
         className={`${
           isOpen ? 'right-0' : 'right-full'
         } fixed z-40 top-0 w-full h-screen bg-lightBlack ease-in-out transition-all duration-500`}

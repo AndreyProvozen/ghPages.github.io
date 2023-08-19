@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
-import { Dropdown } from '@/atoms';
+import Dropdown from '@/atoms/Dropdown';
 import { flashMessageType, linkDataProps } from '@/constants';
 import BarChart from '@/icons/svg/BarChart';
 import ClipBoard from '@/icons/svg/ClipBoard';
