@@ -32,7 +32,7 @@ const qualitiesList = [
     gridClasses: 'col-span-2 col-start-3 row-start-2',
   },
   {
-    image: <BarChart />,
+    image: <Image src="/svg/scatter-chart.svg" width={100} height={100} alt="" />,
     title: 'Analytics',
     subTitle: 'Track and analyze the performance of your shortened URLs',
     gridClasses: 'col-span-2 col-start-5 row-start-2',

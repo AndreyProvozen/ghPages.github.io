@@ -2,9 +2,7 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 
-import { FilterBlockSkeleton } from '@/atoms/Skeleton';
-import { LinksListSkeleton } from '@/atoms/Skeleton';
-import { PaginationSkeleton } from '@/atoms/Skeleton';
+import { FilterBlockSkeleton, LinksListSkeleton, PaginationSkeleton } from '@/atoms/Skeleton';
 import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';

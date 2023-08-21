@@ -4,7 +4,20 @@ interface ObjectType {
 
 type Props = string | ObjectType;
 
-const ClassNames = (...classes: Props[]) => {
+/**
+ * A utility function for generating a string of concatenated class names based on input values.
+ *
+ * @example
+ * ```typescript
+ * const combinedClasses = ClassNames('my-class', 'another-class', { active: true, disabled: false });
+ * // Returns: 'my-class another-class active'
+ * ```
+ *
+ * @param {...Props} classes - One or more class names or objects representing conditional class names.
+ * @returns {string} - A string containing concatenated class names.
+ */
+
+const ClassNames = (...classes: Props[]): string => {
   const newClasses = [];
 
   classes.forEach(value => {

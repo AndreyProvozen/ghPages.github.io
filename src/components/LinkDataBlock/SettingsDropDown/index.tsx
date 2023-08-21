@@ -3,10 +3,7 @@ import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
 import { flashMessageType, linkDataProps } from '@/constants';
-import BarChart from '@/icons/svg/BarChart';
-import ClipBoard from '@/icons/svg/ClipBoard';
-import ThreeDots from '@/icons/svg/ThreeDots';
-import Trash from '@/icons/svg/Trash';
+import { BarChart, ClipBoard, ThreeDots, Trash } from '@/icons/svg';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';

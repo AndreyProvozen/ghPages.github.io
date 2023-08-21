@@ -3,9 +3,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ScreenSize, flashMessageType } from '@/constants';
-import ClipBoard from '@/icons/svg/ClipBoard';
-import Heart from '@/icons/svg/Heart';
-import Trash from '@/icons/svg/Trash';
+import { ClipBoard, Heart, Trash } from '@/icons/svg';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';

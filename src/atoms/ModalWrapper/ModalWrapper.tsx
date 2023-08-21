@@ -2,6 +2,8 @@ import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from 'reac
 
 import Close from '@/icons/svg/Close';
 
+import { MODAL_WRAPPER_TEST_IDS } from './testIds';
+
 interface Props {
   title: string;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
@@ -33,6 +35,7 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children, onConfirm })
     // fix me
     // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
+      data-testid={MODAL_WRAPPER_TEST_IDS.ROOT}
       onClick={() => closeModal(false)}
       className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black z-50 bg-opacity-75"
     >
@@ -42,7 +45,7 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children, onConfirm })
       >
         <div className="border-b-2 border-b-gray py-2 flex justify-between">
           <b className="text-xl mx-auto text-black">{title}</b>
-          <button onClick={() => closeModal(false)}>
+          <button data-testid={MODAL_WRAPPER_TEST_IDS.CLOSE_BUTTON} onClick={() => closeModal(false)}>
             <Close fill="black" width="20px" height="20px" className="mr-2" />
           </button>
         </div>

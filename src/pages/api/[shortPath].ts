@@ -3,7 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next';
 
 import { UrlsModel } from '@/models';
 import connectMongodb from '@/utils/connectMongodb';
-import setMetricsData from '@/utils/updateMetricsData';
+import updateMetricsData from '@/utils/updateMetricsData';
 
 const RedirectToFullLink = async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method !== 'GET') return res.status(405).send('Method Not Allowed');
@@ -14,7 +14,7 @@ const RedirectToFullLink = async (req: NextApiRequest, res: NextApiResponse) => 
   const data = await UrlsModel.findOne({ code: shortPath }).exec();
 
   if (data) {
-    await setMetricsData(data.metrics, req);
+    await updateMetricsData(data.metrics, req.headers, req.socket.remoteAddress);
 
     data.clicked++;
 

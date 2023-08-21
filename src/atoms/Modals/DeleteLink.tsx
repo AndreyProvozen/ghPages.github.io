@@ -8,7 +8,7 @@ import { deleteLink } from '@/store/slices/links.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 
-import ModalWrapper from './ModalWrapper';
+import ModalWrapper from '../ModalWrapper/ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

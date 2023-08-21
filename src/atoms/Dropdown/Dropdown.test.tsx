@@ -1,13 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
 import ClipBoard from '@/icons/svg/ClipBoard';
-import ThreeDots from '@/icons/svg/ThreeDots';
 
 import Dropdown from './Dropdown';
 import { DROPDOWN_TEST_IDS } from './testIds';
 
 const mockDropdownProps = {
-  placeholder: <ThreeDots />,
+  placeholder: <ClipBoard />,
   dropdownData: [
     {
       fieldTitle: 'Copy',

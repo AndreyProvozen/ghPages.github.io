@@ -1,0 +1,16 @@
+export { default as BarChart } from './BarChart';
+export { default as Chevron } from './Chevron';
+export { default as ClipBoard } from './ClipBoard';
+export { default as Close } from './Close';
+export { default as Email } from './Email';
+export { default as GitHub } from './GitHub';
+export { default as Google } from './Google';
+export { default as Heart } from './Heart';
+export { default as Instagram } from './Instagram';
+export { default as LogOut } from './LogOut';
+export { default as Menu } from './Menu';
+export { default as Settings } from './Settings';
+export { default as Star } from './Star';
+export { default as Steam } from './Steam';
+export { default as ThreeDots } from './ThreeDots';
+export { default as Trash } from './Trash';
