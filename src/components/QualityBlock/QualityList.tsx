@@ -6,7 +6,7 @@ import Heart from '@/icons/svg/Heart';
 import ClassNames from '@/utils/classNames';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-const qualitiesList = [
+export const qualitiesList = [
   {
     image: <BarChart />,
     title: 'Statistics',

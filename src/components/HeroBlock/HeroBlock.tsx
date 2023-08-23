@@ -4,7 +4,7 @@ import { useInView } from 'react-intersection-observer';
 
 import ClassNames from '@/utils/classNames';
 
-import Header from './Header';
+import Header from '../Header';
 
 interface Props {
   bgSrc: string;

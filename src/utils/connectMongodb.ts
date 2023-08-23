@@ -24,6 +24,7 @@ const connectMongodb = async (): Promise<boolean> => {
 
   try {
     await connect(MONGODB_URI);
+    return true;
   } catch (error) {
     throw new Error(error);
   }

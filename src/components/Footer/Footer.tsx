@@ -1,9 +1,10 @@
 import Link from 'next/link';
 
 import { GitHub, Instagram, Steam } from '@/icons/svg';
-import { credits } from 'mock';
 
-const linksData = [
+import CredentialsSection from './CredentialsSection';
+
+export const linksData = [
   {
     icon: <GitHub fill="white" />,
     href: 'https://github.com/AndreyProvozen',
@@ -18,12 +19,12 @@ const Footer = ({ containerClasses = '' }) => (
     <div className="container max-mobile:flex-col-reverse max-w-screen-desktop flex justify-between px-5 items-center py-5 mx-auto">
       <p className="text-3xl font-extrabold">Link Shortener</p>
       <div className="flex">
-        {linksData.map(({ icon, href, ariaLabel }) => (
+        {linksData.map(({ icon, href, ariaLabel }, index) => (
           <Link
             target="_blank"
             href={href}
             className="mr-3 hover:[&>svg]:fill-lightPink"
-            key={href}
+            key={`${href}-${index}`}
             aria-label={ariaLabel}
           >
             {icon}
@@ -31,13 +32,7 @@ const Footer = ({ containerClasses = '' }) => (
         ))}
       </div>
     </div>
-    <div className="container py-5 mx-auto">
-      {credits.map(({ href, text }) => (
-        <Link target="_blank" className="block mb-2" href={href} key={href}>
-          {text}
-        </Link>
-      ))}
-    </div>
+    <CredentialsSection />
   </div>
 );
 

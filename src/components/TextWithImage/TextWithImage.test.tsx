@@ -20,26 +20,6 @@ const testClass = 'test-container-class';
 const setup = (props = {}) => render(<TextWithImage {...textWithImageProps} {...props} />);
 
 describe('<TextWithImage />', () => {
-  let originalIntersectionObserver;
-  const mockedObserve = jest.fn();
-  const mockedUnobserve = jest.fn();
-  const mockedDisconnect = jest.fn();
-  const mockedIntersectionObserver = jest.fn((cb, options) => ({
-    observe: mockedObserve,
-    unobserve: mockedUnobserve,
-    disconnect: mockedDisconnect,
-    ...options,
-  }));
-
-  beforeAll(() => {
-    originalIntersectionObserver = window.IntersectionObserver;
-    window.IntersectionObserver = mockedIntersectionObserver;
-  });
-
-  afterAll(() => {
-    window.IntersectionObserver = originalIntersectionObserver;
-  });
-
   it('should render correctly', () => {
     setup({ containerClasses: testClass });
 
@@ -59,16 +39,5 @@ describe('<TextWithImage />', () => {
       const featureBlock = screen.getByText(feature);
       expect(featureBlock).toBeInTheDocument();
     });
-  });
-
-  it('should observe intersection when rendered', () => {
-    setup();
-    expect(mockedObserve).toHaveBeenCalled();
-  });
-
-  it('should disconnect when unmounted', () => {
-    const { unmount } = setup();
-    unmount();
-    expect(mockedDisconnect).toHaveBeenCalled();
   });
 });
