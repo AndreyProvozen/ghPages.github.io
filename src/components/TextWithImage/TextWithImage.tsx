@@ -5,6 +5,8 @@ import { useInView } from 'react-intersection-observer';
 import Star from '@/icons/svg/Star';
 import ClassNames from '@/utils/classNames';
 
+import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
+
 interface Props {
   linkData: { src: string; alt: string };
   text: string;
@@ -27,6 +29,7 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
   return (
     <div
       ref={ref}
+      data-testid={TEXT_WITH_IMAGE_TEST_IDS.ROOT}
       className={ClassNames(
         { 'flex-row-reverse': imageFirst },
         { invisible: !inView },

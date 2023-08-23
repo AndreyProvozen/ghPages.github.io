@@ -1,7 +1,8 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from 'chart.js';
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 
-import { getPieChartData, getBarChartData } from '@/utils/getChartData';
+import getBarChartData from '@/utils/getBarChartData';
+import getPieChartData from '@/utils/getPieChartData';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
