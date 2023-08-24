@@ -9,7 +9,7 @@ export interface linkDataProps {
 }
 
 export interface linkDataListProps {
-  urlsList: linkDataProps[];
+  linksList: linkDataProps[];
   count: number;
 }
 

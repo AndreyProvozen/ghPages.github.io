@@ -12,12 +12,12 @@ const FavoriteLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
 
     const cookieFavoriteList = JSON.parse((getCookie('favorite', { req, res }) as string) || '[]');
 
-    const [urlsList, count] = await Promise.all([
+    const [linksList, count] = await Promise.all([
       Urls.find({ code: cookieFavoriteList }).select('url clicked code'),
       Urls.countDocuments({ code: cookieFavoriteList }),
     ]);
 
-    return res.status(200).json({ urlsList, count });
+    return res.status(200).json({ linksList, count });
   } catch ({ message }) {
     return res.status(500).send(message);
   }

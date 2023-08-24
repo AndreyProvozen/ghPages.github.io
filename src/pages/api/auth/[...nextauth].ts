@@ -24,9 +24,12 @@ const authConfig: AuthOptions = {
   pages: {
     signIn: '/auth',
   },
+  secret: process.env.NEXTAUTH_SECRET ?? '',
+  jwt: {
+    secret: process.env.NEXTAUTH_SECRET ?? '',
+  },
   session: {
-    maxAge: 30 * 24 * 60 * 60, // 30 days
-    updateAge: 24 * 60 * 60, // 24 hours
+    strategy: 'jwt',
   },
   callbacks: {
     async signIn({ account, profile }) {

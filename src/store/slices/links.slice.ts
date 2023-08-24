@@ -78,15 +78,15 @@ const linksSlice = createSlice({
     builder
       .addCase(fetchLinksList.fulfilled, (state, action) => {
         state.count = action.payload.count;
-        state.linksList = action.payload.urlsList;
+        state.linksList = action.payload.linksList;
       })
       .addCase(fetchFavoriteLinks.fulfilled, (state, action) => {
         state.count = action.payload.count;
-        state.linksList = action.payload.urlsList;
+        state.linksList = action.payload.linksList;
       })
       .addCase(fetchLinksBySearchString.fulfilled, (state, action) => {
         state.count = action.payload.count;
-        state.linksList = action.payload.urlsList;
+        state.linksList = action.payload.linksList;
       })
       .addCase(deleteLink.fulfilled, (state, action) => {
         state.linksList = state.linksList.filter(({ code }) => code !== action.payload);

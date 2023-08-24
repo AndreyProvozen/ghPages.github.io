@@ -9,22 +9,22 @@ const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
 const getLinksData = async (req, res) => {
   const { limit = 5, userEmail, page } = req.query;
-  UserModel;
+
   const getLinksByPage = parseInt(page, 10) ? page * limit : 0;
 
   if (userEmail !== 'undefined') {
     const userData = await UserModel.findOne({ email: userEmail });
-    const urlsList = await UrlsModel.find({ code: userData.userLinks })
+    const linksList = await UrlsModel.find({ code: userData.userLinks })
       .select('url clicked code')
       .skip(getLinksByPage)
       .limit(limit);
 
     const count = await UrlsModel.find({ code: userData.userLinks }).countDocuments();
-    return res.status(200).json({ urlsList, count });
+    return res.status(200).json({ linksList, count });
   }
   const cookieLinksList = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
 
-  return res.status(200).json({ urlsList: cookieLinksList, count: cookieLinksList.length });
+  return res.status(200).json({ linksList: cookieLinksList, count: cookieLinksList.length });
 };
 
 const deleteLinksData = async (req, res) => {
@@ -35,7 +35,7 @@ const deleteLinksData = async (req, res) => {
     const deletedUrl = await UrlsModel.findOneAndDelete({ code });
 
     if (!deletedUrl) {
-      return res.status(404).json({ error: 'URL has already been deleted' });
+      return res.status(404).json('URL has already been deleted');
     }
 
     return res.status(200).json(code);
@@ -53,14 +53,14 @@ const postLinksData = async (req, res) => {
   const { url, userEmail } = req.body;
 
   if (!urlRegex.test(url)) {
-    return res.status(400).json({ error: 'Please provide a valid url' });
+    return res.status(400).json('Please provide a valid url');
   }
 
   if (userEmail !== undefined) {
     const existingUrl = await UrlsModel.findOne({ url });
 
     if (existingUrl) {
-      return res.status(409).json({ error: 'URL already exists' });
+      return res.status(409).json('URL already exists');
     }
 
     const newUrl = await UrlsModel.create({ url });
@@ -77,7 +77,7 @@ const postLinksData = async (req, res) => {
   const getLinksFromCookie = JSON.parse((getCookie('link-data', { req, res }) as string) || '[]');
 
   if (getLinksFromCookie.some(({ url: cookieUrl }) => cookieUrl === url)) {
-    return res.status(409).json({ error: 'URL already exists' });
+    return res.status(409).json('URL already exists');
   }
 
   const newLinksData = [...Object.values(getLinksFromCookie), newLinkData];
