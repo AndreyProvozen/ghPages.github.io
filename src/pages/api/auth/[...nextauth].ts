@@ -1,4 +1,4 @@
-import type { AuthOptions } from 'next-auth';
+import type { AuthOptions, ISODateString } from 'next-auth';
 import NextAuth from 'next-auth/next';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GitHubProvider from 'next-auth/providers/github';
@@ -6,7 +6,20 @@ import GoogleProvider from 'next-auth/providers/google';
 
 import User from '@/models/User';
 
-const authConfig: AuthOptions = {
+declare module 'next-auth' {
+  interface Session {
+    user?: {
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+      provider?: string;
+      userLinks?: string[];
+    };
+    expires: ISODateString;
+  }
+}
+
+export const authConfig: AuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID ?? '',

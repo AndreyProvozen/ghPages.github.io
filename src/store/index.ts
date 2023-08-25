@@ -1,10 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 
+import { queryApi } from './api';
 import flashMessageReducer from './slices/flashMessages.slice';
-import linksReducer from './slices/links.slice';
 
 const store = configureStore({
-  reducer: { links: linksReducer, flashMessages: flashMessageReducer },
+  reducer: { flashMessages: flashMessageReducer, [queryApi.reducerPath]: queryApi.reducer },
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(queryApi.middleware),
 });
 
 export type RootState = ReturnType<typeof store.getState>;

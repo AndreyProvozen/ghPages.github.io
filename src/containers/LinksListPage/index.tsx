@@ -1,33 +1,32 @@
 import { useRouter } from 'next/router';
-import { useSession } from 'next-auth/react';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { FilterBlockSkeleton, LinksListSkeleton, PaginationSkeleton } from '@/atoms/Skeleton';
+import { LinksListSkeleton, PaginationSkeleton } from '@/atoms/Skeleton';
 import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';
 import NotFoundSection from '@/components/NotFoundSection';
-import { fetchFavoriteLinks, fetchLinksBySearchString, fetchLinksList } from '@/store/slices/links.slice';
-import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
+import { useGetLinksQuery } from '@/store/api/links.api';
+import { useFetchLinksBySearchStringQuery } from '@/store/api/search.api';
 
 const LinksList = () => {
-  const { data: session } = useSession();
-  const router = useRouter();
+  const { query } = useRouter();
 
-  const dispatch = useAppDispatch();
-  const { count, linksList } = useAppSelector(state => state.links);
+  const favorite = query?.search === 'favorite';
+  const searchString = query?.searchString as string;
+  const skip = !favorite && !searchString;
+
+  const sortedLinkData = useFetchLinksBySearchStringQuery(
+    { favorite, searchString },
+    { refetchOnMountOrArgChange: true, skip }
+  );
+
+  const linkData = useGetLinksQuery({ perPage: 10 }, { skip: !skip });
+  const linksQuery = skip ? linkData : sortedLinkData;
+
+  const { data, isLoading } = linksQuery;
 
   const [perPage] = useState(10);
-
-  useEffect(() => {
-    if (router?.query?.search === 'favorite') {
-      dispatch(fetchFavoriteLinks({ userEmail: session?.user?.email }));
-    } else if (router?.query?.searchString) {
-      dispatch(fetchLinksBySearchString({ searchString: router.query.searchString as string }));
-    } else {
-      dispatch(fetchLinksList({ userEmail: session?.user?.email, page: router.query.page as string, perPage }));
-    }
-  }, [router.query]);
 
   return (
     <>
@@ -41,15 +40,12 @@ const LinksList = () => {
       />
       <div className="max-w-screen-desktop mx-auto w-full px-5 my-10">
         <FiltersBlock />
-        {linksList?.length ? (
-          <LinkDataBlock
-            linksList={linksList}
-            count={count}
-            perPage={perPage}
-            linkContainerClasses="border-b border-gray"
-            showFiltersAndPagination={true}
-          />
-        ) : count === 0 ? (
+        {isLoading ? (
+          <>
+            <LinksListSkeleton quantity={5} />
+            <PaginationSkeleton />
+          </>
+        ) : data.count === 0 ? (
           <NotFoundSection
             title="You currently do not have any links in your collection."
             href="/"
@@ -57,11 +53,13 @@ const LinksList = () => {
             linkText="Create new link"
           />
         ) : (
-          <>
-            <FilterBlockSkeleton />
-            <LinksListSkeleton quantity={5} />
-            <PaginationSkeleton />
-          </>
+          <LinkDataBlock
+            linksList={data.linksList}
+            count={data.count}
+            perPage={perPage}
+            linkContainerClasses="border-b border-gray"
+            showFiltersAndPagination={true}
+          />
         )}
       </div>
     </>

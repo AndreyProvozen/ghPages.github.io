@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
 
-const { MONGODB_URI } = process.env;
+import getConfigVariable from './getConfigVariable';
 
-if (!MONGODB_URI) throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
+const MONGODB_URI = getConfigVariable('MONGODB_URI');
 
 let cached = global.mongoose;
 
@@ -24,6 +24,7 @@ if (!cached) cached = global.mongoose = { conn: null, promise: null };
  */
 
 const connectMongodb = async (): Promise<boolean> => {
+  if (!MONGODB_URI) throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
   if (cached.conn) {
     return cached.conn;
   }

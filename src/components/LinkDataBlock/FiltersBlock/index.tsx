@@ -11,20 +11,24 @@ const FiltersBlock = () => {
   const showFavoriteList = useMemo(() => query?.search === 'favorite', [query?.search]);
 
   useEffect(() => {
-    if (query.search) return;
-
     if (link) {
       const timeoutId = setTimeout(() => {
-        push(`?searchString=${link}`);
-      }, 1000);
+        push(`?searchString=${link}${query.search ? '&search=favorite' : ''}`);
+      }, 800);
 
       return () => clearTimeout(timeoutId);
+    }
+
+    if (showFavoriteList) {
+      push('?search=favorite');
+      return;
     }
 
     push(pathname);
   }, [link]);
 
-  const updateQuery = () => (showFavoriteList ? push(pathname) : push('?search=favorite'));
+  const updateQuery = () =>
+    showFavoriteList ? push(pathname) : push(`?search=favorite${query?.search ? `&searchString=${link}` : ''}`);
 
   return (
     <div className="flex justify-between w-full items-start border-b border-gray mb-5 gap-5">

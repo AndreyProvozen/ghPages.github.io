@@ -3,8 +3,9 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction, useMemo } from 'react';
 
-import type { linkDataProps } from '@/constants';
-import { deleteLink } from '@/store/slices/links.slice';
+import { flashMessageType, type linkDataProps } from '@/constants';
+import { useDeleteLinkMutation } from '@/store/api/links.api';
+import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 
@@ -22,16 +23,20 @@ const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, isStatisticPa
   const { data: session } = useSession();
   const dispatch = useAppDispatch();
   const { push } = useRouter();
+  const [deleteLink] = useDeleteLinkMutation();
 
   const shortLink = useMemo(() => `${API_HOST}/${deletedLink?.code}`, [deletedLink?.code]);
 
-  const endpointUrl = useMemo(
-    () => `${API_HOST}/link?code=${deletedLink?.code}&userEmail=${encodeURIComponent(session?.user?.email)}`,
-    [deletedLink?.code, session?.user]
-  );
-
   const handleDeleteLink = async () => {
-    await dispatch(deleteLink(endpointUrl));
+    const response = await deleteLink({ code: deletedLink?.code, userEmail: session?.user?.email });
+    // fix me error type
+    dispatch(
+      addNewFlashMessage(
+        'error' in response && 'data' in response.error
+          ? { message: response.error.data as string, type: flashMessageType.ERROR }
+          : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
+      )
+    );
 
     if (isStatisticPage) return push('/links');
 

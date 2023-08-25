@@ -1,7 +1,10 @@
+import { GetServerSidePropsContext } from 'next';
 import Head from 'next/head';
-import { getSession } from 'next-auth/react';
+import { getServerSession } from 'next-auth/next';
 
 import Auth from '@/containers/AuthPage';
+
+import { authConfig } from './api/auth/[...nextauth]';
 
 const AuthPage = () => (
   <>
@@ -16,16 +19,11 @@ const AuthPage = () => (
   </>
 );
 
-export const getServerSideProps = async context => {
-  const session = await getSession(context);
+export const getServerSideProps = async (context: GetServerSidePropsContext) => {
+  const session = await getServerSession(context.req, context.res, authConfig);
 
   if (session) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
+    return { redirect: { destination: '/' } };
   }
   return { props: {} };
 };

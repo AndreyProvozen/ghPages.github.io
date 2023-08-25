@@ -1,5 +1,4 @@
 import Head from 'next/head';
-import { getSession } from 'next-auth/react';
 
 import Home from '@/containers/HomePage';
 
@@ -15,13 +14,5 @@ const HomePage = () => (
     <Home />
   </>
 );
-
-export async function getServerSideProps(context) {
-  return {
-    props: {
-      session: await getSession(context),
-    },
-  };
-}
 
 export default HomePage;

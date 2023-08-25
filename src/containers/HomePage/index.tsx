@@ -1,6 +1,5 @@
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { InView } from 'react-intersection-observer';
 
 import Accordion from '@/atoms/Accordion';
@@ -11,26 +10,33 @@ import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
 import TextWithImage from '@/components/TextWithImage';
-import { addNewLink, fetchLinksList } from '@/store/slices/links.slice';
-import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
+import { flashMessageType } from '@/constants';
+import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
+import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
+import { useAppDispatch } from '@/store/storeHooks';
 import ClassNames from '@/utils/classNames';
 import { TextWithImageData, questions } from 'mock';
 
 const Home = () => {
-  const { data: session } = useSession();
   const dispatch = useAppDispatch();
-  const { count, linksList } = useAppSelector(state => state.links);
-
   const [longLink, setLongLink] = useState('');
 
-  useEffect(() => {
-    dispatch(fetchLinksList({ userEmail: session?.user?.email, perPage: 5 }));
-  }, [dispatch, session]);
+  const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 5 });
+  const [addNewLink] = useAddNewLinkMutation();
 
-  const handleOnSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(addNewLink({ url: longLink, userEmail: session?.user?.email }));
+
+    const response = await addNewLink({ url: longLink });
     setLongLink('');
+    // fix me error type
+    dispatch(
+      addNewFlashMessage(
+        'error' in response && 'data' in response.error
+          ? { message: response.error.data as string, type: flashMessageType.ERROR }
+          : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
+      )
+    );
   };
 
   return (
@@ -81,10 +87,10 @@ const Home = () => {
             </button>
           </form>
 
-          {linksList?.length ? (
-            <LinkDataBlock linksList={linksList} linkContainerClasses="bg-white rounded-md mb-5" />
+          {isLoading ? (
+            <LinksListSkeleton isHomePageList={true} />
           ) : (
-            count !== 0 && <LinksListSkeleton isHomePageList={true} />
+            <LinkDataBlock linksList={linkData?.linksList || []} linkContainerClasses="bg-white rounded-md mb-5" />
           )}
         </div>
       </div>

@@ -1,19 +1,22 @@
 import { setCookie, getCookie } from 'cookies-next';
 import { nanoid } from 'nanoid';
 import type { NextApiRequest, NextApiResponse } from 'next';
+import { getServerSession } from 'next-auth';
 
 import { UrlsModel, UserModel } from '@/models';
 import connectMongodb from '@/utils/connectMongodb';
 
+import { authConfig } from './auth/[...nextauth]';
+
 const urlRegex = /^(ftp|http|https):\/\/[^ "]+$/;
 
-const getLinksData = async (req, res) => {
-  const { limit = 5, userEmail, page } = req.query;
+const getLinksData = async (req, res, session) => {
+  const { limit = 5, page } = req.query;
 
   const getLinksByPage = parseInt(page, 10) ? page * limit : 0;
 
-  if (userEmail !== 'undefined') {
-    const userData = await UserModel.findOne({ email: userEmail });
+  if (session) {
+    const userData = await UserModel.findOne({ email: session.user.email });
     const linksList = await UrlsModel.find({ code: userData.userLinks })
       .select('url clicked code')
       .skip(getLinksByPage)
@@ -27,11 +30,11 @@ const getLinksData = async (req, res) => {
   return res.status(200).json({ linksList: cookieLinksList, count: cookieLinksList.length });
 };
 
-const deleteLinksData = async (req, res) => {
-  const { code, userEmail } = req.query;
+const deleteLinksData = async (req, res, session) => {
+  const { code } = req.query;
 
-  if (userEmail !== 'undefined') {
-    await UserModel.findOneAndUpdate({ email: userEmail }, { $pull: { userLinks: code } }, { new: true });
+  if (session) {
+    await UserModel.findOneAndUpdate({ email: session.user.email }, { $pull: { userLinks: code } }, { new: true });
     const deletedUrl = await UrlsModel.findOneAndDelete({ code });
 
     if (!deletedUrl) {
@@ -49,14 +52,14 @@ const deleteLinksData = async (req, res) => {
   return res.status(200).json(code);
 };
 
-const postLinksData = async (req, res) => {
-  const { url, userEmail } = req.body;
+const postLinksData = async (req, res, session) => {
+  const { url } = req.body;
 
   if (!urlRegex.test(url)) {
     return res.status(400).json('Please provide a valid url');
   }
 
-  if (userEmail !== undefined) {
+  if (session) {
     const existingUrl = await UrlsModel.findOne({ url });
 
     if (existingUrl) {
@@ -64,7 +67,7 @@ const postLinksData = async (req, res) => {
     }
 
     const newUrl = await UrlsModel.create({ url });
-    const userData = await UserModel.findOne({ email: userEmail });
+    const userData = await UserModel.findOne({ email: session.user.email });
 
     userData.userLinks = [...userData.userLinks, newUrl.code];
 
@@ -90,15 +93,17 @@ const BaseLink = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     await connectMongodb();
 
+    const session = await getServerSession(req, res, authConfig);
+
     switch (req.method) {
       case 'GET':
-        await getLinksData(req, res);
+        await getLinksData(req, res, session);
         break;
       case 'POST':
-        await postLinksData(req, res);
+        await postLinksData(req, res, session);
         break;
       case 'DELETE':
-        await deleteLinksData(req, res);
+        await deleteLinksData(req, res, session);
         break;
       default:
         res.status(405).send('Method Not Allowed');
