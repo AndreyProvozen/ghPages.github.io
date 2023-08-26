@@ -11,26 +11,18 @@ const mockAccordionItem = [
 
 const [{ title, description }] = mockAccordionItem;
 
-const setup = () => {
-  render(<Accordion questions={[mockAccordionItem[0]]} />);
-
-  const titleBlock = screen.getByText(title);
-  const descriptionBlock = screen.getByText(description);
-
-  return { titleBlock, descriptionBlock };
-};
+const setup = () => render(<Accordion questions={[mockAccordionItem[0]]} />);
 
 describe('<Accordion/>', () => {
   it('should render correctly', () => {
-    const { titleBlock, descriptionBlock } = setup();
+    setup();
+
+    const titleBlock = screen.getByText(title);
+    const descriptionBlock = screen.getByText(description);
 
     expect(titleBlock).toBeVisible();
     expect(descriptionBlock).toHaveClass('max-h-0');
     expect(descriptionBlock).toHaveTextContent(description);
-  });
-
-  it('should expand description when clicked', () => {
-    const { titleBlock, descriptionBlock } = setup();
 
     fireEvent.click(titleBlock);
 

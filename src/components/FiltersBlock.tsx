@@ -38,7 +38,7 @@ const FiltersBlock = () => {
         }  px-3 py-2.5 rounded flex items-center ml-3`}
         onClick={updateQuery}
       >
-        <Heart width={20} height={20} className={`${showFavoriteList ? 'fill-pink' : 'fill-gray'}`} />
+        <Heart width={20} height={20} className={showFavoriteList ? 'fill-pink' : 'fill-gray'} />
         <p className="ml-2">Favorite</p>
       </button>
       <input

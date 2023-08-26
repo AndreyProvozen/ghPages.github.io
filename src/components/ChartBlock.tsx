@@ -12,6 +12,10 @@ const pieOptions = {
       position: 'bottom' as const,
     },
   },
+  options: {
+    parsing: false,
+    normalized: true,
+  },
 };
 
 const barOptions = {
@@ -19,6 +23,10 @@ const barOptions = {
   plugins: {
     legend: {
       display: false,
+    },
+    options: {
+      parsing: false,
+      normalized: true,
     },
   },
 };
@@ -30,23 +38,21 @@ const ChartBlock = ({ metrics }) => {
         <p className="text-2xl font-bold mb-5 text-center">{metrics[4].title}</p>
         <Bar options={barOptions} data={getBarChartData(metrics[4].data)} />
       </div>
-      {metrics.slice(0, 4).map(({ title, data }, i) => {
-        return (
-          <div
-            className={`row-start-${
-              i > 1 ? 3 : 2
-            } flex flex-col bg-gray/20 w-full border border-gray p-5 rounded-lg hover:border-pink hover:shadow-lg`}
-            key={title}
-          >
-            <p className="text-2xl font-bold mb-5 text-center">{title}</p>
-            {i > 1 ? (
-              <Pie data={getPieChartData(data)} style={{ margin: 'auto' }} options={pieOptions} />
-            ) : (
-              <Doughnut data={getPieChartData(data)} style={{ margin: 'auto' }} options={pieOptions} />
-            )}
-          </div>
-        );
-      })}
+      {metrics.slice(0, 4).map(({ title, data }, i) => (
+        <div
+          className={`row-start-${
+            i > 1 ? 3 : 2
+          } flex flex-col bg-gray/20 w-full border border-gray p-5 rounded-lg hover:border-pink hover:shadow-lg`}
+          key={title}
+        >
+          <p className="text-2xl font-bold mb-5 text-center">{title}</p>
+          {i > 1 ? (
+            <Pie data={getPieChartData(data)} style={{ margin: 'auto' }} options={pieOptions} />
+          ) : (
+            <Doughnut data={getPieChartData(data)} style={{ margin: 'auto' }} options={pieOptions} />
+          )}
+        </div>
+      ))}
     </div>
   );
 };

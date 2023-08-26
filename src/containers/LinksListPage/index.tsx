@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 
 import { LinksListSkeleton, PaginationSkeleton } from '@/atoms/Skeleton';
+import FiltersBlock from '@/components/FiltersBlock';
 import HeroBlock from '@/components/HeroBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
-import FiltersBlock from '@/components/LinkDataBlock/FiltersBlock';
 import NotFoundSection from '@/components/NotFoundSection';
 import { useGetLinksQuery } from '@/store/api/links.api';
 import { useFetchLinksBySearchStringQuery } from '@/store/api/search.api';
