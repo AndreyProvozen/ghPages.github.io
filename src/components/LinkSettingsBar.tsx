@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState } from 'react';
 
 import { ScreenSize, flashMessageType } from '@/constants';
-import { ClipBoard, Heart, Trash } from '@/icons/svg';
+import { ClipBoard, Heart, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
@@ -29,6 +29,7 @@ const LinkSettingsBar = ({ link }) => {
   const barData = useMemo(
     () => [
       {
+        ariaLabel: 'Copy link button',
         fieldTitle: !isSmallMobile && 'Copy',
         fieldFunction: () => {
           navigator.clipboard.writeText(`${API_HOST}/${link.code}`);
@@ -37,11 +38,13 @@ const LinkSettingsBar = ({ link }) => {
         fieldImage: <ClipBoard fill="black" />,
       },
       {
+        ariaLabel: 'Delete button',
         fieldTitle: !isSmallMobile && 'Delete',
         fieldFunction: () => setIsDeleteModalOpen(true),
         fieldImage: <Trash fill="black" />,
       },
       {
+        ariaLabel: 'Favorite button',
         fieldFunction: () => {
           if (isFavoriteLink) {
             setFavoriteList(favoriteList.filter(item => item !== link.code));
@@ -87,10 +90,11 @@ const LinkSettingsBar = ({ link }) => {
           </p>
         </div>
         <div className="flex justify-end gap-3  items-center">
-          {barData.map(({ fieldTitle, fieldFunction, fieldImage }, i) => (
+          {barData.map(({ fieldTitle, fieldFunction, fieldImage, ariaLabel }, i) => (
             <button
               key={fieldTitle + i}
               onClick={fieldFunction}
+              aria-label={ariaLabel}
               className="flex border rounded-lg p-2 hover:border-lightPink border-gray hover:bg-pink/10"
             >
               {fieldImage}

@@ -21,7 +21,7 @@ export const questions = [
   },
 ];
 
-export const TextWithImageData = [
+export const textWithImageData = [
   {
     title: 'Link Performance',
     listData: [

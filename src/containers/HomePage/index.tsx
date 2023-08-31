@@ -11,11 +11,11 @@ import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
 import TextWithImage from '@/components/TextWithImage';
 import { flashMessageType } from '@/constants';
+import { textWithImageData, questions } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import ClassNames from '@/utils/classNames';
-import { TextWithImageData, questions } from 'mock';
 
 const Home = () => {
   const dispatch = useAppDispatch();
@@ -96,7 +96,7 @@ const Home = () => {
       </div>
       <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
       <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
-      {TextWithImageData.map(({ listData, linkData, text, title }, i) => (
+      {textWithImageData.map(({ listData, linkData, text, title }, i) => (
         <TextWithImage
           key={i + title}
           linkData={linkData}

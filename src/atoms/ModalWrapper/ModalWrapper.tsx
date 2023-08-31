@@ -1,6 +1,6 @@
 import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from 'react';
 
-import Close from '@/icons/svg/Close';
+import Close from '@/icons/Close';
 
 import { MODAL_WRAPPER_TEST_IDS } from './testIds';
 

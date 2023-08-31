@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { FC, useCallback, useMemo } from 'react';
 
-import Chevron from '@/icons/svg/Chevron';
+import Chevron from '@/icons/Chevron';
 import ClassNames from '@/utils/classNames';
 
 import { PAGINATION_TEST_IDS } from './testIds';

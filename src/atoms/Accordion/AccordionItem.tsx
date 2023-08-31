@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Chevron from '@/icons/svg/Chevron';
+import Chevron from '@/icons/Chevron';
 import ClassNames from '@/utils/classNames';
 
 interface Props {

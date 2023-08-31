@@ -40,6 +40,7 @@ const updateMetricsData = async (metrics: metricsProps[], headers: IncomingHttpH
 
   for (const { title, field } of metricFields) {
     const existingMetric = metrics.find(metric => metric.title === title);
+
     if (existingMetric) {
       existingMetric.data = {
         ...existingMetric.data,

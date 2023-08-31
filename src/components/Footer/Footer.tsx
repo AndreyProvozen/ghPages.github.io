@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { GitHub, Instagram, Steam } from '@/icons/svg';
+import { GitHub, Instagram, Steam } from '@/icons';
 
 import CredentialsSection from './CredentialsSection';
 

@@ -1,6 +1,6 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import ClipBoard from '@/icons/svg/ClipBoard';
+import ClipBoard from '@/icons/ClipBoard';
 
 import Dropdown from './Dropdown';
 import { DROPDOWN_TEST_IDS } from './testIds';

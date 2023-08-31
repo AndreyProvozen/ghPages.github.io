@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { FC } from 'react';
 
 import type { MenuProps } from '@/components/Header/MobileHeader';
-import Chevron from '@/icons/svg/Chevron';
+import Chevron from '@/icons/Chevron';
 
 interface Props {
   currentMenu: MenuProps[][];

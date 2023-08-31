@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import type { flashMessageType } from '@/constants';
-import Close from '@/icons/svg/Close';
+import Close from '@/icons/Close';
 import { removeFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
 

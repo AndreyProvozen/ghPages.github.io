@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import Close from '@/icons/svg/Close';
+import Close from '@/icons/Close';
 
 import { DROVER_TEST_IDS } from './testIds';
 

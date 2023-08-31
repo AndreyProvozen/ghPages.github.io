@@ -4,7 +4,7 @@ import type { Session } from 'next-auth';
 import { signOut } from 'next-auth/react';
 import { FC, useState } from 'react';
 
-import Menu from '@/icons/svg/Menu';
+import Menu from '@/icons/Menu';
 
 export interface MenuProps {
   name: string;

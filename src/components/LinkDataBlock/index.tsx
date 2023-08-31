@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { FC, useEffect, useState } from 'react';
 
 import { ScreenSize, flashMessageType, linkDataProps } from '@/constants';
-import Heart from '@/icons/svg/Heart';
+import Heart from '@/icons/Heart';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';

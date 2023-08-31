@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
-import Heart from '@/icons/svg/Heart';
+import Heart from '@/icons/Heart';
 
 const FiltersBlock = () => {
   const { query, push, pathname } = useRouter();
-
   const [link, setLink] = useState(query?.searchString || '');
-
   const showFavoriteList = useMemo(() => query?.search === 'favorite', [query?.search]);
 
   useEffect(() => {
@@ -35,7 +33,7 @@ const FiltersBlock = () => {
       <button
         className={`border ${
           showFavoriteList ? 'border-pink bg-lightPink/20' : 'border-gray'
-        }  px-3 py-2.5 rounded flex items-center ml-3`}
+        } px-3 py-2.5 rounded flex items-center ml-3`}
         onClick={updateQuery}
       >
         <Heart width={20} height={20} className={showFavoriteList ? 'fill-pink' : 'fill-gray'} />

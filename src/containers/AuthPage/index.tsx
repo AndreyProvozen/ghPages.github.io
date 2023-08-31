@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 
 import Header from '@/components/Header';
-import { authWith } from 'mock';
+import { authWith } from '@/constants/mock';
 
 const Auth = () => (
   <div className="min-h-screen flex flex-col justify-between ">

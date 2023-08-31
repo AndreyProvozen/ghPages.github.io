@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FC, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import Star from '@/icons/svg/Star';
+import Star from '@/icons/Star';
 import ClassNames from '@/utils/classNames';
 
 import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
