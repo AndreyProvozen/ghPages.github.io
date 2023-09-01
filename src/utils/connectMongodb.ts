@@ -25,18 +25,14 @@ if (!cached) cached = global.mongoose = { conn: null, promise: null };
 
 const connectMongodb = async (): Promise<boolean> => {
   if (!MONGODB_URI) throw new Error('Please define the MONGODB_URI environment variable inside .env.local');
-  if (cached.conn) {
-    return cached.conn;
-  }
+  if (cached.conn) return cached.conn;
 
   if (!cached.promise) {
     const opts = {
       bufferCommands: false,
     };
 
-    cached.promise = mongoose.connect(MONGODB_URI, opts).then(mongoose => {
-      return mongoose;
-    });
+    cached.promise = mongoose.connect(MONGODB_URI, opts);
   }
 
   try {

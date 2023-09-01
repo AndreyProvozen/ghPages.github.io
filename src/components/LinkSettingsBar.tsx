@@ -81,15 +81,15 @@ const LinkSettingsBar = ({ link }) => {
     <>
       <div className="flex justify-between mt-5 gap-2 items-center max-tablet:flex-col-reverse">
         <div className="flex gap-3">
-          <div className="border bg-lightOrange/20 border-lightOrange rounded-lg flex items-center px-3 ">
+          <div className="border bg-lightOrange/20 border-lightOrange rounded-lg flex items-center px-3">
             Total clicks:
             <p className="bg-lightOrange font-bold p-2 ml-2">{link.clicked}</p>
           </div>
-          <p className="border bg-darkGreen/20 border-darkGreen font-bold rounded-lg flex items-center px-3 p-2">
+          <p className="border bg-darkGreen/20 border-darkGreen font-bold rounded-lg flex items-center px-3 py-2">
             {new Date(link.createdAt).toDateString()}
           </p>
         </div>
-        <div className="flex justify-end gap-3  items-center">
+        <div className="flex justify-end gap-3 items-center">
           {barData.map(({ fieldTitle, fieldFunction, fieldImage, ariaLabel }, i) => (
             <button
               key={fieldTitle + i}
