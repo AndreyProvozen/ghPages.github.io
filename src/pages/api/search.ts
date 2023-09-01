@@ -26,7 +26,7 @@ const SearchLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
         .lean();
 
       const linksList = userLinksList.filter(
-        ({ code }) => cookieFavoriteList.includes(code) && code.includes(searchTerm)
+        ({ code }) => cookieFavoriteList.includes(code) && code.toLowerCase().includes(searchTerm.toLowerCase())
       );
 
       return res.status(200).json({ linksList, count: linksList.length });
@@ -52,7 +52,7 @@ const SearchLinksList = async (req: NextApiRequest, res: NextApiResponse) => {
         .select('url clicked code')
         .lean();
 
-      const linksList = userLinksList.filter(({ code }) => code.includes(searchTerm));
+      const linksList = userLinksList.filter(({ code }) => code.toLowerCase().includes(searchTerm.toLowerCase()));
       const count = linksList.length;
 
       return res.status(200).json({ linksList, count });

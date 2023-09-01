@@ -6,11 +6,15 @@ const credits = [
     text: 'Image by kjpargeter on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&from_view=search&track=robertav1_2_sidr',
-    text: 'Image by rawpixel.com on Freepik',
+    href: 'https://www.freepik.com/free-vector/grunge-dusty-texture-background_3857029.htm#&position=21&from_view=search',
+    text: 'Image by kjpargeter on Freepik',
   },
   {
     href: 'https://www.freepik.com/free-vector/statistical-analysis-man-cartoon-character-with-magnifying-glass-analyzing-data-circular-diagram-with-colorful-segments-statistics-audit-research-concept-illustration_11668491.htm#&position=4&from_view=collections',
+    text: 'Image by vectorjuice on Freepik',
+  },
+  {
+    href: 'https://www.freepik.com/free-vector/environment-data-analytics-abstract-concept_12085726.htm#&position=2&from_view=collections',
     text: 'Image by vectorjuice on Freepik',
   },
   {
@@ -18,12 +22,12 @@ const credits = [
     text: 'Image by storyset on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/environment-data-analytics-abstract-concept_12085726.htm#&position=2&from_view=collections',
-    text: 'Image by vectorjuice on Freepik',
-  },
-  {
     href: 'https://www.freepik.com/free-vector/setup-analytics-concept-illustration_7140754.htm#&position=0&from_view=collections',
     text: 'Image by storyset on Freepik',
+  },
+  {
+    href: 'https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&from_view=search&track=robertav1_2_sidr',
+    text: 'Image by rawpixel.com on Freepik',
   },
   {
     href: 'https://icons8.com/icon/12923/multiple-devices',
@@ -39,16 +43,14 @@ const credits = [
   },
 ];
 
-const CredentialsSection = () => {
-  return (
-    <div className="container py-5 mx-auto">
-      {credits.map(({ href, text }) => (
-        <Link target="_blank" className="block mb-2" href={href} key={href}>
-          {text}
-        </Link>
-      ))}
-    </div>
-  );
-};
+const CredentialsSection = () => (
+  <div className="container py-5 mx-auto">
+    {credits.map(({ href, text }) => (
+      <Link target="_blank" className="block mb-2" href={href} key={href}>
+        {text}
+      </Link>
+    ))}
+  </div>
+);
 
 export default CredentialsSection;
