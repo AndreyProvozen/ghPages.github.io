@@ -1,26 +1,38 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { FormEvent, useState } from 'react';
-import { InView } from 'react-intersection-observer';
 
-import Accordion from '@/atoms/Accordion';
 import { LinksListSkeleton } from '@/atoms/Skeleton';
-import Footer from '@/components/Footer';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
-import TextWithImage from '@/components/TextWithImage';
 import { flashMessageType } from '@/constants';
 import { textWithImageData, questions } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import ClassNames from '@/utils/classNames';
+import useIntersectionObserver from '@/utils/useIntersectionObserver';
+
+const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
+const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
+const Footer = dynamic(() => import('@/components/Footer'));
 
 const Home = () => {
-  const dispatch = useAppDispatch();
+  const { elementRef: textWithImageRef, isVisible: isTextWithImageVisible } = useIntersectionObserver({
+    threshold: 0.1,
+  });
+  const { elementRef: bottomSectionRef, isVisible: isBottomSectionVisible } = useIntersectionObserver({
+    threshold: 0.1,
+  });
+  const { elementRef: logoAnimationRef, isVisible: isLogoAnimationVisible } = useIntersectionObserver({
+    threshold: 0.3,
+  });
+
   const [longLink, setLongLink] = useState('');
 
+  const dispatch = useAppDispatch();
   const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 5 });
   const [addNewLink] = useAddNewLinkMutation();
 
@@ -41,7 +53,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="relative pb-5 min-h-screen px-5">
+      <div className="relative pb-5 h-screen px-5">
         <Image
           src="/images/homeBg.avif"
           alt="Home background"
@@ -51,23 +63,19 @@ const Home = () => {
         />
         <Header />
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
-          <InView threshold={0.3} triggerOnce initialInView={true}>
-            {({ inView, ref }) => (
-              <div
-                ref={ref}
-                className={ClassNames(
-                  { invisible: !inView },
-                  { 'animate__fadeInDown animate__animated': inView },
-                  'mt-7 my-5 text-white'
-                )}
-              >
-                <h1 className="text-5xl">Link Shortener</h1>
-                <p className="max-w-lg mx-auto">
-                  Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
-                </p>
-              </div>
+          <div
+            ref={logoAnimationRef}
+            className={ClassNames(
+              { invisible: !isLogoAnimationVisible },
+              { 'animate__fadeInDown animate__animated': isLogoAnimationVisible },
+              'mt-7 my-5 text-white'
             )}
-          </InView>
+          >
+            <h1 className="text-5xl">Link Shortener</h1>
+            <p className="max-w-lg mx-auto">
+              Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
+            </p>
+          </div>
           <form
             onSubmit={handleOnSubmit}
             className={`mb-14 w-full relative flex flex-wrap items-stretch max-tablet-small:block`}
@@ -86,7 +94,6 @@ const Home = () => {
               generate link
             </button>
           </form>
-
           {isLoading ? (
             <LinksListSkeleton isHomePageList={true} />
           ) : (
@@ -96,23 +103,32 @@ const Home = () => {
       </div>
       <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
       <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
-      {textWithImageData.map(({ listData, linkData, text, title }, i) => (
-        <TextWithImage
-          key={i + title}
-          linkData={linkData}
-          imageFirst={i % 2 !== 0}
-          title={title}
-          containerClasses="my-10"
-          featuresListData={listData}
-          text={text}
-        />
-      ))}
-      <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
-      <div className="container max-w-screen-desktop mx-auto px-5 my-10">
-        <p className="text-4xl font-bold mb-5 text-center">Frequently Asked Questions</p>
-        <Accordion questions={questions} />
+      <div ref={textWithImageRef}>
+        {isTextWithImageVisible &&
+          textWithImageData.map(({ listData, linkData, text, title }, i) => (
+            <TextWithImage
+              key={i + title}
+              linkData={linkData}
+              imageFirst={i % 2 !== 0}
+              title={title}
+              containerClasses="my-10"
+              featuresListData={listData}
+              text={text}
+            />
+          ))}
       </div>
-      <Footer />
+      <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
+      <div ref={bottomSectionRef}>
+        {isBottomSectionVisible && (
+          <>
+            <div className="container max-w-screen-desktop mx-auto px-5 my-10">
+              <p className="text-4xl font-bold mb-5 text-center">Frequently Asked Questions</p>
+              <Accordion questions={questions} />
+            </div>
+            <Footer />
+          </>
+        )}
+      </div>
     </>
   );
 };

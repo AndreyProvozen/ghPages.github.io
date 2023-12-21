@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { FC } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import ClassNames from '@/utils/classNames';
+import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 import Header from '../Header';
 
@@ -14,10 +14,8 @@ interface Props {
 }
 
 const HeroBlock: FC<Props> = ({ bgSrc, bgAlt, title, subTitle }) => {
-  const { ref, inView } = useInView({
+  const { elementRef: animationRef, isVisible: isAnimationVisible } = useIntersectionObserver({
     threshold: 0.3,
-    triggerOnce: true,
-    initialInView: true,
   });
 
   return (
@@ -25,13 +23,13 @@ const HeroBlock: FC<Props> = ({ bgSrc, bgAlt, title, subTitle }) => {
       <Header />
       <Image src={bgSrc} alt={bgAlt} priority fill className="object-cover object-center z-[-1]" />
       <div
-        ref={ref}
+        ref={animationRef}
         className={ClassNames(
           'container max-w-screen-desktop-small text-center mx-auto pb-20',
           {
-            'animate__zoomIn animate__faster animate__animated': inView,
+            'animate__zoomIn animate__faster animate__animated': isAnimationVisible,
           },
-          { invisible: !inView }
+          { invisible: !isAnimationVisible }
         )}
       >
         <h1 className="text-5xl py-5">{title}</h1>

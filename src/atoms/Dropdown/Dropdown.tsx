@@ -1,4 +1,4 @@
-import { FC, ReactElement, useEffect, useRef, useState } from 'react';
+import { FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
 import DropdownPopUp, { DropdownDataProps } from './DropdownPopUp';
 import { DROPDOWN_TEST_IDS } from './testIds';
@@ -13,13 +13,13 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClas
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
 
+  useEffect(() => {
     document.addEventListener('click', handleClickOutside);
 
     return () => {
@@ -27,13 +27,11 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClas
     };
   }, [dropdownRef]);
 
+  const toggleDropdown = () => setIsOpen(prevState => !prevState);
+
   return (
     <div className="relative text-white" ref={dropdownRef}>
-      <button
-        data-testid={DROPDOWN_TEST_IDS.TOGGLE_BUTTON}
-        onClick={() => setIsOpen(!isOpen)}
-        className="cursor-pointer flex"
-      >
+      <button data-testid={DROPDOWN_TEST_IDS.TOGGLE_BUTTON} onClick={toggleDropdown} className="cursor-pointer flex">
         {placeholder}
       </button>
       {isOpen && (

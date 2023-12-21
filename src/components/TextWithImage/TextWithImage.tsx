@@ -1,9 +1,9 @@
 import Image from 'next/image';
 import { FC, useMemo } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import Star from '@/icons/Star';
 import ClassNames from '@/utils/classNames';
+import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
 
@@ -17,10 +17,8 @@ interface Props {
 }
 
 const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresListData, containerClasses = '' }) => {
-  const { ref, inView } = useInView({
+  const { elementRef: animationRef, isVisible: isAnimationVisible } = useIntersectionObserver({
     threshold: 0.3,
-    triggerOnce: true,
-    initialInView: true,
   });
 
   const imageTransition = useMemo(() => (imageFirst ? 'animate__fadeInRight' : 'animate__fadeInLeft'), [imageFirst]);
@@ -28,11 +26,11 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
 
   return (
     <div
-      ref={ref}
+      ref={animationRef}
       data-testid={TEXT_WITH_IMAGE_TEST_IDS.ROOT}
       className={ClassNames(
         { 'flex-row-reverse': imageFirst },
-        { invisible: !inView },
+        { invisible: !isAnimationVisible },
         'flex justify-between max-w-screen-desktop px-5 mx-auto max-desktop-small:block overflow-hidden',
         containerClasses
       )}
@@ -42,11 +40,13 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
         alt={linkData.alt}
         height={400}
         width={500}
-        className={ClassNames('px-5 max-desktop-small:mx-auto animate__animated', { [imageTransition]: inView })}
+        className={ClassNames('px-5 max-desktop-small:mx-auto animate__animated', {
+          [imageTransition]: isAnimationVisible,
+        })}
       />
       <div
         className={ClassNames('pt-5 max-w-[700px] max-desktop-small:mx-auto animate__animated', {
-          [textTransition]: inView,
+          [textTransition]: isAnimationVisible,
         })}
       >
         <h2 className="text-2xl font-bold mx-auto text-center mb-2">{title}</h2>
