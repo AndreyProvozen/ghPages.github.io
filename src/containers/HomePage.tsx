@@ -105,12 +105,12 @@ const Home = () => {
         </div>
       </div>
       <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
-      <div ref={infoSectionRef}>
+      <div style={{ minHeight: '250px' }} ref={infoSectionRef}>
         {isInfoSectionVisible && (
           <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
         )}
       </div>
-      <div ref={textWithImageRef}>
+      <div style={{ minHeight: '1800px' }} ref={textWithImageRef}>
         {isTextWithImageVisible &&
           textWithImageData.map(({ listData, linkData, text, title }, i) => (
             <TextWithImage
@@ -124,12 +124,12 @@ const Home = () => {
             />
           ))}
       </div>
-      <div ref={infoSectionRef}>
+      <div style={{ minHeight: '250px' }} ref={infoSectionRef}>
         {isInfoSectionVisible && (
           <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
         )}
       </div>
-      <div ref={bottomSectionRef}>
+      <div style={{ minHeight: '700px' }} ref={bottomSectionRef}>
         {isBottomSectionVisible && (
           <>
             <div className="container max-w-screen-desktop mx-auto px-5 my-10">

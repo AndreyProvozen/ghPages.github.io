@@ -2,10 +2,16 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     },
     "target": "esnext",
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": false,
@@ -20,6 +26,12 @@
     "downlevelIteration": true,
     "incremental": true
   },
-  "include": ["src/**/*", "next-env.d.ts"],
-  "exclude": ["node_modules"]
+  "include": [
+    "src/**/*",
+    "cypress",
+    "next-env.d.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
