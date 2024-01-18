@@ -4,7 +4,6 @@ import { FormEvent, useState } from 'react';
 
 import { LinksListSkeleton } from '@/atoms/Skeleton';
 import Header from '@/components/Header';
-import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
 import { flashMessageType } from '@/constants';
@@ -17,6 +16,7 @@ import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
+const InfoBlock = dynamic(() => import('@/components/InfoBlock'), { ssr: false });
 const Footer = dynamic(() => import('@/components/Footer'));
 
 const Home = () => {
@@ -24,6 +24,9 @@ const Home = () => {
     threshold: 0.1,
   });
   const { elementRef: bottomSectionRef, isVisible: isBottomSectionVisible } = useIntersectionObserver({
+    threshold: 0.1,
+  });
+  const { elementRef: infoSectionRef, isVisible: isInfoSectionVisible } = useIntersectionObserver({
     threshold: 0.1,
   });
   const { elementRef: logoAnimationRef, isVisible: isLogoAnimationVisible } = useIntersectionObserver({
@@ -62,7 +65,7 @@ const Home = () => {
           className="object-cover object-center z-[-1]"
         />
         <Header />
-        <div className="container max-w-screen-desktop-small text-center mx-auto text-lg h-full">
+        <div className="container max-w-screen-desktop-small text-center mx-auto text-lg">
           <div
             ref={logoAnimationRef}
             className={ClassNames(
@@ -102,7 +105,11 @@ const Home = () => {
         </div>
       </div>
       <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
-      <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
+      <div ref={infoSectionRef}>
+        {isInfoSectionVisible && (
+          <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
+        )}
+      </div>
       <div ref={textWithImageRef}>
         {isTextWithImageVisible &&
           textWithImageData.map(({ listData, linkData, text, title }, i) => (
@@ -117,7 +124,11 @@ const Home = () => {
             />
           ))}
       </div>
-      <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
+      <div ref={infoSectionRef}>
+        {isInfoSectionVisible && (
+          <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
+        )}
+      </div>
       <div ref={bottomSectionRef}>
         {isBottomSectionVisible && (
           <>

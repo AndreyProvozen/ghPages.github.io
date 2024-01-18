@@ -36,7 +36,7 @@ const LinkStatistic = ({ linkData }: { linkData: FullLinkDataProps }) => {
             <div className="pb-5 border-b border-gray text-lg font-bold truncate">{linkData.url}</div>
             <Link
               href={shortLink}
-              className="mt-5 text-lg cursor-pointer block border-b border-gray pb-5  truncate text-darkPink hover:text-pink"
+              className="mt-5 text-lg cursor-pointer block border-b border-gray pb-5 truncate text-darkPink hover:text-pink"
             >
               {shortLink}
             </Link>
