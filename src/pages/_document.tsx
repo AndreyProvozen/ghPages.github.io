@@ -6,6 +6,9 @@ const Document = () => (
       <link rel="manifest" href="/manifest.json" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
       <meta name="theme-color" content="#000" />
+
+      <meta property="og:site_name" content="Link Shortener" />
+      <meta property="og:type" content="website" />
     </Head>
     <body>
       <Main />
