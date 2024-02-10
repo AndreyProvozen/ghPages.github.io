@@ -54,7 +54,9 @@ const LinkStatistic = ({ linkData }: { linkData: FullLinkDataProps }) => {
           )}
         </div>
       )}
-      <div ref={bottomSectionRef}>{isBottomSectionVisible && <Footer containerClasses="mt-10" />}</div>
+      <div style={{ minHeight: '430px' }} ref={bottomSectionRef}>
+        {isBottomSectionVisible && <Footer containerClasses="mt-10" />}
+      </div>
     </>
   );
 };

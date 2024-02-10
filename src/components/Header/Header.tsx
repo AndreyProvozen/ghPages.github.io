@@ -21,7 +21,7 @@ const Header: FC<Props> = ({ textBlack, containerClasses = '' }) => {
     //fix me classes
     <div className={`${textBlack ? 'text-black border-b-2 border-gray' : 'text-white'} ${containerClasses} py-5`}>
       <header className="container max-w-screen-desktop mx-auto flex justify-between items-center text-xl">
-        <Link href="/" className="text-3xl font-extrabold max-mobile-small:text-2xl">
+        <Link href="/" className="text-3xl font-extrabold max-mobile-small:text-2xl" translate="no">
           Link Shortener
         </Link>
         {isMobile ? <MobileHeader textBlack={textBlack} session={session} /> : <DesktopHeader session={session} />}

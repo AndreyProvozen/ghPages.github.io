@@ -56,7 +56,7 @@ const Home = () => {
 
   return (
     <>
-      <div className="relative pb-5 h-screen px-5">
+      <div className="relative pb-5 min-h-screen px-5">
         <Image
           src="/images/homeBg.avif"
           alt="Home background"
@@ -74,7 +74,9 @@ const Home = () => {
               'mt-7 my-5 text-white'
             )}
           >
-            <h1 className="text-5xl">Link Shortener</h1>
+            <h1 className="text-5xl" translate="no">
+              Link Shortener
+            </h1>
             <p className="max-w-lg mx-auto">
               Free URL Shortener for transforming long, ugly links into nice, memorable and trackable short URLs
             </p>
