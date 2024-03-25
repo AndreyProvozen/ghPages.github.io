@@ -36,7 +36,7 @@ const Home = () => {
   const [longLink, setLongLink] = useState('');
 
   const dispatch = useAppDispatch();
-  const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 5 });
+  const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 4 });
   const [addNewLink] = useAddNewLinkMutation();
 
   const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
