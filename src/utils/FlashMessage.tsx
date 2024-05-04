@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, RefCallback } from 'react';
 
 import type { flashMessageType } from '@/constants';
 import Close from '@/icons/Close';
@@ -39,13 +39,17 @@ const FlashMessage = () => {
     return () => clearTimeout(timerRef.current);
   }, [flashMessages]);
 
+  const handleRef: RefCallback<HTMLDivElement> = element => {
+    if (element) animationRefs.current.push(element);
+  };
+
   return (
     <div className="fixed w-full bottom-8 z-50 text-white">
       <div className="mx-auto grid gap-3 w-full max-w-md">
         {flashMessages.map(({ type, message }, index) => (
           <div
             key={`${message}-${index}`}
-            ref={element => (animationRefs.current[index] = element)}
+            ref={handleRef}
             className="flex justify-between p-4 rounded-lg animate__animated animate__zoomIn animate__faster"
             style={{ backgroundColor: type }}
           >

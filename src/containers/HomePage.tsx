@@ -4,6 +4,7 @@ import { FormEvent, useState } from 'react';
 
 import { LinksListSkeleton } from '@/atoms/Skeleton';
 import Header from '@/components/Header';
+import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
 import { flashMessageType } from '@/constants';
@@ -16,7 +17,6 @@ import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
-const InfoBlock = dynamic(() => import('@/components/InfoBlock'), { ssr: false });
 const Footer = dynamic(() => import('@/components/Footer'));
 
 const Home = () => {

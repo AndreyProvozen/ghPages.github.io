@@ -17,6 +17,6 @@ const { publicRuntimeConfig } = getConfig();
  * @returns {string} - The value of the configuration variable, or an empty string if not found.
  */
 
-const getConfigVariable = (key: string): string => publicRuntimeConfig[key] || '';
+const getConfigVariable = (key: string): string => publicRuntimeConfig?.[key] || '';
 
 export default getConfigVariable;
