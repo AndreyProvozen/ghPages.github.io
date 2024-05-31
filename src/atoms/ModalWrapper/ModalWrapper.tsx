@@ -25,6 +25,7 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children, onConfirm })
   const closeModal = (isConfirm: boolean) => {
     if (modalRef.current) {
       modalRef.current.classList.add('animate__zoomOut');
+
       setTimeout(() => {
         isConfirm ? onConfirm() : setIsModalOpen(false);
       }, 500);
@@ -32,12 +33,11 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children, onConfirm })
   };
 
   return (
-    // fix me
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions
     <div
       data-testid={MODAL_WRAPPER_TEST_IDS.ROOT}
       onClick={() => closeModal(false)}
       className="fixed top-0 left-0 w-full h-full flex justify-center items-center bg-black z-50 bg-opacity-75"
+      aria-hidden
     >
       <div
         ref={modalRef}

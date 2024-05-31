@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSession } from 'next-auth/react';
 import { useState } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
@@ -10,8 +11,10 @@ import LogOut from '@/icons/LogOut';
 
 const ConfirmSignOut = dynamic(() => import('@/atoms/Modals/ConfirmSignOut'), { ssr: false });
 
-const DesktopHeader = ({ session }) => {
+const DesktopHeader = () => {
   const { push } = useRouter();
+  const { data: session } = useSession();
+
   const [isSignOutModalOpen, setIsSignOutModalOpen] = useState(false);
 
   const dropdownData = session

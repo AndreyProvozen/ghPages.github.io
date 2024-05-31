@@ -22,7 +22,7 @@ interface ReturnedProps {
  * </div>
  * ```
  *
- * @param {Props} props - An object containing options for the IntersectionObserver.
+ * @param {IntersectionObserverInit} options - An object containing options for the IntersectionObserver.
  * @returns {Object} An object containing the `elementRef` and `isVisible` properties.
  **/
 

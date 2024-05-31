@@ -1,7 +1,6 @@
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import type { Session } from 'next-auth';
-import { signOut } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import { FC, useState } from 'react';
 
 import Menu from '@/icons/Menu';
@@ -15,13 +14,14 @@ export interface MenuProps {
 
 interface Props {
   textBlack?: boolean;
-  session: Session | null;
 }
 
 const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
 
-const MobileHeader: FC<Props> = ({ textBlack, session }) => {
+const MobileHeader: FC<Props> = ({ textBlack }) => {
   const { push } = useRouter();
+  const { data: session } = useSession();
+
   const [isOpenDrover, setIsOpenDrover] = useState(false);
 
   const handleToggle = () => setIsOpenDrover(!isOpenDrover);

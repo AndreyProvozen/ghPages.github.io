@@ -4,7 +4,7 @@ import { GitHub, Instagram, Steam } from '@/icons';
 
 import CredentialsSection from './CredentialsSection';
 
-export const linksData = [
+const linksData = [
   {
     icon: <GitHub fill="white" />,
     href: 'https://github.com/AndreyProvozen',

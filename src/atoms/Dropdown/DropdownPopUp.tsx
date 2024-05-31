@@ -1,4 +1,4 @@
-import { Dispatch, FC, ReactElement, SetStateAction } from 'react';
+import { Dispatch, FC, ReactElement, SetStateAction, useCallback } from 'react';
 
 import ClassNames from '@/utils/classNames';
 
@@ -18,10 +18,10 @@ interface Props {
 }
 
 const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen }) => {
-  const handleFunction = (fieldFunction: () => void) => {
+  const handleFunction = useCallback((fieldFunction: DropdownDataProps['fieldFunction']) => {
     fieldFunction();
     setIsOpen(false);
-  };
+  }, []);
 
   return (
     <div
@@ -30,9 +30,7 @@ const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpe
     >
       {dropdownData.map(({ fieldTitle, fieldFunction, fieldImage, customField }, i) => (
         <div data-testid={DROPDOWN_TEST_IDS.POPUP_ITEM} key={`${fieldTitle}${i}`}>
-          {customField ? (
-            customField
-          ) : (
+          {customField || (
             <button
               className={ClassNames('group flex items-center border-b-2 border-pink py-4 w-full text-start', {
                 'first:pt-0': i === 0,

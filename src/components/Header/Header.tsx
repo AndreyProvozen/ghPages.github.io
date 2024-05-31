@@ -1,6 +1,5 @@
 import Link from 'next/link';
-import { useSession } from 'next-auth/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import { ScreenSize } from '@/constants';
 import useMediaQuery from '@/utils/useMediaQuery';
@@ -14,19 +13,19 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ textBlack, containerClasses = '' }) => {
-  const { data: session } = useSession();
   const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
 
+  const HeaderComponent = useMemo(() => (isMobile ? MobileHeader : DesktopHeader), [isMobile]);
+
   return (
-    //fix me classes
-    <div className={`${textBlack ? 'text-black border-b-2 border-gray' : 'text-white'} ${containerClasses} py-5`}>
-      <header className="container max-w-screen-desktop mx-auto flex justify-between items-center text-xl">
+    <header className={`${textBlack ? 'text-black border-b-2 border-gray' : 'text-white'} ${containerClasses} py-5`}>
+      <div className="container max-w-screen-desktop mx-auto flex justify-between items-center text-xl">
         <Link href="/" className="text-3xl font-extrabold max-mobile-small:text-2xl" translate="no">
           Link Shortener
         </Link>
-        {isMobile ? <MobileHeader textBlack={textBlack} session={session} /> : <DesktopHeader session={session} />}
-      </header>
-    </div>
+        <HeaderComponent textBlack={textBlack} />
+      </div>
+    </header>
   );
 };
 

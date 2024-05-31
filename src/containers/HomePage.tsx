@@ -26,9 +26,6 @@ const Home = () => {
   const { elementRef: bottomSectionRef, isVisible: isBottomSectionVisible } = useIntersectionObserver({
     threshold: 0.1,
   });
-  const { elementRef: infoSectionRef, isVisible: isInfoSectionVisible } = useIntersectionObserver({
-    threshold: 0.1,
-  });
   const { elementRef: logoAnimationRef, isVisible: isLogoAnimationVisible } = useIntersectionObserver({
     threshold: 0.3,
   });
@@ -83,7 +80,7 @@ const Home = () => {
           </div>
           <form
             onSubmit={handleOnSubmit}
-            className={`mb-14 w-full relative flex flex-wrap items-stretch max-tablet-small:block`}
+            className="mb-14 w-full relative flex flex-wrap items-stretch max-tablet-small:block"
           >
             <input
               type="search"
@@ -107,11 +104,7 @@ const Home = () => {
         </div>
       </div>
       <QualityBlock containerClasses="container max-w-screen-desktop mx-auto text-center px-5 my-8" />
-      <div style={{ minHeight: '250px' }} ref={infoSectionRef}>
-        {isInfoSectionVisible && (
-          <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
-        )}
-      </div>
+      <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
       <div style={{ minHeight: '1800px' }} ref={textWithImageRef}>
         {isTextWithImageVisible &&
           textWithImageData.map(({ listData, linkData, text, title }, i) => (
@@ -126,11 +119,7 @@ const Home = () => {
             />
           ))}
       </div>
-      <div style={{ minHeight: '250px' }} ref={infoSectionRef}>
-        {isInfoSectionVisible && (
-          <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
-        )}
-      </div>
+      <InfoBlock btnHref="/auth" btnText="Sign up" title="Sign up to see full link statistic" />
       <div style={{ minHeight: '700px' }} ref={bottomSectionRef}>
         {isBottomSectionVisible && (
           <>

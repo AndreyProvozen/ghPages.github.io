@@ -21,9 +21,7 @@ const ClassNames = (...classes: Props[]): string => {
   const newClasses = [];
 
   classes.forEach(value => {
-    if (typeof value === 'string') {
-      return newClasses.push(value);
-    }
+    if (typeof value === 'string') return newClasses.push(value);
 
     for (const key in value) {
       if (Object.prototype.hasOwnProperty.call(value, key) && value[key]) {

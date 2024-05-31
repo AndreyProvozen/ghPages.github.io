@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback } from 'react';
 
 import Chevron from '@/icons/Chevron';
 import ClassNames from '@/utils/classNames';
@@ -17,25 +17,21 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
   const currentPage = parseInt(query?.page as string, 10) || 0;
   const totalPage = Math.ceil(count / perPage);
 
-  const disabledForPrev = useMemo(() => currentPage === 0, [currentPage]);
-  const disabledForNext = useMemo(() => currentPage === totalPage - 1, [currentPage, totalPage]);
+  const disabledForPrev = currentPage === 0;
+  const disabledForNext = currentPage === totalPage - 1;
 
-  const pageCounter = useMemo(() => `Page ${currentPage + 1} of ${totalPage}`, [currentPage, totalPage]);
+  const pageCounter = `Page ${currentPage + 1} of ${totalPage}`;
 
   const updatePage = (page: number) => {
     push({ query: { ...query, page } }, undefined, { shallow: true });
   };
 
   const nextPage = useCallback(() => {
-    if (currentPage < totalPage - 1) {
-      updatePage(currentPage + 1);
-    }
+    if (!disabledForNext) updatePage(currentPage + 1);
   }, [totalPage, currentPage]);
 
   const prevPage = useCallback(() => {
-    if (currentPage > 0) {
-      updatePage(currentPage - 1);
-    }
+    if (!disabledForPrev) updatePage(currentPage - 1);
   }, [currentPage]);
 
   return (
