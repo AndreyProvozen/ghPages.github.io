@@ -10,14 +10,18 @@ interface Props {
 }
 
 const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClasses = 'right-0 w-72' }) => {
-  const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const handleClickOutside = useCallback((e: MouseEvent) => {
-    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-      setIsOpen(false);
-    }
-  }, []);
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleClickOutside = useCallback(
+    (e: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    },
+    [dropdownRef]
+  );
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);

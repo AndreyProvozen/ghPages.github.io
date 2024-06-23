@@ -21,7 +21,7 @@ const HeroBlock: FC<Props> = ({ bgSrc, bgAlt, title, subTitle }) => {
   return (
     <div className="relative px-5 bg-cover bg-center max-h-max text-white">
       <Header />
-      <Image src={bgSrc} alt={bgAlt} priority fill className="object-cover object-center z-[-1]" />
+      <Image className="object-cover object-center z-[-1]" src={bgSrc} alt={bgAlt} priority fill />
       <div
         ref={animationRef}
         className={ClassNames(

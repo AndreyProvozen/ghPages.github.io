@@ -7,11 +7,13 @@ const Error = ({ statusCode }: { statusCode: number }) => (
   <div className="relative min-h-screen flex flex-col justify-center items-center px-5">
     <Header containerClasses="top-0 absolute w-full px-5" />
     <Image
+      className="object-cover object-center z-[-1]"
       src="/images/errorBg.avif"
       alt="Home background"
+      sizes="100vw"
+      quality={75}
       priority
       fill
-      className="object-cover object-center z-[-1]"
     />
     <div className="bg-white rounded-lg w-full max-w-md text-center mx-3 py-7 animate__zoomIn animate__faster animate__animated">
       <p className="text-[10rem] max-mobile:text-[8rem] leading-none font-bold">{statusCode}</p>

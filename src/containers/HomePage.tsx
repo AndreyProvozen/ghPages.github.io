@@ -55,11 +55,13 @@ const Home = () => {
     <>
       <div className="relative pb-5 min-h-screen px-5">
         <Image
+          className="object-cover object-center z-[-1]"
           src="/images/homeBg.avif"
           alt="Home background"
+          quality={75}
+          sizes="100vw"
           priority
           fill
-          className="object-cover object-center z-[-1]"
         />
         <Header />
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg">
