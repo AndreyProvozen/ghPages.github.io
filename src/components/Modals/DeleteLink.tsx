@@ -9,7 +9,7 @@ import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 
-import ModalWrapper from '../ModalWrapper/ModalWrapper';
+import ModalWrapper from '../../atoms/ModalWrapper/ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

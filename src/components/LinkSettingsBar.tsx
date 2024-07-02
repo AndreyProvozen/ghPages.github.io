@@ -9,7 +9,7 @@ import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-const DeleteLinkModal = dynamic(() => import('../atoms/Modals/DeleteLink'), { ssr: false });
+const DeleteLinkModal = dynamic(() => import('./Modals/DeleteLink'), { ssr: false });
 
 const API_HOST = getConfigVariable('API_HOST');
 

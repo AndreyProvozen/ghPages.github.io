@@ -5,26 +5,16 @@ import ClipBoard from '@/icons/ClipBoard';
 import Dropdown from './Dropdown';
 import { DROPDOWN_TEST_IDS } from './testIds';
 
-const mockDropdownProps = {
+const MOCK_DROPDOWN_PROPS = {
   placeholder: <ClipBoard />,
   dropdownData: [
-    {
-      fieldTitle: 'Copy',
-      fieldFunction: jest.fn(),
-      fieldImage: <ClipBoard />,
-    },
-    {
-      fieldTitle: 'Statistic',
-      fieldFunction: jest.fn(),
-    },
-    {
-      fieldTitle: 'Delete',
-      fieldFunction: jest.fn(),
-    },
+    { fieldTitle: 'Copy', fieldFunction: jest.fn(), fieldImage: <ClipBoard /> },
+    { fieldTitle: 'Statistic', fieldFunction: jest.fn() },
+    { fieldTitle: 'Delete', fieldFunction: jest.fn() },
   ],
 };
 
-const setup = () => render(<Dropdown {...mockDropdownProps} />);
+const setup = () => render(<Dropdown {...MOCK_DROPDOWN_PROPS} />);
 
 describe('<Dropdown/>', () => {
   it('should render correctly', () => {
@@ -39,12 +29,12 @@ describe('<Dropdown/>', () => {
     expect(popup).toBeVisible();
 
     const dropdownItems = screen.getAllByTestId(DROPDOWN_TEST_IDS.POPUP_ITEM);
-    expect(dropdownItems).toHaveLength(mockDropdownProps.dropdownData.length);
+    expect(dropdownItems).toHaveLength(MOCK_DROPDOWN_PROPS.dropdownData.length);
 
     const dropdownImage = screen.getByTestId(DROPDOWN_TEST_IDS.POPUP_ITEM_IMAGE);
     expect(dropdownImage).toBeInTheDocument();
 
-    mockDropdownProps.dropdownData.forEach(({ fieldTitle }, index) => {
+    MOCK_DROPDOWN_PROPS.dropdownData.forEach(({ fieldTitle }, index) => {
       const dropdownItem = dropdownItems[index];
       expect(dropdownItem).toBeVisible();
 

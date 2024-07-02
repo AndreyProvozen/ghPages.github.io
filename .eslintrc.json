@@ -1,9 +1,6 @@
 {
   "root": true,
-  "env": {
-    "browser": true,
-    "es6": true
-  },
+  "env": { "browser": true, "es6": true },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
@@ -15,18 +12,8 @@
   ],
   "plugins": ["@typescript-eslint", "prettier"],
   "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2021,
-    "sourceType": "module",
-    "ecmaFeatures": {
-      "jsx": true
-    }
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  },
+  "parserOptions": { "ecmaVersion": 2021, "sourceType": "module", "ecmaFeatures": { "jsx": true } },
+  "settings": { "react": { "version": "detect" } },
   "rules": {
     "no-console": "error",
     "no-debugger": "error",
@@ -35,7 +22,6 @@
     "@typescript-eslint/no-explicit-any": "warn",
     "@next/next/no-title-in-document-head": "off",
     "array-callback-return": "off",
-    "react-hooks/exhaustive-deps": "off",
     "@typescript-eslint/return-await": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "import/order": [
@@ -43,10 +29,7 @@
       {
         "groups": ["builtin", "external", "internal"],
         "newlines-between": "always",
-        "alphabetize": {
-          "order": "asc",
-          "caseInsensitive": true
-        }
+        "alphabetize": { "order": "asc", "caseInsensitive": true }
       }
     ]
   },

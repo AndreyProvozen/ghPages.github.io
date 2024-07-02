@@ -18,10 +18,13 @@ interface Props {
 }
 
 const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpen }) => {
-  const handleFunction = useCallback((fieldFunction: DropdownDataProps['fieldFunction']) => {
-    fieldFunction();
-    setIsOpen(false);
-  }, []);
+  const handleFunction = useCallback(
+    (fieldFunction: DropdownDataProps['fieldFunction']) => {
+      fieldFunction();
+      setIsOpen(false);
+    },
+    [setIsOpen]
+  );
 
   return (
     <div

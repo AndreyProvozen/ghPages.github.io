@@ -14,22 +14,17 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClas
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleClickOutside = useCallback(
-    (e: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    },
-    [dropdownRef]
-  );
+  const handleClickOutside = useCallback((e: MouseEvent) => {
+    if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  }, []);
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
 
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [dropdownRef]);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [dropdownRef, handleClickOutside]);
 
   const toggleDropdown = () => setIsOpen(prevState => !prevState);
 

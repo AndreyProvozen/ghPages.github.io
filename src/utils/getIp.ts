@@ -1,4 +1,4 @@
-import { ipListForLocalhost } from '@/constants';
+import { LOCALHOST_ADDRESSES, ipListForLocalhost } from '@/constants';
 
 /**
  * Get the appropriate IP address for the request, considering localhost scenarios.
@@ -17,10 +17,14 @@ import { ipListForLocalhost } from '@/constants';
  */
 
 const getIp = (remoteAddress: string): string => {
-  const ipForLocalhost = ipListForLocalhost[Math.floor(Math.random() * ipListForLocalhost.length)];
-  const isLocalhost = remoteAddress === '::1' || remoteAddress === '127.0.0.1';
+  const isLocalhost = LOCALHOST_ADDRESSES.includes(remoteAddress);
 
-  return isLocalhost ? ipForLocalhost : remoteAddress;
+  if (isLocalhost) {
+    const randomIndex = Math.floor(Math.random() * ipListForLocalhost.length);
+    return ipListForLocalhost[randomIndex];
+  }
+
+  return remoteAddress;
 };
 
 export default getIp;

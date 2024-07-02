@@ -1,4 +1,4 @@
-import { Dispatch, FC, ReactNode, SetStateAction, useEffect, useRef } from 'react';
+import { Dispatch, FC, ReactNode, SetStateAction, useCallback, useEffect, useRef } from 'react';
 
 import Close from '@/icons/Close';
 
@@ -17,20 +17,21 @@ const ModalWrapper: FC<Props> = ({ setIsModalOpen, title, children, onConfirm })
   useEffect(() => {
     document.body.classList.add('overflow-hidden');
 
-    return () => {
-      document.body.classList.remove('overflow-hidden');
-    };
-  }, [setIsModalOpen]);
+    return () => document.body.classList.remove('overflow-hidden');
+  }, []);
 
-  const closeModal = (isConfirm: boolean) => {
-    if (modalRef.current) {
-      modalRef.current.classList.add('animate__zoomOut');
+  const closeModal = useCallback(
+    (isConfirm: boolean) => {
+      if (modalRef.current) {
+        modalRef.current.classList.add('animate__zoomOut');
 
-      setTimeout(() => {
-        isConfirm ? onConfirm() : setIsModalOpen(false);
-      }, 500);
-    }
-  };
+        setTimeout(() => {
+          isConfirm ? onConfirm() : setIsModalOpen(false);
+        }, 500);
+      }
+    },
+    [onConfirm, setIsModalOpen]
+  );
 
   return (
     <div

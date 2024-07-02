@@ -27,9 +27,10 @@ interface ReturnedProps {
  **/
 
 const useIntersectionObserver = (options: IntersectionObserverInit = {}): ReturnedProps => {
+  const elementRef = useRef(null);
+
   const [isVisible, setIsVisible] = useState(false);
   const [hasIntersected, setHasIntersected] = useState(false);
-  const elementRef = useRef(null);
 
   useEffect(() => {
     if (!hasIntersected) {
@@ -39,10 +40,12 @@ const useIntersectionObserver = (options: IntersectionObserverInit = {}): Return
         if (entry.isIntersecting) setHasIntersected(true);
       }, options);
 
-      if (elementRef.current) observer.observe(elementRef.current);
+      const currentElement = elementRef.current;
+
+      if (currentElement) observer.observe(currentElement);
 
       return () => {
-        if (elementRef.current) observer.unobserve(elementRef.current);
+        if (currentElement) observer.unobserve(currentElement);
       };
     }
   }, [options, hasIntersected]);

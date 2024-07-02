@@ -3,7 +3,8 @@ import { nanoid } from 'nanoid';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth';
 
-import { UrlsModel, UserModel } from '@/models';
+import UrlsModel from '@/models/Urls';
+import UserModel from '@/models/User';
 import connectMongodb from '@/utils/connectMongodb';
 
 import { authConfig } from './auth/[...nextauth]';

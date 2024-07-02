@@ -3,24 +3,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import Drover from './Drover';
 import { DROVER_TEST_IDS } from './testIds';
 
-const droverProps = {
+const MOCK_DROVER_PROPS = {
   menu: [
     { name: 'Home', link: '/' },
-    {
-      name: 'Links',
-      link: '/links',
-    },
+    { name: 'Links', link: '/links' },
     {
       name: 'My profile',
       children: [
-        {
-          name: 'Favorite links',
-          handleFunction: jest.fn(),
-        },
-        {
-          name: 'Sign out',
-          handleFunction: jest.fn(),
-        },
+        { name: 'Favorite links', handleFunction: jest.fn() },
+        { name: 'Sign out', handleFunction: jest.fn() },
       ],
     },
   ],
@@ -28,7 +19,7 @@ const droverProps = {
   handleToggle: jest.fn(),
 };
 
-const setup = (props = {}) => render(<Drover {...droverProps} {...props} />);
+const setup = (props = {}) => render(<Drover {...MOCK_DROVER_PROPS} {...props} />);
 
 describe('<Drover/>', () => {
   it('renders closed Drover', () => {
@@ -51,7 +42,7 @@ describe('<Drover/>', () => {
 
     expect(closeButton).not.toBeDisabled();
     closeButton.click();
-    expect(droverProps.handleToggle).toHaveBeenCalled();
+    expect(MOCK_DROVER_PROPS.handleToggle).toHaveBeenCalled();
   });
 
   it('navigates to submenu and back on button click', () => {

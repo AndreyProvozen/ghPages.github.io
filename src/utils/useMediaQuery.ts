@@ -33,7 +33,7 @@ const useMediaQuery = (query: ScreenSize): boolean => {
     setMatches(mediaQuery.matches);
 
     return () => mediaQuery.removeEventListener('change', handleChange);
-  }, []);
+  }, [query]);
 
   return matches;
 };

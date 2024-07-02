@@ -2,7 +2,7 @@ import { getCookie } from 'cookies-next';
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getServerSession } from 'next-auth/next';
 
-import { UrlsModel } from '@/models';
+import UrlsModel from '@/models/Urls';
 import connectMongodb from '@/utils/connectMongodb';
 
 import { authConfig } from './auth/[...nextauth]';

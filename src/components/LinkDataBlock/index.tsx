@@ -12,7 +12,7 @@ import useMediaQuery from '@/utils/useMediaQuery';
 
 import SettingsDropDown from './SettingsDropDown';
 
-const DeleteLinkModal = dynamic(() => import('@/atoms/Modals/DeleteLink'), { ssr: false });
+const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });
 const Pagination = dynamic(() => import('@/atoms/Pagination'), { ssr: false });
 
 interface Props {

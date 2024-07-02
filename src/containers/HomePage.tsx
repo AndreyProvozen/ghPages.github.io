@@ -2,11 +2,11 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { FormEvent, useState } from 'react';
 
-import { LinksListSkeleton } from '@/atoms/Skeleton';
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
+import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
 import { flashMessageType } from '@/constants';
 import { textWithImageData, questions } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';

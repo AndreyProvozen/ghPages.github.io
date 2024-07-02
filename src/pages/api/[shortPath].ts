@@ -1,7 +1,7 @@
 import { getCookie, setCookie } from 'cookies-next';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { UrlsModel } from '@/models';
+import UrlsModel from '@/models/Urls';
 import connectMongodb from '@/utils/connectMongodb';
 import updateMetricsData from '@/utils/updateMetricsData';
 

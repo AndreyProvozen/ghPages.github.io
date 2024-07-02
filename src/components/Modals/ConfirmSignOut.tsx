@@ -1,7 +1,7 @@
 import { signOut } from 'next-auth/react';
 import { Dispatch, FC, SetStateAction } from 'react';
 
-import ModalWrapper from '../ModalWrapper/ModalWrapper';
+import ModalWrapper from '../../atoms/ModalWrapper/ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

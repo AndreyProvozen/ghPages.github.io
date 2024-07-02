@@ -9,7 +9,7 @@ import Dropdown from '@/atoms/Dropdown';
 import Heart from '@/icons/Heart';
 import LogOut from '@/icons/LogOut';
 
-const ConfirmSignOut = dynamic(() => import('@/atoms/Modals/ConfirmSignOut'), { ssr: false });
+const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
 
 const DesktopHeader = () => {
   const { push } = useRouter();

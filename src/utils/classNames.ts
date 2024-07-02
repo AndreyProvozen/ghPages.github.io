@@ -18,16 +18,14 @@ type Props = string | ObjectType;
  */
 
 const ClassNames = (...classes: Props[]): string => {
-  const newClasses = [];
+  const newClasses: string[] = [];
 
   classes.forEach(value => {
     if (typeof value === 'string') return newClasses.push(value);
 
-    for (const key in value) {
-      if (Object.prototype.hasOwnProperty.call(value, key) && value[key]) {
-        newClasses.push(key);
-      }
-    }
+    Object.keys(value).forEach(key => {
+      if (value[key]) newClasses.push(key);
+    });
   });
 
   return newClasses.join(' ');
