@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { FC, useCallback } from 'react';
 
 import Chevron from '@/icons/Chevron';
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 
 import { PAGINATION_TEST_IDS } from './testIds';
 
@@ -42,8 +42,8 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
         className="flex"
         disabled={disabledForPrev}
       >
-        <Chevron className={ClassNames('rotate-90', { 'fill-gray': disabledForPrev })} width={30} height={30} />
-        <b className={ClassNames('text-xl', { 'text-gray': disabledForPrev })}>Prev</b>
+        <Chevron className={classNames('rotate-90', { 'fill-gray': disabledForPrev })} width={30} height={30} />
+        <b className={classNames('text-xl', { 'text-gray': disabledForPrev })}>Prev</b>
       </button>
       <b className="text-xl mx-5"> {pageCounter}</b>
       <button
@@ -52,8 +52,8 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
         data-testid={PAGINATION_TEST_IDS.NEXT_BUTTON}
         disabled={disabledForNext}
       >
-        <b className={ClassNames('text-xl', { 'text-gray': disabledForNext })}>Next</b>
-        <Chevron className={ClassNames('-rotate-90', { 'fill-gray': disabledForNext })} width={30} height={30} />
+        <b className={classNames('text-xl', { 'text-gray': disabledForNext })}>Next</b>
+        <Chevron className={classNames('-rotate-90', { 'fill-gray': disabledForNext })} width={30} height={30} />
       </button>
     </div>
   );

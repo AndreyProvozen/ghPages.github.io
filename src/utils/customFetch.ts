@@ -1,8 +1,8 @@
-type OptionProps = {
+interface OptionProps {
   method?: string;
   headers?: HeadersInit;
   body?: BodyInit;
-};
+}
 
 /**
  * A custom asynchronous function for making HTTP requests using the fetch API.

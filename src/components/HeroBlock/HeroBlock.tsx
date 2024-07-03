@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { FC } from 'react';
 
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 import Header from '../Header';
@@ -24,7 +24,7 @@ const HeroBlock: FC<Props> = ({ bgSrc, bgAlt, title, subTitle }) => {
       <Image className="object-cover object-center z-[-1]" src={bgSrc} alt={bgAlt} priority fill />
       <div
         ref={animationRef}
-        className={ClassNames(
+        className={classNames(
           'container max-w-screen-desktop-small text-center mx-auto pb-20',
           {
             'animate__zoomIn animate__faster animate__animated': isAnimationVisible,

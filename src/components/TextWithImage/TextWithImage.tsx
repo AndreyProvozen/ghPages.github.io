@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { FC, useMemo } from 'react';
 
 import Star from '@/icons/Star';
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
@@ -28,7 +28,7 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
     <div
       ref={animationRef}
       data-testid={TEXT_WITH_IMAGE_TEST_IDS.ROOT}
-      className={ClassNames(
+      className={classNames(
         { 'flex-row-reverse': imageFirst },
         { invisible: !isAnimationVisible },
         'flex justify-between max-w-screen-desktop px-5 mx-auto max-desktop-small:block overflow-hidden',
@@ -40,12 +40,12 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
         alt={linkData.alt}
         height={400}
         width={500}
-        className={ClassNames('px-5 max-desktop-small:mx-auto animate__animated', {
+        className={classNames('px-5 max-desktop-small:mx-auto animate__animated', {
           [imageTransition]: isAnimationVisible,
         })}
       />
       <div
-        className={ClassNames('pt-5 max-w-[700px] max-desktop-small:mx-auto animate__animated', {
+        className={classNames('pt-5 max-w-[700px] max-desktop-small:mx-auto animate__animated', {
           [textTransition]: isAnimationVisible,
         })}
       >

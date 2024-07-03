@@ -9,7 +9,7 @@ type Props = string | ObjectType;
  *
  * @example
  * ```typescript
- * const combinedClasses = ClassNames('my-class', 'another-class', { active: true, disabled: false });
+ * const combinedClasses = classNames('my-class', 'another-class', { active: true, disabled: false });
  * // Returns: 'my-class another-class active'
  * ```
  *
@@ -17,7 +17,7 @@ type Props = string | ObjectType;
  * @returns {string} - A string containing concatenated class names.
  */
 
-const ClassNames = (...classes: Props[]): string => {
+const classNames = (...classes: Props[]): string => {
   const newClasses: string[] = [];
 
   classes.forEach(value => {
@@ -31,4 +31,4 @@ const ClassNames = (...classes: Props[]): string => {
   return newClasses.join(' ');
 };
 
-export default ClassNames;
+export default classNames;

@@ -1,6 +1,6 @@
 import { Dispatch, FC, ReactElement, SetStateAction, useCallback } from 'react';
 
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 
 import { DROPDOWN_TEST_IDS } from './testIds';
 
@@ -35,7 +35,7 @@ const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpe
         <div data-testid={DROPDOWN_TEST_IDS.POPUP_ITEM} key={`${fieldTitle}${i}`}>
           {customField || (
             <button
-              className={ClassNames('group flex items-center border-b-2 border-pink py-4 w-full text-start', {
+              className={classNames('group flex items-center border-b-2 border-pink py-4 w-full text-start', {
                 'first:pt-0': i === 0,
                 'last:border-0': i === dropdownData.length - 1,
               })}

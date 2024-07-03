@@ -77,46 +77,33 @@ export const textWithImageData = [
   },
 ];
 
-export const authWith = [
-  {
-    image: '/svg/google.svg',
-    text: 'Continue with Google',
-    provider: 'google',
-  },
-  {
-    image: '/svg/gitHub.svg',
-    text: 'Continue with GitHub',
-    provider: 'github',
-  },
-];
-
 export const credits = [
   {
     href: 'https://www.freepik.com/free-photo/3d-grunge-room-interior-with-spotlight-smoky-atmosphere-background_6038271.htm',
     text: 'Image by kjpargeter on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/grunge-dusty-texture-background_3857029.htm#&position=21&from_view=search',
+    href: 'https://www.freepik.com/free-vector/grunge-dusty-texture-background_3857029.htm',
     text: 'Image by kjpargeter on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/statistical-analysis-man-cartoon-character-with-magnifying-glass-analyzing-data-circular-diagram-with-colorful-segments-statistics-audit-research-concept-illustration_11668491.htm#&position=4&from_view=collections',
+    href: 'https://www.freepik.com/free-vector/statistical-analysis-man-cartoon-character-with-magnifying-glass-analyzing-data-circular-diagram-with-colorful-segments-statistics-audit-research-concept-illustration_11668491.htm',
     text: 'Image by vectorjuice on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/environment-data-analytics-abstract-concept_12085726.htm#&position=2&from_view=collections',
+    href: 'https://www.freepik.com/free-vector/environment-data-analytics-abstract-concept_12085726.htm',
     text: 'Image by vectorjuice on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/site-stats-concept-illustration_7140739.htm#&position=2&from_view=collections',
+    href: 'https://www.freepik.com/free-vector/site-stats-concept-illustration_7140739.htm',
     text: 'Image by storyset on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-vector/setup-analytics-concept-illustration_7140754.htm#&position=0&from_view=collections',
+    href: 'https://www.freepik.com/free-vector/setup-analytics-concept-illustration_7140754.htm',
     text: 'Image by storyset on Freepik',
   },
   {
-    href: 'https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&from_view=search&track=robertav1_2_sidr',
+    href: 'https://www.freepik.com/free-photo/digital-presentation-related-performance-business-using-graph_13463608.htm#query=statistic&position=17&track=robertav1_2_sidr',
     text: 'Image by rawpixel.com on Freepik',
   },
   {
@@ -124,7 +111,7 @@ export const credits = [
     text: 'Multiple Devices icon by Icons8',
   },
   {
-    href: 'https://www.freepik.com/free-photo/old-black-background-grunge-texture-blackboard-chalkboard-concrete_14055416.htm#query=background&position=31&from_view=search&track=sph',
+    href: 'https://www.freepik.com/free-photo/old-black-background-grunge-texture-blackboard-chalkboard-concrete_14055416.htm#query=background&position=31&track=sph',
     text: 'Image by benzoix on Freepik',
   },
   {

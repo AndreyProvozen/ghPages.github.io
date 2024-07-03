@@ -26,6 +26,7 @@ export interface FullLinkDataProps extends linkDataProps {
   metrics: metricsProps[];
 }
 
+export const LOCALHOST_ADDRESSES = ['::1', '127.0.0.1'];
 export const ipListForLocalhost = ['161.184.29.248', '185.237.74.247', '195.140.184.24', '1.32.231.255'];
 
 export enum ScreenSize {

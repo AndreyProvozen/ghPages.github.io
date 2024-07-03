@@ -1,20 +1,13 @@
-import Head from 'next/head';
-
+import PageMeta from '@/atoms/PageMeta';
 import Home from '@/containers/HomePage';
 
-const metaTitle = 'Link Shortener home';
-const metaDescription =
+const META_TITLE = 'Link Shortener home';
+const META_DESCRIPTION =
   'Create short, custom links with ease using our Link Shortener. Boost your online presence and track link clicks with our advanced analytics. Try it now for free!';
 
 const HomePage = () => (
   <>
-    <Head>
-      <title>{metaTitle}</title>
-      <meta name="description" content={metaDescription} />
-      <meta name="robots" content="index" />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={metaDescription} />
-    </Head>
+    <PageMeta title={META_TITLE} description={META_DESCRIPTION} noIndex={false} />
     <Home />
   </>
 );

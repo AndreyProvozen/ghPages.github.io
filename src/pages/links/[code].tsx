@@ -1,30 +1,23 @@
 import { GetServerSidePropsContext } from 'next';
-import Head from 'next/head';
 
+import PageMeta from '@/atoms/PageMeta';
 import LinkStatistic from '@/containers/LinkStatisticPage';
 
 import { GetLinkFullData } from '../api/link';
 
-const metaTitle = 'Shortened Link Page';
-const metaDescription =
+const META_TITLE = 'Shortened Link Page';
+const META_DESCRIPTION =
   'Shortened Link Page provides comprehensive insights and analytics for your shared links. Gain a deep understanding of user interactions, click rates, and engagement metrics, all in one centralized dashboard. Track the performance of your links, measure their impact, and optimize your strategies for maximum effectiveness. Explore detailed statistics, visualize trends, and make data-driven decisions to enhance your link sharing experience.';
 
 const LinkStatisticPage = ({ data }) => (
   <>
-    <Head>
-      <title>{metaTitle}</title>
-      <meta name="description" content={metaDescription} />
-      <meta name="robots" content="noindex" />
-      <meta property="og:title" content={metaTitle} />
-      <meta property="og:description" content={metaDescription} />
-    </Head>
+    <PageMeta title={META_TITLE} description={META_DESCRIPTION} noIndex />
     <LinkStatistic linkData={JSON.parse(data || '')} />
   </>
 );
 
 export const getServerSideProps = async (context: GetServerSidePropsContext) => {
-  const { code } = context.query;
-  const data = await GetLinkFullData(String(code));
+  const data = await GetLinkFullData(String(context.query.code));
 
   return { props: { data } };
 };

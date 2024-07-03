@@ -17,15 +17,19 @@ const Accordion: FC<Props> = ({ questions }) => {
     [activeQuestions]
   );
 
-  return questions.map(({ title, description }) => (
-    <AccordionItem
-      title={title}
-      description={description}
-      key={title}
-      isOpened={activeQuestions === title}
-      onClick={() => toggleActiveQuestions(title)}
-    />
-  ));
+  return (
+    <>
+      {questions.map(({ title, description }) => (
+        <AccordionItem
+          title={title}
+          description={description}
+          key={title}
+          isOpened={activeQuestions === title}
+          onClick={() => toggleActiveQuestions(title)}
+        />
+      ))}
+    </>
+  );
 };
 
 export default Accordion;

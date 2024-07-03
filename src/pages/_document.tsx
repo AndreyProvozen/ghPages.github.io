@@ -8,6 +8,7 @@ const Document = () => (
       <meta name="theme-color" content="#000" />
 
       <meta property="og:site_name" content="Link Shortener" />
+      <meta name="keywords" content="link shortener, custom links, online presence, link analytics" />
       <meta property="og:type" content="website" />
     </Head>
     <body>

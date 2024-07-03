@@ -1,9 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FC } from 'react';
 
 import Header from '@/components/Header/Header';
 
-const Error = ({ statusCode }: { statusCode: number }) => (
+interface Props {
+  statusCode: number;
+}
+
+const Error: FC<Props> = ({ statusCode }) => (
   <div className="relative min-h-screen flex flex-col justify-center items-center px-5">
     <Header containerClasses="top-0 absolute w-full px-5" />
     <Image
@@ -11,7 +16,6 @@ const Error = ({ statusCode }: { statusCode: number }) => (
       src="/images/errorBg.avif"
       alt="Home background"
       sizes="100vw"
-      quality={75}
       priority
       fill
     />

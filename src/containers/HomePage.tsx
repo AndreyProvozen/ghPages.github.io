@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useState, useCallback } from 'react';
 
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
@@ -12,12 +12,12 @@ import { textWithImageData, questions } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });
-const Footer = dynamic(() => import('@/components/Footer'));
+const Footer = dynamic(() => import('@/components/Footer'), { ssr: false });
 
 const Home = () => {
   const { elementRef: textWithImageRef, isVisible: isTextWithImageVisible } = useIntersectionObserver({
@@ -36,20 +36,29 @@ const Home = () => {
   const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 4 });
   const [addNewLink] = useAddNewLinkMutation();
 
-  const handleOnSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleOnSubmit = useCallback(
+    async (e: FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      e.preventDefault();
 
-    const response = await addNewLink({ url: longLink });
-    setLongLink('');
-    // fix me error type
-    dispatch(
-      addNewFlashMessage(
-        'error' in response && 'data' in response.error
-          ? { message: response.error.data as string, type: flashMessageType.ERROR }
-          : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
-      )
-    );
-  };
+      e.preventDefault();
+
+      const response = await addNewLink({ url: longLink });
+      setLongLink('');
+      dispatch(
+        addNewFlashMessage(
+          'error' in response && 'data' in response.error
+            ? { message: response.error.data as string, type: flashMessageType.ERROR }
+            : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
+        )
+      );
+    },
+    [addNewLink, dispatch, longLink]
+  );
+
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setLongLink(e.target.value);
+  }, []);
 
   return (
     <>
@@ -58,7 +67,6 @@ const Home = () => {
           className="object-cover object-center z-[-1]"
           src="/images/homeBg.avif"
           alt="Home background"
-          quality={75}
           sizes="100vw"
           priority
           fill
@@ -67,7 +75,7 @@ const Home = () => {
         <div className="container max-w-screen-desktop-small text-center mx-auto text-lg">
           <div
             ref={logoAnimationRef}
-            className={ClassNames(
+            className={classNames(
               { invisible: !isLogoAnimationVisible },
               { 'animate__fadeInDown animate__animated': isLogoAnimationVisible },
               'mt-7 my-5 text-white'
@@ -87,7 +95,7 @@ const Home = () => {
             <input
               type="search"
               value={longLink}
-              onChange={e => setLongLink(e.target.value)}
+              onChange={handleInputChange}
               placeholder="Paste the URL to be shortened"
               className="rounded-r bg-white border-[1px] border-gray flex-auto relative m-0 rounded-l px-3 py-2.5 max-tablet-small:w-full max-tablet-small:rounded-r focus:outline-none focus:border-pink"
             />

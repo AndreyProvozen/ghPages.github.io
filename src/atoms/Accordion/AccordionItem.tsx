@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
 import Chevron from '@/icons/Chevron';
-import ClassNames from '@/utils/classNames';
+import classNames from '@/utils/classNames';
 
 interface Props {
   title: string;
@@ -17,7 +17,7 @@ const AccordionItem: FC<Props> = ({ title, description, isOpened, onClick }) => 
       <Chevron
         width="30px"
         height="30px"
-        className={ClassNames('transform transition ease-out duration-300', { 'rotate-180': isOpened })}
+        className={classNames('transform transition ease-out duration-300', { 'rotate-180': isOpened })}
       />
     </button>
     <div
