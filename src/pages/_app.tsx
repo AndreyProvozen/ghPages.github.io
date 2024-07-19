@@ -12,10 +12,7 @@ import FlashMessage from '@/utils/FlashMessage';
 const App = ({ Component, pageProps }: AppProps) => (
   <>
     <Head>
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=2.0, minimal-ui" />
     </Head>
     <Provider store={store}>
       <SessionProvider session={pageProps.session}>
