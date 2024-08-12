@@ -20,8 +20,8 @@ const getIp = (remoteAddress: string): string => {
   const isLocalhost = LOCALHOST_ADDRESSES.includes(remoteAddress);
 
   if (isLocalhost) {
-    const randomIndex = Math.floor(Math.random() * ipListForLocalhost.length);
-    return ipListForLocalhost[randomIndex];
+    const randomIndex = Math.floor(Math.random() * IP_LIST_FOR_LOCALHOST.length);
+    return IP_LIST_FOR_LOCALHOST[randomIndex];
   }
 
   return remoteAddress;

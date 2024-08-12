@@ -11,18 +11,18 @@ interface PieChartData {
   }[];
 }
 
-const DEFAULT_PIE_STATE =  {
-    labels: [],
-    datasets: [
-      {
-        label: 'Clicked',
-        data: [],
-        backgroundColor: [],
-        borderColor: [],
-        borderWidth: 1,
-      },
-    ],
-  }
+const DEFAULT_PIE_STATE = {
+  labels: [],
+  datasets: [
+    {
+      label: 'Clicked',
+      data: [],
+      backgroundColor: [],
+      borderColor: [],
+      borderWidth: 1,
+    },
+  ],
+};
 
 /**
  * Generates pie chart data based on a list of values and labels.
@@ -47,14 +47,14 @@ const DEFAULT_PIE_STATE =  {
  */
 
 const getPieChartData = (list: Record<string, number>): PieChartData => {
-  const pieData = DEFAULT_PIE_STATE
+  const pieData = DEFAULT_PIE_STATE;
 
   Object.entries(list).forEach(([label, value]) => {
     const { color, colorWithOpacity } = getRandomColor(0.4);
 
     pieData.labels.push(label);
-    pieData.datasets[0] = {data:value, backgroundColor:colorWithOpacity, borderColor:color}
-  })
+    pieData.datasets[0] = { data: value, backgroundColor: colorWithOpacity, borderColor: color };
+  });
 
   return pieData;
 };

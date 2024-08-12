@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import {type FC, useCallback, useMemo } from 'react';
+import { type FC, useCallback, useMemo } from 'react';
 
 import Chevron from '@/icons/Chevron';
 import classNames from '@/utils/classNames';
@@ -20,19 +20,22 @@ const Pagination: FC<Props> = ({ perPage, count }) => {
   const disabledForPrev = useMemo(() => currentPage === 0, [currentPage]);
   const disabledForNext = useMemo(() => currentPage === totalPage - 1, [currentPage, totalPage]);
 
-  const pageCounter =useMemo(() => `Page ${currentPage + 1} of ${totalPage}`, [currentPage, totalPage]);
+  const pageCounter = useMemo(() => `Page ${currentPage + 1} of ${totalPage}`, [currentPage, totalPage]);
 
-  const updatePage = useCallback((page: number) => {
-    push({ query: { ...query, page } }, undefined, { shallow: true });
-  }, [push, query]);
+  const updatePage = useCallback(
+    (page: number) => {
+      push({ query: { ...query, page } }, undefined, { shallow: true });
+    },
+    [push, query]
+  );
 
   const nextPage = useCallback(() => {
     if (!disabledForNext) updatePage(currentPage + 1);
-  }, [totalPage, currentPage]);
+  }, [disabledForNext, updatePage, currentPage]);
 
   const prevPage = useCallback(() => {
     if (!disabledForPrev) updatePage(currentPage - 1);
-  }, [currentPage]);
+  }, [currentPage, disabledForPrev, updatePage]);
 
   return (
     <div className="flex justify-center my-4">

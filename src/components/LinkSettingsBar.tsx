@@ -74,7 +74,7 @@ const LinkSettingsBar = ({ link }) => {
         ),
       },
     ],
-    [isSmallMobile, link, favoriteList]
+    [isSmallMobile, isFavoriteLink, link.code, dispatch, favoriteList]
   );
 
   return (

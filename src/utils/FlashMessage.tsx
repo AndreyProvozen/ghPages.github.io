@@ -1,4 +1,4 @@
-import { useEffect, useRef,type RefCallback } from 'react';
+import { useEffect, useRef, type RefCallback } from 'react';
 
 import { type flashMessageType } from '@/constants';
 import Close from '@/icons/Close';
@@ -18,8 +18,8 @@ const FlashMessage = () => {
   const animationRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    const isFlashMessagesExist = flashMessages.length > 0
-    
+    const isFlashMessagesExist = flashMessages.length > 0;
+
     if (isFlashMessagesExist) {
       timerRef.current = setTimeout(() => {
         animationRefs.current.forEach((ref, index) => {
@@ -39,7 +39,7 @@ const FlashMessage = () => {
     }
 
     return () => clearTimeout(timerRef.current);
-  }, [flashMessages]);
+  }, [dispatch, flashMessages]);
 
   const handleRef: RefCallback<HTMLDivElement> = element => {
     if (element) animationRefs.current.push(element);

@@ -43,7 +43,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
         fieldImage: <Trash />,
       },
     ],
-    [data]
+    [data, dispatch, push, setIsDeleteModalOpen, setIsModalOpen]
   );
 
   return (

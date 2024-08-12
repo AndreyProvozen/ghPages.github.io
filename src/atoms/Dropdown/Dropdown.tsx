@@ -1,6 +1,6 @@
 import { FC, ReactElement, useCallback, useEffect, useRef, useState } from 'react';
 
-import DropdownPopUp, {type DropdownDataProps } from './DropdownPopUp';
+import DropdownPopUp, { type DropdownDataProps } from './DropdownPopUp';
 import { DROPDOWN_TEST_IDS } from './testIds';
 
 interface Props {
@@ -26,7 +26,7 @@ const Dropdown: FC<Props> = ({ dropdownData = [], placeholder, listContainerClas
     return () => document.removeEventListener('click', handleClickOutside);
   }, [dropdownRef, handleClickOutside]);
 
-  const toggleDropdown = useCallback(() => setIsOpen(prevState => !prevState),[]) 
+  const toggleDropdown = useCallback(() => setIsOpen(prevState => !prevState), []);
 
   return (
     <div className="relative text-white" ref={dropdownRef}>

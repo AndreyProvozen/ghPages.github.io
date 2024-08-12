@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import {type ScreenSize } from '@/constants';
+import { type ScreenSize } from '@/constants';
 
 /**
  * A custom React hook that allows you to check if a given media query matches the current screen size.

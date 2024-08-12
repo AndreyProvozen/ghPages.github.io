@@ -49,7 +49,7 @@ const updateMetricsData = async (metrics: metricsProps[], headers: IncomingHttpH
     } else {
       metrics.push({ title, data: { [field]: 1 } });
     }
-  })
+  });
 };
 
 export default updateMetricsData;

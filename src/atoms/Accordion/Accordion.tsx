@@ -1,4 +1,4 @@
-import {type FC, useCallback, useState } from 'react';
+import { type FC, useCallback, useState } from 'react';
 
 import AccordionItem from './AccordionItem';
 

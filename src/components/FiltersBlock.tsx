@@ -28,7 +28,7 @@ const FiltersBlock = () => {
     }
 
     updateURL(link && `searchString=${link}`, showFavoriteList && 'search=favorite');
-  }, [link, showFavoriteList]);
+  }, [link, showFavoriteList, updateURL]);
 
   return (
     <div className="flex justify-between w-full items-start border-b border-gray mb-5 gap-5">

@@ -1,4 +1,4 @@
-import {type Dispatch, type FC, type ReactNode, type SetStateAction, useCallback, useEffect, useRef } from 'react';
+import { type Dispatch, type FC, type ReactNode, type SetStateAction, useCallback, useEffect, useRef } from 'react';
 
 import Close from '@/icons/Close';
 
