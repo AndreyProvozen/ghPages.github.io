@@ -1,4 +1,4 @@
-import { LOCALHOST_ADDRESSES, ipListForLocalhost } from '@/constants';
+import { LOCALHOST_ADDRESSES, IP_LIST_FOR_LOCALHOST } from '@/constants';
 
 /**
  * Get the appropriate IP address for the request, considering localhost scenarios.

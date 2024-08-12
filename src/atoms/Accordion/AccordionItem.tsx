@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import {type FC } from 'react';
 
 import Chevron from '@/icons/Chevron';
 import classNames from '@/utils/classNames';

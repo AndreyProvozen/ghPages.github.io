@@ -1,8 +1,8 @@
-import type { IncomingHttpHeaders } from 'http';
+import { type IncomingHttpHeaders } from 'http';
 
 import { UAParser } from 'ua-parser-js';
 
-import type { metricsProps } from '@/constants';
+import { type metricsProps } from '@/constants';
 
 import customFetch from './customFetch';
 import getIp from './getIp';
@@ -38,7 +38,7 @@ const updateMetricsData = async (metrics: metricsProps[], headers: IncomingHttpH
     { title: 'Country clicks', field: country },
   ];
 
-  for (const { title, field } of metricFields) {
+  metricFields.forEach(({ title, field }) => {
     const existingMetric = metrics.find(metric => metric.title === title);
 
     if (existingMetric) {
@@ -49,7 +49,7 @@ const updateMetricsData = async (metrics: metricsProps[], headers: IncomingHttpH
     } else {
       metrics.push({ title, data: { [field]: 1 } });
     }
-  }
+  })
 };
 
 export default updateMetricsData;

@@ -1,4 +1,4 @@
-import { Dispatch, FC, ReactElement, SetStateAction, useCallback } from 'react';
+import {type Dispatch, type FC, type ReactElement, type SetStateAction, useCallback } from 'react';
 
 import classNames from '@/utils/classNames';
 
@@ -49,7 +49,7 @@ const DropdownPopUp: FC<Props> = ({ dropdownData, listContainerClasses, setIsOpe
                   {fieldImage}
                 </div>
               )}
-              <div className="text-xl group-hover:text-lightPink">{fieldTitle}</div>
+              <p className="m-0 text-xl group-hover:text-lightPink">{fieldTitle}</p>
             </button>
           )}
         </div>

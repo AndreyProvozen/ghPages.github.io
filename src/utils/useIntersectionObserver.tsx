@@ -34,10 +34,10 @@ const useIntersectionObserver = (options: IntersectionObserverInit = {}): Return
 
   useEffect(() => {
     if (!hasIntersected) {
-      const observer = new IntersectionObserver(([entry]) => {
-        setIsVisible(entry.isIntersecting);
+      const observer = new IntersectionObserver(([{isIntersecting}]) => {
+        setIsVisible(isIntersecting);
 
-        if (entry.isIntersecting) setHasIntersected(true);
+        if (isIntersecting) setHasIntersected(true);
       }, options);
 
       const currentElement = elementRef.current;

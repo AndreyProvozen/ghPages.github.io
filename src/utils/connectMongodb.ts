@@ -1,4 +1,4 @@
-import mongoose, { ConnectOptions, Connection } from 'mongoose';
+import mongoose, { type ConnectOptions, type Connection } from 'mongoose';
 
 import getConfigVariable from './getConfigVariable';
 

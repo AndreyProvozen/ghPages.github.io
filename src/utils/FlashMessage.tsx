@@ -1,6 +1,6 @@
-import { useEffect, useRef, RefCallback } from 'react';
+import { useEffect, useRef,type RefCallback } from 'react';
 
-import type { flashMessageType } from '@/constants';
+import { type flashMessageType } from '@/constants';
 import Close from '@/icons/Close';
 import { removeFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch, useAppSelector } from '@/store/storeHooks';
@@ -18,7 +18,9 @@ const FlashMessage = () => {
   const animationRefs = useRef<HTMLDivElement[]>([]);
 
   useEffect(() => {
-    if (flashMessages.length > 0) {
+    const isFlashMessagesExist = flashMessages.length > 0
+    
+    if (isFlashMessagesExist) {
       timerRef.current = setTimeout(() => {
         animationRefs.current.forEach((ref, index) => {
           if (!ref) return;
@@ -29,7 +31,7 @@ const FlashMessage = () => {
         });
 
         setTimeout(() => {
-          if (flashMessages.length > 0) {
+          if (isFlashMessagesExist) {
             dispatch(removeFlashMessage(0));
           }
         }, 300);
