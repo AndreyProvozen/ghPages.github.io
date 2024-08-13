@@ -27,7 +27,7 @@ const LinksList: FC = () => {
 
   const { data, isLoading } = linksQuery;
 
-  const [perPage] = useState(10);
+  const [perPage] = useState(9);
 
   return (
     <>
