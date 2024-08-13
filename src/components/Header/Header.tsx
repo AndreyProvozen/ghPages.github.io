@@ -1,11 +1,12 @@
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { FC, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 
-import { ScreenSize } from '@/constants';
+import { SCREEN_SIZES } from '@/constants';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-import DesktopHeader from './DesktopHeader';
-import MobileHeader from './MobileHeader';
+const DesktopHeader = dynamic(() => import('./DesktopHeader'), { ssr: false });
+const MobileHeader = dynamic(() => import('./MobileHeader'), { ssr: false });
 
 interface Props {
   textBlack?: boolean;
@@ -13,7 +14,7 @@ interface Props {
 }
 
 const Header: FC<Props> = ({ textBlack, containerClasses = '' }) => {
-  const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
+  const isMobile = useMediaQuery(SCREEN_SIZES.TABLET_BELOW);
 
   const HeaderComponent = useMemo(() => (isMobile ? MobileHeader : DesktopHeader), [isMobile]);
 

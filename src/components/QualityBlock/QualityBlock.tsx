@@ -1,12 +1,16 @@
+import { type FC } from 'react';
+
 import QualitiesList from './QualityList';
 
-const QualitiesBlock = ({ containerClasses = '' }) => {
-  return (
-    <div className={containerClasses}>
-      <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
-      <QualitiesList />
-    </div>
-  );
-};
+interface Props {
+  containerClasses?: string;
+}
+
+const QualitiesBlock: FC<Props> = ({ containerClasses = '' }) => (
+  <div className={containerClasses}>
+    <h2 className="text-4xl font-bold mb-5">Our qualities</h2>
+    <QualitiesList />
+  </div>
+);
 
 export default QualitiesBlock;

@@ -17,10 +17,10 @@ interface OptionProps {
  * @returns {Promise<any>} - A promise that resolves to the parsed JSON response from the server.
  */
 
-const customFetch = async <T>(
+const customFetch = async (
   url: string,
   { method = 'GET', headers = {}, body = null }: OptionProps = {}
-): Promise<T> => {
+): Promise<any> => {
   try {
     const response = await fetch(url, { method, headers, body });
 

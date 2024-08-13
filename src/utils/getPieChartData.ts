@@ -11,7 +11,7 @@ interface PieChartData {
   }[];
 }
 
-const DEFAULT_PIE_STATE = {
+const DEFAULT_PIE_STATE: PieChartData = {
   labels: [],
   datasets: [
     {
@@ -53,7 +53,9 @@ const getPieChartData = (list: Record<string, number>): PieChartData => {
     const { color, colorWithOpacity } = getRandomColor(0.4);
 
     pieData.labels.push(label);
-    pieData.datasets[0] = { data: value, backgroundColor: colorWithOpacity, borderColor: color };
+    pieData.datasets[0].data.push(value);
+    pieData.datasets[0].backgroundColor.push(colorWithOpacity);
+    pieData.datasets[0].borderColor.push(color);
   });
 
   return pieData;

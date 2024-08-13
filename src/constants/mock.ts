@@ -1,4 +1,4 @@
-export const questions = [
+export const MOCK_QUESTIONS = [
   {
     title: 'What is a URL shortener?',
     description:
@@ -21,7 +21,7 @@ export const questions = [
   },
 ];
 
-export const textWithImageData = [
+export const MOCK_TEXT_WITH_IMAGE = [
   {
     title: 'Link Performance',
     listData: [

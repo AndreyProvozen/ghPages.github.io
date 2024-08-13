@@ -1,14 +1,14 @@
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
-import { FormEvent, useState, useCallback } from 'react';
+import { type FormEvent, type ChangeEvent, useState, useCallback } from 'react';
 
 import Header from '@/components/Header';
 import InfoBlock from '@/components/InfoBlock';
 import LinkDataBlock from '@/components/LinkDataBlock';
 import QualityBlock from '@/components/QualityBlock';
 import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
-import { flashMessageType } from '@/constants';
-import { textWithImageData, questions } from '@/constants/mock';
+import { FLASH_MESSAGE_TYPE } from '@/constants';
+import { MOCK_TEXT_WITH_IMAGE, MOCK_QUESTIONS } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
@@ -30,34 +30,32 @@ const Home = () => {
     threshold: 0.3,
   });
 
-  const [longLink, setLongLink] = useState('');
-
   const dispatch = useAppDispatch();
   const { data: linkData, isLoading } = useGetLinksQuery({ perPage: 4 });
   const [addNewLink] = useAddNewLinkMutation();
 
-  const handleOnSubmit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      e.preventDefault();
+  const [longLink, setLongLink] = useState('');
 
-      e.preventDefault();
+  const handleOnSubmit = useCallback(
+    async (event: FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
 
       const response = await addNewLink({ url: longLink });
+
       setLongLink('');
       dispatch(
         addNewFlashMessage(
           'error' in response && 'data' in response.error
-            ? { message: response.error.data as string, type: flashMessageType.ERROR }
-            : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
+            ? { message: response.error.data as string, type: FLASH_MESSAGE_TYPE.ERROR }
+            : { message: 'Shortened link successfully added', type: FLASH_MESSAGE_TYPE.SUCCESSFUL }
         )
       );
     },
     [addNewLink, dispatch, longLink]
   );
 
-  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setLongLink(e.target.value);
+  const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
+    setLongLink(event.target.value);
   }, []);
 
   return (
@@ -117,11 +115,11 @@ const Home = () => {
       <InfoBlock btnHref="/links" btnText="Get link statistics" title="Already there are abbreviated links" />
       <div style={{ minHeight: '1800px' }} ref={textWithImageRef}>
         {isTextWithImageVisible &&
-          textWithImageData.map(({ listData, linkData, text, title }, i) => (
+          MOCK_TEXT_WITH_IMAGE.map(({ listData, linkData, text, title }, index) => (
             <TextWithImage
-              key={i + title}
+              key={index + title}
               linkData={linkData}
-              imageFirst={i % 2 !== 0}
+              imageFirst={index % 2 !== 0}
               title={title}
               containerClasses="my-10"
               featuresListData={listData}
@@ -135,7 +133,7 @@ const Home = () => {
           <>
             <div className="container max-w-screen-desktop mx-auto px-5 my-10">
               <p className="text-4xl font-bold mb-5 text-center">Frequently Asked Questions</p>
-              <Accordion questions={questions} />
+              <Accordion accordionItems={MOCK_QUESTIONS} />
             </div>
             <Footer />
           </>

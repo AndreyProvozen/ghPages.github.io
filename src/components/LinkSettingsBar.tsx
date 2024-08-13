@@ -1,8 +1,9 @@
 import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type FC } from 'react';
 
-import { ScreenSize, flashMessageType } from '@/constants';
+import { SCREEN_SIZES, FLASH_MESSAGE_TYPE } from '@/constants';
+import { type FullLinkDataProps } from '@/constants';
 import { ClipBoard, Heart, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
@@ -13,14 +14,15 @@ const DeleteLinkModal = dynamic(() => import('./Modals/DeleteLink'), { ssr: fals
 
 const API_HOST = getConfigVariable('API_HOST');
 
-const LinkSettingsBar = ({ link }) => {
+const LinkSettingsBar: FC<{ link: FullLinkDataProps }> = ({ link }) => {
   const dispatch = useAppDispatch();
-  const isSmallMobile = useMediaQuery(ScreenSize.MOBILE_BELOW);
+  const isSmallMobile = useMediaQuery(SCREEN_SIZES.MOBILE_BELOW);
 
   const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const isFavoriteLink = useMemo(() => favoriteList.includes(link.code), [link, favoriteList]);
+  const formatedDate = useMemo(() => new Date(link.createdAt).toDateString(), [link.createdAt]);
 
   useEffect(() => {
     setCookie('favorite', favoriteList);
@@ -33,7 +35,7 @@ const LinkSettingsBar = ({ link }) => {
         fieldTitle: !isSmallMobile && 'Copy',
         fieldFunction: () => {
           navigator.clipboard.writeText(`${API_HOST}/${link.code}`);
-          dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: flashMessageType.SUCCESSFUL }));
+          dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: FLASH_MESSAGE_TYPE.SUCCESSFUL }));
         },
         fieldImage: <ClipBoard fill="black" />,
       },
@@ -51,7 +53,7 @@ const LinkSettingsBar = ({ link }) => {
             dispatch(
               addNewFlashMessage({
                 message: 'The link has been removed from the favorites list',
-                type: flashMessageType.SUCCESSFUL,
+                type: FLASH_MESSAGE_TYPE.SUCCESSFUL,
               })
             );
             return null;
@@ -60,7 +62,7 @@ const LinkSettingsBar = ({ link }) => {
           dispatch(
             addNewFlashMessage({
               message: 'Link has been added to the favorites list',
-              type: flashMessageType.SUCCESSFUL,
+              type: FLASH_MESSAGE_TYPE.SUCCESSFUL,
             })
           );
         },
@@ -86,13 +88,13 @@ const LinkSettingsBar = ({ link }) => {
             <p className="bg-lightOrange font-bold p-2 ml-2">{link.clicked}</p>
           </div>
           <p className="border bg-darkGreen/20 border-darkGreen font-bold rounded-lg flex items-center px-3 py-2">
-            {new Date(link.createdAt).toDateString()}
+            {formatedDate}
           </p>
         </div>
         <div className="flex justify-end gap-3 items-center">
-          {barData.map(({ fieldTitle, fieldFunction, fieldImage, ariaLabel }, i) => (
+          {barData.map(({ fieldTitle, fieldFunction, fieldImage, ariaLabel }, index) => (
             <button
-              key={fieldTitle + i}
+              key={fieldTitle + index}
               onClick={fieldFunction}
               aria-label={ariaLabel}
               className="flex border rounded-lg p-2 hover:border-lightPink border-gray hover:bg-pink/10"

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { FC, useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 
 import Star from '@/icons/Star';
 import classNames from '@/utils/classNames';
@@ -52,7 +52,7 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
         <h2 className="text-2xl font-bold mx-auto text-center mb-2">{title}</h2>
         <div dangerouslySetInnerHTML={{ __html: text }} />
         {Boolean(featuresListData) &&
-          featuresListData?.map(feature => (
+          featuresListData.map(feature => (
             <div className="flex mt-5" key={feature}>
               <Star className="shrink-0 mr-2 fill-lightOrange" /> {feature}
             </div>

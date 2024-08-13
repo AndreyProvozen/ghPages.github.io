@@ -1,9 +1,22 @@
-import { ScreenSize } from '@/constants';
+import { type FC, useMemo } from 'react';
+
+import { SCREEN_SIZES } from '@/constants';
 import useMediaQuery from '@/utils/useMediaQuery';
 
-const TableLink = ({ isHomePageList }) => {
-  const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
-  const linkContainerClasses = isHomePageList ? 'bg-white rounded-md mb-5' : 'border-b border-gray';
+interface Props {
+  isHomePageList?: boolean;
+  quantity?: number;
+}
+
+type TabLinkProps = Pick<Props, 'isHomePageList'>;
+
+const TableLink: FC<TabLinkProps> = ({ isHomePageList }) => {
+  const isMobile = useMediaQuery(SCREEN_SIZES.TABLET_SMALL_BELOW);
+
+  const linkContainerClasses = useMemo(
+    () => (isHomePageList ? 'bg-white rounded-md mb-5' : 'border-b border-gray'),
+    [isHomePageList]
+  );
 
   return (
     <div className={`w-full p-5 flex justify-between items-center ${linkContainerClasses}`}>
@@ -17,14 +30,16 @@ const TableLink = ({ isHomePageList }) => {
   );
 };
 
-const LinksListSkeleton = ({ isHomePageList = false, quantity = 3 }) => (
-  <>
-    {Array(quantity)
-      .fill(1)
-      .map((_, i) => (
-        <TableLink key={i} isHomePageList={isHomePageList} />
+const LinksListSkeleton: FC<Props> = ({ isHomePageList = false, quantity = 3 }) => {
+  const skeletonList = useMemo(() => Array(quantity).fill(1), [quantity]);
+
+  return (
+    <>
+      {skeletonList.map((_, index) => (
+        <TableLink key={index} isHomePageList={isHomePageList} />
       ))}
-  </>
-);
+    </>
+  );
+};
 
 export default LinksListSkeleton;

@@ -3,29 +3,29 @@ import { type FC, useCallback, useState } from 'react';
 import AccordionItem from './AccordionItem';
 
 interface Props {
-  questions: {
+  accordionItems: {
     title: string;
     description: string;
   }[];
 }
 
-const Accordion: FC<Props> = ({ questions }) => {
-  const [activeQuestions, setActiveQuestions] = useState<string | null>(null);
+const Accordion: FC<Props> = ({ accordionItems }) => {
+  const [activeItem, setActiveItem] = useState<string | null>(null);
 
-  const toggleActiveQuestions = useCallback(
-    (questionId: string) => setActiveQuestions(activeQuestions !== questionId ? questionId : null),
-    [activeQuestions]
+  const toggleActiveItem = useCallback(
+    (questionId: string) => setActiveItem(prev => (prev !== questionId ? questionId : null)),
+    []
   );
 
   return (
     <>
-      {questions.map(({ title, description }) => (
+      {accordionItems.map(({ title, description }) => (
         <AccordionItem
           title={title}
           description={description}
           key={title}
-          isOpened={activeQuestions === title}
-          onClick={() => toggleActiveQuestions(title)}
+          isOpened={activeItem === title}
+          onClick={() => toggleActiveItem(title)}
         />
       ))}
     </>

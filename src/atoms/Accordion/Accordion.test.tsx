@@ -5,7 +5,7 @@ import Accordion from './Accordion';
 const MOCK_ACCORDION_ITEM = [{ title: 'Test title', description: 'Test description' }];
 const [{ title, description }] = MOCK_ACCORDION_ITEM;
 
-const setup = () => render(<Accordion questions={[MOCK_ACCORDION_ITEM[0]]} />);
+const setup = () => render(<Accordion accordionItems={[MOCK_ACCORDION_ITEM[0]]} />);
 
 describe('<Accordion/>', () => {
   it('should render correctly', () => {

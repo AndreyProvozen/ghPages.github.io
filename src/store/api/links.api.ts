@@ -1,4 +1,4 @@
-import { linkDataListProps, linkDataProps } from '@/constants';
+import { type LinkDataListProps, type LinkDataProps } from '@/constants';
 
 import { queryApi } from './api';
 
@@ -9,7 +9,7 @@ interface getLinksProps {
 
 export const linksApi = queryApi.injectEndpoints({
   endpoints: build => ({
-    getLinks: build.query<linkDataListProps, getLinksProps>({
+    getLinks: build.query<LinkDataListProps, getLinksProps>({
       query: ({ page, perPage }) => ({
         url: 'link',
         params: { page, limit: perPage },
@@ -23,7 +23,7 @@ export const linksApi = queryApi.injectEndpoints({
           : [{ type: 'Links', id: 'LIST' }],
     }),
     addNewLink: build.mutation<
-      linkDataProps,
+      LinkDataProps,
       {
         url: string;
       }

@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import { Dispatch, FC, SetStateAction, useMemo } from 'react';
+import { type Dispatch, type FC, type SetStateAction, useCallback, useMemo } from 'react';
 
-import { flashMessageType, type linkDataProps } from '@/constants';
+import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import { useDeleteLinkMutation } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
@@ -13,7 +13,7 @@ import ModalWrapper from '../../atoms/ModalWrapper/ModalWrapper';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  deletedLink?: linkDataProps;
+  deletedLink?: LinkDataProps;
   isStatisticPage?: boolean;
 }
 
@@ -27,21 +27,21 @@ const DeleteLinkModal: FC<Props> = ({ setIsModalOpen, deletedLink, isStatisticPa
 
   const shortLink = useMemo(() => `${API_HOST}/${deletedLink?.code}`, [deletedLink?.code]);
 
-  const handleDeleteLink = async () => {
+  const handleDeleteLink = useCallback(async () => {
     const response = await deleteLink({ code: deletedLink?.code, userEmail: session?.user?.email });
     // fix me error type
     dispatch(
       addNewFlashMessage(
         'error' in response && 'data' in response.error
-          ? { message: response.error.data as string, type: flashMessageType.ERROR }
-          : { message: 'Shortened link successfully added', type: flashMessageType.SUCCESSFUL }
+          ? { message: response.error.data as string, type: FLASH_MESSAGE_TYPE.ERROR }
+          : { message: 'Shortened link successfully added', type: FLASH_MESSAGE_TYPE.SUCCESSFUL }
       )
     );
 
     if (isStatisticPage) return push('/links');
 
     setIsModalOpen(false);
-  };
+  }, [deleteLink, deletedLink?.code, session?.user?.email, dispatch, isStatisticPage, push, setIsModalOpen]);
 
   return (
     <ModalWrapper title="Delete link" setIsModalOpen={setIsModalOpen} onConfirm={handleDeleteLink}>

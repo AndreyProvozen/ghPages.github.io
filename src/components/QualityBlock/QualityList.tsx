@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { type FC } from 'react';
 
-import { ScreenSize } from '@/constants';
+import { SCREEN_SIZES } from '@/constants';
 import BarChart from '@/icons/BarChart';
 import Heart from '@/icons/Heart';
 import classNames from '@/utils/classNames';
@@ -45,8 +46,8 @@ export const qualitiesList = [
   },
 ];
 
-const QualityList = () => {
-  const isMobile = useMediaQuery(ScreenSize.TABLET_BELOW);
+const QualityList: FC = () => {
+  const isMobile = useMediaQuery(SCREEN_SIZES.TABLET_BELOW);
 
   return (
     <div className="grid grid-cols-6 justify-items-center max-tablet:grid-cols-2 max-mobile:grid-cols-1 gap-4">

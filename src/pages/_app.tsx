@@ -1,7 +1,7 @@
 import '../../public/styles/animate.min.css';
 import '@/globals.css';
 
-import type { AppContext, AppProps } from 'next/app';
+import { type AppContext, type AppProps } from 'next/app';
 import Head from 'next/head';
 import { SessionProvider, getSession } from 'next-auth/react';
 import { Provider } from 'react-redux';

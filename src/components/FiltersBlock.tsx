@@ -1,19 +1,24 @@
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, useCallback, type FC } from 'react';
 
 import Heart from '@/icons/Heart';
 
-const FiltersBlock = () => {
+const FiltersBlock: FC = () => {
   const { query, push, pathname } = useRouter();
+
   const [link, setLink] = useState(query?.searchString || '');
+
   const showFavoriteList = useMemo(() => query?.search === 'favorite', [query?.search]);
 
-  const updateURL = (searchStringParam: string, favoriteParam: string) => {
-    const queryParams = [searchStringParam, favoriteParam].filter(Boolean).join('&');
-    const updatedURL = queryParams ? `?${queryParams}` : pathname;
+  const updateURL = useCallback(
+    (searchStringParam: string, favoriteParam: string) => {
+      const queryParams = [searchStringParam, favoriteParam].filter(Boolean).join('&');
+      const updatedURL = queryParams ? `?${queryParams}` : pathname;
 
-    push(updatedURL);
-  };
+      push(updatedURL);
+    },
+    [push, pathname]
+  );
 
   useEffect(() => {
     let timeoutId: string | number | NodeJS.Timeout;
@@ -30,6 +35,8 @@ const FiltersBlock = () => {
     updateURL(link && `searchString=${link}`, showFavoriteList && 'search=favorite');
   }, [link, showFavoriteList, updateURL]);
 
+  const onSearchChange = useCallback(event => setLink(event.target.value), []);
+
   return (
     <div className="flex justify-between w-full items-start border-b border-gray mb-5 gap-5">
       <button
@@ -42,9 +49,10 @@ const FiltersBlock = () => {
         <p className="ml-2">Favorite</p>
       </button>
       <input
+        // ??????
         type="search"
         value={link}
-        onChange={e => setLink(e.target.value)}
+        onChange={onSearchChange}
         placeholder="Enter symbols after the last slash in the URL"
         className="mb-5 px-3 py-2.5 relative max-w-sm w-full border-[1px] border-gray rounded focus:outline-none focus:border-pink"
       />

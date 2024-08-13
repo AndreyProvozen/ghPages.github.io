@@ -1,9 +1,9 @@
 import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { FC, useEffect, useState } from 'react';
+import { type FC, useEffect, useState, useCallback } from 'react';
 
-import { ScreenSize, flashMessageType, linkDataProps } from '@/constants';
+import { SCREEN_SIZES, FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import Heart from '@/icons/Heart';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
@@ -16,7 +16,7 @@ const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), 
 const Pagination = dynamic(() => import('@/atoms/Pagination'), { ssr: false });
 
 interface Props {
-  linksList: linkDataProps[];
+  linksList: LinkDataProps[];
   count?: number;
   perPage?: number;
   linkContainerClasses?: string;
@@ -26,42 +26,53 @@ interface Props {
 const API_HOST = getConfigVariable('API_HOST');
 
 const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, linkContainerClasses, showFiltersAndPagination }) => {
-  const isMobile = useMediaQuery(ScreenSize.TABLET_SMALL_BELOW);
+  const isMobile = useMediaQuery(SCREEN_SIZES.TABLET_SMALL_BELOW);
   const dispatch = useAppDispatch();
 
   const [favoriteList, setFavoriteList] = useState<string[]>(JSON.parse((getCookie('favorite') as string) || '[]'));
-  const [deletedLink, setDeletedLink] = useState<linkDataProps | undefined>(undefined);
+  const [deletedLink, setDeletedLink] = useState<LinkDataProps | undefined>(undefined);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   useEffect(() => {
     setCookie('favorite', favoriteList);
   }, [favoriteList]);
 
-  const toggleFavorite = (isFavoriteLink: boolean, code: string) => {
-    if (isFavoriteLink) {
-      setFavoriteList(favoriteList.filter(item => item !== code));
+  const toggleFavorite = useCallback(
+    (isFavoriteLink: boolean, code: string) => {
+      if (isFavoriteLink) {
+        setFavoriteList(prev => prev.filter(item => item !== code));
+        dispatch(
+          addNewFlashMessage({
+            message: 'The link has been removed from the favorites list',
+            type: FLASH_MESSAGE_TYPE.SUCCESSFUL,
+          })
+        );
+
+        return null;
+      }
+
+      setFavoriteList(prev => [...prev, code]);
       dispatch(
         addNewFlashMessage({
-          message: 'The link has been removed from the favorites list',
-          type: flashMessageType.SUCCESSFUL,
+          message: 'Link has been added to the favorites list',
+          type: FLASH_MESSAGE_TYPE.SUCCESSFUL,
         })
       );
-      return null;
-    }
-    setFavoriteList([...favoriteList, code]);
-    dispatch(
-      addNewFlashMessage({ message: 'Link has been added to the favorites list', type: flashMessageType.SUCCESSFUL })
-    );
-  };
+    },
+    [dispatch]
+  );
 
   return (
     <>
       <div className="text-start">
-        {linksList.map((linkData, i) => {
+        {linksList.map((linkData, index) => {
           const isFavoriteLink = favoriteList.includes(linkData.code);
 
           return (
-            <div key={linkData.code + i} className={`flex items-center justify-between p-5 ${linkContainerClasses}`}>
+            <div
+              key={linkData.code + index}
+              className={`flex items-center justify-between p-5 ${linkContainerClasses}`}
+            >
               <div className="flex flex-col w-full max-w-md">
                 <Link
                   target={!showFiltersAndPagination ? '_blank' : '_self'}

@@ -1,12 +1,12 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import { useMemo } from 'react';
+import { useMemo, type FC } from 'react';
 
 import ChartBlock from '@/components/ChartBlock';
 import HeroBlock from '@/components/HeroBlock';
 import LinkSettingsBar from '@/components/LinkSettingsBar';
 import NotFoundSection from '@/components/NotFoundSection';
-import { FullLinkDataProps } from '@/constants';
+import { type FullLinkDataProps } from '@/constants';
 import getConfigVariable from '@/utils/getConfigVariable';
 import useIntersectionObserver from '@/utils/useIntersectionObserver';
 
@@ -14,7 +14,11 @@ const Footer = dynamic(() => import('@/components/Footer'));
 
 const API_HOST = getConfigVariable('API_HOST');
 
-const LinkStatistic = ({ linkData }: { linkData: FullLinkDataProps }) => {
+interface Props {
+  linkData: FullLinkDataProps;
+}
+
+const LinkStatistic: FC<Props> = ({ linkData }) => {
   const { elementRef: bottomSectionRef, isVisible: isBottomSectionVisible } = useIntersectionObserver({
     threshold: 0.1,
   });

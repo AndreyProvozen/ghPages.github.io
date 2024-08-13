@@ -1,17 +1,17 @@
 import { useRouter } from 'next/router';
-import { Dispatch, FC, SetStateAction, useMemo } from 'react';
+import { type Dispatch, type FC, type SetStateAction, useMemo } from 'react';
 
 import Dropdown from '@/atoms/Dropdown';
-import { flashMessageType, linkDataProps } from '@/constants';
+import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import { BarChart, ClipBoard, ThreeDots, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import getConfigVariable from '@/utils/getConfigVariable';
 
 interface Props {
-  data: linkDataProps;
+  data: LinkDataProps;
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
-  setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | linkDataProps>>;
+  setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | LinkDataProps>>;
 }
 const API_HOST = getConfigVariable('API_HOST');
 
@@ -25,7 +25,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
         fieldTitle: 'Copy',
         fieldFunction: () => {
           navigator.clipboard.writeText(`${API_HOST}/${data.code}`);
-          dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: flashMessageType.SUCCESSFUL }));
+          dispatch(addNewFlashMessage({ message: 'Link copied successfully', type: FLASH_MESSAGE_TYPE.SUCCESSFUL }));
         },
         fieldImage: <ClipBoard />,
       },
@@ -35,7 +35,7 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
         fieldImage: <BarChart width="25px" height="25px" fill="white" />,
       },
       {
-        fieldTitle: ' Delete',
+        fieldTitle: 'Delete',
         fieldFunction: () => {
           setIsDeleteModalOpen(data);
           setIsModalOpen(true);

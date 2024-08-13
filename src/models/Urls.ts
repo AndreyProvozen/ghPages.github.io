@@ -1,7 +1,7 @@
-import { Schema, model, models, Document, Model } from 'mongoose';
+import { Schema, model, models, type Document, type Model } from 'mongoose';
 import { nanoid } from 'nanoid';
 
-import { metricsProps } from '@/constants';
+import { type MetricsProps } from '@/constants';
 
 export interface IUrl extends Document {
   code: string;
@@ -9,7 +9,7 @@ export interface IUrl extends Document {
   clicked: number;
   createdAt: Date;
   updatedAt: Date;
-  metrics: metricsProps[];
+  metrics: MetricsProps[];
 }
 
 const UrlSchema = new Schema(

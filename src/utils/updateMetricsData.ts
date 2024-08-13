@@ -2,7 +2,7 @@ import { type IncomingHttpHeaders } from 'http';
 
 import { UAParser } from 'ua-parser-js';
 
-import { type metricsProps } from '@/constants';
+import { type MetricsProps } from '@/constants';
 
 import customFetch from './customFetch';
 import getIp from './getIp';
@@ -19,12 +19,12 @@ import getLanguageCode from './getLanguageCode';
  * await updateMetricsData(metrics, req.headers, req.socket.remoteAddress);
  * ```
  *
- * @param {metricsProps[]} metrics - The array of metrics to update.
+ * @param {MetricsProps[]} metrics - The array of metrics to update.
  * @param {IncomingHttpHeaders} headers - The incoming HTTP headers from the request.
  * @param {string} remoteAddress - The remote address of the request sender.
  */
 
-const updateMetricsData = async (metrics: metricsProps[], headers: IncomingHttpHeaders, remoteAddress: string) => {
+const updateMetricsData = async (metrics: MetricsProps[], headers: IncomingHttpHeaders, remoteAddress: string) => {
   const parser = new UAParser(headers['user-agent']);
   const { browser, os, device } = parser.getResult();
 

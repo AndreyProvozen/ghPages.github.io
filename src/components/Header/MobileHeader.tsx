@@ -1,8 +1,8 @@
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
-import { FC, useState } from 'react';
+import { type FC, useState, useCallback, useMemo } from 'react';
 
+import Drover from '@/atoms/Drover';
 import Menu from '@/icons/Menu';
 
 export interface MenuProps {
@@ -16,38 +16,39 @@ interface Props {
   textBlack?: boolean;
 }
 
-const Drover = dynamic(() => import('@/atoms/Drover'), { ssr: false });
-
 const MobileHeader: FC<Props> = ({ textBlack }) => {
   const { push } = useRouter();
   const { data: session } = useSession();
 
   const [isOpenDrover, setIsOpenDrover] = useState(false);
 
-  const handleToggle = () => setIsOpenDrover(!isOpenDrover);
+  const handleToggle = useCallback(() => setIsOpenDrover(prev => !prev), []);
 
-  const menuMobile: MenuProps[] = [
-    { name: 'Home', link: '/' },
-    {
-      name: 'Links',
-      link: '/links',
-    },
-    session
-      ? {
-          name: 'My profile',
-          children: [
-            {
-              name: 'Favorite links',
-              handleFunction: () => push(`${window.location.origin}/links?search=favorite`),
-            },
-            {
-              name: 'Sign out',
-              handleFunction: signOut,
-            },
-          ],
-        }
-      : { name: 'Sign in', link: '/auth' },
-  ];
+  const menuMobile: MenuProps[] = useMemo(
+    () => [
+      { name: 'Home', link: '/' },
+      {
+        name: 'Links',
+        link: '/links',
+      },
+      session
+        ? {
+            name: 'My profile',
+            children: [
+              {
+                name: 'Favorite links',
+                handleFunction: () => push(`${window.location.origin}/links?search=favorite`),
+              },
+              {
+                name: 'Sign out',
+                handleFunction: signOut,
+              },
+            ],
+          }
+        : { name: 'Sign in', link: '/auth' },
+    ],
+    [push, session]
+  );
 
   return (
     <div>

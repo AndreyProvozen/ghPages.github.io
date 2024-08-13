@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { type FC } from 'react';
 
 const CREDITS = [
   {
@@ -43,7 +44,7 @@ const CREDITS = [
   },
 ];
 
-const CredentialsSection = () => (
+const CredentialsSection: FC = () => (
   <div className="container py-5 mx-auto">
     {CREDITS.map(({ href, text }) => (
       <Link target="_blank" className="block mb-2" href={href} key={href}>
