@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
-const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.env.ANALYZE === 'true' });
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 const withPWA = require('next-pwa')({
   dest: 'public',
@@ -34,6 +36,26 @@ const nextConfig = {
     disableStaticImages: false,
   },
   eslint: { ignoreDuringBuilds: true },
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      loader: 'babel-loader',
+      options: {
+        presets: ['next/babel'],
+        plugins: [
+          ['transform-imports', {
+            '@/atoms': { transform: 'src/atoms/${member}', preventFullImport: true },
+            '@/icons': { transform: 'src/icons/${member}', preventFullImport: true },
+            '@/components': { transform: 'src/components/${member}', preventFullImport: true },
+            '@/utils': { transform: 'src/utils/${member}', preventFullImport: true },
+          },
+          ],
+        ],
+      },
+    });
+
+    return config;
+  },
 };
 
 module.exports = withBundleAnalyzer(withPWA(nextConfig));

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { signIn } from 'next-auth/react';
 
-import Header from '@/components/Header';
+import { Header } from '@/components';
 
 const PROVIDERS_LIST = [
   { image: '/svg/google.svg', text: 'Continue with Google', provider: 'google' },
