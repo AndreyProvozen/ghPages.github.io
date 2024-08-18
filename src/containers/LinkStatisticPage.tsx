@@ -2,10 +2,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useMemo, type FC } from 'react';
 
-import ChartBlock from '@/components/ChartBlock';
-import HeroBlock from '@/components/HeroBlock';
-import LinkSettingsBar from '@/components/LinkSettingsBar';
-import NotFoundSection from '@/components/NotFoundSection';
+import { ChartBlock, HeroBlock, LinkSettingsBar, NotFoundSection } from '@/components';
 import { type FullLinkDataProps } from '@/constants';
 import getConfigVariable from '@/utils/getConfigVariable';
 import useIntersectionObserver from '@/utils/useIntersectionObserver';
