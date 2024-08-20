@@ -3,13 +3,12 @@ import { type FC, useMemo } from 'react';
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 
 import { type MetricsProps } from '@/constants';
-import getBarChartData from '@/utils/getBarChartData';
-import getPieChartData from '@/utils/getPieChartData';
+import {getBarChartData, getPieChartData } from '@/utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const pieOptions = {
-  plugins: { legend: { position: 'bottom' as const } },
+  plugins: { legend: { position: 'bottom'  as const } },
   options: { parsing: false, normalized: true },
 };
 
@@ -25,7 +24,7 @@ interface Props {
   metrics: MetricsProps[];
 }
 
-const ChartBlock: FC<Props> = ({ metrics }) => {
+const ChartBlock: FC < Props > = ({ metrics }) => {
   const pieChartMetrics = useMemo(() => metrics.slice(0, 4), [metrics]);
   const barChartData = useMemo(() => getBarChartData(metrics[4].data), [metrics]);
 

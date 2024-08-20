@@ -1,14 +1,12 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 
-import ClipBoard from '@/icons/ClipBoard';
-
 import Dropdown from './Dropdown';
 import { DROPDOWN_TEST_IDS } from './testIds';
 
 const MOCK_DROPDOWN_PROPS = {
   placeholder: <ClipBoard />,
   dropdownData: [
-    { fieldTitle: 'Copy', fieldFunction: jest.fn(), fieldImage: <ClipBoard /> },
+    { fieldTitle: 'Copy', fieldFunction: jest.fn(), fieldImage: <div>Test node element </div> },
     { fieldTitle: 'Statistic', fieldFunction: jest.fn() },
     { fieldTitle: 'Delete', fieldFunction: jest.fn() },
   ],

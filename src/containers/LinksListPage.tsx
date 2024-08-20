@@ -1,10 +1,7 @@
 import { useRouter } from 'next/router';
 import { useState, useMemo, type FC } from 'react';
 
-import FiltersBlock from '@/components/FiltersBlock';
-import HeroBlock from '@/components/HeroBlock';
-import LinkDataBlock from '@/components/LinkDataBlock';
-import NotFoundSection from '@/components/NotFoundSection';
+import {FiltersBlock, HeroBlock, LinkDataBlock, NotFoundSection} from '@/components';
 import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
 import PaginationSkeleton from '@/components/Skeleton/PaginationSkeleton';
 import { useGetLinksQuery } from '@/store/api/links.api';

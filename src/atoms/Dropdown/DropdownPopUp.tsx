@@ -1,6 +1,6 @@
 import { type Dispatch, type FC, type ReactElement, type SetStateAction, useCallback } from 'react';
 
-import classNames from '@/utils/classNames';
+import { classNames } from '@/utils';
 
 import { DROPDOWN_TEST_IDS } from './testIds';
 

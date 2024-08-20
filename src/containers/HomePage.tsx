@@ -2,18 +2,14 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { type FormEvent, type ChangeEvent, useState, useCallback } from 'react';
 
-import Header from '@/components/Header';
-import InfoBlock from '@/components/InfoBlock';
-import LinkDataBlock from '@/components/LinkDataBlock';
-import QualityBlock from '@/components/QualityBlock';
+import {Header, InfoBlock, LinkDataBlock, QualityBlock } from '@/components';
 import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
 import { FLASH_MESSAGE_TYPE } from '@/constants';
 import { MOCK_TEXT_WITH_IMAGE, MOCK_QUESTIONS } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import classNames from '@/utils/classNames';
-import useIntersectionObserver from '@/utils/useIntersectionObserver';
+import {classNames, useIntersectionObserver} from '@/utils';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });

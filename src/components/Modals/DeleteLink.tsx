@@ -7,9 +7,9 @@ import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import { useDeleteLinkMutation } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import getConfigVariable from '@/utils/getConfigVariable';
+import { getConfigVariable } from '@/utils';
 
-import ModalWrapper from '../../atoms/ModalWrapper/ModalWrapper';
+import { ModalWrapper } from '@/atoms';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

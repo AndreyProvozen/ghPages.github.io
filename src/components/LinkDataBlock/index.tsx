@@ -4,12 +4,10 @@ import Link from 'next/link';
 import { type FC, useEffect, useState, useCallback } from 'react';
 
 import { SCREEN_SIZES, FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
-import Heart from '@/icons/Heart';
+import {Heart} from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import getConfigVariable from '@/utils/getConfigVariable';
-import useMediaQuery from '@/utils/useMediaQuery';
-
+import {getConfigVariable, useMediaQuery} from '@/utils';
 import SettingsDropDown from './SettingsDropDown';
 
 const DeleteLinkModal = dynamic(() => import('@/components/Modals/DeleteLink'), { ssr: false });

@@ -5,9 +5,8 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { useState, useMemo, type FC } from 'react';
 
-import Dropdown from '@/atoms/Dropdown';
-import Heart from '@/icons/Heart';
-import LogOut from '@/icons/LogOut';
+import {Dropdown} from '@/atoms';
+import {Heart, LogOut} from '@/icons';
 
 const ConfirmSignOut = dynamic(() => import('@/components/Modals/ConfirmSignOut'), { ssr: false });
 

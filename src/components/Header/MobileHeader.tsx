@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { signOut, useSession } from 'next-auth/react';
 import { type FC, useState, useCallback, useMemo } from 'react';
 
-import Drover from '@/atoms/Drover';
-import Menu from '@/icons/Menu';
+import {Drover} from '@/atoms';
+import {Menu} from '@/icons';
 
 export interface MenuProps {
   name: string;

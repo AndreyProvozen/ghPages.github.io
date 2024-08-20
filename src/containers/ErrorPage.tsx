@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { type FC } from 'react';
 
-import Header from '@/components/Header/Header';
+import {Header} from '@/components';
 
 interface Props {
   statusCode: number;
