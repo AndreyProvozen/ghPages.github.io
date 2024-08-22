@@ -1,9 +1,10 @@
-import { FC, useState } from 'react';
+import { type FC, useState } from 'react';
+
+import { type MenuProps } from '@/components';
 
 import DroverContent from './DroverContent';
 import DroverHeader from './DroverHeader';
 import { DROVER_TEST_IDS } from './testIds';
-import type { MenuProps } from '../../components/Header/MobileHeader';
 
 interface Props {
   isOpen: boolean;

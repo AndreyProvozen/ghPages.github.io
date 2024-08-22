@@ -4,8 +4,7 @@ import { useMemo, type FC } from 'react';
 
 import { ChartBlock, HeroBlock, LinkSettingsBar, NotFoundSection } from '@/components';
 import { type FullLinkDataProps } from '@/constants';
-import getConfigVariable from '@/utils/getConfigVariable';
-import useIntersectionObserver from '@/utils/useIntersectionObserver';
+import { getConfigVariable, useIntersectionObserver } from '@/utils';
 
 const Footer = dynamic(() => import('@/components/Footer'));
 

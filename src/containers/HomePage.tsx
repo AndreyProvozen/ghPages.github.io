@@ -9,8 +9,7 @@ import { MOCK_TEXT_WITH_IMAGE, MOCK_QUESTIONS } from '@/constants/mock';
 import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import classNames from '@/utils/classNames';
-import useIntersectionObserver from '@/utils/useIntersectionObserver';
+import { classNames, useIntersectionObserver } from '@/utils';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });
 const Accordion = dynamic(() => import('@/atoms/Accordion'), { ssr: false });

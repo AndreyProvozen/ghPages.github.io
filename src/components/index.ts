@@ -1,7 +1,7 @@
 export { default as ChartBlock } from './ChartBlock';
 export { default as FiltersBlock } from './FiltersBlock';
 export { default as Footer } from './Footer';
-export { default as Header } from './Header';
+export { default as Header, type MenuProps } from './Header';
 export { default as HeroBlock } from './HeroBlock';
 export { default as InfoBlock } from './InfoBlock';
 export { default as LinkDataBlock } from './LinkDataBlock';

@@ -1,7 +1,7 @@
 import { type FC, useMemo } from 'react';
 
 import { SCREEN_SIZES } from '@/constants';
-import useMediaQuery from '@/utils/useMediaQuery';
+import { useMediaQuery } from '@/utils';
 
 interface Props {
   isHomePageList?: boolean;

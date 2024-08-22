@@ -1,10 +1,8 @@
 import Image from 'next/image';
 import { type FC } from 'react';
 
-import classNames from '@/utils/classNames';
-import useIntersectionObserver from '@/utils/useIntersectionObserver';
-
-import Header from '../Header';
+import { Header } from '@/components';
+import { classNames, useIntersectionObserver } from '@/utils';
 
 interface Props {
   bgSrc: string;

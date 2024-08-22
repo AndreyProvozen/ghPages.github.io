@@ -1,7 +1,7 @@
 import { type FC } from 'react';
 
-import Chevron from '@/icons/Chevron';
-import classNames from '@/utils/classNames';
+import { Chevron } from '@/icons';
+import { classNames } from '@/utils';
 
 interface Props {
   title: string;

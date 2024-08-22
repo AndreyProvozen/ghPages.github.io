@@ -2,15 +2,13 @@ import { getCookie, setCookie } from 'cookies-next';
 import dynamic from 'next/dynamic';
 import { useEffect, useMemo, useState, type FC } from 'react';
 
-import { SCREEN_SIZES, FLASH_MESSAGE_TYPE } from '@/constants';
-import { type FullLinkDataProps } from '@/constants';
+import { SCREEN_SIZES, FLASH_MESSAGE_TYPE, type FullLinkDataProps } from '@/constants';
 import { ClipBoard, Heart, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import getConfigVariable from '@/utils/getConfigVariable';
-import useMediaQuery from '@/utils/useMediaQuery';
+import { useMediaQuery, getConfigVariable } from '@/utils';
 
-const DeleteLinkModal = dynamic(() => import('./Modals/DeleteLink'), { ssr: false });
+const DeleteLinkModal = dynamic(() => import('../Modals/DeleteLink'), { ssr: false });
 
 const API_HOST = getConfigVariable('API_HOST');
 

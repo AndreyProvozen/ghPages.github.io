@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { type FC, useMemo } from 'react';
 
-import Star from '@/icons/Star';
-import classNames from '@/utils/classNames';
-import useIntersectionObserver from '@/utils/useIntersectionObserver';
+import { Star } from '@/icons';
+import { classNames, useIntersectionObserver } from '@/utils';
 
 import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
 

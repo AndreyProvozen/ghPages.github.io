@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState, useCallback, type FC } from 'react';
 
-import Heart from '@/icons/Heart';
+import { Heart } from '@/icons';
 
 const FiltersBlock: FC = () => {
   const { query, push, pathname } = useRouter();

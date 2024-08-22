@@ -1,12 +1,12 @@
 import { useRouter } from 'next/router';
 import { type Dispatch, type FC, type SetStateAction, useMemo } from 'react';
 
-import Dropdown from '@/atoms/Dropdown';
+import { Dropdown } from '@/atoms';
 import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import { BarChart, ClipBoard, ThreeDots, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
-import getConfigVariable from '@/utils/getConfigVariable';
+import { getConfigVariable } from '@/utils';
 
 interface Props {
   data: LinkDataProps;

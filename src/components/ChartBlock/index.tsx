@@ -3,8 +3,7 @@ import { type FC, useMemo } from 'react';
 import { Pie, Doughnut, Bar } from 'react-chartjs-2';
 
 import { type MetricsProps } from '@/constants';
-import getBarChartData from '@/utils/getBarChartData';
-import getPieChartData from '@/utils/getPieChartData';
+import { getBarChartData, getPieChartData } from '@/utils';
 
 ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 

@@ -2,10 +2,8 @@ import Image from 'next/image';
 import { type FC } from 'react';
 
 import { SCREEN_SIZES } from '@/constants';
-import BarChart from '@/icons/BarChart';
-import Heart from '@/icons/Heart';
-import classNames from '@/utils/classNames';
-import useMediaQuery from '@/utils/useMediaQuery';
+import { BarChart, Heart } from '@/icons';
+import { classNames, useMediaQuery } from '@/utils';
 
 export const qualitiesList = [
   {
