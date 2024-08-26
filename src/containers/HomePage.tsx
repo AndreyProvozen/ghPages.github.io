@@ -6,9 +6,7 @@ import { Header, InfoBlock, LinkDataBlock, QualityBlock } from '@/components';
 import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
 import { FLASH_MESSAGE_TYPE } from '@/constants';
 import { MOCK_TEXT_WITH_IMAGE, MOCK_QUESTIONS } from '@/constants/mock';
-import { useAddNewLinkMutation, useGetLinksQuery } from '@/store/api/links.api';
-import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
-import { useAppDispatch } from '@/store/storeHooks';
+import { useAppDispatch, addNewFlashMessage, useAddNewLinkMutation, useGetLinksQuery } from '@/store';
 import { classNames, useIntersectionObserver } from '@/utils';
 
 const TextWithImage = dynamic(() => import('@/components/TextWithImage'), { ssr: false });

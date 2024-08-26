@@ -4,8 +4,7 @@ import { useState, useMemo, type FC } from 'react';
 import { FiltersBlock, HeroBlock, LinkDataBlock, NotFoundSection } from '@/components';
 import LinksListSkeleton from '@/components/Skeleton/LinksListSkeleton';
 import PaginationSkeleton from '@/components/Skeleton/PaginationSkeleton';
-import { useGetLinksQuery } from '@/store/api/links.api';
-import { useFetchLinksBySearchStringQuery } from '@/store/api/search.api';
+import { useGetLinksQuery, useFetchLinksBySearchStringQuery } from '@/store';
 
 const LinksList: FC = () => {
   const { query } = useRouter();
