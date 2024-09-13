@@ -42,13 +42,11 @@ const updateMetricsData = async (metrics: MetricsProps[], headers: IncomingHttpH
     const existingMetric = metrics.find(metric => metric.title === title);
 
     if (existingMetric) {
-      existingMetric.data = {
-        ...existingMetric.data,
-        [field]: (existingMetric.data[field] || 0) + 1,
-      };
-    } else {
-      metrics.push({ title, data: { [field]: 1 } });
+      existingMetric.data = { ...existingMetric.data, [field]: (existingMetric.data[field] || 0) + 1 };
+      return;
     }
+
+    metrics.push({ title, data: { [field]: 1 } });
   });
 };
 

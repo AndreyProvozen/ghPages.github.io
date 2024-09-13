@@ -33,7 +33,10 @@ const FiltersBlock: FC = () => {
     }
 
     updateURL(link && `searchString=${link}`, showFavoriteList && 'search=favorite');
-  }, [link, showFavoriteList, updateURL]);
+
+    // updateURL as a dependency make dependency cycle
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [link, showFavoriteList]);
 
   const onSearchChange = useCallback(event => setLink(event.target.value), []);
 

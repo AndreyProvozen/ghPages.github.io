@@ -3,13 +3,12 @@ import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 import { type Dispatch, type FC, type SetStateAction, useCallback, useMemo } from 'react';
 
+import { ModalWrapper } from '@/atoms';
 import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
 import { useDeleteLinkMutation } from '@/store/api/links.api';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import { getConfigVariable } from '@/utils';
-
-import { ModalWrapper } from '@/atoms';
 
 interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;

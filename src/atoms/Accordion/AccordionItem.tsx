@@ -1,6 +1,5 @@
 import { type FC } from 'react';
 
-import { Chevron } from '@/icons';
 import { classNames } from '@/utils';
 
 interface Props {
@@ -14,11 +13,14 @@ const AccordionItem: FC<Props> = ({ title, description, isOpened, onClick }) => 
   <div>
     <button className="p-2 cursor-pointer flex justify-between border-b-2 w-full hover:bg-lightPink" onClick={onClick}>
       <h3 className="font-bold text-lg">{title}</h3>
-      <Chevron
+      <svg
+        viewBox="0 0 24 24"
         width="30px"
         height="30px"
         className={classNames('transform transition ease-out duration-300', { 'rotate-180': isOpened })}
-      />
+      >
+        <use href="#chevron-icon" />
+      </svg>
     </button>
     <div
       className={`transition-max-height ease-in-out duration-300 overflow-hidden ${

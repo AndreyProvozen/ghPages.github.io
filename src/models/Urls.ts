@@ -17,12 +17,7 @@ const UrlSchema = new Schema(
     code: { type: String, unique: true, default: () => nanoid(7) },
     url: { type: String, required: true },
     clicked: { type: Number, default: 0 },
-    metrics: [
-      {
-        title: { type: String, required: true },
-        data: { type: Schema.Types.Mixed, default: {} },
-      },
-    ],
+    metrics: [{ title: { type: String, required: true }, data: { type: Schema.Types.Mixed, default: {} } }],
   },
   { timestamps: true }
 );

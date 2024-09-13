@@ -3,7 +3,7 @@ import { type Dispatch, type FC, type SetStateAction, useMemo } from 'react';
 
 import { Dropdown } from '@/atoms';
 import { FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
-import { BarChart, ClipBoard, ThreeDots, Trash } from '@/icons';
+import { BarChart, ClipBoard, Trash } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import { getConfigVariable } from '@/utils';
@@ -13,6 +13,7 @@ interface Props {
   setIsModalOpen: Dispatch<SetStateAction<boolean>>;
   setIsDeleteModalOpen: Dispatch<SetStateAction<undefined | LinkDataProps>>;
 }
+
 const API_HOST = getConfigVariable('API_HOST');
 
 const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpen }) => {
@@ -48,7 +49,11 @@ const SettingsDropDown: FC<Props> = ({ data, setIsModalOpen, setIsDeleteModalOpe
 
   return (
     <Dropdown
-      placeholder={<ThreeDots className="fill-darkPink hover:fill-pink ml-5" aria-label="Open link settings" />}
+      placeholder={
+        <svg className="ml-5 hover:scale-110" viewBox="0 0 30 30" width="30px" aria-label="Open link settings">
+          <use href="#three-dots-icon" />
+        </svg>
+      }
       dropdownData={settingsFields}
       listContainerClasses="right-0 w-60"
     />

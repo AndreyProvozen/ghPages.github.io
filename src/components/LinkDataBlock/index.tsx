@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { type FC, useEffect, useState, useCallback } from 'react';
 
 import { SCREEN_SIZES, FLASH_MESSAGE_TYPE, type LinkDataProps } from '@/constants';
-import { Heart } from '@/icons';
 import { addNewFlashMessage } from '@/store/slices/flashMessages.slice';
 import { useAppDispatch } from '@/store/storeHooks';
 import { getConfigVariable, useMediaQuery } from '@/utils';
@@ -84,14 +83,15 @@ const LinkDataBlock: FC<Props> = ({ linksList, count, perPage, linkContainerClas
               </div>
               {!isMobile && (
                 <>
-                  <div className="pr-10 pl-5">{linkData.clicked}</div>{' '}
-                  <Heart
-                    width={24}
+                  <div className="pr-10 pl-5">{linkData.clicked}</div>
+                  <svg
                     onClick={() => toggleFavorite(isFavoriteLink, linkData.code)}
-                    className={`${
-                      !isFavoriteLink ? 'fill-none' : 'fill-darkRed'
-                    } ml-auto cursor-pointer stroke-2 stroke-darkRed`}
-                  />
+                    viewBox="0 0 24 24"
+                    width="24px"
+                    className="ml-auto cursor-pointer hover:scale-110 transition-all"
+                  >
+                    <use href={isFavoriteLink ? '#heart-icon' : '#heart-outline-icon'} />
+                  </svg>
                 </>
               )}
               <SettingsDropDown

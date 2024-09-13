@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { type FC, useMemo } from 'react';
 
-import { Star } from '@/icons';
 import { classNames, useIntersectionObserver } from '@/utils';
 
 import { TEXT_WITH_IMAGE_TEST_IDS } from './testIds';
@@ -53,7 +52,10 @@ const TextWithImage: FC<Props> = ({ linkData, text, imageFirst, title, featuresL
         {Boolean(featuresListData) &&
           featuresListData.map(feature => (
             <div className="flex mt-5" key={feature}>
-              <Star className="shrink-0 mr-2 fill-lightOrange" /> {feature}
+              <svg viewBox="0 0 24 24" width="24px" className="shrink-0 mr-2 ">
+                <use href="#star-icon" />
+              </svg>
+              {feature}
             </div>
           ))}
       </div>

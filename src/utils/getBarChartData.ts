@@ -1,11 +1,13 @@
 import getRandomColor from './getRandomColor';
 
+interface DatasetsProps {
+  data: number[];
+  backgroundColor: string;
+}
+
 interface ChartData {
   labels: string[];
-  datasets: {
-    data: number[];
-    backgroundColor: string;
-  }[];
+  datasets: DatasetsProps[];
 }
 
 /**
@@ -28,12 +30,7 @@ const getBarChartData = (list: Record<string, number>): ChartData => {
 
   const barData = {
     labels: sortedList.map(([label]) => label),
-    datasets: [
-      {
-        data: sortedList.map(([, value]) => value),
-        backgroundColor: colorWithOpacity,
-      },
-    ],
+    datasets: [{ data: sortedList.map(([, value]) => value), backgroundColor: colorWithOpacity }],
   };
 
   return barData;

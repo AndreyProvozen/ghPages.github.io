@@ -1,28 +1,17 @@
 import getRandomColor from './getRandomColor';
 
-interface PieChartData {
-  labels: string[];
-  datasets: {
-    label: string;
-    data: number[];
-    backgroundColor: string[];
-    borderColor: string[];
-    borderWidth: number;
-  }[];
+interface DatasetsProps {
+  label: string;
+  data: number[];
+  backgroundColor: string[];
+  borderColor: string[];
+  borderWidth: number;
 }
 
-const DEFAULT_PIE_STATE: PieChartData = {
-  labels: [],
-  datasets: [
-    {
-      label: 'Clicked',
-      data: [],
-      backgroundColor: [],
-      borderColor: [],
-      borderWidth: 1,
-    },
-  ],
-};
+interface PieChartData {
+  labels: string[];
+  datasets: DatasetsProps[];
+}
 
 /**
  * Generates pie chart data based on a list of values and labels.
@@ -47,7 +36,10 @@ const DEFAULT_PIE_STATE: PieChartData = {
  */
 
 const getPieChartData = (list: Record<string, number>): PieChartData => {
-  const pieData = DEFAULT_PIE_STATE;
+  const pieData: PieChartData = {
+    labels: [],
+    datasets: [{ label: 'Clicked', data: [], backgroundColor: [], borderColor: [], borderWidth: 1 }],
+  };
 
   Object.entries(list).forEach(([label, value]) => {
     const { color, colorWithOpacity } = getRandomColor(0.4);
