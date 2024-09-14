@@ -2,7 +2,7 @@ import mongoose, { type ConnectOptions, type Connection } from 'mongoose';
 
 import getConfigVariable from './getConfigVariable';
 
-const MONGODB_URI = getConfigVariable('MONGODB_URI');
+const MONGODB_URI = getConfigVariable('MONGODB_URI', true);
 
 interface CachedMongoose {
   conn: Connection | null;

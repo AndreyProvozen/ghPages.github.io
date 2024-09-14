@@ -14,7 +14,8 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   swcMinify: true,
-  publicRuntimeConfig: { API_HOST: process.env.API_HOST, MONGODB_URI: process.env.MONGODB_URI },
+  serverRuntimeConfig: { MONGODB_URI: process.env.MONGODB_URI },
+  publicRuntimeConfig: { API_HOST: process.env.API_HOST, },
   headers: async () => [
     {
       source: '/:path*',
