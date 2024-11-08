@@ -15,7 +15,7 @@ const nextConfig = {
   productionBrowserSourceMaps: true,
   swcMinify: true,
   serverRuntimeConfig: { MONGODB_URI: process.env.MONGODB_URI },
-  publicRuntimeConfig: { API_HOST: process.env.API_HOST, },
+  publicRuntimeConfig: { API_HOST: process.env.API_HOST },
   headers: async () => [
     {
       source: '/:path*',
@@ -37,21 +37,30 @@ const nextConfig = {
     disableStaticImages: false,
   },
   eslint: { ignoreDuringBuilds: true },
-  webpack: (config) => {
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.output.module = true;
+      config.experiments = { ...config.experiments, topLevelAwait: true, outputModule: true };
+      config.optimization = { ...config.optimization, concatenateModules: true };
+    }
+
     config.module.rules.push({
       test: /\.(ts|tsx)$/,
       loader: 'babel-loader',
       options: {
         presets: ['next/babel'],
         plugins: [
-          ['transform-imports', {
-            '@/atoms': { transform: 'src/atoms/${member}', preventFullImport: true },
-            '@/icons': { transform: 'src/icons/${member}', preventFullImport: true },
-            '@/components': { transform: 'src/components/${member}', preventFullImport: true },
-            '@/utils': { transform: 'src/utils/${member}', preventFullImport: true },
-          },
+          [
+            'transform-imports',
+            {
+              '@/atoms': { transform: 'src/atoms/${member}', preventFullImport: true },
+              '@/icons': { transform: 'src/icons/${member}', preventFullImport: true },
+              '@/components': { transform: 'src/components/${member}', preventFullImport: true },
+              '@/utils': { transform: 'src/utils/${member}', preventFullImport: true },
+            },
           ],
-        ],
+          process.env.NODE_ENV === 'production' ? '@babel/plugin-transform-classes' : null,
+        ].filter(Boolean),
       },
     });
 
